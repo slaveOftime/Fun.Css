@@ -15,10 +15,12 @@ style {
 }
 ```
 
-Benchmark for it (may need comparison for it with other libraries):
-|               Method |     Mean |   Error |   StdDev |  Gen 0 | Allocated |
-|--------------------- |---------:|--------:|---------:|-------:|----------:|
-| BuildStyleWithFunCss | 347.2 ns | 8.86 ns | 25.99 ns | 0.2942 |      1 KB |
+Benchmarks (I know it is not fair comparison because Fss is more type safety and will automatically generate classname for you. But I did not find similar libraries to compare, just take as a reference), You can check the code in Benchmark/Benchmarks.fs:
+
+|               Method |            Mean |         Error |        StdDev |    Gen 0 |   Gen 1 | Allocated |
+|--------------------- |----------------:|--------------:|--------------:|---------:|--------:|----------:|
+| BuildStyleWithFunCss |        412.8 ns |       7.72 ns |       7.22 ns |   0.3271 |       - |      1 KB |
+|    BuildStyleWithFss | 17,277,199.8 ns | 334,514.26 ns | 296,538.18 ns | 906.2500 | 31.2500 |  3,821 KB |
 
 
 This project is built in Fun.Blazor at first to help build inline style with type safety way.
