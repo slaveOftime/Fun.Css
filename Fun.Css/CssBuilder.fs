@@ -2046,12 +2046,12 @@ type CssBuilder() =
     /// Sets the margin area on the vertical and horizontal axis.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, vertical: int, horizonal: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append("px ").Append(horizonal).Append("px); "))
+        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append("px ").Append(horizonal).Append("px; "))
 
     /// Sets the margin area on the vertical and horizontal axis.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, vertical: string, horizonal: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append(" ").Append(horizonal).Append("); "))
+        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append(" ").Append(horizonal).Append("; "))
 
     /// Sets the margin area on all four sides of an element. It is a shorthand for margin-top, margin-right,
     /// margin-bottom, and margin-left.
@@ -2068,7 +2068,7 @@ type CssBuilder() =
                 .Append(bottom)
                 .Append("px ")
                 .Append(left)
-                .Append("px); ")
+                .Append("px; ")
         )
 
     /// Sets the margin area on all four sides of an element. It is a shorthand for margin-top, margin-right,
@@ -2086,7 +2086,7 @@ type CssBuilder() =
                 .Append(bottom)
                 .Append(" ")
                 .Append(left)
-                .Append("); ")
+                .Append("; ")
         )
 
     /// Sets the margin area on the left side of an element. A positive value places it farther from its
@@ -2133,11 +2133,11 @@ type CssBuilder() =
     /// Sets the padding area for vertical and horizontal axis.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, vertical: int, horizontal: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append("px ").Append(horizontal).Append("px); "))
+        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append("px ").Append(horizontal).Append("px; "))
     /// Sets the padding area for vertical and horizontal axis.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, vertical: string, horizontal: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append(" ").Append(horizontal).Append("); "))
+        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append(" ").Append(horizontal).Append("; "))
     /// Sets the padding area on all four sides of an element. It is a shorthand for padding-top,
     /// padding-right, padding-bottom, and padding-left.
     [<CustomOperation("padding")>]
