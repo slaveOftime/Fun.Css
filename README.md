@@ -99,12 +99,23 @@ let styleStr = StyleStrBuilder()
 
 [x] Add css selector, pseudo etc. (help wanted 😊)
 
-But we may not need to build that, because it looks pretty complex. Maybe we can just do this:
+But we may not need to build that, because it looks pretty complex and very flexible. Maybe we can just do this:
 
 ```fsharp
-stylesheet ".selected span:hover" {
-    color "red"
+styleElement {
+    ruleset ".selected span:hover" {
+        color "red"
+    }
 }
+```
+And it it generate things like
+
+```html
+<style>
+    .selected span:hover {
+        color: red;
+    }
+</style>
 ```
 
 Even there is no type safety for the selector and pseudo class or element, but it is very straightforward to do.
