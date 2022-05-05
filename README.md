@@ -15,12 +15,13 @@ style {
 }
 ```
 
-Benchmarks (I know it is not fair comparison because Fss is more type safety and will automatically generate classname for you. But I did not find similar libraries to compare, just take as a reference), You can check the code in Benchmark/Benchmarks.fs:
+Benchmarks (I know it is not fair comparison for Fss because Fss is more type safety and will automatically generate classname for you. But I did not find similar libraries to compare, just take as a reference), You can check the code in Benchmark/Benchmarks.fs:
 
-|               Method |            Mean |         Error |        StdDev |    Gen 0 |   Gen 1 | Allocated |
-|--------------------- |----------------:|--------------:|--------------:|---------:|--------:|----------:|
-| BuildStyleWithFunCss |        412.8 ns |       7.72 ns |       7.22 ns |   0.3271 |       - |      1 KB |
-|    BuildStyleWithFss | 17,277,199.8 ns | 334,514.26 ns | 296,538.18 ns | 906.2500 | 31.2500 |  3,821 KB |
+|               Method |            Mean |         Error |        StdDev |          Median |    Gen 0 |   Gen 1 | Allocated |
+|--------------------- |----------------:|--------------:|--------------:|----------------:|---------:|--------:|----------:|
+| BuildStyleWithFunCss |        481.0 ns |      20.27 ns |      55.83 ns |        462.5 ns |   0.3266 |       - |      1 KB |
+|  BuildStyleWithFeliz |        722.6 ns |      14.00 ns |      14.38 ns |        726.4 ns |   0.4778 |       - |      2 KB |
+|    BuildStyleWithFss | 17,913,801.0 ns | 350,775.83 ns | 700,537.24 ns | 17,668,715.6 ns | 906.2500 | 31.2500 |  3,821 KB |
 
 
 This project is built in Fun.Blazor at first to help build inline style with type safety way.

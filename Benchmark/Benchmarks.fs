@@ -17,12 +17,30 @@ type RulesetBuilder(ruleName: string) =
         sb.ToString()
 
 
+[<AutoOpen>]
+module Feliz =
+    let felizStyle = Feliz.CssEngine(fun k v -> k, v)
+
+    let makeStyles (ruleName: string) (rules: (string * string) seq) =
+        let sb = StringBuilder()
+
+        sb.Append(ruleName).AppendLine(" {") |> ignore
+        sb.Append("    ") |> ignore
+
+        for (k, v) in rules do
+            sb.Append(k).Append(": ").Append(v).Append("; ") |> ignore
+
+        sb.AppendLine().AppendLine("}") |> ignore
+        sb.ToString()
+
+
 [<MemoryDiagnoser>]
 type Benchmarks() =
 
+        
+
     [<Benchmark>]
     member _.BuildStyleWithFunCss() =
-    
         RulesetBuilder ".my-style" {
             backgroundColor "#44c767"
             borderRadius 30
@@ -33,6 +51,20 @@ type Benchmarks() =
             cursorPointer
             fontSize 17
         }
+
+
+    [<Benchmark>]
+    member _.BuildStyleWithFeliz() =
+        makeStyles ".my-feliz-style" [
+            felizStyle.backgroundColor "#44c767"
+            felizStyle.borderRadius 30
+            felizStyle.borderWidth 1
+            felizStyle.borderStyleSolid
+            felizStyle.borderColor "#18ab29"
+            felizStyle.displayInlineBlock
+            felizStyle.cursorPointer
+            felizStyle.fontSize 17
+        ]
 
 
     [<Benchmark>]
@@ -55,6 +87,11 @@ type Benchmarks() =
 // }
 // "
 
+// From Feliz.Engine
+// ".my-feliz-style {
+//     background-color: #44c767; border-radius: 30px; border-width: 1px; border-style: solid; border-color: #18ab29; display: inline-block; cursor: pointer; font-size: 17px;
+// }
+// "
 // From Fss
 // ("css-2130983758",
 //  [(".css-2130983758",
