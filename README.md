@@ -1,3 +1,4 @@
+
 # Fun.Css [![Nuget](https://img.shields.io/nuget/vpre/Fun.Css)](https://www.nuget.org/packages/Fun.Css)
 
 
@@ -17,12 +18,11 @@ style {
 
 Benchmarks (I know it is not fair comparison for Fss because Fss is more type safety and will automatically generate classname for you. But I did not find similar libraries to compare, just take as a reference), You can check the code in Benchmark/Benchmarks.fs:
 
-|               Method |            Mean |         Error |        StdDev |          Median |    Gen 0 |   Gen 1 | Allocated |
-|--------------------- |----------------:|--------------:|--------------:|----------------:|---------:|--------:|----------:|
-| BuildStyleWithFunCss |        481.0 ns |      20.27 ns |      55.83 ns |        462.5 ns |   0.3266 |       - |      1 KB |
-|  BuildStyleWithFeliz |        722.6 ns |      14.00 ns |      14.38 ns |        726.4 ns |   0.4778 |       - |      2 KB |
-|    BuildStyleWithFss | 17,913,801.0 ns | 350,775.83 ns | 700,537.24 ns | 17,668,715.6 ns | 906.2500 | 31.2500 |  3,821 KB |
-
+|               Method |        Mean |    Error |   StdDev |  Gen 0 |  Gen 1 | Allocated |
+|--------------------- |------------:|---------:|---------:|-------:|-------:|----------:|
+| BuildStyleWithFunCss |    379.5 ns |  3.61 ns |  3.37 ns | 0.2165 | 0.0005 |      1 KB |
+|  BuildStyleWithFeliz |    691.6 ns |  5.29 ns |  4.95 ns | 0.3166 |      - |      2 KB |
+|    BuildStyleWithFss | 10,264.7 ns | 56.19 ns | 46.92 ns | 1.9073 |      - |     12 KB |
 
 This project is built in Fun.Blazor at first to help build inline style with type safety way.
 
