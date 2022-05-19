@@ -34,6 +34,12 @@ type CssBuilder() =
 
     member inline _.Yield(_: unit) = CombineKeyValue(fun sb -> sb)
     member inline _.Yield([<InlineIfLambda>] x: CombineKeyValue) = x
+    member inline _.Yield(keyValue: string) = CombineKeyValue(fun s -> s.Append(keyValue).Append("; "))
+
+    member inline _.Yield((key, value): string * string) = CombineKeyValue(fun s -> s.Append(key).Append(": ").Append(value).Append("; "))
+    member inline _.Yield((key, value): string * int) = CombineKeyValue(fun s -> s.Append(key).Append(": ").Append(value).Append("; "))
+    member inline _.Yield((key, value): string * float) = CombineKeyValue(fun s -> s.Append(key).Append(": ").Append(value).Append("; "))
+    member inline _.Yield((key, value): string * bool) = CombineKeyValue(fun s -> s.Append(key).Append(": ").Append(value).Append("; "))
 
     member inline _.Run([<InlineIfLambda>] combine: CombineKeyValue) = combine
 
@@ -820,8 +826,7 @@ type CssBuilder() =
     /// This overload takes a floating number that goes from 0 to 1,
     [<CustomOperation("filterBrightness")>]
     member inline _.filterBrightness([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        comb
-        &&& CombineKeyValue(fun x -> x.Append("filter: brightness(").Append(value * 100.).Append("%); "))
+        comb &&& CombineKeyValue(fun x -> x.Append("filter: brightness(").Append(value * 100.).Append("%); "))
     /// Adjusts the contrast of the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.

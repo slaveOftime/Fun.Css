@@ -37,8 +37,6 @@ module Feliz =
 [<MemoryDiagnoser>]
 type Benchmarks() =
 
-        
-
     [<Benchmark>]
     member _.BuildStyleWithFunCss() =
         RulesetBuilder ".my-style" {
@@ -52,19 +50,34 @@ type Benchmarks() =
             fontSize 17
         }
 
+    [<Benchmark>]
+    member _.BuildStyleWithFunCssCustom() =
+        RulesetBuilder ".my-style" {
+            "background-color: #44c767"
+            "border-radius", "30px"
+            "border-width", "1px"
+            borderStyleSolid
+            "border-color", "#18ab29"
+            displayInlineBlock
+            cursorPointer
+            "font-size", "17px"
+        }
+
 
     [<Benchmark>]
     member _.BuildStyleWithFeliz() =
-        makeStyles ".my-feliz-style" [
-            felizStyle.backgroundColor "#44c767"
-            felizStyle.borderRadius 30
-            felizStyle.borderWidth 1
-            felizStyle.borderStyleSolid
-            felizStyle.borderColor "#18ab29"
-            felizStyle.displayInlineBlock
-            felizStyle.cursorPointer
-            felizStyle.fontSize 17
-        ]
+        makeStyles
+            ".my-feliz-style"
+            [
+                felizStyle.backgroundColor "#44c767"
+                felizStyle.borderRadius 30
+                felizStyle.borderWidth 1
+                felizStyle.borderStyleSolid
+                felizStyle.borderColor "#18ab29"
+                felizStyle.displayInlineBlock
+                felizStyle.cursorPointer
+                felizStyle.fontSize 17
+            ]
 
 
     [<Benchmark>]
@@ -95,4 +108,4 @@ type Benchmarks() =
 // From Fss
 // ("css-2130983758",
 //  [(".css-2130983758",
-//    "{ background-color: #44c767;border-radius: 30px;border-width: 1px;border-style: solid;border-color: #18ab29;display: inline-block;cursor: pointer;font-size: 17px; }")])        
+//    "{ background-color: #44c767;border-radius: 30px;border-width: 1px;border-style: solid;border-color: #18ab29;display: inline-block;cursor: pointer;font-size: 17px; }")])
