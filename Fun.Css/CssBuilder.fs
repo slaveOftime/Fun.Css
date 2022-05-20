@@ -17,13 +17,13 @@ module Internal =
 
 
     type Makers =
-        static member inline mkPxWithKV(k: string, v: int) = CombineKeyValue(fun x -> x.Append(k).Append(": ").Append(v).Append("px; "))
+        static member inline mkPxWithKV(k: string, v: int) = CombineKeyValue(fun sb -> sb.Append(k).Append(": ").Append(v).Append("px; "))
 
-        static member inline mkPxWithKV(k: string, v: float) = CombineKeyValue(fun x -> x.Append(k).Append(": ").Append(v).Append("px; "))
+        static member inline mkPxWithKV(k: string, v: float) = CombineKeyValue(fun sb -> sb.Append(k).Append(": ").Append(v).Append("px; "))
 
-        static member inline mkWithKV(k: string, v: int) = CombineKeyValue(fun x -> x.Append(k).Append(": ").Append(v).Append("; "))
+        static member inline mkWithKV(k: string, v: int) = CombineKeyValue(fun sb -> sb.Append(k).Append(": ").Append(v).Append("; "))
 
-        static member inline mkWithKV(k: string, v: float) = CombineKeyValue(fun x -> x.Append(k).Append(": ").Append(v).Append("; "))
+        static member inline mkWithKV(k: string, v: float) = CombineKeyValue(fun sb -> sb.Append(k).Append(": ").Append(v).Append("; "))
 
 
 open Internal
@@ -88,9 +88,9 @@ type CssBuilder() =
 
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, color: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("box-shadow")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -102,9 +102,9 @@ type CssBuilder() =
 
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, blur: int, color: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("box-shadow: ")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -127,9 +127,9 @@ type CssBuilder() =
             color: string
         )
         =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("box-shadow: ")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -693,7 +693,7 @@ type CssBuilder() =
     /// The path to the image to be used as a list-item marker
     [<CustomOperation("propertyUrl")>]
     member inline _.propertyUrl([<InlineIfLambda>] comb: CombineKeyValue, path: string) =
-        comb &&& CombineKeyValue(fun x -> x.Append("list-style-image: url(").Append(path).Append("); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: url(").Append(path).Append("); "))
     /// Sets this property to its default value.
     ///
     /// See example https://www.w3schools.com/cssref/playit.asp?filename=playcss_text-align&preval=initial
@@ -806,13 +806,13 @@ type CssBuilder() =
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterBlur")>]
     member inline _.filterBlur([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: blur(").Append(value).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: blur(").Append(value).Append("%); "))
     /// Applies a blur effect to the elemeen. A larger value will create more blur.
     ///
     /// This overload takes a floating number that goes from 0 to 1,
     [<CustomOperation("filterBlur")>]
     member inline _.filterBlur([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: blur(").Append(value * 100.).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: blur(").Append(value * 100.).Append("%); "))
     /// Adjusts the brightness of the elemeen
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
@@ -820,25 +820,25 @@ type CssBuilder() =
     /// Values over 100% will provide brighter results.
     [<CustomOperation("filterBrightness")>]
     member inline _.filterBrightness([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: brightness(").Append(value).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: brightness(").Append(value).Append("%); "))
     /// Adjusts the brightness of the elemeen. A larger value will create more blur.
     ///
     /// This overload takes a floating number that goes from 0 to 1,
     [<CustomOperation("filterBrightness")>]
     member inline _.filterBrightness([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: brightness(").Append(value * 100.).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: brightness(").Append(value * 100.).Append("%); "))
     /// Adjusts the contrast of the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterContrast")>]
     member inline _.filterContrast([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: contrast(").Append(value).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: contrast(").Append(value).Append("%); "))
     /// Adjusts the contrast of the element. A larger value will create more contrast.
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterContrast")>]
     member inline _.filterContrast([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: contrast(").Append(value * 100.).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: contrast(").Append(value * 100.).Append("%); "))
     /// Applies a drop shadow effect.
     [<CustomOperation("filterDropShadow")>]
     member inline _.filterDropShadow
@@ -852,8 +852,8 @@ type CssBuilder() =
         )
         =
         comb
-        &&& CombineKeyValue(fun x ->
-            x
+        &&& CombineKeyValue(fun sb ->
+            sb
                 .Append("filter: drop-shadow(")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -870,8 +870,8 @@ type CssBuilder() =
     [<CustomOperation("filterDropShadow")>]
     member inline _.filterDropShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, blur: int, color: string) =
         comb
-        &&& CombineKeyValue(fun x ->
-            x
+        &&& CombineKeyValue(fun sb ->
+            sb
                 .Append("filter: drop-shadow(")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -886,8 +886,8 @@ type CssBuilder() =
     [<CustomOperation("filterDropShadow")>]
     member inline _.filterDropShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, color: string) =
         comb
-        &&& CombineKeyValue(fun x ->
-            x
+        &&& CombineKeyValue(fun sb ->
+            sb
                 .Append("filter: drop-shadow(")
                 .Append(horizontalOffset)
                 .Append("px ")
@@ -901,74 +901,74 @@ type CssBuilder() =
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterGrayscale")>]
     member inline _.filterGrayscale([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: grayscale(").Append(value).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: grayscale(").Append(value).Append("%); "))
     /// Converts the image to grayscale
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterGrayscale")>]
     member inline _.filterGrayscale([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: grayscale(").Append(value).Append("%); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: grayscale(").Append(value).Append("%); "))
     /// Applies a hue rotation on the image. The value defines the number of degrees around the color circle the image
     /// samples will be adjusted. 0deg is default, and represents the original image.
     ///
     /// **Note**: Maximum value is 360
     [<CustomOperation("filterHueRotate")>]
     member inline _.filterHueRotate([<InlineIfLambda>] comb: CombineKeyValue, degrees: int) =
-        comb &&& CombineKeyValue(fun x -> x.Append("filter: hue-rotate(").Append(degrees).Append("deg); "))
+        comb &&& CombineKeyValue(fun sb -> sb.Append("filter: hue-rotate(").Append(degrees).Append("deg); "))
     /// Inverts the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterInvert")>]
     member inline _.filterInvert([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("invert(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("invert(").Append(value).Append("%); "))
     /// Inverts the element.
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterInvert")>]
     member inline _.filterInvert([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("invert(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("invert(").Append(value).Append("%); "))
     /// Sets the opacity of the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterOpacity")>]
     member inline _.filterOpacity([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("opacity(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("opacity(").Append(value).Append("%); "))
     /// Sets the opacity of the element.
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterOpacity")>]
     member inline _.filterOpacity([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("opacity(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("opacity(").Append(value).Append("%); "))
     /// Sets the saturation of the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterSaturate")>]
     member inline _.filterSaturate([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("saturate(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("saturate(").Append(value).Append("%); "))
     /// Sets the saturation of the element.
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterSaturate")>]
     member inline _.filterSaturate([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("saturate(").Append(value).Append("%); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("saturate(").Append(value).Append("%); "))
     /// Applies Sepia filter to the element.
     ///
     /// This overload takes an integer that represents a percentage from 0 to 100.
     [<CustomOperation("filterSepia")>]
     member inline _.filterSepia([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("sepia(").Append(value).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("sepia(").Append(value).Append("); "))
     /// Applies Sepia filter to the element.
     ///
     /// This overload takes a floating number that goes from 0 to 1
     [<CustomOperation("filterSepia")>]
     member inline _.filterSepia([<InlineIfLambda>] comb: CombineKeyValue, value: double) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("sepia(").Append(value).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("sepia(").Append(value).Append("); "))
     /// The url() function takes the location of an XML file that specifies an SVG filter, and may include an anchor to a specific filter element.
     ///
     /// Example: `filter: url(svg-url#element-id)`
     [<CustomOperation("filterUrl")>]
     member inline _.filterUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("filter: ").Append("url(").Append(value).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("filter: ").Append("url(").Append(value).Append("); "))
     /// Sets this property to its default value.
     [<CustomOperation("filterInitial")>]
     member inline _.filterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("filter", "initial")
@@ -1182,9 +1182,9 @@ type CssBuilder() =
     /// Define your own values in the cubic-bezier function. Possible values are numeric values from 0 to 1
     [<CustomOperation("animationTimingFunctionCubicBezier")>]
     member inline _.animationTimingFunctionCubicBezier([<InlineIfLambda>] comb: CombineKeyValue, n1: float, n2: float, n3: float, n4: float) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("animation-timing-function: ")
                 .Append("cubic-bezier(")
                 .Append(n1)
@@ -1230,9 +1230,9 @@ type CssBuilder() =
     /// Define your own values in the cubic-bezier function. Possible values are numeric values from 0 to 1
     [<CustomOperation("transitionTimingFunctionCubicBezier")>]
     member inline _.transitionTimingFunctionCubicBezier([<InlineIfLambda>] comb: CombineKeyValue, n1: float, n2: float, n3: float, n4: float) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("transition-timing-function: ")
                 .Append("cubic-bezier(")
                 .Append(n1)
@@ -1583,9 +1583,9 @@ type CssBuilder() =
     /// Defines a 2D transformation, using a matrix of six values.
     [<CustomOperation("transformMatrix")>]
     member inline _.transformMatrix([<InlineIfLambda>] comb: CombineKeyValue, x1: int, y1: int, z1: int, x2: int, y2: int, z2: int) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("transform: ")
                 .Append("matrix(")
                 .Append(x1)
@@ -1605,18 +1605,18 @@ type CssBuilder() =
     /// Defines a 2D translation.
     [<CustomOperation("transformTranslate")>]
     member inline _.transformTranslate([<InlineIfLambda>] comb: CombineKeyValue, x: int, y: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translate(").Append(x).Append("px, ").Append(y).Append("px); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translate(").Append(x).Append("px, ").Append(y).Append("px); "))
 
     /// Defines a 2D translation.
     [<CustomOperation("transformTranslate")>]
     member inline _.transformTranslate([<InlineIfLambda>] comb: CombineKeyValue, x: string, y: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translate(").Append(x).Append(", ").Append(y).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translate(").Append(x).Append(", ").Append(y).Append("); "))
     /// Defines a 3D translation.
     [<CustomOperation("transformTranslate3D")>]
     member inline _.transformTranslate3D([<InlineIfLambda>] comb: CombineKeyValue, x: int, y: int, z: int) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("transform: ")
                 .Append("translate3d(")
                 .Append(x)
@@ -1630,9 +1630,9 @@ type CssBuilder() =
     /// Defines a 3D translation.
     [<CustomOperation("transformTranslate3D")>]
     member inline _.transformTranslate3D([<InlineIfLambda>] comb: CombineKeyValue, x: string, y: string, z: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("transform: ")
                 .Append("translate3d(")
                 .Append(x)
@@ -1646,42 +1646,42 @@ type CssBuilder() =
     /// Defines a translation, using only the value for the X-axis.
     [<CustomOperation("transformTranslateX")>]
     member inline _.transformTranslateX([<InlineIfLambda>] comb: CombineKeyValue, x: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateX(").Append(x).Append("px); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateX(").Append(x).Append("px); "))
     /// Defines a translation, using only the value for the X-axis.
     [<CustomOperation("transformTranslateX")>]
     member inline _.transformTranslateX([<InlineIfLambda>] comb: CombineKeyValue, x: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateX(").Append(x).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateX(").Append(x).Append("); "))
     /// Defines a translation, using only the value for the Y-axis
     [<CustomOperation("transformTranslateY")>]
     member inline _.transformTranslateY([<InlineIfLambda>] comb: CombineKeyValue, y: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateY(").Append(y).Append("px); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateY(").Append(y).Append("px); "))
     /// Defines a translation, using only the value for the Y-axis
     [<CustomOperation("transformTranslateY")>]
     member inline _.transformTranslateY([<InlineIfLambda>] comb: CombineKeyValue, y: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateY(").Append(y).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateY(").Append(y).Append("); "))
     /// Defines a 3D translation, using only the value for the Z-axis
     [<CustomOperation("transformTranslateZ")>]
     member inline _.transformTranslateZ([<InlineIfLambda>] comb: CombineKeyValue, z: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateZ(").Append(z).Append("px); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateZ(").Append(z).Append("px); "))
     /// Defines a 3D translation, using only the value for the Z-axis
     [<CustomOperation("transformTranslateZ")>]
     member inline _.transformTranslateZ([<InlineIfLambda>] comb: CombineKeyValue, z: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("translateZ(").Append(z).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("translateZ(").Append(z).Append("); "))
     /// Defines a 2D scale transformation.
     [<CustomOperation("transformScale")>]
     member inline _.transformScale([<InlineIfLambda>] comb: CombineKeyValue, x: int, y: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("scale(").Append(x).Append(", ").Append(y).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("scale(").Append(x).Append(", ").Append(y).Append("); "))
     /// Defines a scale transformation.
     /// Defines a scale transformation.
     [<CustomOperation("transformScale")>]
     member inline _.transformScale([<InlineIfLambda>] comb: CombineKeyValue, n: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("scale(").Append(n).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("scale(").Append(n).Append("); "))
     /// Defines a 3D scale transformation
     [<CustomOperation("transformScale3D")>]
     member inline _.transformScale3D([<InlineIfLambda>] comb: CombineKeyValue, x: int, y: int, z: int) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("transform: ")
                 .Append("scale3d(")
                 .Append(x)
@@ -1694,52 +1694,53 @@ type CssBuilder() =
     /// Defines a scale transformation by giving a value for the X-axis.
     [<CustomOperation("transformScaleX")>]
     member inline _.transformScaleX([<InlineIfLambda>] comb: CombineKeyValue, x: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("scaleX(").Append(x).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("scaleX(").Append(x).Append("); "))
     /// Defines a scale transformation by giving a value for the Y-axis.
     [<CustomOperation("transformScaleY")>]
     member inline _.transformScaleY([<InlineIfLambda>] comb: CombineKeyValue, y: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("scaleY(").Append(x).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("scaleY(").Append(y).Append("); "))
     /// Defines a 3D translation, using only the value for the Z-axis
     [<CustomOperation("transformScaleZ")>]
     member inline _.transformScaleZ([<InlineIfLambda>] comb: CombineKeyValue, z: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("scaleZ(").Append(x).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("scaleZ(").Append(z).Append("); "))
     /// Defines a 2D rotation, the angle is specified in the parameter.
     [<CustomOperation("transformRotate")>]
     member inline _.transformRotate([<InlineIfLambda>] comb: CombineKeyValue, deg: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("rotate(").Append(x).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("rotate(").Append(deg).Append("deg); "))
     /// Defines a 2D rotation, the angle is specified in the parameter.
     [<CustomOperation("transformRotate")>]
     member inline _.transformRotate([<InlineIfLambda>] comb: CombineKeyValue, deg: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("rotate(").Append(x).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("rotate(").Append(deg).Append("deg); "))
     /// Defines a 3D rotation along the X-axis.
     [<CustomOperation("transformRotateX")>]
     member inline _.transformRotateX([<InlineIfLambda>] comb: CombineKeyValue, deg: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("rotateX(").Append(x).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("rotateX(").Append(deg).Append("deg); "))
 
     /// Defines a 3D rotation along the Y-axis
     [<CustomOperation("transformRotateY")>]
     member inline _.transformRotateY([<InlineIfLambda>] comb: CombineKeyValue, deg: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("rotateY(").Append(x).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("rotateY(").Append(deg).Append("deg); "))
     /// Defines a 3D rotation along the Z-axis
     [<CustomOperation("transformRotateZ")>]
     member inline _.transformRotateZ([<InlineIfLambda>] comb: CombineKeyValue, deg: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("rotateZ(").Append(x).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("rotateZ(").Append(deg).Append("deg); "))
     /// Defines a 2D skew transformation along the X- and the Y-axis.
     [<CustomOperation("transformSkew")>]
     member inline _.transformSkew([<InlineIfLambda>] comb: CombineKeyValue, xAngle: float, yAngle: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("skew(").Append(xAngle).Append("deg, ").Append(yAngle).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("skew(").Append(xAngle).Append("deg, ").Append(yAngle).Append("deg); ")
+        )
     /// Defines a 2D skew transformation along the X-axis
     [<CustomOperation("transformSkewX")>]
     member inline _.transformSkewX([<InlineIfLambda>] comb: CombineKeyValue, xAngle: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("skewX(").Append(xAngle).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("skewX(").Append(xAngle).Append("deg); "))
     /// Defines a 2D skew transformation along the Y-axis
     [<CustomOperation("transformSkewY")>]
     member inline _.transformSkewY([<InlineIfLambda>] comb: CombineKeyValue, yAngle: float) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("skewY(").Append(yAngle).Append("deg); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("skewY(").Append(yAngle).Append("deg); "))
     /// Defines a perspective view for a 3D transformed element
     [<CustomOperation("transformPerspective")>]
     member inline _.transformPerspective([<InlineIfLambda>] comb: CombineKeyValue, n: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("transform: ").Append("perspective(").Append(n).Append("); "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("transform: ").Append("perspective(").Append(n).Append("); "))
     /// Sets this property to its default value.
     [<CustomOperation("transformInitial")>]
     member inline _.transformInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("transform", "initial")
@@ -2051,20 +2052,20 @@ type CssBuilder() =
     /// Sets the margin area on the vertical and horizontal axis.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, vertical: int, horizonal: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append("px ").Append(horizonal).Append("px; "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("margin: ").Append(vertical).Append("px ").Append(horizonal).Append("px; "))
 
     /// Sets the margin area on the vertical and horizontal axis.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, vertical: string, horizonal: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("margin: ").Append(vertical).Append(" ").Append(horizonal).Append("; "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("margin: ").Append(vertical).Append(" ").Append(horizonal).Append("; "))
 
     /// Sets the margin area on all four sides of an element. It is a shorthand for margin-top, margin-right,
     /// margin-bottom, and margin-left.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, top: int, right: int, bottom: int, left: int) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("margin: ")
                 .Append(top)
                 .Append("px ")
@@ -2080,9 +2081,9 @@ type CssBuilder() =
     /// margin-bottom, and margin-left.
     [<CustomOperation("margin")>]
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, top: string, right: string, bottom: string, left: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("margin: ")
                 .Append(top)
                 .Append(" ")
@@ -2138,18 +2139,18 @@ type CssBuilder() =
     /// Sets the padding area for vertical and horizontal axis.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, vertical: int, horizontal: int) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append("px ").Append(horizontal).Append("px; "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("padding: ").Append(vertical).Append("px ").Append(horizontal).Append("px; "))
     /// Sets the padding area for vertical and horizontal axis.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, vertical: string, horizontal: string) =
-        CombineKeyValue(fun x -> comb.Invoke(x).Append("padding: ").Append(vertical).Append(" ").Append(horizontal).Append("; "))
+        CombineKeyValue(fun sb -> comb.Invoke(sb).Append("padding: ").Append(vertical).Append(" ").Append(horizontal).Append("; "))
     /// Sets the padding area on all four sides of an element. It is a shorthand for padding-top,
     /// padding-right, padding-bottom, and padding-left.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, top: string, right: string, bottom: string, left: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("padding: ")
                 .Append(top)
                 .Append(" ")
@@ -2164,9 +2165,9 @@ type CssBuilder() =
     /// padding-right, padding-bottom, and padding-left.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, top: int, right: int, bottom: int, left: int) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("padding: ")
                 .Append(top)
                 .Append("px ")
@@ -2238,8 +2239,8 @@ type CssBuilder() =
     /// ```
     [<CustomOperation("gridTemplateColumns")>]
     member inline _.gridTemplateColumns([<InlineIfLambda>] comb: CombineKeyValue, value: int seq) =
-        CombineKeyValue(fun x ->
-            let sb = comb.Invoke(x).Append("grid-template-columns: ")
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("grid-template-columns: ")
             for v in value do
                 sb.Append(v).Append("px ") |> ignore
             sb.Append("; ")
@@ -2268,9 +2269,9 @@ type CssBuilder() =
             match areaName with
             | Some n -> ", [" + n + "]"
             | None -> ""
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("grid-template-columns: ")
                 .Append("repeat(")
                 .Append(count)
@@ -2291,8 +2292,8 @@ type CssBuilder() =
     /// ```
     [<CustomOperation("gridTemplateRows")>]
     member inline _.gridTemplateRows([<InlineIfLambda>] comb: CombineKeyValue, value: int seq) =
-        CombineKeyValue(fun x ->
-            let sb = comb.Invoke(x).Append("grid-template-rows: ")
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("grid-template-rows: ")
             for v in value do
                 sb.Append(v).Append("px ") |> ignore
             sb.Append("; ")
@@ -2325,9 +2326,9 @@ type CssBuilder() =
             match areaName with
             | Some n -> " [" + n + "]"
             | None -> ""
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("grid-template-rows: ")
                 .Append("repeat(")
                 .Append(count)
@@ -2355,8 +2356,8 @@ type CssBuilder() =
     /// ```
     [<CustomOperation("gridTemplateAreas")>]
     member inline _.gridTemplateAreas([<InlineIfLambda>] comb: CombineKeyValue, value: string list) =
-        CombineKeyValue(fun x ->
-            let sb = comb.Invoke(x).Append("grid-template-areas: ")
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("grid-template-areas: ")
             for item in value do
                 sb.Append("'").Append(item).Append("' ") |> ignore
 
@@ -3007,8 +3008,8 @@ type CssBuilder() =
     [<CustomOperation("borderWidth")>]
     member inline _.borderWidth([<InlineIfLambda>] comb: CombineKeyValue, top: string, ?right: string) =
         comb
-        &&& CombineKeyValue(fun x ->
-            x
+        &&& CombineKeyValue(fun sb ->
+            sb
                 .Append("border-width: ")
                 .Append(
                     top
@@ -3023,9 +3024,9 @@ type CssBuilder() =
     /// Sets the width of an element's border.
     [<CustomOperation("borderWidth")>]
     member inline _.borderWidth([<InlineIfLambda>] comb: CombineKeyValue, top: string, right: string, bottom: string, ?left: string) =
-        CombineKeyValue(fun x ->
+        CombineKeyValue(fun sb ->
             comb
-                .Invoke(x)
+                .Invoke(sb)
                 .Append("border-width: ")
                 .Append(top)
                 .Append(", ")
