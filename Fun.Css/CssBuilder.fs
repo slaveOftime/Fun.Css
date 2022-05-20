@@ -1164,6 +1164,9 @@ type CssBuilder() =
     [<CustomOperation("writingModeInheritFromParent")>]
     member inline _.writingModeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("writing-mode", "inherit")
 
+    [<CustomOperation("animation")>]
+    member inline _.animation([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("animation", x)
+
     /// Default value. Specifies a animation effect with a slow start, then fast, then end slowly (equivalent to cubic-bezier(0.25,0.1,0.25,1)).
     [<CustomOperation("animationTimingFunctionEase")>]
     member inline _.animationTimingFunctionEase([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("animation-timing-function", "ease")
@@ -1579,6 +1582,12 @@ type CssBuilder() =
     /// Defines that there should be no transformation.
     [<CustomOperation("transformNone")>]
     member inline _.transformNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("transform", "none")
+
+    [<CustomOperation("transformOrigin")>]
+    member inline _.transformOrigin([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("transform-origin", x)
+
+    [<CustomOperation("transformOrigin")>]
+    member inline _.transformOrigin([<InlineIfLambda>] comb: CombineKeyValue, x: string, y: string) = comb &>> ("transform-origin", x + " " + y)
 
     /// Defines a 2D transformation, using a matrix of six values.
     [<CustomOperation("transformMatrix")>]
