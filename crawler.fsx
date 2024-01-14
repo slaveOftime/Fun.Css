@@ -3,6 +3,7 @@
 open System
 open System.IO
 open FSharp.Data
+open System
 
 type CSSProperties = HtmlProvider<"https://www.w3schools.com/cssref/pr_background-blend-mode.php">
 
@@ -13,6 +14,7 @@ type ValueType =
     | String
     | Int
     | Float
+    | Tuple of int
     | None
 
 
@@ -41,8 +43,11 @@ let normalizeName (name: string) =
             let mutable i = 0
             while i < name.Length do
                 if name[i] = '-' || name[i] = ' ' then
-                    sb.Append(name[i + 1] |> Char.ToUpper) |> ignore
-                    i <- i + 2
+                    if i < name.Length - 1 then
+                        sb.Append(name[i + 1] |> Char.ToUpper) |> ignore
+                        i <- i + 2
+                    else
+                        i <- i + 1
                 else if name[i] = '@' then
                     i <- i + 1
                 else
@@ -83,30 +88,34 @@ let processPropertyValues (propertyValues: CSSProperties.PropertyValues.Row seq)
                     value, [ ValueType.String, "$\"" + value + "({value})\"" ]
                 else if propertyValue.Value.EndsWith "%" then
                     "percentage", [ ValueType.Float, "string value + \"%\"" ]
-                else if propertyValue.Value.Contains "color" then
+                else if (propertyValue.Value.Split("") |> Seq.filter ((=) "color") |> Seq.length) = 1 then
                     propertyValue.Value, [ ValueType.String, "value" ]
+                else if (propertyValue.Value.Split("") |> Seq.filter ((=) "color") |> Seq.length) = 2 then
+                    "", [ ValueType.String, "value" ]
                 else if propertyValue.Value = "width" || propertyValue.Value = "height" || propertyValue.Value = "length" then
-                    propertyValue.Value, [ ValueType.Int, "string value + \"px\""; ValueType.String, "value" ]
+                    "", [ ValueType.Int, "string value + \"px\"" ]
                 else if propertyValue.Value.Contains "time" || propertyValue.Value.Contains "number" then
                     propertyValue.Value, [ ValueType.Float, "value" ]
                 else if propertyValue.Value = "0" then
                     "", []
                 else if propertyValue.Value = "/" then
-                    propertyValue.Value.Split("/")[0], [ ValueType.String, "value" ]
+                    let count = propertyValue.Value.Split("/").Length
+                    let value = [for i in 1..count -> $"v{i}"] |> String.concat " + " 
+                    "", [ ValueType.Tuple count, value ]
                 else if propertyValue.Value.Split(" ").Length > 1 then
                     let value = propertyValue.Value.Split(" ")[0]
                     (if Char.IsDigit(value[0]) then "value" else value), [ ValueType.String, "value" ]
                 else
-                    propertyValue.Value, [ ValueType.None, "\"" + propertyValue.Value + "\"" ]
+                    propertyValue.Value, [ ValueType.None, "defaultArg value \"" + propertyValue.Value + "\"" ]
             for vt, v in values do
                 let vstr =
                     match vt with
-                    | ValueType.None -> ""
-                    | ValueType.Int -> "(value: int)"
-                    | ValueType.Float -> "(value: float)"
-                    | ValueType.String -> "(value: string)"
-                if String.IsNullOrEmpty(normalizeName name) |> not then
-                    propertyValue, name, v, vstr
+                    | ValueType.None -> ", ?value: string"
+                    | ValueType.Int -> ", value: int"
+                    | ValueType.Float -> ", value: float"
+                    | ValueType.String -> ", value: string"
+                    | ValueType.Tuple count -> "," + ([for i in 1..count -> $"v{i}"] |> String.concat ", ")
+                propertyValue, name, v, vstr
     ]
     |> List.distinctBy (fun (_, name, _, vstr) -> name, vstr)
 
@@ -154,56 +163,6 @@ let manualOpenContent = Text.StringBuilder()
 let helpersContent = Text.StringBuilder()
 
 let appendForAutoOpen (x: string) = autoOpenContent.AppendLine x |> ignore
-let appendForManualOpen (x: string) = manualOpenContent.AppendLine x |> ignore
-let appendForHelpers (x: string) = helpersContent.AppendLine x |> ignore
-
-appendForManualOpen
-    "/// Some properties are not used very often which will need to open this module to access them for better ce build performance
-module Fun.Css.Extensions
-
-open Internal
-
-/// Some top level properties are not  very common which will need to manually open
-type CssBuilder with
-"
-
-appendForHelpers
-    "[<AutoOpen>]
-module Fun.Css.Helpers
-
-open Internal
-
-"
-
-let autoOpenPropertyNames = [
-    "color"
-    "background"
-    "animation"
-
-    "border"
-    "top"
-    "right"
-    "bottom"
-    "left"
-
-    "gap"
-
-    "display"
-    "flex"
-    "grid"
-
-    "height"
-    "width"
-    "max-height"
-    "max-width"
-    "min-height"
-    "min-width"
-
-    "margin"
-    "padding"
-
-    "opacity"
-]
 
 
 autoOpenProperties
@@ -233,104 +192,57 @@ autoOpenProperties
             "min-width"
         ]
 
-    if List.contains mainName autoOpenPropertyNames then
-        appendForAutoOpen
-            $"""    /// {mainDescription}
+    appendForAutoOpen
+        $"""    /// {mainDescription}
     [<CustomOperation("{normalizeName mainName}")>]
     member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("; "))
 """
-        if isPxValue then
-            appendForAutoOpen
-                $"""    /// {mainDescription}
-    [<CustomOperation("{normalizeName mainName}")>]
-    member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("px; "))
-"""
-    else
-        appendForManualOpen
-            $"""    /// {mainDescription}
-    [<CustomOperation("{normalizeName mainName}")>]
-    member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("; "))
-"""
-        if isPxValue then
-            appendForManualOpen
-                $"""    /// {mainDescription}
-    [<CustomOperation("{normalizeName mainName}")>]
-    member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("px; ")) 
-"""
+//     if isPxValue then
+//         appendForAutoOpen
+//             $"""    /// {mainDescription}
+//     [<CustomOperation("{normalizeName mainName}")>]
+//     member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("px; "))
+// """
 
+    let mainPropertyValues =
+        try
+            mainDetail.Tables.``Property Values``.Rows
+        with ex ->
+            printfn "Failed for get property values %A" ex
+            [||]
+
+    let mutable addedSubPropertyNames = Collections.Generic.List<string>()
     if autoOpenSubProperties.ContainsKey property.Name && autoOpenSubProperties[property.Name].Count > 0 then
-        let mutable isModuleCreated = false
         for property in autoOpenSubProperties[property.Name] |> Seq.sortBy (fun x -> x.Name) do
             printfn "%A" property.Name
-            let name = property.Name.Substring(mainName.Length + 1)
-            let detail = loadDetail false property.Url
+            let subName = property.Name.Substring(mainName.Length + 1)
+            let subDetail = loadDetail false property.Url
             let propertyValues =
                 try
-                    detail.Tables.``Property Values``.Rows
+                    subDetail.Tables.``Property Values``.Rows
                 with ex ->
-                    printfn "Retry failed for get property values %A" ex
+                    printfn "Failed for get property values %A" ex
                     [||]
 
             if propertyValues.Length > 0 then
-                if not isModuleCreated then
-                    isModuleCreated <- true
-                    appendForHelpers
-                        $"""/// {mainDescription.Trim()}
-[<RequireQualifiedAccess>]
-module {normalizeName mainName} =
-"""
-
-                let description = getDescription detail.Html
-                appendForHelpers
-                    $"""    /// {description.Trim()}
-    type {normalizeName name} =
-"""
                 for pv, name, v, vstr in propertyValues |> processPropertyValues do
-                    appendForHelpers
-                        $"""        /// {pv.Description.Trim()}
-        static member inline {normalizeName name}{vstr} = CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
-    
+                    addedSubPropertyNames.Add pv.Value
+                    let name = mainName + "-" + subName + "-" + name |> normalizeName
+                    appendForAutoOpen
+                        $"""    /// {pv.Description.Trim()}
+    [<CustomOperation("{name}")>]
+    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{vstr}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
 """
 
-    else if
-        List.contains mainName [
-            "color"
-
-            "height"
-            "width"
-            "max-height"
-            "max-width"
-            "min-height"
-            "min-width"
-
-            "opacity"
-
-            "top"
-            "right"
-            "bottom"
-            "left"
-
-            "gap"
-        ]
-        |> not
-    then
-        let propertyValues =
-            try
-                mainDetail.Tables.``Property Values``.Rows
-            with ex ->
-                printfn "Retry failed for get property values %A" ex
-                [||]
-
-        if propertyValues.Length > 0 then
-            appendForHelpers
-                $"""/// {mainDescription.Trim()}
-type {normalizeName mainName} =
-"""
-            for pv, name, v, vstr in propertyValues |> processPropertyValues do
-                appendForHelpers
-                    $"""    /// {pv.Description.Trim()}
-    static member inline {normalizeName name}{vstr} = CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
-    
+    if mainPropertyValues.Length > 0 then
+        let description = getDescription mainDetail.Html
+        for pv, name, v, vstr in mainPropertyValues |> processPropertyValues do
+            if addedSubPropertyNames.Contains pv.Value |> not then
+                let name = mainName + "-" + name |> normalizeName
+                appendForAutoOpen
+                    $"""    /// {description.Trim()}
+    [<CustomOperation("{name}")>]
+    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{vstr}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
 """
 )
 
@@ -344,7 +256,3 @@ File.ReadAllLines cssBuilderFile
 File.AppendAllLines(cssBuilderFile, [ "    // Auto generated"; "" ])
 
 File.AppendAllText(cssBuilderFile, autoOpenContent.ToString())
-
-
-// System.IO.File.WriteAllText("Fun.Css/CssExtensions.fs", manualOpenContent.ToString())
-System.IO.File.WriteAllText("Fun.Css/CssHelpers.fs", helpersContent.ToString())

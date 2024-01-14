@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0-beta108 - 2024-01-13
+## 0.5.0-beta108 - 2024-01-13
 
 - Auto generate DSL
 
