@@ -10,6 +10,8 @@
 
 	<ItemGroup>
 		<Compile Include="CssBuilder.fs" />
+		<Compile Include="CssHelpers.fs" />
+		<Compile Include="CssExtensions.fs" />
 		<!-- Add source files to "fable" folder in Nuget package -->
 		<Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
 	</ItemGroup>

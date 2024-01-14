@@ -3,6 +3,7 @@
 open System.Text
 open BenchmarkDotNet.Attributes
 open Fss
+open Fun.Css.Helpers
 
 
 type RulesetBuilder(ruleName: string) =
@@ -40,14 +41,14 @@ type Benchmarks() =
     [<Benchmark>]
     member _.BuildStyleWithFunCss() =
         RulesetBuilder ".my-style" {
-            backgroundColor "#44c767"
-            borderRadius 30
-            borderWidth 1
-            borderStyleSolid
-            borderColor "#18ab29"
-            displayInlineBlock
-            cursorPointer
-            fontSize 17
+            background "#44c767"
+            border.radius.length 30
+            border.width.length 1
+            border.style.solid
+            border.color.color "#18ab29"
+            display.inlineBlock
+            cursor.pointer
+            font.size.length 17
         }
 
     [<Benchmark>]
@@ -56,28 +57,26 @@ type Benchmarks() =
             "background-color: #44c767"
             "border-radius", "30px"
             "border-width", "1px"
-            borderStyleSolid
+            "border-style", "solid"
             "border-color", "#18ab29"
-            displayInlineBlock
-            cursorPointer
+            "display", "inline-block"
+            "cursor", "pointer"
             "font-size", "17px"
         }
 
 
     [<Benchmark>]
     member _.BuildStyleWithFeliz() =
-        makeStyles
-            ".my-feliz-style"
-            [
-                felizStyle.backgroundColor "#44c767"
-                felizStyle.borderRadius 30
-                felizStyle.borderWidth 1
-                felizStyle.borderStyleSolid
-                felizStyle.borderColor "#18ab29"
-                felizStyle.displayInlineBlock
-                felizStyle.cursorPointer
-                felizStyle.fontSize 17
-            ]
+        makeStyles ".my-feliz-style" [
+            felizStyle.backgroundColor "#44c767"
+            felizStyle.borderRadius 30
+            felizStyle.borderWidth 1
+            felizStyle.borderStyleSolid
+            felizStyle.borderColor "#18ab29"
+            felizStyle.displayInlineBlock
+            felizStyle.cursorPointer
+            felizStyle.fontSize 17
+        ]
 
 
     [<Benchmark>]
