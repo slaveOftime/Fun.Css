@@ -28,7 +28,7 @@ styleStr {
     marginLeftPercentage 1.1
     alignItemsStart
     alignContentCenter
-    // overflowAuto
+    overflowAuto
     textAlignLastLeft
     justifyContentFlexStart
     whiteSpaceNowrap

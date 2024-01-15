@@ -3,11 +3,11 @@
 open System
 open System.IO
 open FSharp.Data
-open System
 
 type CSSProperties = HtmlProvider<"https://www.w3schools.com/cssref/pr_background-blend-mode.php">
 
 type PropertyInfo = { Name: string; Url: string }
+type PropertyValue = { Value: string; Description: string }
 
 [<RequireQualifiedAccess>]
 type ValueType =
@@ -35,8 +35,31 @@ let getDescription (doc: HtmlDocument) =
         // printfn "Get description failed %A" ex
         ""
 
+let getPropertyValues (doc: HtmlDocument) =
+    try
+        let items = doc.CssSelect("#main") |> Seq.item 0 |> (fun x -> x.Elements())
+        let index =
+            items
+            |> Seq.findIndex (fun x -> x.Name() = "h2" && x.InnerText() = "Property Values" || x.InnerText() = "Filter Functions")
+        if index > 0 then
+            let ps = items |> Seq.item (index + 1) |> (fun x -> x.CssSelect("table tr"))
+            [
+                for p in ps do
+                    let tds = p.CssSelect("td")
+                    if tds.Length > 0 then
+                        {
+                            Value = tds[0].InnerText()
+                            Description = tds[1].InnerText()
+                        }
+            ]
+        else
+            []
+    with ex ->
+        printfn "Get property values failed %A" ex
+        []
 
 let normalizeName (name: string) =
+    let name = name.Trim()
     let name =
         if name.Contains '-' || name.Contains ' ' then
             let sb = Text.StringBuilder()
@@ -79,45 +102,121 @@ let loadDetail reload url =
         File.WriteAllText(file, content.Html.ToString())
         content
 
-let processPropertyValues (propertyValues: CSSProperties.PropertyValues.Row seq) =
+let processPropertyValues (propertyValues: PropertyValue seq) =
     [
         for propertyValue in propertyValues |> Seq.sortBy (fun x -> x.Value) do
-            let name, values =
-                if propertyValue.Value.Contains "(" then
-                    let value = propertyValue.Value.Substring(0, propertyValue.Value.IndexOf("("))
-                    value, [ ValueType.String, "$\"" + value + "({value})\"" ]
-                else if propertyValue.Value.EndsWith "%" then
-                    "percentage", [ ValueType.Float, "string value + \"%\"" ]
-                else if (propertyValue.Value.Split("") |> Seq.filter ((=) "color") |> Seq.length) = 1 then
-                    propertyValue.Value, [ ValueType.String, "value" ]
-                else if (propertyValue.Value.Split("") |> Seq.filter ((=) "color") |> Seq.length) = 2 then
-                    "", [ ValueType.String, "value" ]
-                else if propertyValue.Value = "width" || propertyValue.Value = "height" || propertyValue.Value = "length" then
-                    "", [ ValueType.Int, "string value + \"px\"" ]
-                else if propertyValue.Value.Contains "time" || propertyValue.Value.Contains "number" then
-                    propertyValue.Value, [ ValueType.Float, "value" ]
-                else if propertyValue.Value = "0" then
-                    "", []
-                else if propertyValue.Value = "/" then
-                    let count = propertyValue.Value.Split("/").Length
-                    let value = [for i in 1..count -> $"v{i}"] |> String.concat " + " 
-                    "", [ ValueType.Tuple count, value ]
-                else if propertyValue.Value.Split(" ").Length > 1 then
-                    let value = propertyValue.Value.Split(" ")[0]
-                    (if Char.IsDigit(value[0]) then "value" else value), [ ValueType.String, "value" ]
-                else
-                    propertyValue.Value, [ ValueType.None, "defaultArg value \"" + propertyValue.Value + "\"" ]
-            for vt, v in values do
-                let vstr =
-                    match vt with
-                    | ValueType.None -> ", ?value: string"
-                    | ValueType.Int -> ", value: int"
-                    | ValueType.Float -> ", value: float"
-                    | ValueType.String -> ", value: string"
-                    | ValueType.Tuple count -> "," + ([for i in 1..count -> $"v{i}"] |> String.concat ", ")
-                propertyValue, name, v, vstr
+            if propertyValue.Value.Contains("cubic-bezier") then
+                {|
+                    pv = propertyValue
+                    name = "cubic-bezier"
+                    value = "n1).Append(n2).Append(n3).Append(n4"
+                    valueArgs = ", n1: string, n2: string, n3: string, n4: string"
+                |}
+
+            else if propertyValue.Value.Contains "(" then
+                let value = propertyValue.Value.Substring(0, propertyValue.Value.IndexOf("("))
+                {|
+                    pv = propertyValue
+                    name = value.Trim()
+                    value = "$\"" + value + "({value})\""
+                    valueArgs = ", value: string"
+                |}
+
+            else if propertyValue.Value |> Seq.filter ((=) '%') |> Seq.length = 1 then
+                {|
+                    pv = propertyValue
+                    name = ""
+                    value = "string value + \"%\""
+                    valueArgs = ", value: float"
+                |}
+
+            else if (propertyValue.Value.Split("color") |> Seq.filter ((=) "color") |> Seq.length) = 1 then
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value
+                    value = "color"
+                    valueArgs = ", color: string"
+                |}
+
+            else if (propertyValue.Value.Split("color") |> Seq.filter ((=) "color") |> Seq.length) = 2 then
+                {|
+                    pv = propertyValue
+                    name = ""
+                    value = "color"
+                    valueArgs = ", color: string"
+                |}
+
+            else if propertyValue.Value = "width" || propertyValue.Value = "height" || propertyValue.Value = "length" then
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value
+                    value = "string value + \"px\""
+                    valueArgs = ", value: int"
+                |}
+
+            else if propertyValue.Value.Contains "time" || propertyValue.Value.Contains "number" then
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value
+                    value = "value"
+                    valueArgs = ", value: float"
+                |}
+
+            else if propertyValue.Value.Contains("ListOf") then
+                let valueArgs = normalizeName propertyValue.Value
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value
+                    value = valueArgs
+                    valueArgs = valueArgs
+                |}
+
+            else if propertyValue.Value = "0" then
+                ()
+
+            else if propertyValue.Value.Contains("/") then
+                let names = propertyValue.Value.Split("/") |> Seq.map normalizeName |> Seq.toList
+                let valueArgs = names |> String.concat ": string, "
+                let value = names |> String.concat ").Append("
+                {|
+                    pv = propertyValue
+                    name = ""
+                    value = value
+                    valueArgs = ", " + valueArgs + ": string"
+                |}
+
+            else if propertyValue.Value.Contains("|") then
+                let values =
+                    propertyValue.Value.Split("|") |> Seq.filter (String.IsNullOrEmpty >> not) |> Seq.map (fun x -> x.Trim()) |> Seq.toList
+
+                match values with
+                | [ name; "string" ] -> {|
+                    pv = propertyValue
+                    name = name
+                    value = "value"
+                    valueArgs = ", value: string"
+                  |}
+                | _ -> printfn "Unhandled values %s" propertyValue.Value
+
+            else if Seq.contains propertyValue.Value [ "auto"; "initial"; "inherit" ] then
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value
+                    value = "\"" + propertyValue.Value + "\""
+                    valueArgs = ""
+                |}
+
+            else
+                {|
+                    pv = propertyValue
+                    name = propertyValue.Value.Replace("%", "")
+                    value = "defaultArg value \"" + propertyValue.Value + "\""
+                    valueArgs = ", ?value: string"
+                |}
     ]
-    |> List.distinctBy (fun (_, name, _, vstr) -> name, vstr)
+    |> Seq.map (fun x -> {| x with name = x.name.Trim() |})
+    |> Seq.distinctBy (fun x -> x.name, x.valueArgs)
+    |> Seq.toList
 
 
 
@@ -197,19 +296,12 @@ autoOpenProperties
     [<CustomOperation("{normalizeName mainName}")>]
     member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("; "))
 """
-//     if isPxValue then
-//         appendForAutoOpen
-//             $"""    /// {mainDescription}
-//     [<CustomOperation("{normalizeName mainName}")>]
-//     member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("px; "))
-// """
-
-    let mainPropertyValues =
-        try
-            mainDetail.Tables.``Property Values``.Rows
-        with ex ->
-            printfn "Failed for get property values %A" ex
-            [||]
+    //     if isPxValue then
+    //         appendForAutoOpen
+    //             $"""    /// {mainDescription}
+    //     [<CustomOperation("{normalizeName mainName}")>]
+    //     member inline _.{normalizeName mainName}([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append(value).Append("px; "))
+    // """
 
     let mutable addedSubPropertyNames = Collections.Generic.List<string>()
     if autoOpenSubProperties.ContainsKey property.Name && autoOpenSubProperties[property.Name].Count > 0 then
@@ -217,32 +309,28 @@ autoOpenProperties
             printfn "%A" property.Name
             let subName = property.Name.Substring(mainName.Length + 1)
             let subDetail = loadDetail false property.Url
-            let propertyValues =
-                try
-                    subDetail.Tables.``Property Values``.Rows
-                with ex ->
-                    printfn "Failed for get property values %A" ex
-                    [||]
+            let propertyValues = getPropertyValues subDetail.Html
 
             if propertyValues.Length > 0 then
-                for pv, name, v, vstr in propertyValues |> processPropertyValues do
-                    addedSubPropertyNames.Add pv.Value
-                    let name = mainName + "-" + subName + "-" + name |> normalizeName
+                for pv in propertyValues |> processPropertyValues do
+                    addedSubPropertyNames.Add pv.pv.Value
+                    let name = mainName + "-" + subName + "-" + pv.name |> normalizeName
                     appendForAutoOpen
-                        $"""    /// {pv.Description.Trim()}
+                        $"""    /// {pv.pv.Description.Trim()}
     [<CustomOperation("{name}")>]
-    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{vstr}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
+    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{pv.valueArgs}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({pv.value}).Append("; "))
 """
 
+    let mainPropertyValues = getPropertyValues mainDetail.Html
     if mainPropertyValues.Length > 0 then
         let description = getDescription mainDetail.Html
-        for pv, name, v, vstr in mainPropertyValues |> processPropertyValues do
-            if addedSubPropertyNames.Contains pv.Value |> not then
-                let name = mainName + "-" + name |> normalizeName
+        for pv in mainPropertyValues |> processPropertyValues do
+            if addedSubPropertyNames.Contains pv.pv.Value |> not then
+                let name = mainName + "-" + pv.name |> normalizeName
                 appendForAutoOpen
                     $"""    /// {description.Trim()}
     [<CustomOperation("{name}")>]
-    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{vstr}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({v}).Append("; "))
+    member inline _.{name}([<InlineIfLambda>] comb: CombineKeyValue{pv.valueArgs}) = comb &&& CombineKeyValue(fun sb -> sb.Append("{property.Name}: ").Append({pv.value}).Append("; "))
 """
 )
 

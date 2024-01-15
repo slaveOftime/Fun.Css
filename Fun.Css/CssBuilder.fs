@@ -1318,9 +1318,29 @@ type CssBuilder() =
     [<CustomOperation("import")>]
     member inline _.import([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@import: ").Append(value).Append("; "))
 
+    /// The @import rule allows you to import a style sheet into another style sheet.
+    [<CustomOperation("importListOfMediaqueries")>]
+    member inline _.importListOfMediaqueries([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@import: ").Append(defaultArg value "list-of-mediaqueries").Append("; "))
+
+    /// The @import rule allows you to import a style sheet into another style sheet.
+    [<CustomOperation("importUrl")>]
+    member inline _.importUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@import: ").Append(value).Append("; "))
+
     ///  The @keyframes rule specifies the animation code. 
     [<CustomOperation("keyframes")>]
     member inline _.keyframes([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@keyframes: ").Append(value).Append("; "))
+
+    /// The @keyframes rule specifies the animation code.
+    [<CustomOperation("keyframesAnimationname")>]
+    member inline _.keyframesAnimationname([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@keyframes: ").Append(defaultArg value "animationname").Append("; "))
+
+    /// The @keyframes rule specifies the animation code.
+    [<CustomOperation("keyframesCssStyles")>]
+    member inline _.keyframesCssStyles([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@keyframes: ").Append(defaultArg value "css-styles").Append("; "))
+
+    /// The @keyframes rule specifies the animation code.
+    [<CustomOperation("keyframesKeyframesSelector")>]
+    member inline _.keyframesKeyframesSelector([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("@keyframes: ").Append(defaultArg value "keyframes-selector").Append("; "))
 
     ///  The @media rule is used in media queries to apply different styles for different media types/devices. 
     [<CustomOperation("media")>]
@@ -1332,19 +1352,19 @@ type CssBuilder() =
 
     /// The accent-color property specifies the accent color for user-interface controls like: , ,  and .
     [<CustomOperation("accentColorAuto")>]
-    member inline _.accentColorAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.accentColorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append("auto").Append("; "))
 
     /// The accent-color property specifies the accent color for user-interface controls like: , ,  and .
     [<CustomOperation("accentColorColor")>]
-    member inline _.accentColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append(value).Append("; "))
+    member inline _.accentColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append(defaultArg value "color").Append("; "))
 
     /// The accent-color property specifies the accent color for user-interface controls like: , ,  and .
     [<CustomOperation("accentColorInherit")>]
-    member inline _.accentColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.accentColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append("inherit").Append("; "))
 
     /// The accent-color property specifies the accent color for user-interface controls like: , ,  and .
     [<CustomOperation("accentColorInitial")>]
-    member inline _.accentColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.accentColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("accent-color: ").Append("initial").Append("; "))
 
     ///  The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container. 
     [<CustomOperation("alignContent")>]
@@ -1364,11 +1384,11 @@ type CssBuilder() =
 
     /// The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container.
     [<CustomOperation("alignContentInherit")>]
-    member inline _.alignContentInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-content: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.alignContentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-content: ").Append("inherit").Append("; "))
 
     /// The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container.
     [<CustomOperation("alignContentInitial")>]
-    member inline _.alignContentInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-content: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.alignContentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-content: ").Append("initial").Append("; "))
 
     /// The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container.
     [<CustomOperation("alignContentSpaceAround")>]
@@ -1412,11 +1432,11 @@ type CssBuilder() =
 
     /// The align-items property specifies the default alignment for items inside a flexbox or grid container.
     [<CustomOperation("alignItemsInherit")>]
-    member inline _.alignItemsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-items: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.alignItemsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-items: ").Append("inherit").Append("; "))
 
     /// The align-items property specifies the default alignment for items inside a flexbox or grid container.
     [<CustomOperation("alignItemsInitial")>]
-    member inline _.alignItemsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-items: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.alignItemsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-items: ").Append("initial").Append("; "))
 
     /// The align-items property specifies the default alignment for items inside a flexbox or grid container.
     [<CustomOperation("alignItemsNormal")>]
@@ -1436,7 +1456,7 @@ type CssBuilder() =
 
     /// The align-self property specifies the alignment in the block direction for the selected item inside a flexbox or grid container.
     [<CustomOperation("alignSelfAuto")>]
-    member inline _.alignSelfAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.alignSelfAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append("auto").Append("; "))
 
     /// The align-self property specifies the alignment in the block direction for the selected item inside a flexbox or grid container.
     [<CustomOperation("alignSelfBaseline")>]
@@ -1456,11 +1476,11 @@ type CssBuilder() =
 
     /// The align-self property specifies the alignment in the block direction for the selected item inside a flexbox or grid container.
     [<CustomOperation("alignSelfInherit")>]
-    member inline _.alignSelfInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.alignSelfInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append("inherit").Append("; "))
 
     /// The align-self property specifies the alignment in the block direction for the selected item inside a flexbox or grid container.
     [<CustomOperation("alignSelfInitial")>]
-    member inline _.alignSelfInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.alignSelfInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("align-self: ").Append("initial").Append("; "))
 
     /// The align-self property specifies the alignment in the block direction for the selected item inside a flexbox or grid container.
     [<CustomOperation("alignSelfStretch")>]
@@ -1470,17 +1490,29 @@ type CssBuilder() =
     [<CustomOperation("all")>]
     member inline _.all([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("all: ").Append(value).Append("; "))
 
+    /// The all property resets all properties, apart from unicode-bidi and direction, to their initial or inherited value.
+    [<CustomOperation("allInherit")>]
+    member inline _.allInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("all: ").Append("inherit").Append("; "))
+
+    /// The all property resets all properties, apart from unicode-bidi and direction, to their initial or inherited value.
+    [<CustomOperation("allInitial")>]
+    member inline _.allInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("all: ").Append("initial").Append("; "))
+
+    /// The all property resets all properties, apart from unicode-bidi and direction, to their initial or inherited value.
+    [<CustomOperation("allUnset")>]
+    member inline _.allUnset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("all: ").Append(defaultArg value "unset").Append("; "))
+
     ///  The animation property is a shorthand property for: 
     [<CustomOperation("animation")>]
     member inline _.animation([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationDelayInherit")>]
-    member inline _.animationDelayInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-delay: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationDelayInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-delay: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationDelayInitial")>]
-    member inline _.animationDelayInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-delay: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationDelayInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-delay: ").Append("initial").Append("; "))
 
     /// Optional. Defines the number of seconds (s) or milliseconds (ms) to wait before the animation will start. Default value is 0. Negative values are allowed. If you use negative values, the animation will start as if it had already been playing for N seconds/milliseconds.
     [<CustomOperation("animationDelayTime")>]
@@ -1494,13 +1526,13 @@ type CssBuilder() =
     [<CustomOperation("animationDirectionAlternateReverse")>]
     member inline _.animationDirectionAlternateReverse([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append(defaultArg value "alternate-reverse").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationDirectionInherit")>]
-    member inline _.animationDirectionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationDirectionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationDirectionInitial")>]
-    member inline _.animationDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append("initial").Append("; "))
 
     /// Default value. The animation is played as normal (forwards)
     [<CustomOperation("animationDirectionNormal")>]
@@ -1510,41 +1542,65 @@ type CssBuilder() =
     [<CustomOperation("animationDirectionReverse")>]
     member inline _.animationDirectionReverse([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-direction: ").Append(defaultArg value "reverse").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationDurationInherit")>]
-    member inline _.animationDurationInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-duration: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationDurationInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-duration: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationDurationInitial")>]
-    member inline _.animationDurationInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-duration: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationDurationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-duration: ").Append("initial").Append("; "))
 
     /// Specifies the length of time an animation should take to complete one cycle. This can be specified in seconds or milliseconds. Default value is 0, which means that no animation will occur
     [<CustomOperation("animationDurationTime")>]
     member inline _.animationDurationTime([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-duration: ").Append(value).Append("; "))
 
+    /// The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+    [<CustomOperation("animationFillModeBackwards")>]
+    member inline _.animationFillModeBackwards([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append(defaultArg value "backwards").Append("; "))
+
+    /// The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions
+    [<CustomOperation("animationFillModeBoth")>]
+    member inline _.animationFillModeBoth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append(defaultArg value "both").Append("; "))
+
+    /// The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+    [<CustomOperation("animationFillModeForwards")>]
+    member inline _.animationFillModeForwards([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append(defaultArg value "forwards").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("animationFillModeInherit")>]
+    member inline _.animationFillModeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("animationFillModeInitial")>]
+    member inline _.animationFillModeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append("initial").Append("; "))
+
+    /// Default value. Animation will not apply any styles to the element before or after it is executing
+    [<CustomOperation("animationFillModeNone")>]
+    member inline _.animationFillModeNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-fill-mode: ").Append(defaultArg value "none").Append("; "))
+
     /// Specifies that the animation should be played infinite times (for ever)
     [<CustomOperation("animationIterationCountInfinite")>]
     member inline _.animationIterationCountInfinite([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append(defaultArg value "infinite").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationIterationCountInherit")>]
-    member inline _.animationIterationCountInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationIterationCountInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationIterationCountInitial")>]
-    member inline _.animationIterationCountInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationIterationCountInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append("initial").Append("; "))
 
     /// A number that defines how many times an animation should be played. Default value is 1
     [<CustomOperation("animationIterationCountNumber")>]
     member inline _.animationIterationCountNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-iteration-count: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationNameInherit")>]
-    member inline _.animationNameInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-name: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationNameInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-name: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationNameInitial")>]
-    member inline _.animationNameInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-name: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationNameInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-name: ").Append("initial").Append("; "))
 
     /// Specifies the name of the keyframe you want to bind to the selector
     [<CustomOperation("animationNameKeyframename")>]
@@ -1554,13 +1610,13 @@ type CssBuilder() =
     [<CustomOperation("animationNameNone")>]
     member inline _.animationNameNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-name: ").Append(defaultArg value "none").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationPlayStateInherit")>]
-    member inline _.animationPlayStateInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-play-state: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationPlayStateInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-play-state: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationPlayStateInitial")>]
-    member inline _.animationPlayStateInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-play-state: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationPlayStateInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-play-state: ").Append("initial").Append("; "))
 
     /// Specifies that the animation is paused
     [<CustomOperation("animationPlayStatePaused")>]
@@ -1572,7 +1628,7 @@ type CssBuilder() =
 
     /// Define your own values in the cubic-bezier function Possible values are numeric values from 0 to 1
     [<CustomOperation("animationTimingFunctionCubicBezier")>]
-    member inline _.animationTimingFunctionCubicBezier([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append($"cubic-bezier({value})").Append("; "))
+    member inline _.animationTimingFunctionCubicBezier([<InlineIfLambda>] comb: CombineKeyValue, n1: string, n2: string, n3: string, n4: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append(n1).Append(n2).Append(n3).Append(n4).Append("; "))
 
     /// Default value. The animation has a slow start, then fast, before it ends slowly
     [<CustomOperation("animationTimingFunctionEase")>]
@@ -1590,13 +1646,13 @@ type CssBuilder() =
     [<CustomOperation("animationTimingFunctionEaseOut")>]
     member inline _.animationTimingFunctionEaseOut([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append(defaultArg value "ease-out").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("animationTimingFunctionInherit")>]
-    member inline _.animationTimingFunctionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.animationTimingFunctionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("animationTimingFunctionInitial")>]
-    member inline _.animationTimingFunctionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.animationTimingFunctionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append("initial").Append("; "))
 
     /// The animation has the same speed from start to end
     [<CustomOperation("animationTimingFunctionLinear")>]
@@ -1614,17 +1670,49 @@ type CssBuilder() =
     [<CustomOperation("animationTimingFunctionSteps")>]
     member inline _.animationTimingFunctionSteps([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation-timing-function: ").Append($"steps({value})").Append("; "))
 
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationIterationCount")>]
+    member inline _.animationAnimationIterationCount([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value " animation-iteration-count").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationTimingFunction")>]
+    member inline _.animationAnimationTimingFunction([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value " animation-timing-function").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationDelay")>]
+    member inline _.animationAnimationDelay([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-delay").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationDirection")>]
+    member inline _.animationAnimationDirection([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-direction").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationDuration")>]
+    member inline _.animationAnimationDuration([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-duration").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationFillMode")>]
+    member inline _.animationAnimationFillMode([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-fill-mode").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationName")>]
+    member inline _.animationAnimationName([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-name").Append("; "))
+
+    /// The animation property is a shorthand property for:
+    [<CustomOperation("animationAnimationPlayState")>]
+    member inline _.animationAnimationPlayState([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("animation: ").Append(defaultArg value "animation-play-state").Append("; "))
+
     ///  The aspect-ratio property allows you to define the ratio between width and height of an element. 
     [<CustomOperation("aspectRatio")>]
     member inline _.aspectRatio([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("aspect-ratio: ").Append(value).Append("; "))
 
     /// The aspect-ratio property allows you to define the ratio between width and height of an element.
     [<CustomOperation("aspectRatioInherit")>]
-    member inline _.aspectRatioInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("aspect-ratio: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.aspectRatioInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("aspect-ratio: ").Append("inherit").Append("; "))
 
     /// The aspect-ratio property allows you to define the ratio between width and height of an element.
     [<CustomOperation("aspectRatioInitial")>]
-    member inline _.aspectRatioInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("aspect-ratio: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.aspectRatioInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("aspect-ratio: ").Append("initial").Append("; "))
 
     /// The aspect-ratio property allows you to define the ratio between width and height of an element.
     [<CustomOperation("aspectRatioNumber")>]
@@ -1640,11 +1728,11 @@ type CssBuilder() =
 
     /// The backdrop-filter property is used to apply a graphical effect to the area behind an element.
     [<CustomOperation("backdropFilterInherit")>]
-    member inline _.backdropFilterInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("backdrop-filter: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backdropFilterInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("backdrop-filter: ").Append("inherit").Append("; "))
 
     /// The backdrop-filter property is used to apply a graphical effect to the area behind an element.
     [<CustomOperation("backdropFilterInitial")>]
-    member inline _.backdropFilterInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("backdrop-filter: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backdropFilterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("backdrop-filter: ").Append("initial").Append("; "))
 
     /// The backdrop-filter property is used to apply a graphical effect to the area behind an element.
     [<CustomOperation("backdropFilterNone")>]
@@ -1660,11 +1748,11 @@ type CssBuilder() =
 
     /// The backface-visibility property defines whether or not the back face of an element should be visible when facing the user.
     [<CustomOperation("backfaceVisibilityInherit")>]
-    member inline _.backfaceVisibilityInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("backface-visibility: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backfaceVisibilityInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("backface-visibility: ").Append("inherit").Append("; "))
 
     /// The backface-visibility property defines whether or not the back face of an element should be visible when facing the user.
     [<CustomOperation("backfaceVisibilityInitial")>]
-    member inline _.backfaceVisibilityInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("backface-visibility: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backfaceVisibilityInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("backface-visibility: ").Append("initial").Append("; "))
 
     /// The backface-visibility property defines whether or not the back face of an element should be visible when facing the user.
     [<CustomOperation("backfaceVisibilityVisible")>]
@@ -1674,9 +1762,29 @@ type CssBuilder() =
     [<CustomOperation("background")>]
     member inline _.background([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background: ").Append(value).Append("; "))
 
+    /// The background image will not scroll with the page
+    [<CustomOperation("backgroundAttachmentFixed")>]
+    member inline _.backgroundAttachmentFixed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-attachment: ").Append(defaultArg value "fixed").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("backgroundAttachmentInherit")>]
+    member inline _.backgroundAttachmentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-attachment: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("backgroundAttachmentInitial")>]
+    member inline _.backgroundAttachmentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-attachment: ").Append("initial").Append("; "))
+
+    /// The background image will scroll with the element's contents
+    [<CustomOperation("backgroundAttachmentLocal")>]
+    member inline _.backgroundAttachmentLocal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-attachment: ").Append(defaultArg value "local").Append("; "))
+
+    /// The background image will scroll with the page. This is default
+    [<CustomOperation("backgroundAttachmentScroll")>]
+    member inline _.backgroundAttachmentScroll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-attachment: ").Append(defaultArg value "scroll").Append("; "))
+
     /// Sets the blending mode to color
     [<CustomOperation("backgroundBlendModeColor")>]
-    member inline _.backgroundBlendModeColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-blend-mode: ").Append(value).Append("; "))
+    member inline _.backgroundBlendModeColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-blend-mode: ").Append(defaultArg value "color").Append("; "))
 
     /// Sets the blending mode to color-dodge
     [<CustomOperation("backgroundBlendModeColorDodge")>]
@@ -1722,45 +1830,49 @@ type CssBuilder() =
     [<CustomOperation("backgroundClipContentBox")>]
     member inline _.backgroundClipContentBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append(defaultArg value "content-box").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundClipInherit")>]
-    member inline _.backgroundClipInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundClipInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundClipInitial")>]
-    member inline _.backgroundClipInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundClipInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append("initial").Append("; "))
 
     /// The background extends to the inside edge of the border
     [<CustomOperation("backgroundClipPaddingBox")>]
     member inline _.backgroundClipPaddingBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-clip: ").Append(defaultArg value "padding-box").Append("; "))
 
-    /// Specifies the background color. Look at CSS Color Values for a complete list of possible color values.
+    /// Specifies the background color. Look at  CSS Color Values for a complete list of possible color values.
     [<CustomOperation("backgroundColorColor")>]
-    member inline _.backgroundColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append(value).Append("; "))
+    member inline _.backgroundColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundColorInherit")>]
-    member inline _.backgroundColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundColorInitial")>]
-    member inline _.backgroundColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append("initial").Append("; "))
 
     /// Specifies that the background color should be transparent. This is default
     [<CustomOperation("backgroundColorTransparent")>]
     member inline _.backgroundColorTransparent([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-color: ").Append(defaultArg value "transparent").Append("; "))
 
+    /// The URL to the image. To specify more than one image, separate the URLs with a comma
+    [<CustomOperation("backgroundImageUrl")>]
+    member inline _.backgroundImageUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append($" url({value})").Append("; "))
+
     /// Sets a conic gradient as the background image. Define at least two colors
     [<CustomOperation("backgroundImageConicGradient")>]
     member inline _.backgroundImageConicGradient([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append($"conic-gradient({value})").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundImageInherit")>]
-    member inline _.backgroundImageInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundImageInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundImageInitial")>]
-    member inline _.backgroundImageInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundImageInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append("initial").Append("; "))
 
     /// Sets a linear gradient as the background image. Define at least two colors (top to bottom)
     [<CustomOperation("backgroundImageLinearGradient")>]
@@ -1786,10 +1898,6 @@ type CssBuilder() =
     [<CustomOperation("backgroundImageRepeatingRadialGradient")>]
     member inline _.backgroundImageRepeatingRadialGradient([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append($"repeating-radial-gradient({value})").Append("; "))
 
-    /// The URL to the image. To specify more than one image, separate the URLs with a comma
-    [<CustomOperation("backgroundImageUrl")>]
-    member inline _.backgroundImageUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-image: ").Append($"url({value})").Append("; "))
-
     /// The background image starts from the upper left corner of the border
     [<CustomOperation("backgroundOriginBorderBox")>]
     member inline _.backgroundOriginBorderBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append(defaultArg value "border-box").Append("; "))
@@ -1798,49 +1906,49 @@ type CssBuilder() =
     [<CustomOperation("backgroundOriginContentBox")>]
     member inline _.backgroundOriginContentBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append(defaultArg value "content-box").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundOriginInherit")>]
-    member inline _.backgroundOriginInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundOriginInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundOriginInitial")>]
-    member inline _.backgroundOriginInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundOriginInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append("initial").Append("; "))
 
     /// Default value. The background image starts from the upper left corner of the padding edge
     [<CustomOperation("backgroundOriginPaddingBox")>]
     member inline _.backgroundOriginPaddingBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-origin: ").Append(defaultArg value "padding-box").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundPositionInherit")>]
-    member inline _.backgroundPositionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundPositionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundPositionInitial")>]
-    member inline _.backgroundPositionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundPositionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append("initial").Append("; "))
 
     /// If you only specify one keyword, the other value will be "center"
-    [<CustomOperation("backgroundPositionLeft")>]
-    member inline _.backgroundPositionLeft([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(value).Append("; "))
+    [<CustomOperation("backgroundPositionLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom")>]
+    member inline _.backgroundPositionLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(defaultArg value "left top left center left bottom right top right center right bottom center top center center center bottom").Append("; "))
 
     /// The first value is the horizontal position and the second value is the vertical. The top left corner is 0% 0%. The right bottom corner is 100% 100%. If you only specify one value, the other value will be 50%. Default value is: 0% 0%
-    [<CustomOperation("backgroundPositionPercentage")>]
-    member inline _.backgroundPositionPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("backgroundPositionXY")>]
+    member inline _.backgroundPositionXY([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(defaultArg value "x% y%").Append("; "))
 
     /// The first value is the horizontal position and the second value is the vertical. The top left corner is 0 0. Units can be pixels (0px 0px) or any other CSS units. If you only specify one value, the other value will be 50%. You can mix % and positions
-    [<CustomOperation("backgroundPositionXpos")>]
-    member inline _.backgroundPositionXpos([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(value).Append("; "))
+    [<CustomOperation("backgroundPositionXposYpos")>]
+    member inline _.backgroundPositionXposYpos([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position: ").Append(defaultArg value "xpos ypos").Append("; "))
 
     /// Positions background center on x-axis.
     [<CustomOperation("backgroundPositionXCenter")>]
     member inline _.backgroundPositionXCenter([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "center").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundPositionXInherit")>]
-    member inline _.backgroundPositionXInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundPositionXInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundPositionXInitial")>]
-    member inline _.backgroundPositionXInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundPositionXInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append("initial").Append("; "))
 
     /// Positions background left side on x-axis.
     [<CustomOperation("backgroundPositionXLeft")>]
@@ -1851,16 +1959,16 @@ type CssBuilder() =
     member inline _.backgroundPositionXRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "right").Append("; "))
 
     /// Left side is 0% on x-axis, and right side is 100%. Percentage value refers to width of background positioning area minus width of background image.
-    [<CustomOperation("backgroundPositionXPercentage")>]
-    member inline _.backgroundPositionXPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("backgroundPositionX")>]
+    member inline _.backgroundPositionX([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(string value + "%").Append("; "))
 
     /// Horizontal distance from left side. Units can be pixels (0px) or any other CSS units.
     [<CustomOperation("backgroundPositionXXpos")>]
     member inline _.backgroundPositionXXpos([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "xpos").Append("; "))
 
     /// Two value syntax, only supported in Firefox and Safari. - xpos is set either to "left" or "right". - offset is horizontal distance from background image and "left" or "right" side set with xpos. Units can be pixels or any other CSS units.
-    [<CustomOperation("backgroundPositionXXpos")>]
-    member inline _.backgroundPositionXXpos([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(value).Append("; "))
+    [<CustomOperation("backgroundPositionXXposOffset")>]
+    member inline _.backgroundPositionXXposOffset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-x: ").Append(defaultArg value "xpos offset").Append("; "))
 
     /// Positions background bottom on y-axis.
     [<CustomOperation("backgroundPositionYBottom")>]
@@ -1870,37 +1978,37 @@ type CssBuilder() =
     [<CustomOperation("backgroundPositionYCenter")>]
     member inline _.backgroundPositionYCenter([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "center").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundPositionYInherit")>]
-    member inline _.backgroundPositionYInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundPositionYInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundPositionYInitial")>]
-    member inline _.backgroundPositionYInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundPositionYInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append("initial").Append("; "))
 
     /// Positions background top on y-axis.
     [<CustomOperation("backgroundPositionYTop")>]
     member inline _.backgroundPositionYTop([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "top").Append("; "))
 
     /// Top side is 0% on y-axis, and bottom side is 100%. Percentage value refers to height of background positioning area minus height of background image.
-    [<CustomOperation("backgroundPositionYPercentage")>]
-    member inline _.backgroundPositionYPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("backgroundPositionY")>]
+    member inline _.backgroundPositionY([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(string value + "%").Append("; "))
 
     /// Vertical distance from top side. Units can be pixels (0px) or any other CSS units.
     [<CustomOperation("backgroundPositionYYpos")>]
     member inline _.backgroundPositionYYpos([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "ypos").Append("; "))
 
     /// Two value syntax, only supported in Firefox and Safari. - ypos is set either to "top" or "bottom". - offset is vertical distance from background image and "top" or "bottom" side set with ypos. Units can be pixels or any other CSS units.
-    [<CustomOperation("backgroundPositionYYpos")>]
-    member inline _.backgroundPositionYYpos([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(value).Append("; "))
+    [<CustomOperation("backgroundPositionYYposOffset")>]
+    member inline _.backgroundPositionYYposOffset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-position-y: ").Append(defaultArg value "ypos offset").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundRepeatInherit")>]
-    member inline _.backgroundRepeatInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-repeat: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundRepeatInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-repeat: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundRepeatInitial")>]
-    member inline _.backgroundRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-repeat: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-repeat: ").Append("initial").Append("; "))
 
     /// The background-image is not repeated. The image will only be shown once
     [<CustomOperation("backgroundRepeatNoRepeat")>]
@@ -1926,29 +2034,29 @@ type CssBuilder() =
     [<CustomOperation("backgroundRepeatSpace")>]
     member inline _.backgroundRepeatSpace([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-repeat: ").Append(defaultArg value "space").Append("; "))
 
-    /// Default value. The background image is displayed in its original size
-    [<CustomOperation("backgroundSizeAuto")>]
-    member inline _.backgroundSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value "auto").Append("; "))
-
     /// Resize the background image to make sure the image is fully visible
     [<CustomOperation("backgroundSizeContain")>]
-    member inline _.backgroundSizeContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value "contain").Append("; "))
+    member inline _.backgroundSizeContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value " contain").Append("; "))
 
     /// Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges
     [<CustomOperation("backgroundSizeCover")>]
-    member inline _.backgroundSizeCover([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value "cover").Append("; "))
+    member inline _.backgroundSizeCover([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value " cover").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Default value. The background image is displayed in its original size
+    [<CustomOperation("backgroundSizeAuto")>]
+    member inline _.backgroundSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("backgroundSizeInherit")>]
-    member inline _.backgroundSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.backgroundSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("backgroundSizeInitial")>]
-    member inline _.backgroundSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.backgroundSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append("initial").Append("; "))
 
     /// Sets the width and height of the background image. The first value sets the width, the second value sets the height. If only one value is given, the second is set to "auto". Read about length units
-    [<CustomOperation("backgroundSize")>]
-    member inline _.backgroundSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("backgroundSizeLength")>]
+    member inline _.backgroundSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("background-size: ").Append(string value + "px").Append("; "))
 
     /// Sets the width and height of the background image in percent of the parent element. The first value sets the width, the second value sets the height. If only one value is given, the second is set to "auto"
     [<CustomOperation("backgroundSizePercentage")>]
@@ -1991,24 +2099,24 @@ type CssBuilder() =
     member inline _.blockSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(value).Append("; "))
 
     /// The block-size property specifies the size of an element in the block direction.
-    [<CustomOperation("blockSizePercentage")>]
-    member inline _.blockSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("blockSize")>]
+    member inline _.blockSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(string value + "%").Append("; "))
 
     /// The block-size property specifies the size of an element in the block direction.
     [<CustomOperation("blockSizeAuto")>]
-    member inline _.blockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.blockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append("auto").Append("; "))
 
     /// The block-size property specifies the size of an element in the block direction.
     [<CustomOperation("blockSizeInherit")>]
-    member inline _.blockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.blockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append("inherit").Append("; "))
 
     /// The block-size property specifies the size of an element in the block direction.
     [<CustomOperation("blockSizeInitial")>]
-    member inline _.blockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.blockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append("initial").Append("; "))
 
     /// The block-size property specifies the size of an element in the block direction.
-    [<CustomOperation("blockSize")>]
-    member inline _.blockSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("blockSizeLength")>]
+    member inline _.blockSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("block-size: ").Append(string value + "px").Append("; "))
 
     ///  The border property is a shorthand property for: 
     [<CustomOperation("border")>]
@@ -2026,25 +2134,25 @@ type CssBuilder() =
     [<CustomOperation("borderBlockBorderBlockWidth")>]
     member inline _.borderBlockBorderBlockWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block: ").Append(defaultArg value "border-block-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockInherit")>]
-    member inline _.borderBlockInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockInitial")>]
-    member inline _.borderBlockInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderBlockColorColor")>]
-    member inline _.borderBlockColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append(value).Append("; "))
+    member inline _.borderBlockColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockColorInherit")>]
-    member inline _.borderBlockColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockColorInitial")>]
-    member inline _.borderBlockColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderBlockColorTransparent")>]
@@ -2062,25 +2170,25 @@ type CssBuilder() =
     [<CustomOperation("borderBlockEndBorderBlockEndWidth")>]
     member inline _.borderBlockEndBorderBlockEndWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end: ").Append(defaultArg value "border-block-end-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockEndInherit")>]
-    member inline _.borderBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockEndInitial")>]
-    member inline _.borderBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderBlockEndColorColor")>]
-    member inline _.borderBlockEndColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append(value).Append("; "))
+    member inline _.borderBlockEndColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockEndColorInherit")>]
-    member inline _.borderBlockEndColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockEndColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockEndColorInitial")>]
-    member inline _.borderBlockEndColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockEndColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderBlockEndColorTransparent")>]
@@ -2106,13 +2214,13 @@ type CssBuilder() =
     [<CustomOperation("borderBlockEndStyleHidden")>]
     member inline _.borderBlockEndStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockEndStyleInherit")>]
-    member inline _.borderBlockEndStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockEndStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockEndStyleInitial")>]
-    member inline _.borderBlockEndStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockEndStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderBlockEndStyleInset")>]
@@ -2134,17 +2242,17 @@ type CssBuilder() =
     [<CustomOperation("borderBlockEndStyleSolid")>]
     member inline _.borderBlockEndStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockEndWidthInherit")>]
-    member inline _.borderBlockEndWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockEndWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockEndWidthInitial")>]
-    member inline _.borderBlockEndWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockEndWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderBlockEndWidth")>]
-    member inline _.borderBlockEndWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBlockEndWidthLength")>]
+    member inline _.borderBlockEndWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-end-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderBlockEndWidthMedium")>]
@@ -2170,25 +2278,25 @@ type CssBuilder() =
     [<CustomOperation("borderBlockStartBorderBlockStartWidth")>]
     member inline _.borderBlockStartBorderBlockStartWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start: ").Append(defaultArg value "border-block-start-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockStartInherit")>]
-    member inline _.borderBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockStartInitial")>]
-    member inline _.borderBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderBlockStartColorColor")>]
-    member inline _.borderBlockStartColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append(value).Append("; "))
+    member inline _.borderBlockStartColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockStartColorInherit")>]
-    member inline _.borderBlockStartColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockStartColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockStartColorInitial")>]
-    member inline _.borderBlockStartColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockStartColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderBlockStartColorTransparent")>]
@@ -2214,13 +2322,13 @@ type CssBuilder() =
     [<CustomOperation("borderBlockStartStyleHidden")>]
     member inline _.borderBlockStartStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockStartStyleInherit")>]
-    member inline _.borderBlockStartStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockStartStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockStartStyleInitial")>]
-    member inline _.borderBlockStartStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockStartStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderBlockStartStyleInset")>]
@@ -2242,17 +2350,17 @@ type CssBuilder() =
     [<CustomOperation("borderBlockStartStyleSolid")>]
     member inline _.borderBlockStartStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockStartWidthInherit")>]
-    member inline _.borderBlockStartWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockStartWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockStartWidthInitial")>]
-    member inline _.borderBlockStartWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockStartWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderBlockStartWidth")>]
-    member inline _.borderBlockStartWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBlockStartWidthLength")>]
+    member inline _.borderBlockStartWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-start-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderBlockStartWidthMedium")>]
@@ -2286,13 +2394,13 @@ type CssBuilder() =
     [<CustomOperation("borderBlockStyleHidden")>]
     member inline _.borderBlockStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockStyleInherit")>]
-    member inline _.borderBlockStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockStyleInitial")>]
-    member inline _.borderBlockStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderBlockStyleInset")>]
@@ -2314,17 +2422,17 @@ type CssBuilder() =
     [<CustomOperation("borderBlockStyleSolid")>]
     member inline _.borderBlockStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBlockWidthInherit")>]
-    member inline _.borderBlockWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBlockWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBlockWidthInitial")>]
-    member inline _.borderBlockWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBlockWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderBlockWidth")>]
-    member inline _.borderBlockWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBlockWidthLength")>]
+    member inline _.borderBlockWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-block-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderBlockWidthMedium")>]
@@ -2350,61 +2458,61 @@ type CssBuilder() =
     [<CustomOperation("borderBottomBorderBottomWidth")>]
     member inline _.borderBottomBorderBottomWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom: ").Append(defaultArg value "border-bottom-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomInherit")>]
-    member inline _.borderBottomInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomInitial")>]
-    member inline _.borderBottomInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom: ").Append("initial").Append("; "))
 
-    /// Specifies the color of the bottom border. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the color of the bottom border. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderBottomColorColor")>]
-    member inline _.borderBottomColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append(value).Append("; "))
+    member inline _.borderBottomColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomColorInherit")>]
-    member inline _.borderBottomColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomColorInitial")>]
-    member inline _.borderBottomColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderBottomColorTransparent")>]
     member inline _.borderBottomColorTransparent([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-color: ").Append(defaultArg value "transparent").Append("; "))
 
     /// Defines the shape of the bottom-left corner in %
-    [<CustomOperation("borderBottomLeftRadiusPercentage")>]
-    member inline _.borderBottomLeftRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderBottomLeftRadius")>]
+    member inline _.borderBottomLeftRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomLeftRadiusInherit")>]
-    member inline _.borderBottomLeftRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomLeftRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomLeftRadiusInitial")>]
-    member inline _.borderBottomLeftRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomLeftRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the bottom-left corner. Default value is 0. Read about length units
-    [<CustomOperation("borderBottomLeftRadius")>]
-    member inline _.borderBottomLeftRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBottomLeftRadiusLength")>]
+    member inline _.borderBottomLeftRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-left-radius: ").Append(string value + "px").Append("; "))
 
     /// Defines the shape of the bottom-right corner in %
-    [<CustomOperation("borderBottomRightRadiusPercentage")>]
-    member inline _.borderBottomRightRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderBottomRightRadius")>]
+    member inline _.borderBottomRightRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomRightRadiusInherit")>]
-    member inline _.borderBottomRightRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomRightRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomRightRadiusInitial")>]
-    member inline _.borderBottomRightRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomRightRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the bottom-right corner. Default value is 0. Read about length units
-    [<CustomOperation("borderBottomRightRadius")>]
-    member inline _.borderBottomRightRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBottomRightRadiusLength")>]
+    member inline _.borderBottomRightRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-right-radius: ").Append(string value + "px").Append("; "))
 
     /// Specifies a dashed border
     [<CustomOperation("borderBottomStyleDashed")>]
@@ -2426,13 +2534,13 @@ type CssBuilder() =
     [<CustomOperation("borderBottomStyleHidden")>]
     member inline _.borderBottomStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomStyleInherit")>]
-    member inline _.borderBottomStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomStyleInitial")>]
-    member inline _.borderBottomStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderBottomStyleInset")>]
@@ -2454,17 +2562,17 @@ type CssBuilder() =
     [<CustomOperation("borderBottomStyleSolid")>]
     member inline _.borderBottomStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderBottomWidthInherit")>]
-    member inline _.borderBottomWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderBottomWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderBottomWidthInitial")>]
-    member inline _.borderBottomWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderBottomWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the bottom border. Read about length units
-    [<CustomOperation("borderBottomWidth")>]
-    member inline _.borderBottomWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderBottomWidthLength")>]
+    member inline _.borderBottomWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-bottom-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium bottom border. This is default
     [<CustomOperation("borderBottomWidthMedium")>]
@@ -2482,65 +2590,65 @@ type CssBuilder() =
     [<CustomOperation("borderCollapseCollapse")>]
     member inline _.borderCollapseCollapse([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append(defaultArg value "collapse").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderCollapseInherit")>]
-    member inline _.borderCollapseInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderCollapseInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderCollapseInitial")>]
-    member inline _.borderCollapseInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderCollapseInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append("initial").Append("; "))
 
     /// Borders are separated; each cell will display its own borders. This is default.
     [<CustomOperation("borderCollapseSeparate")>]
     member inline _.borderCollapseSeparate([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-collapse: ").Append(defaultArg value "separate").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderColorColor")>]
-    member inline _.borderColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append(value).Append("; "))
+    member inline _.borderColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderColorInherit")>]
-    member inline _.borderColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderColorInitial")>]
-    member inline _.borderColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderColorTransparent")>]
     member inline _.borderColorTransparent([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-color: ").Append(defaultArg value "transparent").Append("; "))
 
     /// Defines the shape of the corner at block-end and inline-end in percentange of length of element on corresponding axis.
-    [<CustomOperation("borderEndEndRadiusPercentage")>]
-    member inline _.borderEndEndRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderEndEndRadius")>]
+    member inline _.borderEndEndRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderEndEndRadiusInherit")>]
-    member inline _.borderEndEndRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderEndEndRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderEndEndRadiusInitial")>]
-    member inline _.borderEndEndRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderEndEndRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the corner at block-end and inline-end. Read about length units
-    [<CustomOperation("borderEndEndRadius")>]
-    member inline _.borderEndEndRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderEndEndRadiusLength")>]
+    member inline _.borderEndEndRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-end-radius: ").Append(string value + "px").Append("; "))
 
     /// Defines the shape of the corner at block-end and inline-start in percentange of length of element on corresponding axis.
-    [<CustomOperation("borderEndStartRadiusPercentage")>]
-    member inline _.borderEndStartRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderEndStartRadius")>]
+    member inline _.borderEndStartRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderEndStartRadiusInherit")>]
-    member inline _.borderEndStartRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderEndStartRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderEndStartRadiusInitial")>]
-    member inline _.borderEndStartRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderEndStartRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the corner at block-end and inline-start. Read about length units
-    [<CustomOperation("borderEndStartRadius")>]
-    member inline _.borderEndStartRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderEndStartRadiusLength")>]
+    member inline _.borderEndStartRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-end-start-radius: ").Append(string value + "px").Append("; "))
 
     /// The amount by which the border image area extends beyond the border box
     [<CustomOperation("borderImageBorderImageOutset")>]
@@ -2562,109 +2670,109 @@ type CssBuilder() =
     [<CustomOperation("borderImageBorderImageWidth")>]
     member inline _.borderImageBorderImageWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image: ").Append(defaultArg value "border-image-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderImageInherit")>]
-    member inline _.borderImageInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderImageInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderImageInitial")>]
-    member inline _.borderImageInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderImageInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image: ").Append("initial").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderImageOutsetInherit")>]
-    member inline _.borderImageOutsetInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderImageOutsetInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderImageOutsetInitial")>]
-    member inline _.borderImageOutsetInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderImageOutsetInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append("initial").Append("; "))
 
     /// A length unit specifying how far from the edges the border-image will appear. Default value is 0
-    [<CustomOperation("borderImageOutset")>]
-    member inline _.borderImageOutset([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderImageOutsetLength")>]
+    member inline _.borderImageOutsetLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append(string value + "px").Append("; "))
 
     /// Represent multiples of the corresponding border-width
     [<CustomOperation("borderImageOutsetNumber")>]
     member inline _.borderImageOutsetNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-outset: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
-    [<CustomOperation("borderImageRepeatInherit")>]
-    member inline _.borderImageRepeatInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// Sets this property to its default value. Read about initial
-    [<CustomOperation("borderImageRepeatInitial")>]
-    member inline _.borderImageRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "initial").Append("; "))
-
     /// The image is tiled (repeated) to fill the area
     [<CustomOperation("borderImageRepeatRepeat")>]
-    member inline _.borderImageRepeatRepeat([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "repeat").Append("; "))
+    member inline _.borderImageRepeatRepeat([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value " repeat").Append("; "))
 
     /// The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the image is rescaled so it fits
     [<CustomOperation("borderImageRepeatRound")>]
-    member inline _.borderImageRepeatRound([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "round").Append("; "))
+    member inline _.borderImageRepeatRound([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value " round").Append("; "))
+
+    /// Default value. The image is stretched to fill the area
+    [<CustomOperation("borderImageRepeatStretch")>]
+    member inline _.borderImageRepeatStretch([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value " stretch").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("borderImageRepeatInherit")>]
+    member inline _.borderImageRepeatInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("borderImageRepeatInitial")>]
+    member inline _.borderImageRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append("initial").Append("; "))
 
     /// The image is tiled (repeated) to fill the area. If it does not fill the area with a whole number of tiles, the extra space is distributed around the tiles
     [<CustomOperation("borderImageRepeatSpace")>]
     member inline _.borderImageRepeatSpace([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "space").Append("; "))
 
-    /// Default value. The image is stretched to fill the area
-    [<CustomOperation("borderImageRepeatStretch")>]
-    member inline _.borderImageRepeatStretch([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-repeat: ").Append(defaultArg value "stretch").Append("; "))
-
-    /// Percentages are relative to the height or width of the image
-    [<CustomOperation("borderImageSlicePercentage")>]
-    member inline _.borderImageSlicePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(string value + "%").Append("; "))
-
     /// Causes the middle part of the image to be displayed
     [<CustomOperation("borderImageSliceFill")>]
-    member inline _.borderImageSliceFill([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(defaultArg value "fill").Append("; "))
+    member inline _.borderImageSliceFill([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(defaultArg value " fill").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Percentages are relative to the height or width of the image
+    [<CustomOperation("borderImageSlice")>]
+    member inline _.borderImageSlice([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(string value + "%").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderImageSliceInherit")>]
-    member inline _.borderImageSliceInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderImageSliceInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderImageSliceInitial")>]
-    member inline _.borderImageSliceInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderImageSliceInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append("initial").Append("; "))
 
     /// The number(s) represent pixels for raster images or coordinates for vector images
     [<CustomOperation("borderImageSliceNumber")>]
     member inline _.borderImageSliceNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-slice: ").Append(value).Append("; "))
 
+    /// No image will be used
+    [<CustomOperation("borderImageSourceNone")>]
+    member inline _.borderImageSourceNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append(defaultArg value " none").Append("; "))
+
     /// The path to the image to be used as a border
     [<CustomOperation("borderImageSourceImage")>]
     member inline _.borderImageSourceImage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append(defaultArg value "image").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderImageSourceInherit")>]
-    member inline _.borderImageSourceInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderImageSourceInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderImageSourceInitial")>]
-    member inline _.borderImageSourceInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append(defaultArg value "initial").Append("; "))
-
-    /// No image will be used
-    [<CustomOperation("borderImageSourceNone")>]
-    member inline _.borderImageSourceNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append(defaultArg value "none").Append("; "))
+    member inline _.borderImageSourceInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-source: ").Append("initial").Append("; "))
 
     /// Refers to the size of the border image area: the width of the area for horizontal offsets, the height for vertical offsets
-    [<CustomOperation("borderImageWidthPercentage")>]
-    member inline _.borderImageWidthPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderImageWidth")>]
+    member inline _.borderImageWidth([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(string value + "%").Append("; "))
 
     /// If specified, the width is the intrinsic width or height of the corresponding image slice
     [<CustomOperation("borderImageWidthAuto")>]
-    member inline _.borderImageWidthAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.borderImageWidthAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderImageWidthInherit")>]
-    member inline _.borderImageWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderImageWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderImageWidthInitial")>]
-    member inline _.borderImageWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderImageWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append("initial").Append("; "))
 
     /// A length unit (px) specifying the size of the border-width
-    [<CustomOperation("borderImageWidth")>]
-    member inline _.borderImageWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderImageWidthLength")>]
+    member inline _.borderImageWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-image-width: ").Append(string value + "px").Append("; "))
 
     /// Default value 1. Represents multiples of the corresponding border-width
     [<CustomOperation("borderImageWidthNumber")>]
@@ -2682,25 +2790,25 @@ type CssBuilder() =
     [<CustomOperation("borderInlineBorderInlineWidth")>]
     member inline _.borderInlineBorderInlineWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline: ").Append(defaultArg value "border-inline-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineInherit")>]
-    member inline _.borderInlineInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineInitial")>]
-    member inline _.borderInlineInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderInlineColorColor")>]
-    member inline _.borderInlineColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append(value).Append("; "))
+    member inline _.borderInlineColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineColorInherit")>]
-    member inline _.borderInlineColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineColorInitial")>]
-    member inline _.borderInlineColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderInlineColorTransparent")>]
@@ -2718,25 +2826,25 @@ type CssBuilder() =
     [<CustomOperation("borderInlineEndBorderInlineEndWidth")>]
     member inline _.borderInlineEndBorderInlineEndWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end: ").Append(defaultArg value "border-inline-end-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineEndInherit")>]
-    member inline _.borderInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineEndInitial")>]
-    member inline _.borderInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderInlineEndColorColor")>]
-    member inline _.borderInlineEndColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append(value).Append("; "))
+    member inline _.borderInlineEndColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineEndColorInherit")>]
-    member inline _.borderInlineEndColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineEndColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineEndColorInitial")>]
-    member inline _.borderInlineEndColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineEndColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderInlineEndColorTransparent")>]
@@ -2762,13 +2870,13 @@ type CssBuilder() =
     [<CustomOperation("borderInlineEndStyleHidden")>]
     member inline _.borderInlineEndStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineEndStyleInherit")>]
-    member inline _.borderInlineEndStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineEndStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineEndStyleInitial")>]
-    member inline _.borderInlineEndStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineEndStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderInlineEndStyleInset")>]
@@ -2790,17 +2898,17 @@ type CssBuilder() =
     [<CustomOperation("borderInlineEndStyleSolid")>]
     member inline _.borderInlineEndStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineEndWidthInherit")>]
-    member inline _.borderInlineEndWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineEndWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineEndWidthInitial")>]
-    member inline _.borderInlineEndWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineEndWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderInlineEndWidth")>]
-    member inline _.borderInlineEndWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderInlineEndWidthLength")>]
+    member inline _.borderInlineEndWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-end-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderInlineEndWidthMedium")>]
@@ -2826,25 +2934,25 @@ type CssBuilder() =
     [<CustomOperation("borderInlineStartBorderInlineStartWidth")>]
     member inline _.borderInlineStartBorderInlineStartWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start: ").Append(defaultArg value "border-inline-start-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineStartInherit")>]
-    member inline _.borderInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineStartInitial")>]
-    member inline _.borderInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start: ").Append("initial").Append("; "))
 
-    /// Specifies the border color. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
+    /// Specifies the border color. Look at  CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderInlineStartColorColor")>]
-    member inline _.borderInlineStartColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append(value).Append("; "))
+    member inline _.borderInlineStartColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineStartColorInherit")>]
-    member inline _.borderInlineStartColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineStartColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineStartColorInitial")>]
-    member inline _.borderInlineStartColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineStartColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderInlineStartColorTransparent")>]
@@ -2870,13 +2978,13 @@ type CssBuilder() =
     [<CustomOperation("borderInlineStartStyleHidden")>]
     member inline _.borderInlineStartStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineStartStyleInherit")>]
-    member inline _.borderInlineStartStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineStartStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineStartStyleInitial")>]
-    member inline _.borderInlineStartStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineStartStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderInlineStartStyleInset")>]
@@ -2898,17 +3006,17 @@ type CssBuilder() =
     [<CustomOperation("borderInlineStartStyleSolid")>]
     member inline _.borderInlineStartStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineStartWidthInherit")>]
-    member inline _.borderInlineStartWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineStartWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineStartWidthInitial")>]
-    member inline _.borderInlineStartWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineStartWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderInlineStartWidth")>]
-    member inline _.borderInlineStartWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderInlineStartWidthLength")>]
+    member inline _.borderInlineStartWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-start-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderInlineStartWidthMedium")>]
@@ -2942,13 +3050,13 @@ type CssBuilder() =
     [<CustomOperation("borderInlineStyleHidden")>]
     member inline _.borderInlineStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineStyleInherit")>]
-    member inline _.borderInlineStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineStyleInitial")>]
-    member inline _.borderInlineStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderInlineStyleInset")>]
@@ -2970,17 +3078,17 @@ type CssBuilder() =
     [<CustomOperation("borderInlineStyleSolid")>]
     member inline _.borderInlineStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderInlineWidthInherit")>]
-    member inline _.borderInlineWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderInlineWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderInlineWidthInitial")>]
-    member inline _.borderInlineWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderInlineWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderInlineWidth")>]
-    member inline _.borderInlineWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderInlineWidthLength")>]
+    member inline _.borderInlineWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-inline-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderInlineWidthMedium")>]
@@ -3006,25 +3114,25 @@ type CssBuilder() =
     [<CustomOperation("borderLeftBorderLeftWidth")>]
     member inline _.borderLeftBorderLeftWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left: ").Append(defaultArg value "border-left-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderLeftInherit")>]
-    member inline _.borderLeftInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderLeftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderLeftInitial")>]
-    member inline _.borderLeftInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderLeftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left: ").Append("initial").Append("; "))
 
     /// Specifies the color of the left border. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderLeftColorColor")>]
-    member inline _.borderLeftColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append(value).Append("; "))
+    member inline _.borderLeftColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderLeftColorInherit")>]
-    member inline _.borderLeftColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderLeftColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderLeftColorInitial")>]
-    member inline _.borderLeftColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderLeftColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderLeftColorTransparent")>]
@@ -3050,13 +3158,13 @@ type CssBuilder() =
     [<CustomOperation("borderLeftStyleHidden")>]
     member inline _.borderLeftStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderLeftStyleInherit")>]
-    member inline _.borderLeftStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderLeftStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderLeftStyleInitial")>]
-    member inline _.borderLeftStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderLeftStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderLeftStyleInset")>]
@@ -3078,17 +3186,17 @@ type CssBuilder() =
     [<CustomOperation("borderLeftStyleSolid")>]
     member inline _.borderLeftStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderLeftWidthInherit")>]
-    member inline _.borderLeftWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderLeftWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderLeftWidthInitial")>]
-    member inline _.borderLeftWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderLeftWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the left border. Read about length units
-    [<CustomOperation("borderLeftWidth")>]
-    member inline _.borderLeftWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderLeftWidthLength")>]
+    member inline _.borderLeftWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium left border. This is default
     [<CustomOperation("borderLeftWidthMedium")>]
@@ -3103,20 +3211,20 @@ type CssBuilder() =
     member inline _.borderLeftWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-left-width: ").Append(defaultArg value "thin").Append("; "))
 
     /// Defines the shape of the corners in %
-    [<CustomOperation("borderRadiusPercentage")>]
-    member inline _.borderRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderRadius")>]
+    member inline _.borderRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderRadiusInherit")>]
-    member inline _.borderRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderRadiusInitial")>]
-    member inline _.borderRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the corners. Default value is 0. Read about length units
-    [<CustomOperation("borderRadius")>]
-    member inline _.borderRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderRadiusLength")>]
+    member inline _.borderRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-radius: ").Append(string value + "px").Append("; "))
 
     /// Optional. Specifies the color of the right border. Default value is the color of the text
     [<CustomOperation("borderRightBorderRightColor")>]
@@ -3130,25 +3238,25 @@ type CssBuilder() =
     [<CustomOperation("borderRightBorderRightWidth")>]
     member inline _.borderRightBorderRightWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right: ").Append(defaultArg value "border-right-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderRightInherit")>]
-    member inline _.borderRightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderRightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderRightInitial")>]
-    member inline _.borderRightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderRightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right: ").Append("initial").Append("; "))
 
     /// Specifies the color of the right border. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderRightColorColor")>]
-    member inline _.borderRightColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append(value).Append("; "))
+    member inline _.borderRightColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderRightColorInherit")>]
-    member inline _.borderRightColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderRightColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderRightColorInitial")>]
-    member inline _.borderRightColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderRightColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderRightColorTransparent")>]
@@ -3174,13 +3282,13 @@ type CssBuilder() =
     [<CustomOperation("borderRightStyleHidden")>]
     member inline _.borderRightStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderRightStyleInherit")>]
-    member inline _.borderRightStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderRightStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderRightStyleInitial")>]
-    member inline _.borderRightStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderRightStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderRightStyleInset")>]
@@ -3202,17 +3310,17 @@ type CssBuilder() =
     [<CustomOperation("borderRightStyleSolid")>]
     member inline _.borderRightStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderRightWidthInherit")>]
-    member inline _.borderRightWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderRightWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderRightWidthInitial")>]
-    member inline _.borderRightWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderRightWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the right border. Read about length units
-    [<CustomOperation("borderRightWidth")>]
-    member inline _.borderRightWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderRightWidthLength")>]
+    member inline _.borderRightWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium right border. This is default
     [<CustomOperation("borderRightWidthMedium")>]
@@ -3226,49 +3334,49 @@ type CssBuilder() =
     [<CustomOperation("borderRightWidthThin")>]
     member inline _.borderRightWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-right-width: ").Append(defaultArg value "thin").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderSpacingInherit")>]
-    member inline _.borderSpacingInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderSpacingInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderSpacingInitial")>]
-    member inline _.borderSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append("initial").Append("; "))
 
     /// Specifies the distance between the borders of adjacent cells in px, cm, etc. Negative values are not allowed. If one value is specified, it defines both the horizontal and vertical spacing between cellsIf two values are specified, the first sets the horizontal spacing and the second sets the vertical spacing
-    [<CustomOperation("borderSpacingLength")>]
-    member inline _.borderSpacingLength([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append(value).Append("; "))
+    [<CustomOperation("borderSpacingLengthLength")>]
+    member inline _.borderSpacingLengthLength([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-spacing: ").Append(defaultArg value "length length").Append("; "))
 
     /// Defines the shape of the corner at block-start and inline-end in percentange of length of element on corresponding axis.
-    [<CustomOperation("borderStartEndRadiusPercentage")>]
-    member inline _.borderStartEndRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderStartEndRadius")>]
+    member inline _.borderStartEndRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderStartEndRadiusInherit")>]
-    member inline _.borderStartEndRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderStartEndRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderStartEndRadiusInitial")>]
-    member inline _.borderStartEndRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderStartEndRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the corner at block-start and inline-end. Read about length units
-    [<CustomOperation("borderStartEndRadius")>]
-    member inline _.borderStartEndRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderStartEndRadiusLength")>]
+    member inline _.borderStartEndRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-end-radius: ").Append(string value + "px").Append("; "))
 
     /// Defines the shape of the corner at block-start and inline-start in percentange of length of element on corresponding axis.
-    [<CustomOperation("borderStartStartRadiusPercentage")>]
-    member inline _.borderStartStartRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderStartStartRadius")>]
+    member inline _.borderStartStartRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderStartStartRadiusInherit")>]
-    member inline _.borderStartStartRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderStartStartRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderStartStartRadiusInitial")>]
-    member inline _.borderStartStartRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderStartStartRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the corner at block-start and inline-start. Read about length units
-    [<CustomOperation("borderStartStartRadius")>]
-    member inline _.borderStartStartRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderStartStartRadiusLength")>]
+    member inline _.borderStartStartRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-start-start-radius: ").Append(string value + "px").Append("; "))
 
     /// Specifies a dashed border
     [<CustomOperation("borderStyleDashed")>]
@@ -3290,13 +3398,13 @@ type CssBuilder() =
     [<CustomOperation("borderStyleHidden")>]
     member inline _.borderStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderStyleInherit")>]
-    member inline _.borderStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderStyleInitial")>]
-    member inline _.borderStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderStyleInset")>]
@@ -3330,61 +3438,61 @@ type CssBuilder() =
     [<CustomOperation("borderTopBorderTopWidth")>]
     member inline _.borderTopBorderTopWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top: ").Append(defaultArg value "border-top-width").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopInherit")>]
-    member inline _.borderTopInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopInitial")>]
-    member inline _.borderTopInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top: ").Append("initial").Append("; "))
 
     /// Specifies the color of the top border. Look at CSS Color Values for a complete list of possible color values. Default color is the current color of the element
     [<CustomOperation("borderTopColorColor")>]
-    member inline _.borderTopColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append(value).Append("; "))
+    member inline _.borderTopColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopColorInherit")>]
-    member inline _.borderTopColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopColorInitial")>]
-    member inline _.borderTopColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append("initial").Append("; "))
 
     /// Specifies that the border color should be transparent
     [<CustomOperation("borderTopColorTransparent")>]
     member inline _.borderTopColorTransparent([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-color: ").Append(defaultArg value "transparent").Append("; "))
 
     /// Defines the shape of the top-left corner in %
-    [<CustomOperation("borderTopLeftRadiusPercentage")>]
-    member inline _.borderTopLeftRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderTopLeftRadius")>]
+    member inline _.borderTopLeftRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopLeftRadiusInherit")>]
-    member inline _.borderTopLeftRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopLeftRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopLeftRadiusInitial")>]
-    member inline _.borderTopLeftRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopLeftRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the top-left corner. Read about length units
-    [<CustomOperation("borderTopLeftRadius")>]
-    member inline _.borderTopLeftRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderTopLeftRadiusLength")>]
+    member inline _.borderTopLeftRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-left-radius: ").Append(string value + "px").Append("; "))
 
     /// Defines the shape of the top-right corner in %
-    [<CustomOperation("borderTopRightRadiusPercentage")>]
-    member inline _.borderTopRightRadiusPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("borderTopRightRadius")>]
+    member inline _.borderTopRightRadius([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopRightRadiusInherit")>]
-    member inline _.borderTopRightRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopRightRadiusInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopRightRadiusInitial")>]
-    member inline _.borderTopRightRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopRightRadiusInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append("initial").Append("; "))
 
     /// Defines the shape of the top-right corner. Read about length units
-    [<CustomOperation("borderTopRightRadius")>]
-    member inline _.borderTopRightRadius([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderTopRightRadiusLength")>]
+    member inline _.borderTopRightRadiusLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-right-radius: ").Append(string value + "px").Append("; "))
 
     /// Specifies a dashed border
     [<CustomOperation("borderTopStyleDashed")>]
@@ -3406,13 +3514,13 @@ type CssBuilder() =
     [<CustomOperation("borderTopStyleHidden")>]
     member inline _.borderTopStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopStyleInherit")>]
-    member inline _.borderTopStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopStyleInitial")>]
-    member inline _.borderTopStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset border. The effect depends on the border-color value
     [<CustomOperation("borderTopStyleInset")>]
@@ -3434,17 +3542,17 @@ type CssBuilder() =
     [<CustomOperation("borderTopStyleSolid")>]
     member inline _.borderTopStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderTopWidthInherit")>]
-    member inline _.borderTopWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderTopWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderTopWidthInitial")>]
-    member inline _.borderTopWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderTopWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the top border. Read about length units
-    [<CustomOperation("borderTopWidth")>]
-    member inline _.borderTopWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderTopWidthLength")>]
+    member inline _.borderTopWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium top border. This is default
     [<CustomOperation("borderTopWidthMedium")>]
@@ -3458,17 +3566,17 @@ type CssBuilder() =
     [<CustomOperation("borderTopWidthThin")>]
     member inline _.borderTopWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-top-width: ").Append(defaultArg value "thin").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("borderWidthInherit")>]
-    member inline _.borderWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.borderWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("borderWidthInitial")>]
-    member inline _.borderWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.borderWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the border. Read about length units
-    [<CustomOperation("borderWidth")>]
-    member inline _.borderWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("borderWidthLength")>]
+    member inline _.borderWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("border-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium border. This is default
     [<CustomOperation("borderWidthMedium")>]
@@ -3499,28 +3607,44 @@ type CssBuilder() =
     member inline _.bottom([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(value).Append("; "))
 
     /// The bottom property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("bottomPercentage")>]
-    member inline _.bottomPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("bottom")>]
+    member inline _.bottom([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(string value + "%").Append("; "))
 
     /// The bottom property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("bottomAuto")>]
-    member inline _.bottomAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.bottomAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append("auto").Append("; "))
 
     /// The bottom property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("bottomInherit")>]
-    member inline _.bottomInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.bottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append("inherit").Append("; "))
 
     /// The bottom property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("bottomInitial")>]
-    member inline _.bottomInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.bottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append("initial").Append("; "))
 
     /// The bottom property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("bottom")>]
-    member inline _.bottom([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("bottomLength")>]
+    member inline _.bottomLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("bottom: ").Append(string value + "px").Append("; "))
 
     ///  The box-decoration-break property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented. 
     [<CustomOperation("boxDecorationBreak")>]
     member inline _.boxDecorationBreak([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-decoration-break: ").Append(value).Append("; "))
+
+    /// The box-decoration-break property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+    [<CustomOperation("boxDecorationBreakClone")>]
+    member inline _.boxDecorationBreakClone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-decoration-break: ").Append(defaultArg value " clone").Append("; "))
+
+    /// The box-decoration-break property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+    [<CustomOperation("boxDecorationBreakSlice")>]
+    member inline _.boxDecorationBreakSlice([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-decoration-break: ").Append(defaultArg value " slice").Append("; "))
+
+    /// The box-decoration-break property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+    [<CustomOperation("boxDecorationBreakInherit")>]
+    member inline _.boxDecorationBreakInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-decoration-break: ").Append("inherit").Append("; "))
+
+    /// The box-decoration-break property specifies how the background, padding, border, border-image, box-shadow, margin, and clip-path of an element is applied when the box for the element is fragmented.
+    [<CustomOperation("boxDecorationBreakInitial")>]
+    member inline _.boxDecorationBreakInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-decoration-break: ").Append("initial").Append("; "))
 
     ///  The box-reflect property is used to create a reflection of an element. 
     [<CustomOperation("boxReflect")>]
@@ -3536,11 +3660,11 @@ type CssBuilder() =
 
     /// The box-reflect property is used to create a reflection of an element.
     [<CustomOperation("boxReflectInherit")>]
-    member inline _.boxReflectInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.boxReflectInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append("inherit").Append("; "))
 
     /// The box-reflect property is used to create a reflection of an element.
     [<CustomOperation("boxReflectInitial")>]
-    member inline _.boxReflectInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.boxReflectInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append("initial").Append("; "))
 
     /// The box-reflect property is used to create a reflection of an element.
     [<CustomOperation("boxReflectLeft")>]
@@ -3551,8 +3675,12 @@ type CssBuilder() =
     member inline _.boxReflectNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(defaultArg value "none").Append("; "))
 
     /// The box-reflect property is used to create a reflection of an element.
-    [<CustomOperation("boxReflectPosition")>]
-    member inline _.boxReflectPosition([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(value).Append("; "))
+    [<CustomOperation("boxReflectPositionOffset")>]
+    member inline _.boxReflectPositionOffset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(defaultArg value "position offset").Append("; "))
+
+    /// The box-reflect property is used to create a reflection of an element.
+    [<CustomOperation("boxReflectPositionOffsetGradient")>]
+    member inline _.boxReflectPositionOffsetGradient([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-reflect: ").Append(defaultArg value "position offset gradient").Append("; "))
 
     /// The box-reflect property is used to create a reflection of an element.
     [<CustomOperation("boxReflectRight")>]
@@ -3568,7 +3696,7 @@ type CssBuilder() =
 
     /// The box-shadow property attaches one or more shadows to an element.
     [<CustomOperation("boxShadowColor")>]
-    member inline _.boxShadowColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append(value).Append("; "))
+    member inline _.boxShadowColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append(defaultArg value "color").Append("; "))
 
     /// The box-shadow property attaches one or more shadows to an element.
     [<CustomOperation("boxShadowHOffset")>]
@@ -3576,11 +3704,11 @@ type CssBuilder() =
 
     /// The box-shadow property attaches one or more shadows to an element.
     [<CustomOperation("boxShadowInherit")>]
-    member inline _.boxShadowInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.boxShadowInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append("inherit").Append("; "))
 
     /// The box-shadow property attaches one or more shadows to an element.
     [<CustomOperation("boxShadowInitial")>]
-    member inline _.boxShadowInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.boxShadowInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-shadow: ").Append("initial").Append("; "))
 
     /// The box-shadow property attaches one or more shadows to an element.
     [<CustomOperation("boxShadowInset")>]
@@ -3604,31 +3732,187 @@ type CssBuilder() =
 
     /// The box-sizing property defines how the width and height of an element are calculated: should they include padding and borders, or not.
     [<CustomOperation("boxSizingBorderBox")>]
-    member inline _.boxSizingBorderBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value "border-box").Append("; "))
+    member inline _.boxSizingBorderBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value " border-box").Append("; "))
 
     /// The box-sizing property defines how the width and height of an element are calculated: should they include padding and borders, or not.
     [<CustomOperation("boxSizingContentBox")>]
-    member inline _.boxSizingContentBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value "content-box").Append("; "))
+    member inline _.boxSizingContentBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value " content-box").Append("; "))
 
     /// The box-sizing property defines how the width and height of an element are calculated: should they include padding and borders, or not.
     [<CustomOperation("boxSizingInherit")>]
-    member inline _.boxSizingInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.boxSizingInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append("inherit").Append("; "))
 
     /// The box-sizing property defines how the width and height of an element are calculated: should they include padding and borders, or not.
     [<CustomOperation("boxSizingInitial")>]
-    member inline _.boxSizingInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.boxSizingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("box-sizing: ").Append("initial").Append("; "))
 
     ///  The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element. 
     [<CustomOperation("breakAfter")>]
     member inline _.breakAfter([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(value).Append("; "))
 
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAll")>]
+    member inline _.breakAfterAll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "all").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAlways")>]
+    member inline _.breakAfterAlways([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "always").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAuto")>]
+    member inline _.breakAfterAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append("auto").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAvoid")>]
+    member inline _.breakAfterAvoid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "avoid").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAvoidColumn")>]
+    member inline _.breakAfterAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "avoid-column").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAvoidPage")>]
+    member inline _.breakAfterAvoidPage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "avoid-page").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterAvoidRegion")>]
+    member inline _.breakAfterAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "avoid-region").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterColumn")>]
+    member inline _.breakAfterColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "column").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterInherit")>]
+    member inline _.breakAfterInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append("inherit").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterInitial")>]
+    member inline _.breakAfterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append("initial").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterLeft")>]
+    member inline _.breakAfterLeft([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "left").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterPage")>]
+    member inline _.breakAfterPage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "page").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterRecto")>]
+    member inline _.breakAfterRecto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "recto").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterRegion")>]
+    member inline _.breakAfterRegion([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "region").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterRight")>]
+    member inline _.breakAfterRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "right").Append("; "))
+
+    /// The break-after property specifies whether or not a page break, column break, or region break should occur after the specified element.
+    [<CustomOperation("breakAfterVerso")>]
+    member inline _.breakAfterVerso([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-after: ").Append(defaultArg value "verso").Append("; "))
+
     ///  The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element. 
     [<CustomOperation("breakBefore")>]
     member inline _.breakBefore([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(value).Append("; "))
 
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAll")>]
+    member inline _.breakBeforeAll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "all").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAlways")>]
+    member inline _.breakBeforeAlways([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "always").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAuto")>]
+    member inline _.breakBeforeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append("auto").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAvoid")>]
+    member inline _.breakBeforeAvoid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "avoid").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAvoidColumn")>]
+    member inline _.breakBeforeAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "avoid-column").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAvoidPage")>]
+    member inline _.breakBeforeAvoidPage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "avoid-page").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeAvoidRegion")>]
+    member inline _.breakBeforeAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "avoid-region").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeColumn")>]
+    member inline _.breakBeforeColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "column").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeInherit")>]
+    member inline _.breakBeforeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append("inherit").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeInitial")>]
+    member inline _.breakBeforeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append("initial").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeLeft")>]
+    member inline _.breakBeforeLeft([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "left").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforePage")>]
+    member inline _.breakBeforePage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "page").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeRecto")>]
+    member inline _.breakBeforeRecto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "recto").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeRegion")>]
+    member inline _.breakBeforeRegion([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "region").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeRight")>]
+    member inline _.breakBeforeRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "right").Append("; "))
+
+    /// The break-before property specifies whether or not a page break, column break, or region break should occur before the specified element.
+    [<CustomOperation("breakBeforeVerso")>]
+    member inline _.breakBeforeVerso([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-before: ").Append(defaultArg value "verso").Append("; "))
+
     ///  The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element. 
     [<CustomOperation("breakInside")>]
     member inline _.breakInside([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append(value).Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideAuto")>]
+    member inline _.breakInsideAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append("auto").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideAvoid")>]
+    member inline _.breakInsideAvoid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append(defaultArg value "avoid").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideAvoidColumn")>]
+    member inline _.breakInsideAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append(defaultArg value "avoid-column").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideAvoidPage")>]
+    member inline _.breakInsideAvoidPage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append(defaultArg value "avoid-page").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideAvoidRegion")>]
+    member inline _.breakInsideAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append(defaultArg value "avoid-region").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideInherit")>]
+    member inline _.breakInsideInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append("inherit").Append("; "))
+
+    /// The break-inside property specifies whether or not a page break, column break, or region break should occur inside the specified element.
+    [<CustomOperation("breakInsideInitial")>]
+    member inline _.breakInsideInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("break-inside: ").Append("initial").Append("; "))
 
     ///  The caption-side property specifies the placement of a table caption. 
     [<CustomOperation("captionSide")>]
@@ -3640,11 +3924,11 @@ type CssBuilder() =
 
     /// The caption-side property specifies the placement of a table caption.
     [<CustomOperation("captionSideInherit")>]
-    member inline _.captionSideInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("caption-side: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.captionSideInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("caption-side: ").Append("inherit").Append("; "))
 
     /// The caption-side property specifies the placement of a table caption.
     [<CustomOperation("captionSideInitial")>]
-    member inline _.captionSideInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("caption-side: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.captionSideInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("caption-side: ").Append("initial").Append("; "))
 
     /// The caption-side property specifies the placement of a table caption.
     [<CustomOperation("captionSideTop")>]
@@ -3654,33 +3938,25 @@ type CssBuilder() =
     [<CustomOperation("caretColor")>]
     member inline _.caretColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("caret-color: ").Append(value).Append("; "))
 
+    /// The caret-color property specifies the color of the cursor (caret) in inputs, textareas, or any element that is editable.
+    [<CustomOperation("caretColorAuto")>]
+    member inline _.caretColorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("caret-color: ").Append("auto").Append("; "))
+
+    /// The caret-color property specifies the color of the cursor (caret) in inputs, textareas, or any element that is editable.
+    [<CustomOperation("caretColorColor")>]
+    member inline _.caretColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("caret-color: ").Append(defaultArg value "color").Append("; "))
+
+    /// The caret-color property specifies the color of the cursor (caret) in inputs, textareas, or any element that is editable.
+    [<CustomOperation("caretColorInherit")>]
+    member inline _.caretColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("caret-color: ").Append("inherit").Append("; "))
+
+    /// The caret-color property specifies the color of the cursor (caret) in inputs, textareas, or any element that is editable.
+    [<CustomOperation("caretColorInitial")>]
+    member inline _.caretColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("caret-color: ").Append("initial").Append("; "))
+
     /// 
     [<CustomOperation("clear")>]
     member inline _.clear([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(value).Append("; "))
-
-    /// 
-    [<CustomOperation("clearBoth")>]
-    member inline _.clearBoth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "both").Append("; "))
-
-    /// 
-    [<CustomOperation("clearInherit")>]
-    member inline _.clearInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// 
-    [<CustomOperation("clearInitial")>]
-    member inline _.clearInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "initial").Append("; "))
-
-    /// 
-    [<CustomOperation("clearLeft")>]
-    member inline _.clearLeft([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "left").Append("; "))
-
-    /// 
-    [<CustomOperation("clearNone")>]
-    member inline _.clearNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "none").Append("; "))
-
-    /// 
-    [<CustomOperation("clearRight")>]
-    member inline _.clearRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clear: ").Append(defaultArg value "right").Append("; "))
 
     /// Note: The clip property is deprecated and is replaced by the clip-path property. 
     [<CustomOperation("clip")>]
@@ -3694,7 +3970,7 @@ type CssBuilder() =
     [<CustomOperation("clipPathBorderBox")>]
     member inline _.clipPathBorderBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append(defaultArg value "border-box").Append("; "))
 
-    /// Defines a URL to an SVG element
+    /// Defines a URL to an SVG  element
     [<CustomOperation("clipPathClipSource")>]
     member inline _.clipPathClipSource([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append(defaultArg value "clip-source").Append("; "))
 
@@ -3706,13 +3982,13 @@ type CssBuilder() =
     [<CustomOperation("clipPathFillBox")>]
     member inline _.clipPathFillBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append(defaultArg value "fill-box").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("clipPathInherit")>]
-    member inline _.clipPathInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.clipPathInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("clipPathInitial")>]
-    member inline _.clipPathInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.clipPathInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip-path: ").Append("initial").Append("; "))
 
     /// Uses the margin box as the reference box
     [<CustomOperation("clipPathMarginBox")>]
@@ -3736,7 +4012,7 @@ type CssBuilder() =
 
     /// Note: The clip property is deprecated and is replaced by the clip-path property.
     [<CustomOperation("clipAuto")>]
-    member inline _.clipAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.clipAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("clip: ").Append("auto").Append("; "))
 
     /// Note: The clip property is deprecated and is replaced by the clip-path property.
     [<CustomOperation("clipShape")>]
@@ -3748,15 +4024,15 @@ type CssBuilder() =
 
     /// The color property specifies the color of text.
     [<CustomOperation("colorColor")>]
-    member inline _.colorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append(value).Append("; "))
+    member inline _.colorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append(defaultArg value "color").Append("; "))
 
     /// The color property specifies the color of text.
     [<CustomOperation("colorInherit")>]
-    member inline _.colorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.colorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append("inherit").Append("; "))
 
     /// The color property specifies the color of text.
     [<CustomOperation("colorInitial")>]
-    member inline _.colorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.colorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("color: ").Append("initial").Append("; "))
 
     ///  The column-count property specifies the number of columns an element should be divided into. 
     [<CustomOperation("columnCount")>]
@@ -3764,15 +4040,15 @@ type CssBuilder() =
 
     /// The column-count property specifies the number of columns an element should be divided into.
     [<CustomOperation("columnCountAuto")>]
-    member inline _.columnCountAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.columnCountAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append("auto").Append("; "))
 
     /// The column-count property specifies the number of columns an element should be divided into.
     [<CustomOperation("columnCountInherit")>]
-    member inline _.columnCountInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnCountInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append("inherit").Append("; "))
 
     /// The column-count property specifies the number of columns an element should be divided into.
     [<CustomOperation("columnCountInitial")>]
-    member inline _.columnCountInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnCountInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-count: ").Append("initial").Append("; "))
 
     /// The column-count property specifies the number of columns an element should be divided into.
     [<CustomOperation("columnCountNumber")>]
@@ -3784,7 +4060,7 @@ type CssBuilder() =
 
     /// The column-fill property specifies how to fill columns, balanced or not.
     [<CustomOperation("columnFillAuto")>]
-    member inline _.columnFillAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.columnFillAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append("auto").Append("; "))
 
     /// The column-fill property specifies how to fill columns, balanced or not.
     [<CustomOperation("columnFillBalance")>]
@@ -3792,11 +4068,11 @@ type CssBuilder() =
 
     /// The column-fill property specifies how to fill columns, balanced or not.
     [<CustomOperation("columnFillInherit")>]
-    member inline _.columnFillInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnFillInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append("inherit").Append("; "))
 
     /// The column-fill property specifies how to fill columns, balanced or not.
     [<CustomOperation("columnFillInitial")>]
-    member inline _.columnFillInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnFillInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-fill: ").Append("initial").Append("; "))
 
     ///  The column-gap property specifies the gap between the columns in grid, flexbox or multi-column layout. 
     [<CustomOperation("columnGap")>]
@@ -3804,15 +4080,15 @@ type CssBuilder() =
 
     /// The column-gap property specifies the gap between the columns in grid, flexbox or multi-column layout.
     [<CustomOperation("columnGapInherit")>]
-    member inline _.columnGapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnGapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append("inherit").Append("; "))
 
     /// The column-gap property specifies the gap between the columns in grid, flexbox or multi-column layout.
     [<CustomOperation("columnGapInitial")>]
-    member inline _.columnGapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnGapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append("initial").Append("; "))
 
     /// The column-gap property specifies the gap between the columns in grid, flexbox or multi-column layout.
-    [<CustomOperation("columnGap")>]
-    member inline _.columnGap([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("columnGapLength")>]
+    member inline _.columnGapLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-gap: ").Append(string value + "px").Append("; "))
 
     /// The column-gap property specifies the gap between the columns in grid, flexbox or multi-column layout.
     [<CustomOperation("columnGapNormal")>]
@@ -3824,87 +4100,87 @@ type CssBuilder() =
 
     /// Specifies the color of the rule. Look at CSS Color Values for a complete list of possible color values
     [<CustomOperation("columnRuleColorColor")>]
-    member inline _.columnRuleColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append(value).Append("; "))
+    member inline _.columnRuleColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("columnRuleColorInherit")>]
-    member inline _.columnRuleColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnRuleColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("columnRuleColorInitial")>]
-    member inline _.columnRuleColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnRuleColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-color: ").Append("initial").Append("; "))
 
     /// Defines a dashed rule
     [<CustomOperation("columnRuleStyleDashed")>]
-    member inline _.columnRuleStyleDashed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "dashed").Append("; "))
+    member inline _.columnRuleStyleDashed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " dashed").Append("; "))
 
     /// Defines a dotted rule
     [<CustomOperation("columnRuleStyleDotted")>]
-    member inline _.columnRuleStyleDotted([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "dotted").Append("; "))
+    member inline _.columnRuleStyleDotted([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " dotted").Append("; "))
 
     /// Defines a double rule
     [<CustomOperation("columnRuleStyleDouble")>]
-    member inline _.columnRuleStyleDouble([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "double").Append("; "))
+    member inline _.columnRuleStyleDouble([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " double").Append("; "))
 
     /// Specifies a 3D grooved rule. The effect depends on the width and color values
     [<CustomOperation("columnRuleStyleGroove")>]
-    member inline _.columnRuleStyleGroove([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "groove").Append("; "))
+    member inline _.columnRuleStyleGroove([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " groove").Append("; "))
 
     /// Defines a hidden rule
     [<CustomOperation("columnRuleStyleHidden")>]
-    member inline _.columnRuleStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "hidden").Append("; "))
-
-    /// Inherits this property from its parent element. Read about inherit
-    [<CustomOperation("columnRuleStyleInherit")>]
-    member inline _.columnRuleStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// Sets this property to its default value. Read about initial
-    [<CustomOperation("columnRuleStyleInitial")>]
-    member inline _.columnRuleStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnRuleStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " hidden").Append("; "))
 
     /// Specifies a 3D inset rule. The effect depends on the width and color values
     [<CustomOperation("columnRuleStyleInset")>]
-    member inline _.columnRuleStyleInset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "inset").Append("; "))
+    member inline _.columnRuleStyleInset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " inset").Append("; "))
 
     /// Default value. Defines no rule
     [<CustomOperation("columnRuleStyleNone")>]
-    member inline _.columnRuleStyleNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "none").Append("; "))
+    member inline _.columnRuleStyleNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " none").Append("; "))
 
     /// Specifies a 3D outset rule. The effect depends on the width and color values
     [<CustomOperation("columnRuleStyleOutset")>]
-    member inline _.columnRuleStyleOutset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "outset").Append("; "))
+    member inline _.columnRuleStyleOutset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " outset").Append("; "))
 
     /// Specifies a 3D ridged rule. The effect depends on the width and color values
     [<CustomOperation("columnRuleStyleRidge")>]
-    member inline _.columnRuleStyleRidge([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "ridge").Append("; "))
+    member inline _.columnRuleStyleRidge([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " ridge").Append("; "))
 
     /// Defines a solid rule
     [<CustomOperation("columnRuleStyleSolid")>]
-    member inline _.columnRuleStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value "solid").Append("; "))
+    member inline _.columnRuleStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append(defaultArg value " solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
-    [<CustomOperation("columnRuleWidthInherit")>]
-    member inline _.columnRuleWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value "inherit").Append("; "))
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("columnRuleStyleInherit")>]
+    member inline _.columnRuleStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
-    [<CustomOperation("columnRuleWidthInitial")>]
-    member inline _.columnRuleWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value "initial").Append("; "))
-
-    /// Specifies the width of the rule
-    [<CustomOperation("columnRuleWidth")>]
-    member inline _.columnRuleWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(string value + "px").Append("; "))
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("columnRuleStyleInitial")>]
+    member inline _.columnRuleStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-style: ").Append("initial").Append("; "))
 
     /// Default value. Defines a medium rule
     [<CustomOperation("columnRuleWidthMedium")>]
-    member inline _.columnRuleWidthMedium([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value "medium").Append("; "))
+    member inline _.columnRuleWidthMedium([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value " medium").Append("; "))
 
     /// Defines a thick rule
     [<CustomOperation("columnRuleWidthThick")>]
-    member inline _.columnRuleWidthThick([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value "thick").Append("; "))
+    member inline _.columnRuleWidthThick([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value " thick").Append("; "))
 
     /// Defines a thin rule
     [<CustomOperation("columnRuleWidthThin")>]
-    member inline _.columnRuleWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value "thin").Append("; "))
+    member inline _.columnRuleWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(defaultArg value " thin").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("columnRuleWidthInherit")>]
+    member inline _.columnRuleWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("columnRuleWidthInitial")>]
+    member inline _.columnRuleWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append("initial").Append("; "))
+
+    /// Specifies the width of the rule
+    [<CustomOperation("columnRuleWidthLength")>]
+    member inline _.columnRuleWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-rule-width: ").Append(string value + "px").Append("; "))
 
     /// The column-rule property sets the width, style, and color of the rule between columns.
     [<CustomOperation("columnRuleColumnRuleColor")>]
@@ -3928,11 +4204,11 @@ type CssBuilder() =
 
     /// The column-span property specifies how many columns an element should span across.
     [<CustomOperation("columnSpanInherit")>]
-    member inline _.columnSpanInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-span: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnSpanInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-span: ").Append("inherit").Append("; "))
 
     /// The column-span property specifies how many columns an element should span across.
     [<CustomOperation("columnSpanInitial")>]
-    member inline _.columnSpanInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-span: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnSpanInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-span: ").Append("initial").Append("; "))
 
     /// The column-span property specifies how many columns an element should span across.
     [<CustomOperation("columnSpanNone")>]
@@ -3944,19 +4220,19 @@ type CssBuilder() =
 
     /// The column-width property specifies the column width.
     [<CustomOperation("columnWidthAuto")>]
-    member inline _.columnWidthAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.columnWidthAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append("auto").Append("; "))
 
     /// The column-width property specifies the column width.
     [<CustomOperation("columnWidthInherit")>]
-    member inline _.columnWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append("inherit").Append("; "))
 
     /// The column-width property specifies the column width.
     [<CustomOperation("columnWidthInitial")>]
-    member inline _.columnWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append("initial").Append("; "))
 
     /// The column-width property specifies the column width.
-    [<CustomOperation("columnWidth")>]
-    member inline _.columnWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("columnWidthLength")>]
+    member inline _.columnWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("column-width: ").Append(string value + "px").Append("; "))
 
     ///  The columns property is a shorthand property for: 
     [<CustomOperation("columns")>]
@@ -3964,7 +4240,7 @@ type CssBuilder() =
 
     /// The columns property is a shorthand property for:
     [<CustomOperation("columnsAuto")>]
-    member inline _.columnsAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.columnsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append("auto").Append("; "))
 
     /// The columns property is a shorthand property for:
     [<CustomOperation("columnsColumnCount")>]
@@ -3976,11 +4252,11 @@ type CssBuilder() =
 
     /// The columns property is a shorthand property for:
     [<CustomOperation("columnsInherit")>]
-    member inline _.columnsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.columnsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append("inherit").Append("; "))
 
     /// The columns property is a shorthand property for:
     [<CustomOperation("columnsInitial")>]
-    member inline _.columnsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.columnsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("columns: ").Append("initial").Append("; "))
 
     ///  The content property is used with the ::before and ::after pseudo-elements, to insert generated content. 
     [<CustomOperation("content")>]
@@ -3988,7 +4264,11 @@ type CssBuilder() =
 
     /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
     [<CustomOperation("contentAttr")>]
-    member inline _.contentAttr([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append($"attr({value})").Append("; "))
+    member inline _.contentAttr([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append($" attr({value})").Append("; "))
+
+    /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
+    [<CustomOperation("contentUrl")>]
+    member inline _.contentUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append($" url({value})").Append("; "))
 
     /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
     [<CustomOperation("contentCloseQuote")>]
@@ -4000,11 +4280,11 @@ type CssBuilder() =
 
     /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
     [<CustomOperation("contentInherit")>]
-    member inline _.contentInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.contentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append("inherit").Append("; "))
 
     /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
     [<CustomOperation("contentInitial")>]
-    member inline _.contentInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.contentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append("initial").Append("; "))
 
     /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
     [<CustomOperation("contentNoCloseQuote")>]
@@ -4030,21 +4310,65 @@ type CssBuilder() =
     [<CustomOperation("contentString")>]
     member inline _.contentString([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append(defaultArg value "string").Append("; "))
 
-    /// The content property is used with the ::before and ::after pseudo-elements, to insert generated content.
-    [<CustomOperation("contentUrl")>]
-    member inline _.contentUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("content: ").Append($"url({value})").Append("; "))
-
     ///  The counter-increment property increases or decreases the value of one or more CSS counters. 
     [<CustomOperation("counterIncrement")>]
     member inline _.counterIncrement([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-increment: ").Append(value).Append("; "))
+
+    /// The counter-increment property increases or decreases the value of one or more CSS counters.
+    [<CustomOperation("counterIncrementIdNumber")>]
+    member inline _.counterIncrementIdNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-increment: ").Append(value).Append("; "))
+
+    /// The counter-increment property increases or decreases the value of one or more CSS counters.
+    [<CustomOperation("counterIncrementInherit")>]
+    member inline _.counterIncrementInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-increment: ").Append("inherit").Append("; "))
+
+    /// The counter-increment property increases or decreases the value of one or more CSS counters.
+    [<CustomOperation("counterIncrementInitial")>]
+    member inline _.counterIncrementInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-increment: ").Append("initial").Append("; "))
+
+    /// The counter-increment property increases or decreases the value of one or more CSS counters.
+    [<CustomOperation("counterIncrementNone")>]
+    member inline _.counterIncrementNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-increment: ").Append(defaultArg value "none").Append("; "))
 
     ///  The counter-reset property creates or resets one or more CSS counters. 
     [<CustomOperation("counterReset")>]
     member inline _.counterReset([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-reset: ").Append(value).Append("; "))
 
+    /// The counter-reset property creates or resets one or more CSS counters.
+    [<CustomOperation("counterResetIdNumber")>]
+    member inline _.counterResetIdNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-reset: ").Append(value).Append("; "))
+
+    /// The counter-reset property creates or resets one or more CSS counters.
+    [<CustomOperation("counterResetInherit")>]
+    member inline _.counterResetInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-reset: ").Append("inherit").Append("; "))
+
+    /// The counter-reset property creates or resets one or more CSS counters.
+    [<CustomOperation("counterResetInitial")>]
+    member inline _.counterResetInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-reset: ").Append("initial").Append("; "))
+
+    /// The counter-reset property creates or resets one or more CSS counters.
+    [<CustomOperation("counterResetNone")>]
+    member inline _.counterResetNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-reset: ").Append(defaultArg value "none").Append("; "))
+
     ///  The counter-set property creates and sets a CSS counter to a specific value. 
     [<CustomOperation("counterSet")>]
     member inline _.counterSet([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-set: ").Append(value).Append("; "))
+
+    /// The counter-set property creates and sets a CSS counter to a specific value.
+    [<CustomOperation("counterSetCounterNameNumber")>]
+    member inline _.counterSetCounterNameNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-set: ").Append(value).Append("; "))
+
+    /// The counter-set property creates and sets a CSS counter to a specific value.
+    [<CustomOperation("counterSetInherit")>]
+    member inline _.counterSetInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-set: ").Append("inherit").Append("; "))
+
+    /// The counter-set property creates and sets a CSS counter to a specific value.
+    [<CustomOperation("counterSetInitial")>]
+    member inline _.counterSetInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-set: ").Append("initial").Append("; "))
+
+    /// The counter-set property creates and sets a CSS counter to a specific value.
+    [<CustomOperation("counterSetNone")>]
+    member inline _.counterSetNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("counter-set: ").Append(defaultArg value "none").Append("; "))
 
     ///  The cursor property specifies the mouse cursor to be displayed when pointing over an element. 
     [<CustomOperation("cursor")>]
@@ -4064,7 +4388,7 @@ type CssBuilder() =
 
     /// The cursor property specifies the mouse cursor to be displayed when pointing over an element.
     [<CustomOperation("cursorAuto")>]
-    member inline _.cursorAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.cursorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append("auto").Append("; "))
 
     /// The cursor property specifies the mouse cursor to be displayed when pointing over an element.
     [<CustomOperation("cursorCell")>]
@@ -4112,11 +4436,11 @@ type CssBuilder() =
 
     /// The cursor property specifies the mouse cursor to be displayed when pointing over an element.
     [<CustomOperation("cursorInherit")>]
-    member inline _.cursorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.cursorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append("inherit").Append("; "))
 
     /// The cursor property specifies the mouse cursor to be displayed when pointing over an element.
     [<CustomOperation("cursorInitial")>]
-    member inline _.cursorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.cursorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("cursor: ").Append("initial").Append("; "))
 
     /// The cursor property specifies the mouse cursor to be displayed when pointing over an element.
     [<CustomOperation("cursorMove")>]
@@ -4212,11 +4536,11 @@ type CssBuilder() =
 
     /// The direction property specifies the text direction/writing direction within a block-level element.
     [<CustomOperation("directionInherit")>]
-    member inline _.directionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("direction: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.directionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("direction: ").Append("inherit").Append("; "))
 
     /// The direction property specifies the text direction/writing direction within a block-level element.
     [<CustomOperation("directionInitial")>]
-    member inline _.directionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("direction: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.directionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("direction: ").Append("initial").Append("; "))
 
     /// The direction property specifies the text direction/writing direction within a block-level element.
     [<CustomOperation("directionLtr")>]
@@ -4230,102 +4554,6 @@ type CssBuilder() =
     [<CustomOperation("display")>]
     member inline _.display([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(value).Append("; "))
 
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("display")>]
-    member inline _.display([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayBlock")>]
-    member inline _.displayBlock([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "block").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayContents")>]
-    member inline _.displayContents([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "contents").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayFlex")>]
-    member inline _.displayFlex([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "flex").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayGrid")>]
-    member inline _.displayGrid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "grid").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInherit")>]
-    member inline _.displayInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInitial")>]
-    member inline _.displayInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "initial").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInline")>]
-    member inline _.displayInline([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inline").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInlineBlock")>]
-    member inline _.displayInlineBlock([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inline-block").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInlineFlex")>]
-    member inline _.displayInlineFlex([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inline-flex").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInlineGrid")>]
-    member inline _.displayInlineGrid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inline-grid").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayInlineTable")>]
-    member inline _.displayInlineTable([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "inline-table").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayListItem")>]
-    member inline _.displayListItem([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "list-item").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayNone")>]
-    member inline _.displayNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "none").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayRunIn")>]
-    member inline _.displayRunIn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "run-in").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTable")>]
-    member inline _.displayTable([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableCaption")>]
-    member inline _.displayTableCaption([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-caption").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableCell")>]
-    member inline _.displayTableCell([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-cell").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableColumn")>]
-    member inline _.displayTableColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-column").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableColumnGroup")>]
-    member inline _.displayTableColumnGroup([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-column-group").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableFooterGroup")>]
-    member inline _.displayTableFooterGroup([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-footer-group").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableHeaderGroup")>]
-    member inline _.displayTableHeaderGroup([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-header-group").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableRow")>]
-    member inline _.displayTableRow([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-row").Append("; "))
-
-    /// The display property specifies the display behavior (the type of rendering box) of an element.
-    [<CustomOperation("displayTableRowGroup")>]
-    member inline _.displayTableRowGroup([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("display: ").Append(defaultArg value "table-row-group").Append("; "))
-
     ///  The empty-cells property sets whether or not to display borders on empty cells in a table. 
     [<CustomOperation("emptyCells")>]
     member inline _.emptyCells([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("empty-cells: ").Append(value).Append("; "))
@@ -4336,11 +4564,11 @@ type CssBuilder() =
 
     /// The empty-cells property sets whether or not to display borders on empty cells in a table.
     [<CustomOperation("emptyCellsInherit")>]
-    member inline _.emptyCellsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("empty-cells: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.emptyCellsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("empty-cells: ").Append("inherit").Append("; "))
 
     /// The empty-cells property sets whether or not to display borders on empty cells in a table.
     [<CustomOperation("emptyCellsInitial")>]
-    member inline _.emptyCellsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("empty-cells: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.emptyCellsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("empty-cells: ").Append("initial").Append("; "))
 
     /// The empty-cells property sets whether or not to display borders on empty cells in a table.
     [<CustomOperation("emptyCellsShow")>]
@@ -4356,15 +4584,15 @@ type CssBuilder() =
 
     /// Default value. The length is equal to the length of the flexible item. If the item has no length specified, the length will be according to its content
     [<CustomOperation("flexBasisAuto")>]
-    member inline _.flexBasisAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.flexBasisAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexBasisInherit")>]
-    member inline _.flexBasisInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexBasisInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexBasisInitial")>]
-    member inline _.flexBasisInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexBasisInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-basis: ").Append("initial").Append("; "))
 
     /// A length unit, or percentage, specifying the initial length of the flexible item(s)
     [<CustomOperation("flexBasisNumber")>]
@@ -4378,13 +4606,13 @@ type CssBuilder() =
     [<CustomOperation("flexDirectionColumnReverse")>]
     member inline _.flexDirectionColumnReverse([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-direction: ").Append(defaultArg value "column-reverse").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexDirectionInherit")>]
-    member inline _.flexDirectionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-direction: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexDirectionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-direction: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexDirectionInitial")>]
-    member inline _.flexDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-direction: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-direction: ").Append("initial").Append("; "))
 
     /// Default value. The flexible items are displayed horizontally, as a row
     [<CustomOperation("flexDirectionRow")>]
@@ -4402,45 +4630,45 @@ type CssBuilder() =
     [<CustomOperation("flexFlowFlexWrap")>]
     member inline _.flexFlowFlexWrap([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-flow: ").Append(defaultArg value "flex-wrap").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexFlowInherit")>]
-    member inline _.flexFlowInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-flow: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexFlowInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-flow: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexFlowInitial")>]
-    member inline _.flexFlowInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-flow: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexFlowInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-flow: ").Append("initial").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexGrowInherit")>]
-    member inline _.flexGrowInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-grow: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexGrowInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-grow: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexGrowInitial")>]
-    member inline _.flexGrowInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-grow: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexGrowInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-grow: ").Append("initial").Append("; "))
 
     /// A number specifying how much the item will grow relative to the rest of the flexible items. Default value is 0
     [<CustomOperation("flexGrowNumber")>]
     member inline _.flexGrowNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-grow: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexShrinkInherit")>]
-    member inline _.flexShrinkInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-shrink: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexShrinkInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-shrink: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexShrinkInitial")>]
-    member inline _.flexShrinkInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-shrink: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexShrinkInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-shrink: ").Append("initial").Append("; "))
 
     /// A number specifying how much the item will shrink relative to the rest of the flexible items. Default value is 1
     [<CustomOperation("flexShrinkNumber")>]
     member inline _.flexShrinkNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-shrink: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("flexWrapInherit")>]
-    member inline _.flexWrapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-wrap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.flexWrapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-wrap: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("flexWrapInitial")>]
-    member inline _.flexWrapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-wrap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.flexWrapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("flex-wrap: ").Append("initial").Append("; "))
 
     /// Default value. Specifies that the flexible items will not wrap
     [<CustomOperation("flexWrapNowrap")>]
@@ -4476,11 +4704,11 @@ type CssBuilder() =
 
     /// The float property specifies whether an element should float to the left, right, or not at all.
     [<CustomOperation("floatInherit")>]
-    member inline _.floatInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("float: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.floatInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("float: ").Append("inherit").Append("; "))
 
     /// The float property specifies whether an element should float to the left, right, or not at all.
     [<CustomOperation("floatInitial")>]
-    member inline _.floatInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("float: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.floatInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("float: ").Append("initial").Append("; "))
 
     /// The float property specifies whether an element should float to the left, right, or not at all.
     [<CustomOperation("floatLeft")>]
@@ -4499,48 +4727,48 @@ type CssBuilder() =
     member inline _.font([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font: ").Append(value).Append("; "))
 
     /// A prioritized list of font family names and/or generic family names
-    [<CustomOperation("fontFamilyFamilyName")>]
-    member inline _.fontFamilyFamilyName([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append(value).Append("; "))
+    [<CustomOperation("fontFamily")>]
+    member inline _.fontFamily([<InlineIfLambda>] comb: CombineKeyValue, familyName: string, genericFamily: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append(familyName).Append(genericFamily).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("fontFamilyInherit")>]
-    member inline _.fontFamilyInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.fontFamilyInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontFamilyInitial")>]
-    member inline _.fontFamilyInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontFamilyInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-family: ").Append("initial").Append("; "))
+
+    /// Default. Use the default settings to lay out text
+    [<CustomOperation("fontFeatureSettingsNormal")>]
+    member inline _.fontFeatureSettingsNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-feature-settings: ").Append(defaultArg value " normal").Append("; "))
 
     /// Format: string [1|0|on|off] Always a string of 4 ASCII characters.
     [<CustomOperation("fontFeatureSettingsFeatureValue")>]
     member inline _.fontFeatureSettingsFeatureValue([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-feature-settings: ").Append(defaultArg value "feature-value").Append("; "))
 
-    /// Default. Use the default settings to lay out text
-    [<CustomOperation("fontFeatureSettingsNormal")>]
-    member inline _.fontFeatureSettingsNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-feature-settings: ").Append(defaultArg value "normal").Append("; "))
-
     /// Default. The browser determines whether font kerning should be applied or not
     [<CustomOperation("fontKerningAuto")>]
-    member inline _.fontKerningAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.fontKerningAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value " auto").Append("; "))
 
     /// Specifies that font kerning is not applied
     [<CustomOperation("fontKerningNone")>]
-    member inline _.fontKerningNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value "none").Append("; "))
+    member inline _.fontKerningNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value " none").Append("; "))
 
     /// Specifies that font kerning is applied
     [<CustomOperation("fontKerningNormal")>]
-    member inline _.fontKerningNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value "normal").Append("; "))
+    member inline _.fontKerningNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-kerning: ").Append(defaultArg value " normal").Append("; "))
 
     /// Sets the font-size to a percent of the parent element's font size
-    [<CustomOperation("fontSizePercentage")>]
-    member inline _.fontSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("fontSize")>]
+    member inline _.fontSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("fontSizeInherit")>]
-    member inline _.fontSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.fontSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontSizeInitial")>]
-    member inline _.fontSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append("initial").Append("; "))
 
     /// Sets the font-size to a large size
     [<CustomOperation("fontSizeLarge")>]
@@ -4551,8 +4779,8 @@ type CssBuilder() =
     member inline _.fontSizeLarger([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(defaultArg value "larger").Append("; "))
 
     /// Sets the font-size to a fixed size in px, cm, etc. Read about length units
-    [<CustomOperation("fontSize")>]
-    member inline _.fontSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("fontSizeLength")>]
+    member inline _.fontSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(string value + "px").Append("; "))
 
     /// Sets the font-size to a medium size. This is default
     [<CustomOperation("fontSizeMedium")>]
@@ -4582,13 +4810,73 @@ type CssBuilder() =
     [<CustomOperation("fontSizeXxSmall")>]
     member inline _.fontSizeXxSmall([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size: ").Append(defaultArg value "xx-small").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
-    [<CustomOperation("fontStyleInherit")>]
-    member inline _.fontStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-style: ").Append(defaultArg value "inherit").Append("; "))
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("fontSizeAdjustInherit")>]
+    member inline _.fontSizeAdjustInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size-adjust: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("fontSizeAdjustInitial")>]
+    member inline _.fontSizeAdjustInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size-adjust: ").Append("initial").Append("; "))
+
+    /// Default value. No font size adjustment
+    [<CustomOperation("fontSizeAdjustNone")>]
+    member inline _.fontSizeAdjustNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size-adjust: ").Append(defaultArg value "none").Append("; "))
+
+    /// Defines the aspect value to use
+    [<CustomOperation("fontSizeAdjustNumber")>]
+    member inline _.fontSizeAdjustNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-size-adjust: ").Append(value).Append("; "))
+
+    /// Makes the text narrower than semi-condensed, but not as narrow as extra-condensed
+    [<CustomOperation("fontStretchCondensed")>]
+    member inline _.fontStretchCondensed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "condensed").Append("; "))
+
+    /// Makes the text wider than semi-expanded, but not as wide as extra-expanded
+    [<CustomOperation("fontStretchExpanded")>]
+    member inline _.fontStretchExpanded([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "expanded").Append("; "))
+
+    /// Makes the text narrower than condensed, but not as narrow as ultra-condensed
+    [<CustomOperation("fontStretchExtraCondensed")>]
+    member inline _.fontStretchExtraCondensed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "extra-condensed").Append("; "))
+
+    /// Makes the text wider than expanded, but not as wide as ultra-expanded
+    [<CustomOperation("fontStretchExtraExpanded")>]
+    member inline _.fontStretchExtraExpanded([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "extra-expanded").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("fontStretchInherit")>]
+    member inline _.fontStretchInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("fontStretchInitial")>]
+    member inline _.fontStretchInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append("initial").Append("; "))
+
+    /// Default value. No font stretching
+    [<CustomOperation("fontStretchNormal")>]
+    member inline _.fontStretchNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "normal").Append("; "))
+
+    /// Makes the text narrower than normal, but not as narrow as condensed
+    [<CustomOperation("fontStretchSemiCondensed")>]
+    member inline _.fontStretchSemiCondensed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "semi-condensed").Append("; "))
+
+    /// Makes the text wider than normal, but not as wide as expanded
+    [<CustomOperation("fontStretchSemiExpanded")>]
+    member inline _.fontStretchSemiExpanded([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "semi-expanded").Append("; "))
+
+    /// Makes the text as narrow as it gets
+    [<CustomOperation("fontStretchUltraCondensed")>]
+    member inline _.fontStretchUltraCondensed([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "ultra-condensed").Append("; "))
+
+    /// Makes the text as wide as it gets
+    [<CustomOperation("fontStretchUltraExpanded")>]
+    member inline _.fontStretchUltraExpanded([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-stretch: ").Append(defaultArg value "ultra-expanded").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("fontStyleInherit")>]
+    member inline _.fontStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-style: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontStyleInitial")>]
-    member inline _.fontStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-style: ").Append("initial").Append("; "))
 
     /// The browser displays an italic font style
     [<CustomOperation("fontStyleItalic")>]
@@ -4602,13 +4890,13 @@ type CssBuilder() =
     [<CustomOperation("fontStyleOblique")>]
     member inline _.fontStyleOblique([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-style: ").Append(defaultArg value "oblique").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("fontVariantInherit")>]
-    member inline _.fontVariantInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.fontVariantInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontVariantInitial")>]
-    member inline _.fontVariantInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontVariantInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant: ").Append("initial").Append("; "))
 
     /// The browser displays a normal font. This is default
     [<CustomOperation("fontVariantNormal")>]
@@ -4626,13 +4914,13 @@ type CssBuilder() =
     [<CustomOperation("fontVariantCapsAllSmallCaps")>]
     member inline _.fontVariantCapsAllSmallCaps([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append(defaultArg value "all-small-caps").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("fontVariantCapsInherit")>]
-    member inline _.fontVariantCapsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.fontVariantCapsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontVariantCapsInitial")>]
-    member inline _.fontVariantCapsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontVariantCapsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append("initial").Append("; "))
 
     /// Deactivates the use of alternate glyphs
     [<CustomOperation("fontVariantCapsNormal")>]
@@ -4659,8 +4947,8 @@ type CssBuilder() =
     member inline _.fontVariantCapsUnset([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-variant-caps: ").Append(defaultArg value "unset").Append("; "))
 
     /// Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold
-    [<CustomOperation("fontWeightValue")>]
-    member inline _.fontWeightValue([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append(value).Append("; "))
+    [<CustomOperation("fontWeight100200300400500600700800900")>]
+    member inline _.fontWeight100200300400500600700800900([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append(defaultArg value "100 200 300 400 500 600 700 800 900").Append("; "))
 
     /// Defines thick characters
     [<CustomOperation("fontWeightBold")>]
@@ -4670,13 +4958,13 @@ type CssBuilder() =
     [<CustomOperation("fontWeightBolder")>]
     member inline _.fontWeightBolder([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append(defaultArg value "bolder").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("fontWeightInherit")>]
-    member inline _.fontWeightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.fontWeightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("fontWeightInitial")>]
-    member inline _.fontWeightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.fontWeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("font-weight: ").Append("initial").Append("; "))
 
     /// Defines lighter characters
     [<CustomOperation("fontWeightLighter")>]
@@ -4693,6 +4981,10 @@ type CssBuilder() =
     /// The font property is a shorthand property for:
     [<CustomOperation("fontFontFamily")>]
     member inline _.fontFontFamily([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font: ").Append(defaultArg value "font-family").Append("; "))
+
+    /// The font property is a shorthand property for:
+    [<CustomOperation("font")>]
+    member inline _.font([<InlineIfLambda>] comb: CombineKeyValue, fontSize: string, lineHeight: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("font: ").Append(fontSize).Append(lineHeight).Append("; "))
 
     /// The font property is a shorthand property for:
     [<CustomOperation("fontFontStyle")>]
@@ -4736,11 +5028,11 @@ type CssBuilder() =
 
     /// The gap property defines the size of the gap between the rows and between the columns in flexbox, grid or multi-column layout. It is a shorthand for the following properties:
     [<CustomOperation("gapInherit")>]
-    member inline _.gapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("gap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.gapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("gap: ").Append("inherit").Append("; "))
 
     /// The gap property defines the size of the gap between the rows and between the columns in flexbox, grid or multi-column layout. It is a shorthand for the following properties:
     [<CustomOperation("gapInitial")>]
-    member inline _.gapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("gap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.gapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("gap: ").Append("initial").Append("; "))
 
     /// The gap property defines the size of the gap between the rows and between the columns in flexbox, grid or multi-column layout. It is a shorthand for the following properties:
     [<CustomOperation("gapRowGap")>]
@@ -4771,20 +5063,20 @@ type CssBuilder() =
     member inline _.gridAreaItemname([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-area: ").Append(defaultArg value "itemname").Append("; "))
 
     /// Sets the size of the columns, by using a percent value
-    [<CustomOperation("gridAutoColumnsPercentage")>]
-    member inline _.gridAutoColumnsPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("gridAutoColumns")>]
+    member inline _.gridAutoColumns([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append(string value + "%").Append("; "))
 
     /// Default value. The size of the columns is determined by the size of the container
     [<CustomOperation("gridAutoColumnsAuto")>]
-    member inline _.gridAutoColumnsAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridAutoColumnsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append("auto").Append("; "))
 
     /// 
     [<CustomOperation("gridAutoColumnsFitContent")>]
     member inline _.gridAutoColumnsFitContent([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append($"fit-content({value})").Append("; "))
 
     /// Sets the size of the columns, by using a legal length value. Read about length units
-    [<CustomOperation("gridAutoColumns")>]
-    member inline _.gridAutoColumns([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridAutoColumnsLength")>]
+    member inline _.gridAutoColumnsLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-columns: ").Append(string value + "px").Append("; "))
 
     /// Sets the size of each column depending on the largest item in the column
     [<CustomOperation("gridAutoColumnsMaxContent")>]
@@ -4803,8 +5095,8 @@ type CssBuilder() =
     member inline _.gridAutoFlowColumn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(defaultArg value "column").Append("; "))
 
     /// Places items by filling each column, and fill any holes in the grid
-    [<CustomOperation("gridAutoFlowColumn")>]
-    member inline _.gridAutoFlowColumn([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(value).Append("; "))
+    [<CustomOperation("gridAutoFlowColumnDense")>]
+    member inline _.gridAutoFlowColumnDense([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(defaultArg value "column dense").Append("; "))
 
     /// Place items to fill any holes in the grid
     [<CustomOperation("gridAutoFlowDense")>]
@@ -4815,16 +5107,16 @@ type CssBuilder() =
     member inline _.gridAutoFlowRow([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(defaultArg value "row").Append("; "))
 
     /// Places items by filling each row, and fill any holes in the grid
-    [<CustomOperation("gridAutoFlowRow")>]
-    member inline _.gridAutoFlowRow([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(value).Append("; "))
+    [<CustomOperation("gridAutoFlowRowDense")>]
+    member inline _.gridAutoFlowRowDense([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-flow: ").Append(defaultArg value "row dense").Append("; "))
 
     /// Default value. The size of the rows is determined by the size of the largest item in the row
     [<CustomOperation("gridAutoRowsAuto")>]
-    member inline _.gridAutoRowsAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-rows: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridAutoRowsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-rows: ").Append("auto").Append("; "))
 
     /// Sets the size of the rows, by using a legal length value. Read about length units
-    [<CustomOperation("gridAutoRows")>]
-    member inline _.gridAutoRows([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-rows: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridAutoRowsLength")>]
+    member inline _.gridAutoRowsLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-auto-rows: ").Append(string value + "px").Append("; "))
 
     /// Sets the size of each row to depend on the largest item in the row
     [<CustomOperation("gridAutoRowsMaxContent")>]
@@ -4842,33 +5134,33 @@ type CssBuilder() =
     [<CustomOperation("gridColumnGridColumnStart")>]
     member inline _.gridColumnGridColumnStart([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column: ").Append(defaultArg value "grid-column-start").Append("; "))
 
+    /// Specifies the number of columns the item will span
+    [<CustomOperation("gridColumnEndSpanN")>]
+    member inline _.gridColumnEndSpanN([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-end: ").Append(defaultArg value " span n").Append("; "))
+
     /// Default value. The item will span one column
     [<CustomOperation("gridColumnEndAuto")>]
-    member inline _.gridColumnEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridColumnEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-end: ").Append("auto").Append("; "))
 
     /// Specifies on which column to end the display of the item
     [<CustomOperation("gridColumnEndColumnLine")>]
     member inline _.gridColumnEndColumnLine([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-end: ").Append(defaultArg value "column-line").Append("; "))
 
-    /// Specifies the number of columns the item will span
-    [<CustomOperation("gridColumnEndSpan")>]
-    member inline _.gridColumnEndSpan([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-end: ").Append(value).Append("; "))
-
     /// Any legal length value, like px or %. 0 is the default value. Read about length units
-    [<CustomOperation("gridColumnGap")>]
-    member inline _.gridColumnGap([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-gap: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridColumnGapLength")>]
+    member inline _.gridColumnGapLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-gap: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the number of columns the item will span
+    [<CustomOperation("gridColumnStartSpanN")>]
+    member inline _.gridColumnStartSpanN([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-start: ").Append(defaultArg value " span n").Append("; "))
 
     /// Default value. The item will be placed following the flow
     [<CustomOperation("gridColumnStartAuto")>]
-    member inline _.gridColumnStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridColumnStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-start: ").Append("auto").Append("; "))
 
     /// Specifies on which column to start the display of the item
     [<CustomOperation("gridColumnStartColumnLine")>]
     member inline _.gridColumnStartColumnLine([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-start: ").Append(defaultArg value "column-line").Append("; "))
-
-    /// Specifies the number of columns the item will span
-    [<CustomOperation("gridColumnStartSpan")>]
-    member inline _.gridColumnStartSpan([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-column-start: ").Append(value).Append("; "))
 
     /// Sets the size of the gap between the columns in a grid layout. 0 is the default value
     [<CustomOperation("gridGapGridColumnGap")>]
@@ -4886,33 +5178,33 @@ type CssBuilder() =
     [<CustomOperation("gridRowGridRowStart")>]
     member inline _.gridRowGridRowStart([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row: ").Append(defaultArg value "grid-row-start").Append("; "))
 
+    /// Specifies the number of rows the item will span.
+    [<CustomOperation("gridRowEndSpanN")>]
+    member inline _.gridRowEndSpanN([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-end: ").Append(defaultArg value " span n").Append("; "))
+
     /// Default value. The item will span one row.
     [<CustomOperation("gridRowEndAuto")>]
-    member inline _.gridRowEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridRowEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-end: ").Append("auto").Append("; "))
 
     /// Specifies on which row to end the display of the item.
     [<CustomOperation("gridRowEndRowLine")>]
     member inline _.gridRowEndRowLine([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-end: ").Append(defaultArg value "row-line").Append("; "))
 
-    /// Specifies the number of rows the item will span.
-    [<CustomOperation("gridRowEndSpan")>]
-    member inline _.gridRowEndSpan([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-end: ").Append(value).Append("; "))
-
     /// Any legal length value, like px or %. 0 is the default value
-    [<CustomOperation("gridRowGap")>]
-    member inline _.gridRowGap([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-gap: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridRowGapLength")>]
+    member inline _.gridRowGapLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-gap: ").Append(string value + "px").Append("; "))
 
     /// Default value. The item will be placed by following the flow.
     [<CustomOperation("gridRowStartAuto")>]
-    member inline _.gridRowStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridRowStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-start: ").Append("auto").Append("; "))
 
     /// Specifies on which row to start the display of the item.
     [<CustomOperation("gridRowStartRowLine")>]
     member inline _.gridRowStartRowLine([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-row-start: ").Append(defaultArg value "row-line").Append("; "))
 
     /// Specifies the size(s) of the columns and rows
-    [<CustomOperation("gridTemplateGridTemplate")>]
-    member inline _.gridTemplateGridTemplate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append(value).Append("; "))
+    [<CustomOperation("gridTemplate")>]
+    member inline _.gridTemplate([<InlineIfLambda>] comb: CombineKeyValue, gridTemplateRows: string, gridTemplateColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append(gridTemplateRows).Append(gridTemplateColumns).Append("; "))
 
     /// Specifies the grid layout using named items
     [<CustomOperation("gridTemplateGridTemplateAreas")>]
@@ -4920,11 +5212,11 @@ type CssBuilder() =
 
     /// Inherits this property from its parent element. Read about inherit
     [<CustomOperation("gridTemplateInherit")>]
-    member inline _.gridTemplateInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.gridTemplateInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("gridTemplateInitial")>]
-    member inline _.gridTemplateInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.gridTemplateInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template: ").Append("initial").Append("; "))
 
     /// Default value. No specific sizing of the columns or rows
     [<CustomOperation("gridTemplateNone")>]
@@ -4940,19 +5232,19 @@ type CssBuilder() =
 
     /// The size of the columns is determined by the size of the container and on the size of the content of the items in the column
     [<CustomOperation("gridTemplateColumnsAuto")>]
-    member inline _.gridTemplateColumnsAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridTemplateColumnsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("gridTemplateColumnsInherit")>]
-    member inline _.gridTemplateColumnsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.gridTemplateColumnsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("gridTemplateColumnsInitial")>]
-    member inline _.gridTemplateColumnsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.gridTemplateColumnsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append("initial").Append("; "))
 
     /// Sets the size of the columns, by using a legal length value. Read about length units
-    [<CustomOperation("gridTemplateColumns")>]
-    member inline _.gridTemplateColumns([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridTemplateColumnsLength")>]
+    member inline _.gridTemplateColumnsLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-columns: ").Append(string value + "px").Append("; "))
 
     /// Sets the size of each column to depend on the largest item in the column
     [<CustomOperation("gridTemplateColumnsMaxContent")>]
@@ -4968,11 +5260,11 @@ type CssBuilder() =
 
     /// The size of the rows is determined by the size of the container, and on the size of the content of the items in the row
     [<CustomOperation("gridTemplateRowsAuto")>]
-    member inline _.gridTemplateRowsAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-rows: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.gridTemplateRowsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-rows: ").Append("auto").Append("; "))
 
     /// Sets the size of the rows, by using a legal length value. Read about length units
-    [<CustomOperation("gridTemplateRows")>]
-    member inline _.gridTemplateRows([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-rows: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("gridTemplateRowsLength")>]
+    member inline _.gridTemplateRowsLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-rows: ").Append(string value + "px").Append("; "))
 
     /// Sets the size of each row to depend on the largest item in the row
     [<CustomOperation("gridTemplateRowsMaxContent")>]
@@ -4987,44 +5279,80 @@ type CssBuilder() =
     member inline _.gridTemplateRowsNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid-template-rows: ").Append(defaultArg value "none").Append("; "))
 
     /// The grid property is a shorthand property for:
-    [<CustomOperation("gridGridAutoFlow")>]
-    member inline _.gridGridAutoFlow([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(value).Append("; "))
+    [<CustomOperation("grid")>]
+    member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, gridAutoFlowGridAutoRows: string, gridTemplateColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(gridAutoFlowGridAutoRows).Append(gridTemplateColumns).Append("; "))
 
     /// The grid property is a shorthand property for:
-    [<CustomOperation("gridGridAutoRows")>]
-    member inline _.gridGridAutoRows([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(value).Append("; "))
+    [<CustomOperation("grid")>]
+    member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, gridAutoRows: string, gridTemplateColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(gridAutoRows).Append(gridTemplateColumns).Append("; "))
 
     /// The grid property is a shorthand property for:
-    [<CustomOperation("gridGridTemplateRows")>]
-    member inline _.gridGridTemplateRows([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(value).Append("; "))
+    [<CustomOperation("grid")>]
+    member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, gridTemplateRows: string, gridAutoColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(gridTemplateRows).Append(gridAutoColumns).Append("; "))
+
+    /// The grid property is a shorthand property for:
+    [<CustomOperation("grid")>]
+    member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, gridTemplateRows: string, gridAutoFlowGridAutoColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(gridTemplateRows).Append(gridAutoFlowGridAutoColumns).Append("; "))
+
+    /// The grid property is a shorthand property for:
+    [<CustomOperation("grid")>]
+    member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, gridTemplateRows: string, gridTemplateColumns: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("grid: ").Append(gridTemplateRows).Append(gridTemplateColumns).Append("; "))
 
     ///  The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text. 
     [<CustomOperation("hangingPunctuation")>]
     member inline _.hangingPunctuation([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(value).Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationAllowEnd")>]
+    member inline _.hangingPunctuationAllowEnd([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(defaultArg value "allow-end").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationFirst")>]
+    member inline _.hangingPunctuationFirst([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(defaultArg value "first").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationForceEnd")>]
+    member inline _.hangingPunctuationForceEnd([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(defaultArg value "force-end").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationInherit")>]
+    member inline _.hangingPunctuationInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append("inherit").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationInitial")>]
+    member inline _.hangingPunctuationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append("initial").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationLast")>]
+    member inline _.hangingPunctuationLast([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(defaultArg value "last").Append("; "))
+
+    /// The hanging-punctuation property specifies whether a punctuation mark may be placed outside the line box at the start or at the end of a full line of text.
+    [<CustomOperation("hangingPunctuationNone")>]
+    member inline _.hangingPunctuationNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hanging-punctuation: ").Append(defaultArg value "none").Append("; "))
 
     ///  The height property sets the height of an element. 
     [<CustomOperation("height")>]
     member inline _.height([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(value).Append("; "))
 
     /// The height property sets the height of an element.
-    [<CustomOperation("heightPercentage")>]
-    member inline _.heightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("height")>]
+    member inline _.height([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(string value + "%").Append("; "))
 
     /// The height property sets the height of an element.
     [<CustomOperation("heightAuto")>]
-    member inline _.heightAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.heightAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append("auto").Append("; "))
 
     /// The height property sets the height of an element.
     [<CustomOperation("heightInherit")>]
-    member inline _.heightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.heightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append("inherit").Append("; "))
 
     /// The height property sets the height of an element.
     [<CustomOperation("heightInitial")>]
-    member inline _.heightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.heightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append("initial").Append("; "))
 
     /// The height property sets the height of an element.
-    [<CustomOperation("height")>]
-    member inline _.height([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("heightLength")>]
+    member inline _.heightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("height: ").Append(string value + "px").Append("; "))
 
     ///  The hyphenate-character property defines the character used at the end of line, before a hyphenation break. 
     [<CustomOperation("hyphenateCharacter")>]
@@ -5032,15 +5360,15 @@ type CssBuilder() =
 
     /// The hyphenate-character property defines the character used at the end of line, before a hyphenation break.
     [<CustomOperation("hyphenateCharacterAuto")>]
-    member inline _.hyphenateCharacterAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.hyphenateCharacterAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append("auto").Append("; "))
 
     /// The hyphenate-character property defines the character used at the end of line, before a hyphenation break.
     [<CustomOperation("hyphenateCharacterInherit")>]
-    member inline _.hyphenateCharacterInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.hyphenateCharacterInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append("inherit").Append("; "))
 
     /// The hyphenate-character property defines the character used at the end of line, before a hyphenation break.
     [<CustomOperation("hyphenateCharacterInitial")>]
-    member inline _.hyphenateCharacterInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.hyphenateCharacterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphenate-character: ").Append("initial").Append("; "))
 
     /// The hyphenate-character property defines the character used at the end of line, before a hyphenation break.
     [<CustomOperation("hyphenateCharacterString")>]
@@ -5052,15 +5380,15 @@ type CssBuilder() =
 
     /// The hyphens property defines whether hyphenation is allowed to create more soft wrap opportunities within a line of text.
     [<CustomOperation("hyphensAuto")>]
-    member inline _.hyphensAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.hyphensAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append("auto").Append("; "))
 
     /// The hyphens property defines whether hyphenation is allowed to create more soft wrap opportunities within a line of text.
     [<CustomOperation("hyphensInherit")>]
-    member inline _.hyphensInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.hyphensInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append("inherit").Append("; "))
 
     /// The hyphens property defines whether hyphenation is allowed to create more soft wrap opportunities within a line of text.
     [<CustomOperation("hyphensInitial")>]
-    member inline _.hyphensInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.hyphensInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("hyphens: ").Append("initial").Append("; "))
 
     /// The hyphens property defines whether hyphenation is allowed to create more soft wrap opportunities within a line of text.
     [<CustomOperation("hyphensManual")>]
@@ -5076,7 +5404,7 @@ type CssBuilder() =
 
     /// The image-rendering property specifies the type of algorithm to be used for image scaling.
     [<CustomOperation("imageRenderingAuto")>]
-    member inline _.imageRenderingAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.imageRenderingAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append("auto").Append("; "))
 
     /// The image-rendering property specifies the type of algorithm to be used for image scaling.
     [<CustomOperation("imageRenderingCrispEdges")>]
@@ -5088,11 +5416,11 @@ type CssBuilder() =
 
     /// The image-rendering property specifies the type of algorithm to be used for image scaling.
     [<CustomOperation("imageRenderingInherit")>]
-    member inline _.imageRenderingInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.imageRenderingInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append("inherit").Append("; "))
 
     /// The image-rendering property specifies the type of algorithm to be used for image scaling.
     [<CustomOperation("imageRenderingInitial")>]
-    member inline _.imageRenderingInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.imageRenderingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("image-rendering: ").Append("initial").Append("; "))
 
     /// The image-rendering property specifies the type of algorithm to be used for image scaling.
     [<CustomOperation("imageRenderingPixelated")>]
@@ -5107,152 +5435,168 @@ type CssBuilder() =
     member inline _.inlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(value).Append("; "))
 
     /// The inline-size property specifies the size of an element in the inline direction.
-    [<CustomOperation("inlineSizePercentage")>]
-    member inline _.inlineSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("inlineSize")>]
+    member inline _.inlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(string value + "%").Append("; "))
 
     /// The inline-size property specifies the size of an element in the inline direction.
     [<CustomOperation("inlineSizeAuto")>]
-    member inline _.inlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.inlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append("auto").Append("; "))
 
     /// The inline-size property specifies the size of an element in the inline direction.
     [<CustomOperation("inlineSizeInherit")>]
-    member inline _.inlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.inlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append("inherit").Append("; "))
 
     /// The inline-size property specifies the size of an element in the inline direction.
     [<CustomOperation("inlineSizeInitial")>]
-    member inline _.inlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.inlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append("initial").Append("; "))
 
     /// The inline-size property specifies the size of an element in the inline direction.
-    [<CustomOperation("inlineSize")>]
-    member inline _.inlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("inlineSizeLength")>]
+    member inline _.inlineSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inline-size: ").Append(string value + "px").Append("; "))
 
     ///  The inset property sets the distance between an element and the parent element. 
     [<CustomOperation("inset")>]
     member inline _.inset([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset: ").Append(value).Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetBlockPercentage")>]
-    member inline _.insetBlockPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetBlock")>]
+    member inline _.insetBlock([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset-block value.
     [<CustomOperation("insetBlockAuto")>]
-    member inline _.insetBlockAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetBlockInherit")>]
-    member inline _.insetBlockInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetBlockInitial")>]
-    member inline _.insetBlockInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetBlock")>]
-    member inline _.insetBlock([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetBlockLength")>]
+    member inline _.insetBlockLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetBlockEndPercentage")>]
-    member inline _.insetBlockEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetBlockEnd")>]
+    member inline _.insetBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset distance.
     [<CustomOperation("insetBlockEndAuto")>]
-    member inline _.insetBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetBlockEndInherit")>]
-    member inline _.insetBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetBlockEndInitial")>]
-    member inline _.insetBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetBlockEnd")>]
-    member inline _.insetBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetBlockEndLength")>]
+    member inline _.insetBlockEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetBlockStartPercentage")>]
-    member inline _.insetBlockStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetBlockStart")>]
+    member inline _.insetBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset distance.
     [<CustomOperation("insetBlockStartAuto")>]
-    member inline _.insetBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetBlockStartInherit")>]
-    member inline _.insetBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetBlockStartInitial")>]
-    member inline _.insetBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetBlockStart")>]
-    member inline _.insetBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetBlockStartLength")>]
+    member inline _.insetBlockStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-block-start: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetInlinePercentage")>]
-    member inline _.insetInlinePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetInline")>]
+    member inline _.insetInline([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset-inline distance.
     [<CustomOperation("insetInlineAuto")>]
-    member inline _.insetInlineAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetInlineAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetInlineInherit")>]
-    member inline _.insetInlineInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetInlineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetInlineInitial")>]
-    member inline _.insetInlineInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetInline")>]
-    member inline _.insetInline([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetInlineLength")>]
+    member inline _.insetInlineLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetInlineEndPercentage")>]
-    member inline _.insetInlineEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetInlineEnd")>]
+    member inline _.insetInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset distance.
     [<CustomOperation("insetInlineEndAuto")>]
-    member inline _.insetInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetInlineEndInherit")>]
-    member inline _.insetInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetInlineEndInitial")>]
-    member inline _.insetInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetInlineEnd")>]
-    member inline _.insetInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetInlineEndLength")>]
+    member inline _.insetInlineEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element on the corresponding axis.
-    [<CustomOperation("insetInlineStartPercentage")>]
-    member inline _.insetInlineStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("insetInlineStart")>]
+    member inline _.insetInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default inset distance.
     [<CustomOperation("insetInlineStartAuto")>]
-    member inline _.insetInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.insetInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("insetInlineStartInherit")>]
-    member inline _.insetInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.insetInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("insetInlineStartInitial")>]
-    member inline _.insetInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.insetInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("insetInlineStart")>]
-    member inline _.insetInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("insetInlineStartLength")>]
+    member inline _.insetInlineStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("inset-inline-start: ").Append(string value + "px").Append("; "))
 
     ///  The isolation property defines whether an element must create a new stacking content. 
     [<CustomOperation("isolation")>]
     member inline _.isolation([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("isolation: ").Append(value).Append("; "))
+
+    /// The isolation property defines whether an element must create a new stacking content.
+    [<CustomOperation("isolationAuto")>]
+    member inline _.isolationAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("isolation: ").Append("auto").Append("; "))
+
+    /// The isolation property defines whether an element must create a new stacking content.
+    [<CustomOperation("isolationInherit")>]
+    member inline _.isolationInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("isolation: ").Append("inherit").Append("; "))
+
+    /// The isolation property defines whether an element must create a new stacking content.
+    [<CustomOperation("isolationInitial")>]
+    member inline _.isolationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("isolation: ").Append("initial").Append("; "))
+
+    /// The isolation property defines whether an element must create a new stacking content.
+    [<CustomOperation("isolationIsolate")>]
+    member inline _.isolationIsolate([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("isolation: ").Append(defaultArg value "isolate").Append("; "))
 
     ///  The justify-content property aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally). 
     [<CustomOperation("justifyContent")>]
@@ -5272,11 +5616,11 @@ type CssBuilder() =
 
     /// The justify-content property aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally).
     [<CustomOperation("justifyContentInherit")>]
-    member inline _.justifyContentInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-content: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.justifyContentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-content: ").Append("inherit").Append("; "))
 
     /// The justify-content property aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally).
     [<CustomOperation("justifyContentInitial")>]
-    member inline _.justifyContentInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-content: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.justifyContentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-content: ").Append("initial").Append("; "))
 
     /// The justify-content property aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally).
     [<CustomOperation("justifyContentSpaceAround")>]
@@ -5295,8 +5639,8 @@ type CssBuilder() =
     member inline _.justifyItems([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append(value).Append("; "))
 
     /// The justify-items property is set on the grid container to give child elements (grid items) alignment in the inline direction.
-    [<CustomOperation("justifyItemsBaseline")>]
-    member inline _.justifyItemsBaseline([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append(value).Append("; "))
+    [<CustomOperation("justifyItemsBaselineAlignment")>]
+    member inline _.justifyItemsBaselineAlignment([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append(defaultArg value "baseline alignment").Append("; "))
 
     /// The justify-items property is set on the grid container to give child elements (grid items) alignment in the inline direction.
     [<CustomOperation("justifyItemsCenter")>]
@@ -5308,11 +5652,11 @@ type CssBuilder() =
 
     /// The justify-items property is set on the grid container to give child elements (grid items) alignment in the inline direction.
     [<CustomOperation("justifyItemsInherit")>]
-    member inline _.justifyItemsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.justifyItemsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append("inherit").Append("; "))
 
     /// The justify-items property is set on the grid container to give child elements (grid items) alignment in the inline direction.
     [<CustomOperation("justifyItemsInitial")>]
-    member inline _.justifyItemsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.justifyItemsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-items: ").Append("initial").Append("; "))
 
     /// The justify-items property is set on the grid container to give child elements (grid items) alignment in the inline direction.
     [<CustomOperation("justifyItemsLeft")>]
@@ -5348,11 +5692,11 @@ type CssBuilder() =
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
     [<CustomOperation("justifySelfAuto")>]
-    member inline _.justifySelfAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.justifySelfAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append("auto").Append("; "))
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
-    [<CustomOperation("justifySelfBaseline")>]
-    member inline _.justifySelfBaseline([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append(value).Append("; "))
+    [<CustomOperation("justifySelfBaselineAlignment")>]
+    member inline _.justifySelfBaselineAlignment([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append(defaultArg value "baseline alignment").Append("; "))
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
     [<CustomOperation("justifySelfCenter")>]
@@ -5364,11 +5708,11 @@ type CssBuilder() =
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
     [<CustomOperation("justifySelfInherit")>]
-    member inline _.justifySelfInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.justifySelfInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append("inherit").Append("; "))
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
     [<CustomOperation("justifySelfInitial")>]
-    member inline _.justifySelfInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.justifySelfInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("justify-self: ").Append("initial").Append("; "))
 
     /// The justify-self property aligns a grid item within its grid cell in the inline direction.
     [<CustomOperation("justifySelfLeft")>]
@@ -5399,64 +5743,48 @@ type CssBuilder() =
     member inline _.left([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(value).Append("; "))
 
     /// The left property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("leftPercentage")>]
-    member inline _.leftPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("left")>]
+    member inline _.left([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(string value + "%").Append("; "))
 
     /// The left property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("leftAuto")>]
-    member inline _.leftAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.leftAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append("auto").Append("; "))
 
     /// The left property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("leftInherit")>]
-    member inline _.leftInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.leftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append("inherit").Append("; "))
 
     /// The left property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("leftInitial")>]
-    member inline _.leftInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.leftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append("initial").Append("; "))
 
     /// The left property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("left")>]
-    member inline _.left([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("leftLength")>]
+    member inline _.leftLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("left: ").Append(string value + "px").Append("; "))
 
     /// 
     [<CustomOperation("letterSpacing")>]
     member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("letter-spacing: ").Append(value).Append("; "))
-
-    /// 
-    [<CustomOperation("letterSpacingInherit")>]
-    member inline _.letterSpacingInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("letter-spacing: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// 
-    [<CustomOperation("letterSpacingInitial")>]
-    member inline _.letterSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("letter-spacing: ").Append(defaultArg value "initial").Append("; "))
-
-    /// 
-    [<CustomOperation("letterSpacing")>]
-    member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("letter-spacing: ").Append(string value + "px").Append("; "))
-
-    /// 
-    [<CustomOperation("letterSpacingNormal")>]
-    member inline _.letterSpacingNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("letter-spacing: ").Append(defaultArg value "normal").Append("; "))
 
     ///  The line-height property specifies the height of a line. 
     [<CustomOperation("lineHeight")>]
     member inline _.lineHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(value).Append("; "))
 
     /// The line-height property specifies the height of a line.
-    [<CustomOperation("lineHeightPercentage")>]
-    member inline _.lineHeightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("lineHeight")>]
+    member inline _.lineHeight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(string value + "%").Append("; "))
 
     /// The line-height property specifies the height of a line.
     [<CustomOperation("lineHeightInherit")>]
-    member inline _.lineHeightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.lineHeightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append("inherit").Append("; "))
 
     /// The line-height property specifies the height of a line.
     [<CustomOperation("lineHeightInitial")>]
-    member inline _.lineHeightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.lineHeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append("initial").Append("; "))
 
     /// The line-height property specifies the height of a line.
-    [<CustomOperation("lineHeight")>]
-    member inline _.lineHeight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("lineHeightLength")>]
+    member inline _.lineHeightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("line-height: ").Append(string value + "px").Append("; "))
 
     /// The line-height property specifies the height of a line.
     [<CustomOperation("lineHeightNormal")>]
@@ -5470,13 +5798,13 @@ type CssBuilder() =
     [<CustomOperation("listStyle")>]
     member inline _.listStyle([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("listStyleImageInherit")>]
-    member inline _.listStyleImageInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.listStyleImageInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("listStyleImageInitial")>]
-    member inline _.listStyleImageInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.listStyleImageInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: ").Append("initial").Append("; "))
 
     /// No image will be displayed. Instead, the list-style-type property will define what type of list marker will be rendered. This is default
     [<CustomOperation("listStyleImageNone")>]
@@ -5486,13 +5814,13 @@ type CssBuilder() =
     [<CustomOperation("listStyleImageUrl")>]
     member inline _.listStyleImageUrl([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-image: ").Append(defaultArg value "url").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("listStylePositionInherit")>]
-    member inline _.listStylePositionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-position: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.listStylePositionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-position: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("listStylePositionInitial")>]
-    member inline _.listStylePositionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-position: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.listStylePositionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-position: ").Append("initial").Append("; "))
 
     /// The bullet points will be inside the list item
     [<CustomOperation("listStylePositionInside")>]
@@ -5542,13 +5870,13 @@ type CssBuilder() =
     [<CustomOperation("listStyleTypeHiraganaIroha")>]
     member inline _.listStyleTypeHiraganaIroha([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-type: ").Append(defaultArg value "hiragana-iroha").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("listStyleTypeInherit")>]
-    member inline _.listStyleTypeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-type: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.listStyleTypeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-type: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("listStyleTypeInitial")>]
-    member inline _.listStyleTypeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-type: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.listStyleTypeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("list-style-type: ").Append("initial").Append("; "))
 
     /// The marker is traditional Katakana numbering
     [<CustomOperation("listStyleTypeKatakana")>]
@@ -5615,272 +5943,424 @@ type CssBuilder() =
     member inline _.margin([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin: ").Append(value).Append("; "))
 
     /// Specifies margin-block in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginBlockPercentage")>]
-    member inline _.marginBlockPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginBlock")>]
+    member inline _.marginBlock([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin-block value.
     [<CustomOperation("marginBlockAuto")>]
-    member inline _.marginBlockAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginBlockInherit")>]
-    member inline _.marginBlockInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginBlockInitial")>]
-    member inline _.marginBlockInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append("initial").Append("; "))
 
     /// Specifies margin-block in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginBlock")>]
-    member inline _.marginBlock([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginBlockLength")>]
+    member inline _.marginBlockLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginBlockEndPercentage")>]
-    member inline _.marginBlockEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginBlockEnd")>]
+    member inline _.marginBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin.
     [<CustomOperation("marginBlockEndAuto")>]
-    member inline _.marginBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginBlockEndInherit")>]
-    member inline _.marginBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginBlockEndInitial")>]
-    member inline _.marginBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginBlockEnd")>]
-    member inline _.marginBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginBlockEndLength")>]
+    member inline _.marginBlockEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginBlockStartPercentage")>]
-    member inline _.marginBlockStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginBlockStart")>]
+    member inline _.marginBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin distance.
     [<CustomOperation("marginBlockStartAuto")>]
-    member inline _.marginBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginBlockStartInherit")>]
-    member inline _.marginBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginBlockStartInitial")>]
-    member inline _.marginBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginBlockStart")>]
-    member inline _.marginBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginBlockStartLength")>]
+    member inline _.marginBlockStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-block-start: ").Append(string value + "px").Append("; "))
 
     /// Specifies a bottom margin in percent of the width of the containing element
-    [<CustomOperation("marginBottomPercentage")>]
-    member inline _.marginBottomPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginBottom")>]
+    member inline _.marginBottom([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(string value + "%").Append("; "))
 
     /// The browser calculates a bottom margin
     [<CustomOperation("marginBottomAuto")>]
-    member inline _.marginBottomAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginBottomAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginBottomInherit")>]
-    member inline _.marginBottomInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginBottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginBottomInitial")>]
-    member inline _.marginBottomInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginBottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append("initial").Append("; "))
 
     /// Specifies a fixed bottom margin in px, cm, em, etc. Default value is 0. Negative values are allowed. Read about length units
-    [<CustomOperation("marginBottom")>]
-    member inline _.marginBottom([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginBottomLength")>]
+    member inline _.marginBottomLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-bottom: ").Append(string value + "px").Append("; "))
 
     /// Specifies margin-inline in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginInlinePercentage")>]
-    member inline _.marginInlinePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginInline")>]
+    member inline _.marginInline([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin-inline value.
     [<CustomOperation("marginInlineAuto")>]
-    member inline _.marginInlineAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginInlineAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginInlineInherit")>]
-    member inline _.marginInlineInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginInlineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginInlineInitial")>]
-    member inline _.marginInlineInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append("initial").Append("; "))
 
     /// Specifies margin-inline in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginInline")>]
-    member inline _.marginInline([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginInlineLength")>]
+    member inline _.marginInlineLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline: ").Append(string value + "px").Append("; "))
 
     /// Specifies margin-inline-end in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginInlineEndPercentage")>]
-    member inline _.marginInlineEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginInlineEnd")>]
+    member inline _.marginInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin-inline-end value.
     [<CustomOperation("marginInlineEndAuto")>]
-    member inline _.marginInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginInlineEndInherit")>]
-    member inline _.marginInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginInlineEndInitial")>]
-    member inline _.marginInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append("initial").Append("; "))
 
     /// Specifies margin-inline-end in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginInlineEnd")>]
-    member inline _.marginInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginInlineEndLength")>]
+    member inline _.marginInlineEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies margin-inline-start in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("marginInlineStartPercentage")>]
-    member inline _.marginInlineStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginInlineStart")>]
+    member inline _.marginInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default margin-inline-start value.
     [<CustomOperation("marginInlineStartAuto")>]
-    member inline _.marginInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginInlineStartInherit")>]
-    member inline _.marginInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginInlineStartInitial")>]
-    member inline _.marginInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append("initial").Append("; "))
 
     /// Specifies margin-inline-start in px, pt, cm, etc. Negative values are allowed. Read about length units
-    [<CustomOperation("marginInlineStart")>]
-    member inline _.marginInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginInlineStartLength")>]
+    member inline _.marginInlineStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-inline-start: ").Append(string value + "px").Append("; "))
 
     /// Specifies a left margin in percent of the width of the containing element
-    [<CustomOperation("marginLeftPercentage")>]
-    member inline _.marginLeftPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginLeft")>]
+    member inline _.marginLeft([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(string value + "%").Append("; "))
 
     /// The browser calculates a left margin
     [<CustomOperation("marginLeftAuto")>]
-    member inline _.marginLeftAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginLeftAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginLeftInherit")>]
-    member inline _.marginLeftInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginLeftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginLeftInitial")>]
-    member inline _.marginLeftInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginLeftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append("initial").Append("; "))
 
     /// Specifies a fixed left margin in px, pt, cm, etc. Default value is 0px. Negative values are allowed. Read about length units
-    [<CustomOperation("marginLeft")>]
-    member inline _.marginLeft([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginLeftLength")>]
+    member inline _.marginLeftLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-left: ").Append(string value + "px").Append("; "))
 
     /// Specifies a right margin in percent of the width of the containing element
-    [<CustomOperation("marginRightPercentage")>]
-    member inline _.marginRightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginRight")>]
+    member inline _.marginRight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(string value + "%").Append("; "))
 
     /// The browser calculates a right margin
     [<CustomOperation("marginRightAuto")>]
-    member inline _.marginRightAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginRightAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginRightInherit")>]
-    member inline _.marginRightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginRightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginRightInitial")>]
-    member inline _.marginRightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginRightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append("initial").Append("; "))
 
     /// Specifies a fixed right margin in px, pt, cm, etc. Default value is 0px. Read about length units
-    [<CustomOperation("marginRight")>]
-    member inline _.marginRight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginRightLength")>]
+    member inline _.marginRightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-right: ").Append(string value + "px").Append("; "))
 
     /// Specifies a top margin in percent of the width of the containing element
-    [<CustomOperation("marginTopPercentage")>]
-    member inline _.marginTopPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("marginTop")>]
+    member inline _.marginTop([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(string value + "%").Append("; "))
 
     /// The browser calculates a top margin
     [<CustomOperation("marginTopAuto")>]
-    member inline _.marginTopAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.marginTopAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("marginTopInherit")>]
-    member inline _.marginTopInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.marginTopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("marginTopInitial")>]
-    member inline _.marginTopInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.marginTopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append("initial").Append("; "))
 
     /// Specifies a fixed top margin in px, pt, cm, etc. Default value is 0px. Negative values are allowed. Read about length units
-    [<CustomOperation("marginTop")>]
-    member inline _.marginTop([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("marginTopLength")>]
+    member inline _.marginTopLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("margin-top: ").Append(string value + "px").Append("; "))
 
     ///  The mask-image property specifies an image to be used as a mask layer for an element. 
     [<CustomOperation("maskImage")>]
     member inline _.maskImage([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append(value).Append("; "))
 
+    /// The mask-image property specifies an image to be used as a mask layer for an element.
+    [<CustomOperation("maskImageImage")>]
+    member inline _.maskImageImage([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append(defaultArg value "image").Append("; "))
+
+    /// The mask-image property specifies an image to be used as a mask layer for an element.
+    [<CustomOperation("maskImageInherit")>]
+    member inline _.maskImageInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append("inherit").Append("; "))
+
+    /// The mask-image property specifies an image to be used as a mask layer for an element.
+    [<CustomOperation("maskImageInitial")>]
+    member inline _.maskImageInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append("initial").Append("; "))
+
+    /// The mask-image property specifies an image to be used as a mask layer for an element.
+    [<CustomOperation("maskImageNone")>]
+    member inline _.maskImageNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append(defaultArg value "none").Append("; "))
+
+    /// The mask-image property specifies an image to be used as a mask layer for an element.
+    [<CustomOperation("maskImageUrl")>]
+    member inline _.maskImageUrl([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-image: ").Append(defaultArg value "url").Append("; "))
+
     ///  The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask. 
     [<CustomOperation("maskMode")>]
     member inline _.maskMode([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append(value).Append("; "))
+
+    /// The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask.
+    [<CustomOperation("maskModeAlpha")>]
+    member inline _.maskModeAlpha([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append(defaultArg value "alpha").Append("; "))
+
+    /// The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask.
+    [<CustomOperation("maskModeInherit")>]
+    member inline _.maskModeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append("inherit").Append("; "))
+
+    /// The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask.
+    [<CustomOperation("maskModeInitial")>]
+    member inline _.maskModeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append("initial").Append("; "))
+
+    /// The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask.
+    [<CustomOperation("maskModeLuminance")>]
+    member inline _.maskModeLuminance([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append(defaultArg value "luminance").Append("; "))
+
+    /// The mask-mode property specifies whether the mask layer image should be treated as a luminance mask or as an alpha mask.
+    [<CustomOperation("maskModeMatchSource")>]
+    member inline _.maskModeMatchSource([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-mode: ").Append(defaultArg value "match-source").Append("; "))
 
     ///  The mask-origin property specifies the origin position (the mask position area) of a mask layer image. 
     [<CustomOperation("maskOrigin")>]
     member inline _.maskOrigin([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(value).Append("; "))
 
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginBorderBox")>]
+    member inline _.maskOriginBorderBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "border-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginContentBox")>]
+    member inline _.maskOriginContentBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "content-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginFillBox")>]
+    member inline _.maskOriginFillBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "fill-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginInherit")>]
+    member inline _.maskOriginInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append("inherit").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginInitial")>]
+    member inline _.maskOriginInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append("initial").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginMarginBox")>]
+    member inline _.maskOriginMarginBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "margin-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginPaddingBox")>]
+    member inline _.maskOriginPaddingBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "padding-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginStrokeBox")>]
+    member inline _.maskOriginStrokeBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "stroke-box").Append("; "))
+
+    /// The mask-origin property specifies the origin position (the mask position area) of a mask layer image.
+    [<CustomOperation("maskOriginViewBox")>]
+    member inline _.maskOriginViewBox([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-origin: ").Append(defaultArg value "view-box").Append("; "))
+
     ///  The mask-position property sets the starting position of a mask image (relative to the mask position area). 
     [<CustomOperation("maskPosition")>]
     member inline _.maskPosition([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append(value).Append("; "))
+
+    /// The mask-position property sets the starting position of a mask image (relative to the mask position area).
+    [<CustomOperation("maskPositionInherit")>]
+    member inline _.maskPositionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append("inherit").Append("; "))
+
+    /// The mask-position property sets the starting position of a mask image (relative to the mask position area).
+    [<CustomOperation("maskPositionInitial")>]
+    member inline _.maskPositionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append("initial").Append("; "))
+
+    /// The mask-position property sets the starting position of a mask image (relative to the mask position area).
+    [<CustomOperation("maskPositionLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom")>]
+    member inline _.maskPositionLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append(defaultArg value "left top left center left bottom right top right center right bottom center top center center center bottom").Append("; "))
+
+    /// The mask-position property sets the starting position of a mask image (relative to the mask position area).
+    [<CustomOperation("maskPositionXY")>]
+    member inline _.maskPositionXY([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append(defaultArg value "x% y%").Append("; "))
+
+    /// The mask-position property sets the starting position of a mask image (relative to the mask position area).
+    [<CustomOperation("maskPositionXposYpos")>]
+    member inline _.maskPositionXposYpos([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-position: ").Append(defaultArg value "xpos ypos").Append("; "))
 
     ///  The mask-repeat property sets if/how a mask image will be repeated. 
     [<CustomOperation("maskRepeat")>]
     member inline _.maskRepeat([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(value).Append("; "))
 
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatInherit")>]
+    member inline _.maskRepeatInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append("inherit").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatInitial")>]
+    member inline _.maskRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append("initial").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatNoRepeat")>]
+    member inline _.maskRepeatNoRepeat([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "no-repeat").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatRepeat")>]
+    member inline _.maskRepeatRepeat([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "repeat").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatRepeatX")>]
+    member inline _.maskRepeatRepeatX([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "repeat-x").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatRepeatY")>]
+    member inline _.maskRepeatRepeatY([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "repeat-y").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatRound")>]
+    member inline _.maskRepeatRound([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "round").Append("; "))
+
+    /// The mask-repeat property sets if/how a mask image will be repeated.
+    [<CustomOperation("maskRepeatSpace")>]
+    member inline _.maskRepeatSpace([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-repeat: ").Append(defaultArg value "space").Append("; "))
+
     ///  The mask-size property specifies the size of the mask layer image. 
     [<CustomOperation("maskSize")>]
     member inline _.maskSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append(value).Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeAuto")>]
+    member inline _.maskSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append("auto").Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeContain")>]
+    member inline _.maskSizeContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append(defaultArg value "contain").Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeCover")>]
+    member inline _.maskSizeCover([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append(defaultArg value "cover").Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeInherit")>]
+    member inline _.maskSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append("inherit").Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeInitial")>]
+    member inline _.maskSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append("initial").Append("; "))
+
+    /// The mask-size property specifies the size of the mask layer image.
+    [<CustomOperation("maskSizeSize")>]
+    member inline _.maskSizeSize([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mask-size: ").Append(defaultArg value "size").Append("; "))
 
     ///  The max-block-size property specifies the maximum size of an element in the block direction. 
     [<CustomOperation("maxBlockSize")>]
     member inline _.maxBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(value).Append("; "))
 
     /// The max-block-size property specifies the maximum size of an element in the block direction.
-    [<CustomOperation("maxBlockSizePercentage")>]
-    member inline _.maxBlockSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("maxBlockSize")>]
+    member inline _.maxBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(string value + "%").Append("; "))
 
     /// The max-block-size property specifies the maximum size of an element in the block direction.
     [<CustomOperation("maxBlockSizeAuto")>]
-    member inline _.maxBlockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.maxBlockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append("auto").Append("; "))
 
     /// The max-block-size property specifies the maximum size of an element in the block direction.
     [<CustomOperation("maxBlockSizeInherit")>]
-    member inline _.maxBlockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.maxBlockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append("inherit").Append("; "))
 
     /// The max-block-size property specifies the maximum size of an element in the block direction.
     [<CustomOperation("maxBlockSizeInitial")>]
-    member inline _.maxBlockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.maxBlockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append("initial").Append("; "))
 
     /// The max-block-size property specifies the maximum size of an element in the block direction.
-    [<CustomOperation("maxBlockSize")>]
-    member inline _.maxBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("maxBlockSizeLength")>]
+    member inline _.maxBlockSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-block-size: ").Append(string value + "px").Append("; "))
 
     ///  The max-height property defines the maximum height of an element. 
     [<CustomOperation("maxHeight")>]
     member inline _.maxHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(value).Append("; "))
 
     /// The max-height property defines the maximum height of an element.
-    [<CustomOperation("maxHeightPercentage")>]
-    member inline _.maxHeightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("maxHeight")>]
+    member inline _.maxHeight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(string value + "%").Append("; "))
 
     /// The max-height property defines the maximum height of an element.
     [<CustomOperation("maxHeightInherit")>]
-    member inline _.maxHeightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.maxHeightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append("inherit").Append("; "))
 
     /// The max-height property defines the maximum height of an element.
     [<CustomOperation("maxHeightInitial")>]
-    member inline _.maxHeightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.maxHeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append("initial").Append("; "))
 
     /// The max-height property defines the maximum height of an element.
-    [<CustomOperation("maxHeight")>]
-    member inline _.maxHeight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("maxHeightLength")>]
+    member inline _.maxHeightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-height: ").Append(string value + "px").Append("; "))
 
     /// The max-height property defines the maximum height of an element.
     [<CustomOperation("maxHeightNone")>]
@@ -5891,44 +6371,44 @@ type CssBuilder() =
     member inline _.maxInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(value).Append("; "))
 
     /// The max-inline-size property specifies the maximum size of an element in the inline direction.
-    [<CustomOperation("maxInlineSizePercentage")>]
-    member inline _.maxInlineSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("maxInlineSize")>]
+    member inline _.maxInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(string value + "%").Append("; "))
 
     /// The max-inline-size property specifies the maximum size of an element in the inline direction.
     [<CustomOperation("maxInlineSizeAuto")>]
-    member inline _.maxInlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.maxInlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append("auto").Append("; "))
 
     /// The max-inline-size property specifies the maximum size of an element in the inline direction.
     [<CustomOperation("maxInlineSizeInherit")>]
-    member inline _.maxInlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.maxInlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append("inherit").Append("; "))
 
     /// The max-inline-size property specifies the maximum size of an element in the inline direction.
     [<CustomOperation("maxInlineSizeInitial")>]
-    member inline _.maxInlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.maxInlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append("initial").Append("; "))
 
     /// The max-inline-size property specifies the maximum size of an element in the inline direction.
-    [<CustomOperation("maxInlineSize")>]
-    member inline _.maxInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("maxInlineSizeLength")>]
+    member inline _.maxInlineSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-inline-size: ").Append(string value + "px").Append("; "))
 
     ///  The max-width property defines the maximum width of an element. 
     [<CustomOperation("maxWidth")>]
     member inline _.maxWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(value).Append("; "))
 
     /// The max-width property defines the maximum width of an element.
-    [<CustomOperation("maxWidthPercentage")>]
-    member inline _.maxWidthPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("maxWidth")>]
+    member inline _.maxWidth([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(string value + "%").Append("; "))
 
     /// The max-width property defines the maximum width of an element.
     [<CustomOperation("maxWidthInherit")>]
-    member inline _.maxWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.maxWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append("inherit").Append("; "))
 
     /// The max-width property defines the maximum width of an element.
     [<CustomOperation("maxWidthInitial")>]
-    member inline _.maxWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.maxWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append("initial").Append("; "))
 
     /// The max-width property defines the maximum width of an element.
-    [<CustomOperation("maxWidth")>]
-    member inline _.maxWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("maxWidthLength")>]
+    member inline _.maxWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("max-width: ").Append(string value + "px").Append("; "))
 
     /// The max-width property defines the maximum width of an element.
     [<CustomOperation("maxWidthNone")>]
@@ -5939,88 +6419,88 @@ type CssBuilder() =
     member inline _.minBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(value).Append("; "))
 
     /// The min-block-size property specifies the minimum size of an element in the block direction.
-    [<CustomOperation("minBlockSizePercentage")>]
-    member inline _.minBlockSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("minBlockSize")>]
+    member inline _.minBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(string value + "%").Append("; "))
 
     /// The min-block-size property specifies the minimum size of an element in the block direction.
     [<CustomOperation("minBlockSizeAuto")>]
-    member inline _.minBlockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.minBlockSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append("auto").Append("; "))
 
     /// The min-block-size property specifies the minimum size of an element in the block direction.
     [<CustomOperation("minBlockSizeInherit")>]
-    member inline _.minBlockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.minBlockSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append("inherit").Append("; "))
 
     /// The min-block-size property specifies the minimum size of an element in the block direction.
     [<CustomOperation("minBlockSizeInitial")>]
-    member inline _.minBlockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.minBlockSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append("initial").Append("; "))
 
     /// The min-block-size property specifies the minimum size of an element in the block direction.
-    [<CustomOperation("minBlockSize")>]
-    member inline _.minBlockSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("minBlockSizeLength")>]
+    member inline _.minBlockSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-block-size: ").Append(string value + "px").Append("; "))
 
     ///  The min-height property defines the minimum height of an element. 
     [<CustomOperation("minHeight")>]
     member inline _.minHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(value).Append("; "))
 
     /// The min-height property defines the minimum height of an element.
-    [<CustomOperation("minHeightPercentage")>]
-    member inline _.minHeightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("minHeight")>]
+    member inline _.minHeight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(string value + "%").Append("; "))
 
     /// The min-height property defines the minimum height of an element.
     [<CustomOperation("minHeightInherit")>]
-    member inline _.minHeightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.minHeightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append("inherit").Append("; "))
 
     /// The min-height property defines the minimum height of an element.
     [<CustomOperation("minHeightInitial")>]
-    member inline _.minHeightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.minHeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append("initial").Append("; "))
 
     /// The min-height property defines the minimum height of an element.
-    [<CustomOperation("minHeight")>]
-    member inline _.minHeight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("minHeightLength")>]
+    member inline _.minHeightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-height: ").Append(string value + "px").Append("; "))
 
     ///  The min-inline-size property specifies the minimum size of an element in the inline direction. 
     [<CustomOperation("minInlineSize")>]
     member inline _.minInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(value).Append("; "))
 
     /// The min-inline-size property specifies the minimum size of an element in the inline direction.
-    [<CustomOperation("minInlineSizePercentage")>]
-    member inline _.minInlineSizePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("minInlineSize")>]
+    member inline _.minInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(string value + "%").Append("; "))
 
     /// The min-inline-size property specifies the minimum size of an element in the inline direction.
     [<CustomOperation("minInlineSizeAuto")>]
-    member inline _.minInlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.minInlineSizeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append("auto").Append("; "))
 
     /// The min-inline-size property specifies the minimum size of an element in the inline direction.
     [<CustomOperation("minInlineSizeInherit")>]
-    member inline _.minInlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.minInlineSizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append("inherit").Append("; "))
 
     /// The min-inline-size property specifies the minimum size of an element in the inline direction.
     [<CustomOperation("minInlineSizeInitial")>]
-    member inline _.minInlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.minInlineSizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append("initial").Append("; "))
 
     /// The min-inline-size property specifies the minimum size of an element in the inline direction.
-    [<CustomOperation("minInlineSize")>]
-    member inline _.minInlineSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("minInlineSizeLength")>]
+    member inline _.minInlineSizeLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-inline-size: ").Append(string value + "px").Append("; "))
 
     ///  The min-width property defines the minimum width of an element. 
     [<CustomOperation("minWidth")>]
     member inline _.minWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(value).Append("; "))
 
     /// The min-width property defines the minimum width of an element.
-    [<CustomOperation("minWidthPercentage")>]
-    member inline _.minWidthPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("minWidth")>]
+    member inline _.minWidth([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(string value + "%").Append("; "))
 
     /// The min-width property defines the minimum width of an element.
     [<CustomOperation("minWidthInherit")>]
-    member inline _.minWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.minWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append("inherit").Append("; "))
 
     /// The min-width property defines the minimum width of an element.
     [<CustomOperation("minWidthInitial")>]
-    member inline _.minWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.minWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append("initial").Append("; "))
 
     /// The min-width property defines the minimum width of an element.
-    [<CustomOperation("minWidth")>]
-    member inline _.minWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("minWidthLength")>]
+    member inline _.minWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("min-width: ").Append(string value + "px").Append("; "))
 
     ///  The mix-blend-mode property specifies how an element's content should blend with its direct parent background. 
     [<CustomOperation("mixBlendMode")>]
@@ -6028,7 +6508,7 @@ type CssBuilder() =
 
     /// The mix-blend-mode property specifies how an element's content should blend with its direct parent background.
     [<CustomOperation("mixBlendModeColor")>]
-    member inline _.mixBlendModeColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mix-blend-mode: ").Append(value).Append("; "))
+    member inline _.mixBlendModeColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("mix-blend-mode: ").Append(defaultArg value "color").Append("; "))
 
     /// The mix-blend-mode property specifies how an element's content should blend with its direct parent background.
     [<CustomOperation("mixBlendModeColorBurn")>]
@@ -6100,11 +6580,11 @@ type CssBuilder() =
 
     /// The object-fit property is used to specify how an  or  should be resized to fit its container.
     [<CustomOperation("objectFitInherit")>]
-    member inline _.objectFitInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-fit: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.objectFitInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-fit: ").Append("inherit").Append("; "))
 
     /// The object-fit property is used to specify how an  or  should be resized to fit its container.
     [<CustomOperation("objectFitInitial")>]
-    member inline _.objectFitInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-fit: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.objectFitInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-fit: ").Append("initial").Append("; "))
 
     /// The object-fit property is used to specify how an  or  should be resized to fit its container.
     [<CustomOperation("objectFitNone")>]
@@ -6120,11 +6600,11 @@ type CssBuilder() =
 
     /// The object-position property is used together with object-fit to specify how an  or  should be positioned with x/y coordinates inside its "own content box".
     [<CustomOperation("objectPositionInherit")>]
-    member inline _.objectPositionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-position: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.objectPositionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-position: ").Append("inherit").Append("; "))
 
     /// The object-position property is used together with object-fit to specify how an  or  should be positioned with x/y coordinates inside its "own content box".
     [<CustomOperation("objectPositionInitial")>]
-    member inline _.objectPositionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-position: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.objectPositionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("object-position: ").Append("initial").Append("; "))
 
     /// The object-position property is used together with object-fit to specify how an  or  should be positioned with x/y coordinates inside its "own content box".
     [<CustomOperation("objectPositionPosition")>]
@@ -6134,17 +6614,109 @@ type CssBuilder() =
     [<CustomOperation("offset")>]
     member inline _.offset([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset: ").Append(value).Append("; "))
 
+    /// Default. The achored point will be in the center of the element, same as property value '50% 50%'.
+    [<CustomOperation("offsetAnchorAuto")>]
+    member inline _.offsetAnchorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("offsetAnchorInherit")>]
+    member inline _.offsetAnchorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("offsetAnchorInitial")>]
+    member inline _.offsetAnchorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append("initial").Append("; "))
+
+    /// If you only specify one keyword, the other value will be "center"
+    [<CustomOperation("offsetAnchorLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom")>]
+    member inline _.offsetAnchorLeftTopLeftCenterLeftBottomRightTopRightCenterRightBottomCenterTopCenterCenterCenterBottom([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append(defaultArg value "left top left center left bottom right top right center right bottom center top center center center bottom").Append("; "))
+
+    /// The first value is the horizontal position and the second value is the vertical. The top left corner is 0% 0%. The right bottom corner is 100% 100%. If you only specify one value, the other value will be 50%. Default value is: 50% 50%
+    [<CustomOperation("offsetAnchorXY")>]
+    member inline _.offsetAnchorXY([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append(defaultArg value "x% y%").Append("; "))
+
+    /// The first value is the horizontal position and the second value is the vertical. The top left corner is 0 0. Units can be pixels (0px 0px) or any other CSS units. If you only specify one value, the other value will be 50%. You can mix % and positions
+    [<CustomOperation("offsetAnchorXposYpos")>]
+    member inline _.offsetAnchorXposYpos([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-anchor: ").Append(defaultArg value "xpos ypos").Append("; "))
+
+    /// Specifies the distance in percent relative to the lenth of the path.
+    [<CustomOperation("offsetDistance")>]
+    member inline _.offsetDistance([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-distance: ").Append(string value + "%").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("offsetDistanceInherit")>]
+    member inline _.offsetDistanceInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-distance: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("offsetDistanceInitial")>]
+    member inline _.offsetDistanceInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-distance: ").Append("initial").Append("; "))
+
+    /// Specifies the elements distance from the start of its path in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("offsetDistanceLength")>]
+    member inline _.offsetDistanceLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-distance: ").Append(string value + "px").Append("; "))
+
+    /// Currently not supported. Specify a path by defining a basic shape using CSS functions like inset(), circle(), ellipse() or polygon().
+    [<CustomOperation("offsetPath")>]
+    member inline _.offsetPath([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append(defaultArg value "").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("offsetPathInherit")>]
+    member inline _.offsetPathInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("offsetPathInitial")>]
+    member inline _.offsetPathInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append("initial").Append("; "))
+
+    /// Default. The element's default offset-path property value.
+    [<CustomOperation("offsetPathNone")>]
+    member inline _.offsetPathNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append(defaultArg value "none").Append("; "))
+
+    /// Specify a path in SVG syntax. Learn about SVG paths
+    [<CustomOperation("offsetPathPath")>]
+    member inline _.offsetPathPath([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append($"path({value})").Append("; "))
+
+    /// Currently not supported. Specify a path with the CSS ray() function.
+    [<CustomOperation("offsetPathRay")>]
+    member inline _.offsetPathRay([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append($"ray({value})").Append("; "))
+
+    /// Currently not supported. Specify a path by using the URL to an SVG file.
+    [<CustomOperation("offsetPathUrl")>]
+    member inline _.offsetPathUrl([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-path: ").Append($"url({value})").Append("; "))
+
+    /// Specifies how much to rotate an element with an constant angle.
+    [<CustomOperation("offsetRotate")>]
+    member inline _.offsetRotate([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append(defaultArg value "").Append("; "))
+
+    /// The element is facing the direction it moving along a path. This is default.
+    [<CustomOperation("offsetRotateAuto")>]
+    member inline _.offsetRotateAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append("auto").Append("; "))
+
+    /// With both auto and  given, the angle is added to the default rotation, in the clockwise direction.
+    [<CustomOperation("offsetRotateAuto")>]
+    member inline _.offsetRotateAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append(defaultArg value "auto ").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("offsetRotateInherit")>]
+    member inline _.offsetRotateInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("offsetRotateInitial")>]
+    member inline _.offsetRotateInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append("initial").Append("; "))
+
+    /// The element is rotated in the opposite direction of the default rotation.
+    [<CustomOperation("offsetRotateReverse")>]
+    member inline _.offsetRotateReverse([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("offset-rotate: ").Append(defaultArg value "reverse").Append("; "))
+
     ///  The opacity property sets the opacity level for an element. 
     [<CustomOperation("opacity")>]
     member inline _.opacity([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("opacity: ").Append(value).Append("; "))
 
     /// The opacity property sets the opacity level for an element.
     [<CustomOperation("opacityInherit")>]
-    member inline _.opacityInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("opacity: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.opacityInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("opacity: ").Append("inherit").Append("; "))
 
     /// The opacity property sets the opacity level for an element.
     [<CustomOperation("opacityInitial")>]
-    member inline _.opacityInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("opacity: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.opacityInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("opacity: ").Append("initial").Append("; "))
 
     /// The opacity property sets the opacity level for an element.
     [<CustomOperation("opacityNumber")>]
@@ -6156,11 +6728,11 @@ type CssBuilder() =
 
     /// The order property specifies the order of a flexible item relative to the rest of the flexible items inside the same container.
     [<CustomOperation("orderInherit")>]
-    member inline _.orderInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("order: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.orderInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("order: ").Append("inherit").Append("; "))
 
     /// The order property specifies the order of a flexible item relative to the rest of the flexible items inside the same container.
     [<CustomOperation("orderInitial")>]
-    member inline _.orderInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("order: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.orderInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("order: ").Append("initial").Append("; "))
 
     /// The order property specifies the order of a flexible item relative to the rest of the flexible items inside the same container.
     [<CustomOperation("orderNumber")>]
@@ -6170,33 +6742,45 @@ type CssBuilder() =
     [<CustomOperation("orphans")>]
     member inline _.orphans([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("orphans: ").Append(value).Append("; "))
 
+    /// The orphans property specifies the minimum number of lines that must be left at the bottom of a page or column.
+    [<CustomOperation("orphansInherit")>]
+    member inline _.orphansInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("orphans: ").Append("inherit").Append("; "))
+
+    /// The orphans property specifies the minimum number of lines that must be left at the bottom of a page or column.
+    [<CustomOperation("orphansInitial")>]
+    member inline _.orphansInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("orphans: ").Append("initial").Append("; "))
+
+    /// The orphans property specifies the minimum number of lines that must be left at the bottom of a page or column.
+    [<CustomOperation("orphansInteger")>]
+    member inline _.orphansInteger([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("orphans: ").Append(defaultArg value "integer").Append("; "))
+
     /// 
     [<CustomOperation("outline")>]
     member inline _.outline([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline: ").Append(value).Append("; "))
 
     /// Specifies the color of the outline. Look at CSS Color Values for a complete list of possible color values.
     [<CustomOperation("outlineColorColor")>]
-    member inline _.outlineColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append(value).Append("; "))
+    member inline _.outlineColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("outlineColorInherit")>]
-    member inline _.outlineColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.outlineColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("outlineColorInitial")>]
-    member inline _.outlineColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.outlineColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-color: ").Append("initial").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("outlineOffsetInherit")>]
-    member inline _.outlineOffsetInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.outlineOffsetInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("outlineOffsetInitial")>]
-    member inline _.outlineOffsetInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.outlineOffsetInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append("initial").Append("; "))
 
     /// The distance the outline is outset from the border edge. Default value is 0
-    [<CustomOperation("outlineOffset")>]
-    member inline _.outlineOffset([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("outlineOffsetLength")>]
+    member inline _.outlineOffsetLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-offset: ").Append(string value + "px").Append("; "))
 
     /// Specifies a dashed outline
     [<CustomOperation("outlineStyleDashed")>]
@@ -6218,13 +6802,13 @@ type CssBuilder() =
     [<CustomOperation("outlineStyleHidden")>]
     member inline _.outlineStyleHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("outlineStyleInherit")>]
-    member inline _.outlineStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.outlineStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("outlineStyleInitial")>]
-    member inline _.outlineStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.outlineStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append("initial").Append("; "))
 
     /// Specifies a 3D inset outline. The effect depends on the outline-color value
     [<CustomOperation("outlineStyleInset")>]
@@ -6246,17 +6830,17 @@ type CssBuilder() =
     [<CustomOperation("outlineStyleSolid")>]
     member inline _.outlineStyleSolid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-style: ").Append(defaultArg value "solid").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("outlineWidthInherit")>]
-    member inline _.outlineWidthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.outlineWidthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("outlineWidthInitial")>]
-    member inline _.outlineWidthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.outlineWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append("initial").Append("; "))
 
     /// Allows you to define the thickness of the outline. Read about length units
-    [<CustomOperation("outlineWidth")>]
-    member inline _.outlineWidth([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("outlineWidthLength")>]
+    member inline _.outlineWidthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append(string value + "px").Append("; "))
 
     /// Specifies a medium outline. This is default
     [<CustomOperation("outlineWidthMedium")>]
@@ -6270,21 +6854,25 @@ type CssBuilder() =
     [<CustomOperation("outlineWidthThin")>]
     member inline _.outlineWidthThin([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline-width: ").Append(defaultArg value "thin").Append("; "))
 
-    /// 
-    [<CustomOperation("outlineOutlineColor")>]
-    member inline _.outlineOutlineColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline: ").Append(defaultArg value "outline-color").Append("; "))
-
-    /// 
-    [<CustomOperation("outlineOutlineStyle")>]
-    member inline _.outlineOutlineStyle([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline: ").Append(defaultArg value "outline-style").Append("; "))
-
-    /// 
-    [<CustomOperation("outlineOutlineWidth")>]
-    member inline _.outlineOutlineWidth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("outline: ").Append(defaultArg value "outline-width").Append("; "))
-
     ///  The overflow property specifies what should happen if content overflows an element's box. 
     [<CustomOperation("overflow")>]
     member inline _.overflow([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow: ").Append(value).Append("; "))
+
+    /// Default value. Scroll anchoring is enabled
+    [<CustomOperation("overflowAnchorAuto")>]
+    member inline _.overflowAnchorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-anchor: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("overflowAnchorInherit")>]
+    member inline _.overflowAnchorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-anchor: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("overflowAnchorInitial")>]
+    member inline _.overflowAnchorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-anchor: ").Append("initial").Append("; "))
+
+    /// Scroll anchoring is disabled
+    [<CustomOperation("overflowAnchorNone")>]
+    member inline _.overflowAnchorNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-anchor: ").Append(defaultArg value "none").Append("; "))
 
     /// Long words will break if they overflow the container
     [<CustomOperation("overflowWrapAnywhere")>]
@@ -6294,13 +6882,13 @@ type CssBuilder() =
     [<CustomOperation("overflowWrapBreakWord")>]
     member inline _.overflowWrapBreakWord([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-wrap: ").Append(defaultArg value "break-word").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("overflowWrapInherit")>]
-    member inline _.overflowWrapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-wrap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.overflowWrapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-wrap: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("overflowWrapInitial")>]
-    member inline _.overflowWrapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-wrap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.overflowWrapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-wrap: ").Append("initial").Append("; "))
 
     /// Long words will not break, even if they overflow the container. This is default
     [<CustomOperation("overflowWrapNormal")>]
@@ -6308,19 +6896,19 @@ type CssBuilder() =
 
     /// Should cause a scrolling mechanism to be provided for overflowing boxes
     [<CustomOperation("overflowXAuto")>]
-    member inline _.overflowXAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.overflowXAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append("auto").Append("; "))
 
     /// The content is clipped - and no scrolling mechanism is provided
     [<CustomOperation("overflowXHidden")>]
     member inline _.overflowXHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("overflowXInherit")>]
-    member inline _.overflowXInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.overflowXInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("overflowXInitial")>]
-    member inline _.overflowXInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.overflowXInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-x: ").Append("initial").Append("; "))
 
     /// The content is clipped and a scrolling mechanism is provided
     [<CustomOperation("overflowXScroll")>]
@@ -6332,19 +6920,19 @@ type CssBuilder() =
 
     /// Should cause a scrolling mechanism to be provided for overflowing boxes
     [<CustomOperation("overflowYAuto")>]
-    member inline _.overflowYAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.overflowYAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append("auto").Append("; "))
 
     /// The content is clipped - and no scrolling mechanism is provided
     [<CustomOperation("overflowYHidden")>]
     member inline _.overflowYHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append(defaultArg value "hidden").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("overflowYInherit")>]
-    member inline _.overflowYInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.overflowYInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("overflowYInitial")>]
-    member inline _.overflowYInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.overflowYInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overflow-y: ").Append("initial").Append("; "))
 
     /// The content is clipped and a scrolling mechanism is provided
     [<CustomOperation("overflowYScroll")>]
@@ -6362,201 +6950,337 @@ type CssBuilder() =
     [<CustomOperation("overscrollBehavior")>]
     member inline _.overscrollBehavior([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior: ").Append(value).Append("; "))
 
+    /// Allows scroll chaining and overscroll affordance behavior. This is default
+    [<CustomOperation("overscrollBehaviorBlockAuto")>]
+    member inline _.overscrollBehaviorBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-block: ").Append("auto").Append("; "))
+
+    /// Allows overscroll affordance behavior, but not scroll chaining.
+    [<CustomOperation("overscrollBehaviorBlockContain")>]
+    member inline _.overscrollBehaviorBlockContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-block: ").Append(defaultArg value "contain").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("overscrollBehaviorBlockInherit")>]
+    member inline _.overscrollBehaviorBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-block: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("overscrollBehaviorBlockInitial")>]
+    member inline _.overscrollBehaviorBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-block: ").Append("initial").Append("; "))
+
+    /// Does not allow overscroll affordance or scroll chaining behavior.
+    [<CustomOperation("overscrollBehaviorBlockNone")>]
+    member inline _.overscrollBehaviorBlockNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-block: ").Append(defaultArg value "none").Append("; "))
+
+    /// Allows scroll chaining and overscroll affordance behavior. This is default
+    [<CustomOperation("overscrollBehaviorInlineAuto")>]
+    member inline _.overscrollBehaviorInlineAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-inline: ").Append("auto").Append("; "))
+
+    /// Allows overscroll affordance behavior, but not scroll chaining.
+    [<CustomOperation("overscrollBehaviorInlineContain")>]
+    member inline _.overscrollBehaviorInlineContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-inline: ").Append(defaultArg value "contain").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("overscrollBehaviorInlineInherit")>]
+    member inline _.overscrollBehaviorInlineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-inline: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("overscrollBehaviorInlineInitial")>]
+    member inline _.overscrollBehaviorInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-inline: ").Append("initial").Append("; "))
+
+    /// Does not allow overscroll affordance or scroll chaining behavior.
+    [<CustomOperation("overscrollBehaviorInlineNone")>]
+    member inline _.overscrollBehaviorInlineNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-inline: ").Append(defaultArg value "none").Append("; "))
+
+    /// Allows scroll chaining and overscroll affordance behavior. This is default
+    [<CustomOperation("overscrollBehaviorXAuto")>]
+    member inline _.overscrollBehaviorXAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-x: ").Append("auto").Append("; "))
+
+    /// Allows overscroll affordance behavior, but not scroll chaining.
+    [<CustomOperation("overscrollBehaviorXContain")>]
+    member inline _.overscrollBehaviorXContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-x: ").Append(defaultArg value "contain").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("overscrollBehaviorXInherit")>]
+    member inline _.overscrollBehaviorXInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-x: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("overscrollBehaviorXInitial")>]
+    member inline _.overscrollBehaviorXInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-x: ").Append("initial").Append("; "))
+
+    /// Does not allow overscroll affordance or scroll chaining behavior.
+    [<CustomOperation("overscrollBehaviorXNone")>]
+    member inline _.overscrollBehaviorXNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-x: ").Append(defaultArg value "none").Append("; "))
+
+    /// Allows scroll chaining and overscroll affordance behavior. This is default
+    [<CustomOperation("overscrollBehaviorYAuto")>]
+    member inline _.overscrollBehaviorYAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-y: ").Append("auto").Append("; "))
+
+    /// Allows overscroll affordance behavior, but not scroll chaining.
+    [<CustomOperation("overscrollBehaviorYContain")>]
+    member inline _.overscrollBehaviorYContain([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-y: ").Append(defaultArg value "contain").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("overscrollBehaviorYInherit")>]
+    member inline _.overscrollBehaviorYInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-y: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("overscrollBehaviorYInitial")>]
+    member inline _.overscrollBehaviorYInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-y: ").Append("initial").Append("; "))
+
+    /// Does not allow overscroll affordance or scroll chaining behavior.
+    [<CustomOperation("overscrollBehaviorYNone")>]
+    member inline _.overscrollBehaviorYNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("overscroll-behavior-y: ").Append(defaultArg value "none").Append("; "))
+
     /// An element's padding is the space between its content and its border.
     [<CustomOperation("padding")>]
     member inline _.padding([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding: ").Append(value).Append("; "))
 
     /// Specifies padding-block in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingBlockPercentage")>]
-    member inline _.paddingBlockPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingBlock")>]
+    member inline _.paddingBlock([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-block value.
     [<CustomOperation("paddingBlockAuto")>]
-    member inline _.paddingBlockAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingBlockInherit")>]
-    member inline _.paddingBlockInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingBlockInitial")>]
-    member inline _.paddingBlockInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append("initial").Append("; "))
 
     /// Specifies padding-block in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingBlock")>]
-    member inline _.paddingBlock([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingBlockLength")>]
+    member inline _.paddingBlockLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block: ").Append(string value + "px").Append("; "))
 
     /// Specifies padding-block-end in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingBlockEndPercentage")>]
-    member inline _.paddingBlockEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingBlockEnd")>]
+    member inline _.paddingBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-block-end value.
     [<CustomOperation("paddingBlockEndAuto")>]
-    member inline _.paddingBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingBlockEndInherit")>]
-    member inline _.paddingBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingBlockEndInitial")>]
-    member inline _.paddingBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append("initial").Append("; "))
 
     /// Specifies padding-block-end in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingBlockEnd")>]
-    member inline _.paddingBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingBlockEndLength")>]
+    member inline _.paddingBlockEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies padding-block-start in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingBlockStartPercentage")>]
-    member inline _.paddingBlockStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingBlockStart")>]
+    member inline _.paddingBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-block-start value.
     [<CustomOperation("paddingBlockStartAuto")>]
-    member inline _.paddingBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingBlockStartInherit")>]
-    member inline _.paddingBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingBlockStartInitial")>]
-    member inline _.paddingBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append("initial").Append("; "))
 
     /// Specifies padding-block-start in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingBlockStart")>]
-    member inline _.paddingBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingBlockStartLength")>]
+    member inline _.paddingBlockStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-block-start: ").Append(string value + "px").Append("; "))
 
     /// Specifies a bottom padding in percent of the width of the containing element
-    [<CustomOperation("paddingBottomPercentage")>]
-    member inline _.paddingBottomPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingBottom")>]
+    member inline _.paddingBottom([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingBottomInherit")>]
-    member inline _.paddingBottomInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingBottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingBottomInitial")>]
-    member inline _.paddingBottomInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingBottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append("initial").Append("; "))
 
     /// Specifies a fixed bottom padding in px, pt, cm, etc. Default value is 0. Read about length units
-    [<CustomOperation("paddingBottom")>]
-    member inline _.paddingBottom([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingBottomLength")>]
+    member inline _.paddingBottomLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-bottom: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingInlinePercentage")>]
-    member inline _.paddingInlinePercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingInline")>]
+    member inline _.paddingInline([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-inline distance.
     [<CustomOperation("paddingInlineAuto")>]
-    member inline _.paddingInlineAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingInlineAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingInlineInherit")>]
-    member inline _.paddingInlineInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingInlineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingInlineInitial")>]
-    member inline _.paddingInlineInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingInline")>]
-    member inline _.paddingInline([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingInlineLength")>]
+    member inline _.paddingInlineLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingInlineEndPercentage")>]
-    member inline _.paddingInlineEndPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingInlineEnd")>]
+    member inline _.paddingInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-inline-end distance.
     [<CustomOperation("paddingInlineEndAuto")>]
-    member inline _.paddingInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingInlineEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingInlineEndInherit")>]
-    member inline _.paddingInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingInlineEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingInlineEndInitial")>]
-    member inline _.paddingInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingInlineEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingInlineEnd")>]
-    member inline _.paddingInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingInlineEndLength")>]
+    member inline _.paddingInlineEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-end: ").Append(string value + "px").Append("; "))
 
     /// Specifies distance in percent relative to size of parent element in the inline direction.
-    [<CustomOperation("paddingInlineStartPercentage")>]
-    member inline _.paddingInlineStartPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingInlineStart")>]
+    member inline _.paddingInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(string value + "%").Append("; "))
 
     /// Default. The element's default padding-inline-start distance.
     [<CustomOperation("paddingInlineStartAuto")>]
-    member inline _.paddingInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.paddingInlineStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append("auto").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingInlineStartInherit")>]
-    member inline _.paddingInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingInlineStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingInlineStartInitial")>]
-    member inline _.paddingInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingInlineStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append("initial").Append("; "))
 
     /// Specifies distance in px, pt, cm, etc. Negative values are not allowed. Read about length units
-    [<CustomOperation("paddingInlineStart")>]
-    member inline _.paddingInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingInlineStartLength")>]
+    member inline _.paddingInlineStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-inline-start: ").Append(string value + "px").Append("; "))
 
     /// Specifies a left padding in percent of the width of the containing element
-    [<CustomOperation("paddingLeftPercentage")>]
-    member inline _.paddingLeftPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingLeft")>]
+    member inline _.paddingLeft([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingLeftInherit")>]
-    member inline _.paddingLeftInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingLeftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingLeftInitial")>]
-    member inline _.paddingLeftInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingLeftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append("initial").Append("; "))
 
     /// Specifies a fixed left padding in px, pt, cm, etc. Default value is 0. Read about length units
-    [<CustomOperation("paddingLeft")>]
-    member inline _.paddingLeft([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingLeftLength")>]
+    member inline _.paddingLeftLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-left: ").Append(string value + "px").Append("; "))
 
     /// Specifies a right padding in percent of the width of the containing element
-    [<CustomOperation("paddingRightPercentage")>]
-    member inline _.paddingRightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingRight")>]
+    member inline _.paddingRight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingRightInherit")>]
-    member inline _.paddingRightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingRightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingRightInitial")>]
-    member inline _.paddingRightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingRightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append("initial").Append("; "))
 
     /// Specifies a fixed right padding in px, pt, cm, etc. Default value is 0. Read about length units
-    [<CustomOperation("paddingRight")>]
-    member inline _.paddingRight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingRightLength")>]
+    member inline _.paddingRightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-right: ").Append(string value + "px").Append("; "))
 
     /// Specifies a top padding in percent of the width of the containing element
-    [<CustomOperation("paddingTopPercentage")>]
-    member inline _.paddingTopPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("paddingTop")>]
+    member inline _.paddingTop([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(string value + "%").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("paddingTopInherit")>]
-    member inline _.paddingTopInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paddingTopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("paddingTopInitial")>]
-    member inline _.paddingTopInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paddingTopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append("initial").Append("; "))
 
     /// Specifies a fixed top padding in px, pt, cm, etc. Default value is 0. Read about length units
-    [<CustomOperation("paddingTop")>]
-    member inline _.paddingTop([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("paddingTopLength")>]
+    member inline _.paddingTopLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("padding-top: ").Append(string value + "px").Append("; "))
 
     ///  The page-break-after property adds a page-break after a specified element. 
     [<CustomOperation("pageBreakAfter")>]
     member inline _.pageBreakAfter([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append(value).Append("; "))
 
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterAlways")>]
+    member inline _.pageBreakAfterAlways([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append(defaultArg value "always").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterAuto")>]
+    member inline _.pageBreakAfterAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append("auto").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterAvoid")>]
+    member inline _.pageBreakAfterAvoid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append(defaultArg value "avoid").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterInherit")>]
+    member inline _.pageBreakAfterInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append("inherit").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterInitial")>]
+    member inline _.pageBreakAfterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append("initial").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterLeft")>]
+    member inline _.pageBreakAfterLeft([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append(defaultArg value "left").Append("; "))
+
+    /// The page-break-after property adds a page-break after a specified element.
+    [<CustomOperation("pageBreakAfterRight")>]
+    member inline _.pageBreakAfterRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-after: ").Append(defaultArg value "right").Append("; "))
+
     ///  The page-break-before property adds a page-break before a specified element.. 
     [<CustomOperation("pageBreakBefore")>]
     member inline _.pageBreakBefore([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append(value).Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeAlways")>]
+    member inline _.pageBreakBeforeAlways([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append(defaultArg value "always").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeAuto")>]
+    member inline _.pageBreakBeforeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append("auto").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeAvoid")>]
+    member inline _.pageBreakBeforeAvoid([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append(defaultArg value "avoid").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeInherit")>]
+    member inline _.pageBreakBeforeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append("inherit").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeInitial")>]
+    member inline _.pageBreakBeforeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append("initial").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeLeft")>]
+    member inline _.pageBreakBeforeLeft([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append(defaultArg value "left").Append("; "))
+
+    /// The page-break-before property adds a page-break before a specified element..
+    [<CustomOperation("pageBreakBeforeRight")>]
+    member inline _.pageBreakBeforeRight([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("page-break-before: ").Append(defaultArg value "right").Append("; "))
 
     /// 
     [<CustomOperation("pageBreakInside")>]
@@ -6568,39 +7292,39 @@ type CssBuilder() =
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
     [<CustomOperation("paintOrderInherit")>]
-    member inline _.paintOrderInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.paintOrderInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append("inherit").Append("; "))
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
     [<CustomOperation("paintOrderInitial")>]
-    member inline _.paintOrderInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.paintOrderInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append("initial").Append("; "))
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
     [<CustomOperation("paintOrderNormal")>]
     member inline _.paintOrderNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "normal").Append("; "))
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
-    [<CustomOperation("paintOrderOne")>]
-    member inline _.paintOrderOne([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(value).Append("; "))
+    [<CustomOperation("paintOrderOneValue")>]
+    member inline _.paintOrderOneValue([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "one value").Append("; "))
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
-    [<CustomOperation("paintOrderThree")>]
-    member inline _.paintOrderThree([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(value).Append("; "))
+    [<CustomOperation("paintOrderThreeValues")>]
+    member inline _.paintOrderThreeValues([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "three values").Append("; "))
 
     /// The paint-order property specifies the order of how an SVG element or text is painted.
-    [<CustomOperation("paintOrderTwo")>]
-    member inline _.paintOrderTwo([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(value).Append("; "))
+    [<CustomOperation("paintOrderTwoValues")>]
+    member inline _.paintOrderTwoValues([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("paint-order: ").Append(defaultArg value "two values").Append("; "))
 
     ///  The perspective property is used to give a 3D-positioned element some perspective. 
     [<CustomOperation("perspective")>]
     member inline _.perspective([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective: ").Append(value).Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("perspectiveOriginInherit")>]
-    member inline _.perspectiveOriginInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective-origin: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.perspectiveOriginInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective-origin: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("perspectiveOriginInitial")>]
-    member inline _.perspectiveOriginInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective-origin: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.perspectiveOriginInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective-origin: ").Append("initial").Append("; "))
 
     /// Defining where the view is placed at the x-axisPossible values:leftcenterrightlength%Default value: 50%
     [<CustomOperation("perspectiveOriginXAxis")>]
@@ -6611,8 +7335,8 @@ type CssBuilder() =
     member inline _.perspectiveOriginYAxis([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective-origin: ").Append(defaultArg value "y-axis").Append("; "))
 
     /// The perspective property is used to give a 3D-positioned element some perspective.
-    [<CustomOperation("perspective")>]
-    member inline _.perspective([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("perspectiveLength")>]
+    member inline _.perspectiveLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("perspective: ").Append(string value + "px").Append("; "))
 
     /// The perspective property is used to give a 3D-positioned element some perspective.
     [<CustomOperation("perspectiveNone")>]
@@ -6632,11 +7356,11 @@ type CssBuilder() =
 
     /// The place-content property is used in flexbox and grid layouts, and is a shorthand property for the following properties:
     [<CustomOperation("placeContentInherit")>]
-    member inline _.placeContentInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-content: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.placeContentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-content: ").Append("inherit").Append("; "))
 
     /// The place-content property is used in flexbox and grid layouts, and is a shorthand property for the following properties:
     [<CustomOperation("placeContentInitial")>]
-    member inline _.placeContentInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-content: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.placeContentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-content: ").Append("initial").Append("; "))
 
     /// The place-content property is used in flexbox and grid layouts, and is a shorthand property for the following properties:
     [<CustomOperation("placeContentNormal")>]
@@ -6684,15 +7408,15 @@ type CssBuilder() =
 
     /// The place-items property is used in grid layout, and is a shorthand property for the following properties:
     [<CustomOperation("placeItemsInherit")>]
-    member inline _.placeItemsInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.placeItemsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append("inherit").Append("; "))
 
     /// The place-items property is used in grid layout, and is a shorthand property for the following properties:
     [<CustomOperation("placeItemsInitial")>]
-    member inline _.placeItemsInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.placeItemsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append("initial").Append("; "))
 
     /// The place-items property is used in grid layout, and is a shorthand property for the following properties:
-    [<CustomOperation("placeItemsNormal")>]
-    member inline _.placeItemsNormal([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append(value).Append("; "))
+    [<CustomOperation("placeItemsNormalLegacy")>]
+    member inline _.placeItemsNormalLegacy([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-items: ").Append(defaultArg value "normal legacy").Append("; "))
 
     /// The place-items property is used in grid layout, and is a shorthand property for the following properties:
     [<CustomOperation("placeItemsStart")>]
@@ -6708,11 +7432,11 @@ type CssBuilder() =
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
     [<CustomOperation("placeSelfAuto")>]
-    member inline _.placeSelfAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.placeSelfAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append("auto").Append("; "))
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
-    [<CustomOperation("placeSelfBaseline")>]
-    member inline _.placeSelfBaseline([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append(value).Append("; "))
+    [<CustomOperation("placeSelfBaselineAlignment")>]
+    member inline _.placeSelfBaselineAlignment([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append(defaultArg value "baseline alignment").Append("; "))
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
     [<CustomOperation("placeSelfCenter")>]
@@ -6724,11 +7448,11 @@ type CssBuilder() =
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
     [<CustomOperation("placeSelfInherit")>]
-    member inline _.placeSelfInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.placeSelfInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append("inherit").Append("; "))
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
     [<CustomOperation("placeSelfInitial")>]
-    member inline _.placeSelfInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.placeSelfInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("place-self: ").Append("initial").Append("; "))
 
     /// The place-self property is used to align individual grid items, and is a shorthand property for the following properties:
     [<CustomOperation("placeSelfLeft")>]
@@ -6758,6 +7482,22 @@ type CssBuilder() =
     [<CustomOperation("pointerEvents")>]
     member inline _.pointerEvents([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("pointer-events: ").Append(value).Append("; "))
 
+    /// The pointer-events property defines whether or not an element reacts to pointer events.
+    [<CustomOperation("pointerEventsAuto")>]
+    member inline _.pointerEventsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("pointer-events: ").Append("auto").Append("; "))
+
+    /// The pointer-events property defines whether or not an element reacts to pointer events.
+    [<CustomOperation("pointerEventsInherit")>]
+    member inline _.pointerEventsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("pointer-events: ").Append("inherit").Append("; "))
+
+    /// The pointer-events property defines whether or not an element reacts to pointer events.
+    [<CustomOperation("pointerEventsInitial")>]
+    member inline _.pointerEventsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("pointer-events: ").Append("initial").Append("; "))
+
+    /// The pointer-events property defines whether or not an element reacts to pointer events.
+    [<CustomOperation("pointerEventsNone")>]
+    member inline _.pointerEventsNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("pointer-events: ").Append(defaultArg value "none").Append("; "))
+
     ///  The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky). 
     [<CustomOperation("position")>]
     member inline _.position([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("position: ").Append(value).Append("; "))
@@ -6772,11 +7512,11 @@ type CssBuilder() =
 
     /// The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).
     [<CustomOperation("positionInherit")>]
-    member inline _.positionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("position: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.positionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("position: ").Append("inherit").Append("; "))
 
     /// The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).
     [<CustomOperation("positionInitial")>]
-    member inline _.positionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("position: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.positionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("position: ").Append("initial").Append("; "))
 
     /// The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).
     [<CustomOperation("positionRelative")>]
@@ -6796,19 +7536,19 @@ type CssBuilder() =
 
     /// The quotes property sets the type of quotation marks for quotations.
     [<CustomOperation("quotesInherit")>]
-    member inline _.quotesInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.quotesInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append("inherit").Append("; "))
 
     /// The quotes property sets the type of quotation marks for quotations.
     [<CustomOperation("quotesInitial")>]
-    member inline _.quotesInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.quotesInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append("initial").Append("; "))
 
     /// The quotes property sets the type of quotation marks for quotations.
     [<CustomOperation("quotesNone")>]
     member inline _.quotesNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append(defaultArg value "none").Append("; "))
 
     /// The quotes property sets the type of quotation marks for quotations.
-    [<CustomOperation("quotesString")>]
-    member inline _.quotesString([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append(value).Append("; "))
+    [<CustomOperation("quotesStringStringStringString")>]
+    member inline _.quotesStringStringStringString([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("quotes: ").Append(defaultArg value "string string string string").Append("; "))
 
     ///  The resize property defines if (and how) an element is resizable by the user. 
     [<CustomOperation("resize")>]
@@ -6816,51 +7556,51 @@ type CssBuilder() =
 
     /// The resize property defines if (and how) an element is resizable by the user.
     [<CustomOperation("resizeBoth")>]
-    member inline _.resizeBoth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "both").Append("; "))
+    member inline _.resizeBoth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value " both").Append("; "))
 
     /// The resize property defines if (and how) an element is resizable by the user.
     [<CustomOperation("resizeHorizontal")>]
-    member inline _.resizeHorizontal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "horizontal").Append("; "))
-
-    /// The resize property defines if (and how) an element is resizable by the user.
-    [<CustomOperation("resizeInherit")>]
-    member inline _.resizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// The resize property defines if (and how) an element is resizable by the user.
-    [<CustomOperation("resizeInitial")>]
-    member inline _.resizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.resizeHorizontal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value " horizontal").Append("; "))
 
     /// The resize property defines if (and how) an element is resizable by the user.
     [<CustomOperation("resizeNone")>]
-    member inline _.resizeNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "none").Append("; "))
+    member inline _.resizeNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value " none").Append("; "))
 
     /// The resize property defines if (and how) an element is resizable by the user.
     [<CustomOperation("resizeVertical")>]
-    member inline _.resizeVertical([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value "vertical").Append("; "))
+    member inline _.resizeVertical([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append(defaultArg value " vertical").Append("; "))
+
+    /// The resize property defines if (and how) an element is resizable by the user.
+    [<CustomOperation("resizeInherit")>]
+    member inline _.resizeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append("inherit").Append("; "))
+
+    /// The resize property defines if (and how) an element is resizable by the user.
+    [<CustomOperation("resizeInitial")>]
+    member inline _.resizeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("resize: ").Append("initial").Append("; "))
 
     ///  The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements. 
     [<CustomOperation("right")>]
     member inline _.right([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(value).Append("; "))
 
     /// The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("rightPercentage")>]
-    member inline _.rightPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("right")>]
+    member inline _.right([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(string value + "%").Append("; "))
 
     /// The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("rightAuto")>]
-    member inline _.rightAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.rightAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append("auto").Append("; "))
 
     /// The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("rightInherit")>]
-    member inline _.rightInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.rightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append("inherit").Append("; "))
 
     /// The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("rightInitial")>]
-    member inline _.rightInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.rightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append("initial").Append("; "))
 
     /// The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("right")>]
-    member inline _.right([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("rightLength")>]
+    member inline _.rightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("right: ").Append(string value + "px").Append("; "))
 
     ///  The rotate property allows you to rotate elements. 
     [<CustomOperation("rotate")>]
@@ -6876,15 +7616,15 @@ type CssBuilder() =
 
     /// The rotate property allows you to rotate elements.
     [<CustomOperation("rotateInherit")>]
-    member inline _.rotateInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.rotateInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append("inherit").Append("; "))
 
     /// The rotate property allows you to rotate elements.
     [<CustomOperation("rotateInitial")>]
-    member inline _.rotateInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.rotateInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append("initial").Append("; "))
 
     /// The rotate property allows you to rotate elements.
-    [<CustomOperation("rotateVector")>]
-    member inline _.rotateVector([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append(value).Append("; "))
+    [<CustomOperation("rotateVectorAngle")>]
+    member inline _.rotateVectorAngle([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("rotate: ").Append(defaultArg value "vector angle").Append("; "))
 
     ///  The row-gap property specifies the gap between the rows in a flexbox or grid layout. 
     [<CustomOperation("rowGap")>]
@@ -6892,15 +7632,15 @@ type CssBuilder() =
 
     /// The row-gap property specifies the gap between the rows in a flexbox or grid layout.
     [<CustomOperation("rowGapInherit")>]
-    member inline _.rowGapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.rowGapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append("inherit").Append("; "))
 
     /// The row-gap property specifies the gap between the rows in a flexbox or grid layout.
     [<CustomOperation("rowGapInitial")>]
-    member inline _.rowGapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.rowGapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append("initial").Append("; "))
 
     /// The row-gap property specifies the gap between the rows in a flexbox or grid layout.
-    [<CustomOperation("rowGap")>]
-    member inline _.rowGap([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("rowGapLength")>]
+    member inline _.rowGapLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("row-gap: ").Append(string value + "px").Append("; "))
 
     /// The row-gap property specifies the gap between the rows in a flexbox or grid layout.
     [<CustomOperation("rowGapNormal")>]
@@ -6912,11 +7652,11 @@ type CssBuilder() =
 
     /// The scale property allows you to change the size of elements.
     [<CustomOperation("scaleInherit")>]
-    member inline _.scaleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scale: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.scaleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scale: ").Append("inherit").Append("; "))
 
     /// The scale property allows you to change the size of elements.
     [<CustomOperation("scaleInitial")>]
-    member inline _.scaleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scale: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.scaleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scale: ").Append("initial").Append("; "))
 
     /// The scale property allows you to change the size of elements.
     [<CustomOperation("scaleXAxis")>]
@@ -6934,49 +7674,373 @@ type CssBuilder() =
     [<CustomOperation("scrollBehavior")>]
     member inline _.scrollBehavior([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-behavior: ").Append(value).Append("; "))
 
+    /// The scroll-behavior property specifies whether to smoothly animate the scroll position, instead of a straight jump, when the user clicks on a link within a scrollable box.
+    [<CustomOperation("scrollBehaviorAuto")>]
+    member inline _.scrollBehaviorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-behavior: ").Append("auto").Append("; "))
+
+    /// The scroll-behavior property specifies whether to smoothly animate the scroll position, instead of a straight jump, when the user clicks on a link within a scrollable box.
+    [<CustomOperation("scrollBehaviorInherit")>]
+    member inline _.scrollBehaviorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-behavior: ").Append("inherit").Append("; "))
+
+    /// The scroll-behavior property specifies whether to smoothly animate the scroll position, instead of a straight jump, when the user clicks on a link within a scrollable box.
+    [<CustomOperation("scrollBehaviorInitial")>]
+    member inline _.scrollBehaviorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-behavior: ").Append("initial").Append("; "))
+
+    /// The scroll-behavior property specifies whether to smoothly animate the scroll position, instead of a straight jump, when the user clicks on a link within a scrollable box.
+    [<CustomOperation("scrollBehaviorSmooth")>]
+    member inline _.scrollBehaviorSmooth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-behavior: ").Append(defaultArg value "smooth").Append("; "))
+
     ///  The scroll-margin property specifies the distance between the snap position and the container. 
     [<CustomOperation("scrollMargin")>]
     member inline _.scrollMargin([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin: ").Append(value).Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginBlockInherit")>]
+    member inline _.scrollMarginBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginBlockInitial")>]
+    member inline _.scrollMarginBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block: ").Append("initial").Append("; "))
+
+    /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginBlockLength")>]
+    member inline _.scrollMarginBlockLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginBlockEndInherit")>]
+    member inline _.scrollMarginBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-end: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginBlockEndInitial")>]
+    member inline _.scrollMarginBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-end: ").Append("initial").Append("; "))
+
+    /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginBlockEndLength")>]
+    member inline _.scrollMarginBlockEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-end: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginBlockStartInherit")>]
+    member inline _.scrollMarginBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-start: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginBlockStartInitial")>]
+    member inline _.scrollMarginBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-start: ").Append("initial").Append("; "))
+
+    /// Specifies distance in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginBlockStartLength")>]
+    member inline _.scrollMarginBlockStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-block-start: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginBottomInherit")>]
+    member inline _.scrollMarginBottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-bottom: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginBottomInitial")>]
+    member inline _.scrollMarginBottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-bottom: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-margin-bottom in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginBottomLength")>]
+    member inline _.scrollMarginBottomLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-bottom: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginLeftInherit")>]
+    member inline _.scrollMarginLeftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-left: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginLeftInitial")>]
+    member inline _.scrollMarginLeftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-left: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-margin-left in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginLeftLength")>]
+    member inline _.scrollMarginLeftLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-left: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginRightInherit")>]
+    member inline _.scrollMarginRightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-right: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginRightInitial")>]
+    member inline _.scrollMarginRightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-right: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-margin-right in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginRightLength")>]
+    member inline _.scrollMarginRightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-right: ").Append(string value + "px").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollMarginTopInherit")>]
+    member inline _.scrollMarginTopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-top: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollMarginTopInitial")>]
+    member inline _.scrollMarginTopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-top: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-margin-top in px, pt, cm, etc. Negative values are allowed. Read about length units
+    [<CustomOperation("scrollMarginTopLength")>]
+    member inline _.scrollMarginTopLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-margin-top: ").Append(string value + "px").Append("; "))
 
     ///  The scroll-padding property specifies the distance from the container to the snap position of child elements. 
     [<CustomOperation("scrollPadding")>]
     member inline _.scrollPadding([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding: ").Append(value).Append("; "))
 
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingBlock")>]
+    member inline _.scrollPaddingBlock([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingBlockAuto")>]
+    member inline _.scrollPaddingBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingBlockInherit")>]
+    member inline _.scrollPaddingBlockInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingBlockInitial")>]
+    member inline _.scrollPaddingBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-block in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingBlockLength")>]
+    member inline _.scrollPaddingBlockLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingBlockEnd")>]
+    member inline _.scrollPaddingBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-end: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingBlockEndAuto")>]
+    member inline _.scrollPaddingBlockEndAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-end: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingBlockEndInherit")>]
+    member inline _.scrollPaddingBlockEndInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-end: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingBlockEndInitial")>]
+    member inline _.scrollPaddingBlockEndInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-end: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-block-end in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingBlockEndLength")>]
+    member inline _.scrollPaddingBlockEndLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-end: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingBlockStart")>]
+    member inline _.scrollPaddingBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-start: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingBlockStartAuto")>]
+    member inline _.scrollPaddingBlockStartAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-start: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingBlockStartInherit")>]
+    member inline _.scrollPaddingBlockStartInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-start: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingBlockStartInitial")>]
+    member inline _.scrollPaddingBlockStartInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-start: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-block-start in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingBlockStartLength")>]
+    member inline _.scrollPaddingBlockStartLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-block-start: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingBottom")>]
+    member inline _.scrollPaddingBottom([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-bottom: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingBottomAuto")>]
+    member inline _.scrollPaddingBottomAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-bottom: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingBottomInherit")>]
+    member inline _.scrollPaddingBottomInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-bottom: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingBottomInitial")>]
+    member inline _.scrollPaddingBottomInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-bottom: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-bottom in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingBottomLength")>]
+    member inline _.scrollPaddingBottomLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-bottom: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingLeft")>]
+    member inline _.scrollPaddingLeft([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-left: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingLeftAuto")>]
+    member inline _.scrollPaddingLeftAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-left: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingLeftInherit")>]
+    member inline _.scrollPaddingLeftInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-left: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingLeftInitial")>]
+    member inline _.scrollPaddingLeftInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-left: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-left in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingLeftLength")>]
+    member inline _.scrollPaddingLeftLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-left: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingRight")>]
+    member inline _.scrollPaddingRight([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-right: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingRightAuto")>]
+    member inline _.scrollPaddingRightAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-right: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingRightInherit")>]
+    member inline _.scrollPaddingRightInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-right: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingRightInitial")>]
+    member inline _.scrollPaddingRightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-right: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-right in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingRightLength")>]
+    member inline _.scrollPaddingRightLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-right: ").Append(string value + "px").Append("; "))
+
+    /// Specifies the padding in percent of the width of the containing element
+    [<CustomOperation("scrollPaddingTop")>]
+    member inline _.scrollPaddingTop([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-top: ").Append(string value + "%").Append("; "))
+
+    /// Default value. The browser calculates the padding
+    [<CustomOperation("scrollPaddingTopAuto")>]
+    member inline _.scrollPaddingTopAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-top: ").Append("auto").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("scrollPaddingTopInherit")>]
+    member inline _.scrollPaddingTopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-top: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("scrollPaddingTopInitial")>]
+    member inline _.scrollPaddingTopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-top: ").Append("initial").Append("; "))
+
+    /// Specifies scroll-padding-top in px, pt, cm, etc. Negative values are not allowed. Read about length units
+    [<CustomOperation("scrollPaddingTopLength")>]
+    member inline _.scrollPaddingTopLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-padding-top: ").Append(string value + "px").Append("; "))
+
     ///  The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling. 
     [<CustomOperation("scrollSnapAlign")>]
     member inline _.scrollSnapAlign([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(value).Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignBlockInline")>]
+    member inline _.scrollSnapAlignBlockInline([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(defaultArg value "block inline").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignCenter")>]
+    member inline _.scrollSnapAlignCenter([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(defaultArg value "center").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignEnd")>]
+    member inline _.scrollSnapAlignEnd([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(defaultArg value "end").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignInherit")>]
+    member inline _.scrollSnapAlignInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append("inherit").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignInitial")>]
+    member inline _.scrollSnapAlignInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append("initial").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignNone")>]
+    member inline _.scrollSnapAlignNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(defaultArg value "none").Append("; "))
+
+    /// The scroll-snap-align property specifies where elements will snap into focus when you stop scrolling.
+    [<CustomOperation("scrollSnapAlignStart")>]
+    member inline _.scrollSnapAlignStart([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-align: ").Append(defaultArg value "start").Append("; "))
 
     ///  When swiping fast on a trackpad or a touch screen, the scroll-snap-stop property specifies whether to scroll past elements or to stop and snap on the next element. 
     [<CustomOperation("scrollSnapStop")>]
     member inline _.scrollSnapStop([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-stop: ").Append(value).Append("; "))
 
+    /// When swiping fast on a trackpad or a touch screen, the scroll-snap-stop property specifies whether to scroll past elements or to stop and snap on the next element.
+    [<CustomOperation("scrollSnapStopAlways")>]
+    member inline _.scrollSnapStopAlways([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-stop: ").Append(defaultArg value "always").Append("; "))
+
+    /// When swiping fast on a trackpad or a touch screen, the scroll-snap-stop property specifies whether to scroll past elements or to stop and snap on the next element.
+    [<CustomOperation("scrollSnapStopInherit")>]
+    member inline _.scrollSnapStopInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-stop: ").Append("inherit").Append("; "))
+
+    /// When swiping fast on a trackpad or a touch screen, the scroll-snap-stop property specifies whether to scroll past elements or to stop and snap on the next element.
+    [<CustomOperation("scrollSnapStopInitial")>]
+    member inline _.scrollSnapStopInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-stop: ").Append("initial").Append("; "))
+
+    /// When swiping fast on a trackpad or a touch screen, the scroll-snap-stop property specifies whether to scroll past elements or to stop and snap on the next element.
+    [<CustomOperation("scrollSnapStopNormal")>]
+    member inline _.scrollSnapStopNormal([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-stop: ").Append(defaultArg value "normal").Append("; "))
+
     ///  The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction. 
     [<CustomOperation("scrollSnapType")>]
     member inline _.scrollSnapType([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(value).Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeBlock")>]
+    member inline _.scrollSnapTypeBlock([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "block").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeBoth")>]
+    member inline _.scrollSnapTypeBoth([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "both").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeInherit")>]
+    member inline _.scrollSnapTypeInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append("inherit").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeInitial")>]
+    member inline _.scrollSnapTypeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append("initial").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeInline")>]
+    member inline _.scrollSnapTypeInline([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "inline").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeMandatory")>]
+    member inline _.scrollSnapTypeMandatory([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "mandatory").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeNone")>]
+    member inline _.scrollSnapTypeNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "none").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeProximity")>]
+    member inline _.scrollSnapTypeProximity([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "proximity").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeX")>]
+    member inline _.scrollSnapTypeX([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "x").Append("; "))
+
+    /// The scroll-snap-type specifies how the elements will snap into focus when you stop scrolling, and in what direction.
+    [<CustomOperation("scrollSnapTypeY")>]
+    member inline _.scrollSnapTypeY([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scroll-snap-type: ").Append(defaultArg value "y").Append("; "))
 
     ///  The scrollbar-color property specifies the color of the scrollbar track (background) and thumb (the scroller). 
     [<CustomOperation("scrollbarColor")>]
     member inline _.scrollbarColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scrollbar-color: ").Append(value).Append("; "))
 
+    /// The scrollbar-color property specifies the color of the scrollbar track (background) and thumb (the scroller).
+    [<CustomOperation("scrollbarColorAuto")>]
+    member inline _.scrollbarColorAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scrollbar-color: ").Append("auto").Append("; "))
+
+    /// The scrollbar-color property specifies the color of the scrollbar track (background) and thumb (the scroller).
+    [<CustomOperation("scrollbarColorColorColor")>]
+    member inline _.scrollbarColorColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("scrollbar-color: ").Append(defaultArg value "color color").Append("; "))
+
+    /// The scrollbar-color property specifies the color of the scrollbar track (background) and thumb (the scroller).
+    [<CustomOperation("scrollbarColorInherit")>]
+    member inline _.scrollbarColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scrollbar-color: ").Append("inherit").Append("; "))
+
+    /// The scrollbar-color property specifies the color of the scrollbar track (background) and thumb (the scroller).
+    [<CustomOperation("scrollbarColorInitial")>]
+    member inline _.scrollbarColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("scrollbar-color: ").Append("initial").Append("; "))
+
     ///  The tab-size property specifies the width of a tab character. 
     [<CustomOperation("tabSize")>]
     member inline _.tabSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("tab-size: ").Append(value).Append("; "))
-
-    /// The tab-size property specifies the width of a tab character.
-    [<CustomOperation("tabSizeInherit")>]
-    member inline _.tabSizeInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("tab-size: ").Append(defaultArg value "inherit").Append("; "))
-
-    /// The tab-size property specifies the width of a tab character.
-    [<CustomOperation("tabSizeInitial")>]
-    member inline _.tabSizeInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("tab-size: ").Append(defaultArg value "initial").Append("; "))
-
-    /// The tab-size property specifies the width of a tab character.
-    [<CustomOperation("tabSize")>]
-    member inline _.tabSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("tab-size: ").Append(string value + "px").Append("; "))
-
-    /// The tab-size property specifies the width of a tab character.
-    [<CustomOperation("tabSizeNumber")>]
-    member inline _.tabSizeNumber([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("tab-size: ").Append(value).Append("; "))
 
     ///  The table-layout property defines the algorithm used to lay out table cells, rows, and columns. 
     [<CustomOperation("tableLayout")>]
@@ -6984,7 +8048,7 @@ type CssBuilder() =
 
     /// The table-layout property defines the algorithm used to lay out table cells, rows, and columns.
     [<CustomOperation("tableLayoutAuto")>]
-    member inline _.tableLayoutAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.tableLayoutAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append("auto").Append("; "))
 
     /// The table-layout property defines the algorithm used to lay out table cells, rows, and columns.
     [<CustomOperation("tableLayoutFixed")>]
@@ -6992,11 +8056,11 @@ type CssBuilder() =
 
     /// The table-layout property defines the algorithm used to lay out table cells, rows, and columns.
     [<CustomOperation("tableLayoutInherit")>]
-    member inline _.tableLayoutInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.tableLayoutInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append("inherit").Append("; "))
 
     /// The table-layout property defines the algorithm used to lay out table cells, rows, and columns.
     [<CustomOperation("tableLayoutInitial")>]
-    member inline _.tableLayoutInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.tableLayoutInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("table-layout: ").Append("initial").Append("; "))
 
     ///  The text-align property specifies the horizontal alignment of text in an element. 
     [<CustomOperation("textAlign")>]
@@ -7004,7 +8068,7 @@ type CssBuilder() =
 
     /// Default value. The last line is justified and aligned left
     [<CustomOperation("textAlignLastAuto")>]
-    member inline _.textAlignLastAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.textAlignLastAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append("auto").Append("; "))
 
     /// The last line is center-aligned
     [<CustomOperation("textAlignLastCenter")>]
@@ -7014,13 +8078,13 @@ type CssBuilder() =
     [<CustomOperation("textAlignLastEnd")>]
     member inline _.textAlignLastEnd([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append(defaultArg value "end").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("textAlignLastInherit")>]
-    member inline _.textAlignLastInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textAlignLastInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("textAlignLastInitial")>]
-    member inline _.textAlignLastInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textAlignLastInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-align-last: ").Append("initial").Append("; "))
 
     /// The last line is justified as the rest of the lines
     [<CustomOperation("textAlignLastJustify")>]
@@ -7044,23 +8108,23 @@ type CssBuilder() =
 
     /// Specifies the color of the text-decoration
     [<CustomOperation("textDecorationColorColor")>]
-    member inline _.textDecorationColorColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append(value).Append("; "))
+    member inline _.textDecorationColorColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append(defaultArg value "color").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("textDecorationColorInherit")>]
-    member inline _.textDecorationColorInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textDecorationColorInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("textDecorationColorInitial")>]
-    member inline _.textDecorationColorInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textDecorationColorInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-color: ").Append("initial").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("textDecorationLineInherit")>]
-    member inline _.textDecorationLineInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-line: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textDecorationLineInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-line: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("textDecorationLineInitial")>]
-    member inline _.textDecorationLineInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-line: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textDecorationLineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-line: ").Append("initial").Append("; "))
 
     /// Specifies that a line will be displayed through the text
     [<CustomOperation("textDecorationLineLineThrough")>]
@@ -7090,13 +8154,13 @@ type CssBuilder() =
     [<CustomOperation("textDecorationStyleDouble")>]
     member inline _.textDecorationStyleDouble([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append(defaultArg value "double").Append("; "))
 
-    /// Inherits this property from its parent element. Read about inherit
+    /// Inherits this property from its parent element.  Read about inherit
     [<CustomOperation("textDecorationStyleInherit")>]
-    member inline _.textDecorationStyleInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textDecorationStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append("inherit").Append("; "))
 
-    /// Sets this property to its default value. Read about initial
+    /// Sets this property to its default value.  Read about initial
     [<CustomOperation("textDecorationStyleInitial")>]
-    member inline _.textDecorationStyleInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textDecorationStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append("initial").Append("; "))
 
     /// Default value. The line will display as a single line
     [<CustomOperation("textDecorationStyleSolid")>]
@@ -7105,22 +8169,6 @@ type CssBuilder() =
     /// The line will display as a wavy line
     [<CustomOperation("textDecorationStyleWavy")>]
     member inline _.textDecorationStyleWavy([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration-style: ").Append(defaultArg value "wavy").Append("; "))
-
-    /// 
-    [<CustomOperation("textDecorationTextDecorationColor")>]
-    member inline _.textDecorationTextDecorationColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration: ").Append(defaultArg value "text-decoration-color").Append("; "))
-
-    /// 
-    [<CustomOperation("textDecorationTextDecorationLine")>]
-    member inline _.textDecorationTextDecorationLine([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration: ").Append(defaultArg value "text-decoration-line").Append("; "))
-
-    /// 
-    [<CustomOperation("textDecorationTextDecorationStyle")>]
-    member inline _.textDecorationTextDecorationStyle([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration: ").Append(defaultArg value "text-decoration-style").Append("; "))
-
-    /// 
-    [<CustomOperation("textDecorationTextDecorationThickness")>]
-    member inline _.textDecorationTextDecorationThickness([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-decoration: ").Append(defaultArg value "text-decoration-thickness").Append("; "))
 
     ///  The text-emphasis property is used to apply emphasis marks to text. 
     [<CustomOperation("textEmphasis")>]
@@ -7131,20 +8179,20 @@ type CssBuilder() =
     member inline _.textIndent([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(value).Append("; "))
 
     /// The text-indent property specifies the indentation of the first line in a text-block.
-    [<CustomOperation("textIndentPercentage")>]
-    member inline _.textIndentPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("textIndent")>]
+    member inline _.textIndent([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(string value + "%").Append("; "))
 
     /// The text-indent property specifies the indentation of the first line in a text-block.
     [<CustomOperation("textIndentInherit")>]
-    member inline _.textIndentInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textIndentInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append("inherit").Append("; "))
 
     /// The text-indent property specifies the indentation of the first line in a text-block.
     [<CustomOperation("textIndentInitial")>]
-    member inline _.textIndentInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textIndentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append("initial").Append("; "))
 
     /// The text-indent property specifies the indentation of the first line in a text-block.
-    [<CustomOperation("textIndent")>]
-    member inline _.textIndent([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("textIndentLength")>]
+    member inline _.textIndentLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-indent: ").Append(string value + "px").Append("; "))
 
     ///  The text-justify property specifies the justification method of text when text-align is set to "justify". 
     [<CustomOperation("textJustify")>]
@@ -7152,15 +8200,15 @@ type CssBuilder() =
 
     /// The text-justify property specifies the justification method of text when text-align is set to "justify".
     [<CustomOperation("textJustifyAuto")>]
-    member inline _.textJustifyAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.textJustifyAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append("auto").Append("; "))
 
     /// The text-justify property specifies the justification method of text when text-align is set to "justify".
     [<CustomOperation("textJustifyInherit")>]
-    member inline _.textJustifyInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textJustifyInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append("inherit").Append("; "))
 
     /// The text-justify property specifies the justification method of text when text-align is set to "justify".
     [<CustomOperation("textJustifyInitial")>]
-    member inline _.textJustifyInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textJustifyInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-justify: ").Append("initial").Append("; "))
 
     /// The text-justify property specifies the justification method of text when text-align is set to "justify".
     [<CustomOperation("textJustifyInterCharacter")>]
@@ -7180,11 +8228,11 @@ type CssBuilder() =
 
     /// The text-orientation property specifies the orientation of characters.
     [<CustomOperation("textOrientationInherit")>]
-    member inline _.textOrientationInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-orientation: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textOrientationInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-orientation: ").Append("inherit").Append("; "))
 
     /// The text-orientation property specifies the orientation of characters.
     [<CustomOperation("textOrientationInitial")>]
-    member inline _.textOrientationInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-orientation: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textOrientationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-orientation: ").Append("initial").Append("; "))
 
     /// The text-orientation property specifies the orientation of characters.
     [<CustomOperation("textOrientationMixed")>]
@@ -7220,11 +8268,11 @@ type CssBuilder() =
 
     /// The text-overflow property specifies how overflowed content that is not displayed should be signaled to the user. It can be clipped, display an ellipsis (...), or display a custom string.
     [<CustomOperation("textOverflowInherit")>]
-    member inline _.textOverflowInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-overflow: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textOverflowInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-overflow: ").Append("inherit").Append("; "))
 
     /// The text-overflow property specifies how overflowed content that is not displayed should be signaled to the user. It can be clipped, display an ellipsis (...), or display a custom string.
     [<CustomOperation("textOverflowInitial")>]
-    member inline _.textOverflowInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-overflow: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textOverflowInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-overflow: ").Append("initial").Append("; "))
 
     /// The text-overflow property specifies how overflowed content that is not displayed should be signaled to the user. It can be clipped, display an ellipsis (...), or display a custom string.
     [<CustomOperation("textOverflowString")>]
@@ -7240,7 +8288,7 @@ type CssBuilder() =
 
     /// The text-shadow property adds shadow to text.
     [<CustomOperation("textShadowColor")>]
-    member inline _.textShadowColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append(value).Append("; "))
+    member inline _.textShadowColor([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append(defaultArg value "color").Append("; "))
 
     /// The text-shadow property adds shadow to text.
     [<CustomOperation("textShadowHShadow")>]
@@ -7248,11 +8296,11 @@ type CssBuilder() =
 
     /// The text-shadow property adds shadow to text.
     [<CustomOperation("textShadowInherit")>]
-    member inline _.textShadowInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textShadowInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append("inherit").Append("; "))
 
     /// The text-shadow property adds shadow to text.
     [<CustomOperation("textShadowInitial")>]
-    member inline _.textShadowInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textShadowInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-shadow: ").Append("initial").Append("; "))
 
     /// The text-shadow property adds shadow to text.
     [<CustomOperation("textShadowNone")>]
@@ -7272,11 +8320,11 @@ type CssBuilder() =
 
     /// The text-transform property controls the capitalization of text.
     [<CustomOperation("textTransformInherit")>]
-    member inline _.textTransformInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-transform: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textTransformInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-transform: ").Append("inherit").Append("; "))
 
     /// The text-transform property controls the capitalization of text.
     [<CustomOperation("textTransformInitial")>]
-    member inline _.textTransformInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-transform: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textTransformInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-transform: ").Append("initial").Append("; "))
 
     /// The text-transform property controls the capitalization of text.
     [<CustomOperation("textTransformLowercase")>]
@@ -7296,19 +8344,19 @@ type CssBuilder() =
 
     /// The text-underline-offset property specifies the offset distance of underline text decorations.
     [<CustomOperation("textUnderlineOffsetAuto")>]
-    member inline _.textUnderlineOffsetAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.textUnderlineOffsetAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append("auto").Append("; "))
 
     /// The text-underline-offset property specifies the offset distance of underline text decorations.
     [<CustomOperation("textUnderlineOffsetInherit")>]
-    member inline _.textUnderlineOffsetInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textUnderlineOffsetInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append("inherit").Append("; "))
 
     /// The text-underline-offset property specifies the offset distance of underline text decorations.
     [<CustomOperation("textUnderlineOffsetInitial")>]
-    member inline _.textUnderlineOffsetInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textUnderlineOffsetInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append("initial").Append("; "))
 
     /// The text-underline-offset property specifies the offset distance of underline text decorations.
-    [<CustomOperation("textUnderlineOffset")>]
-    member inline _.textUnderlineOffset([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("textUnderlineOffsetLength")>]
+    member inline _.textUnderlineOffsetLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-offset: ").Append(string value + "px").Append("; "))
 
     /// The text-underline-offset property specifies the offset distance of underline text decorations.
     [<CustomOperation("textUnderlineOffsetPercentage")>]
@@ -7320,7 +8368,7 @@ type CssBuilder() =
 
     /// The text-underline-position property specifies the position of underline text decorations.
     [<CustomOperation("textUnderlinePositionAuto")>]
-    member inline _.textUnderlinePositionAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.textUnderlinePositionAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append("auto").Append("; "))
 
     /// The text-underline-position property specifies the position of underline text decorations.
     [<CustomOperation("textUnderlinePositionFromFont")>]
@@ -7328,11 +8376,11 @@ type CssBuilder() =
 
     /// The text-underline-position property specifies the position of underline text decorations.
     [<CustomOperation("textUnderlinePositionInherit")>]
-    member inline _.textUnderlinePositionInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.textUnderlinePositionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append("inherit").Append("; "))
 
     /// The text-underline-position property specifies the position of underline text decorations.
     [<CustomOperation("textUnderlinePositionInitial")>]
-    member inline _.textUnderlinePositionInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.textUnderlinePositionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("text-underline-position: ").Append("initial").Append("; "))
 
     /// The text-underline-position property specifies the position of underline text decorations.
     [<CustomOperation("textUnderlinePositionLeft")>]
@@ -7351,128 +8399,260 @@ type CssBuilder() =
     member inline _.top([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(value).Append("; "))
 
     /// The top property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("topPercentage")>]
-    member inline _.topPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("top")>]
+    member inline _.top([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(string value + "%").Append("; "))
 
     /// The top property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("topAuto")>]
-    member inline _.topAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.topAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append("auto").Append("; "))
 
     /// The top property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("topInherit")>]
-    member inline _.topInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.topInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append("inherit").Append("; "))
 
     /// The top property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
     [<CustomOperation("topInitial")>]
-    member inline _.topInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.topInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append("initial").Append("; "))
 
     /// The top property affects the vertical position of a positioned element. This property has no effect on non-positioned elements.
-    [<CustomOperation("top")>]
-    member inline _.top([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("topLength")>]
+    member inline _.topLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("top: ").Append(string value + "px").Append("; "))
 
     ///  The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements. 
     [<CustomOperation("transform")>]
     member inline _.transform([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append(value).Append("; "))
 
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformInherit")>]
-    member inline _.transformInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append(defaultArg value "inherit").Append("; "))
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transformOriginInherit")>]
+    member inline _.transformOriginInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-origin: ").Append("inherit").Append("; "))
 
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformInitial")>]
-    member inline _.transformInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append(defaultArg value "initial").Append("; "))
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transformOriginInitial")>]
+    member inline _.transformOriginInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-origin: ").Append("initial").Append("; "))
+
+    /// Defines where the view is placed at the x-axis. Possible values: leftcenterrightlength%
+    [<CustomOperation("transformOriginXAxis")>]
+    member inline _.transformOriginXAxis([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-origin: ").Append(defaultArg value "x-axis").Append("; "))
+
+    /// Defines where the view is placed at the y-axis. Possible values: topcenterbottomlength%
+    [<CustomOperation("transformOriginYAxis")>]
+    member inline _.transformOriginYAxis([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-origin: ").Append(defaultArg value "y-axis").Append("; "))
+
+    /// Defines where the view is placed at the z-axis (for 3D transformations). Possible values: length
+    [<CustomOperation("transformOriginZAxis")>]
+    member inline _.transformOriginZAxis([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-origin: ").Append(defaultArg value "z-axis").Append("; "))
+
+    /// Specifies that child elements will NOT preserve its 3D position. This is default
+    [<CustomOperation("transformStyleFlat")>]
+    member inline _.transformStyleFlat([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-style: ").Append(defaultArg value "flat").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transformStyleInherit")>]
+    member inline _.transformStyleInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-style: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transformStyleInitial")>]
+    member inline _.transformStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-style: ").Append("initial").Append("; "))
+
+    /// Specifies that child elements will preserve its 3D position
+    [<CustomOperation("transformStylePreserve3d")>]
+    member inline _.transformStylePreserve3d([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform-style: ").Append(defaultArg value "preserve-3d").Append("; "))
 
     /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
     [<CustomOperation("transformMatrix")>]
-    member inline _.transformMatrix([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"matrix({value})").Append("; "))
+    member inline _.transformMatrix([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" matrix({value})").Append("; "))
 
     /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
     [<CustomOperation("transformMatrix3d")>]
-    member inline _.transformMatrix3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"matrix3d ({value})").Append("; "))
+    member inline _.transformMatrix3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" matrix3d ({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformPerspective")>]
+    member inline _.transformPerspective([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" perspective({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformRotate")>]
+    member inline _.transformRotate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" rotate({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformRotate3d")>]
+    member inline _.transformRotate3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" rotate3d({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformRotateX")>]
+    member inline _.transformRotateX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" rotateX({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformRotateY")>]
+    member inline _.transformRotateY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" rotateY({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformRotateZ")>]
+    member inline _.transformRotateZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" rotateZ({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformScale")>]
+    member inline _.transformScale([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" scale({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformScale3d")>]
+    member inline _.transformScale3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" scale3d({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformScaleX")>]
+    member inline _.transformScaleX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" scaleX({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformScaleY")>]
+    member inline _.transformScaleY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" scaleY({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformScaleZ")>]
+    member inline _.transformScaleZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" scaleZ({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformSkew")>]
+    member inline _.transformSkew([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" skew({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformSkewX")>]
+    member inline _.transformSkewX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" skewX({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformSkewY")>]
+    member inline _.transformSkewY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" skewY({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformTranslate")>]
+    member inline _.transformTranslate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" translate({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformTranslate3d")>]
+    member inline _.transformTranslate3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" translate3d({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformTranslateX")>]
+    member inline _.transformTranslateX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" translateX({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformTranslateY")>]
+    member inline _.transformTranslateY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" translateY({value})").Append("; "))
+
+    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
+    [<CustomOperation("transformTranslateZ")>]
+    member inline _.transformTranslateZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($" translateZ({value})").Append("; "))
 
     /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
     [<CustomOperation("transformNone")>]
     member inline _.transformNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append(defaultArg value "none").Append("; "))
 
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformPerspective")>]
-    member inline _.transformPerspective([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"perspective({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformRotate")>]
-    member inline _.transformRotate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"rotate({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformRotate3d")>]
-    member inline _.transformRotate3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"rotate3d({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformRotateX")>]
-    member inline _.transformRotateX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"rotateX({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformRotateY")>]
-    member inline _.transformRotateY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"rotateY({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformRotateZ")>]
-    member inline _.transformRotateZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"rotateZ({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformScale")>]
-    member inline _.transformScale([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"scale({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformScale3d")>]
-    member inline _.transformScale3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"scale3d({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformScaleX")>]
-    member inline _.transformScaleX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"scaleX({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformScaleY")>]
-    member inline _.transformScaleY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"scaleY({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformScaleZ")>]
-    member inline _.transformScaleZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"scaleZ({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformSkew")>]
-    member inline _.transformSkew([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"skew({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformSkewX")>]
-    member inline _.transformSkewX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"skewX({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformSkewY")>]
-    member inline _.transformSkewY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"skewY({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformTranslate")>]
-    member inline _.transformTranslate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"translate({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformTranslate3d")>]
-    member inline _.transformTranslate3d([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"translate3d({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformTranslateX")>]
-    member inline _.transformTranslateX([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"translateX({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformTranslateY")>]
-    member inline _.transformTranslateY([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"translateY({value})").Append("; "))
-
-    /// The transform property applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.
-    [<CustomOperation("transformTranslateZ")>]
-    member inline _.transformTranslateZ([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transform: ").Append($"translateZ({value})").Append("; "))
-
     ///  The transition property is a shorthand property for: 
     [<CustomOperation("transition")>]
     member inline _.transition([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition: ").Append(value).Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transitionDelayInherit")>]
+    member inline _.transitionDelayInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-delay: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transitionDelayInitial")>]
+    member inline _.transitionDelayInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-delay: ").Append("initial").Append("; "))
+
+    /// Specifies the number of seconds or milliseconds to wait before the transition effect will start
+    [<CustomOperation("transitionDelayTime")>]
+    member inline _.transitionDelayTime([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-delay: ").Append(value).Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transitionDurationInherit")>]
+    member inline _.transitionDurationInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-duration: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transitionDurationInitial")>]
+    member inline _.transitionDurationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-duration: ").Append("initial").Append("; "))
+
+    /// Specifies how many seconds or milliseconds a transition effect takes to complete. Default value is 0s, meaning there will be no effect
+    [<CustomOperation("transitionDurationTime")>]
+    member inline _.transitionDurationTime([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-duration: ").Append(value).Append("; "))
+
+    /// Default value. All properties will get a transition effect
+    [<CustomOperation("transitionPropertyAll")>]
+    member inline _.transitionPropertyAll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-property: ").Append(defaultArg value "all").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transitionPropertyInherit")>]
+    member inline _.transitionPropertyInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-property: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transitionPropertyInitial")>]
+    member inline _.transitionPropertyInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-property: ").Append("initial").Append("; "))
+
+    /// No property will get a transition effect
+    [<CustomOperation("transitionPropertyNone")>]
+    member inline _.transitionPropertyNone([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-property: ").Append(defaultArg value "none").Append("; "))
+
+    /// Defines a comma separated list of CSS property names the transition effect is for
+    [<CustomOperation("transitionPropertyProperty")>]
+    member inline _.transitionPropertyProperty([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-property: ").Append(defaultArg value "property").Append("; "))
+
+    /// Define your own values in the cubic-bezier function. Possible values are numeric values from 0 to 1
+    [<CustomOperation("transitionTimingFunctionCubicBezier")>]
+    member inline _.transitionTimingFunctionCubicBezier([<InlineIfLambda>] comb: CombineKeyValue, n1: string, n2: string, n3: string, n4: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(n1).Append(n2).Append(n3).Append(n4).Append("; "))
+
+    /// Default value. Specifies a transition effect with a slow start, then fast, then end slowly (equivalent to cubic-bezier(0.25,0.1,0.25,1))
+    [<CustomOperation("transitionTimingFunctionEase")>]
+    member inline _.transitionTimingFunctionEase([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "ease").Append("; "))
+
+    /// Specifies a transition effect with a slow start (equivalent to cubic-bezier(0.42,0,1,1))
+    [<CustomOperation("transitionTimingFunctionEaseIn")>]
+    member inline _.transitionTimingFunctionEaseIn([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "ease-in").Append("; "))
+
+    /// Specifies a transition effect with a slow start and end (equivalent to cubic-bezier(0.42,0,0.58,1))
+    [<CustomOperation("transitionTimingFunctionEaseInOut")>]
+    member inline _.transitionTimingFunctionEaseInOut([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "ease-in-out").Append("; "))
+
+    /// Specifies a transition effect with a slow end (equivalent to cubic-bezier(0,0,0.58,1))
+    [<CustomOperation("transitionTimingFunctionEaseOut")>]
+    member inline _.transitionTimingFunctionEaseOut([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "ease-out").Append("; "))
+
+    /// Inherits this property from its parent element.  Read about inherit
+    [<CustomOperation("transitionTimingFunctionInherit")>]
+    member inline _.transitionTimingFunctionInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append("inherit").Append("; "))
+
+    /// Sets this property to its default value.  Read about initial
+    [<CustomOperation("transitionTimingFunctionInitial")>]
+    member inline _.transitionTimingFunctionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append("initial").Append("; "))
+
+    /// Specifies a transition effect with the same speed from start to end (equivalent to cubic-bezier(0,0,1,1))
+    [<CustomOperation("transitionTimingFunctionLinear")>]
+    member inline _.transitionTimingFunctionLinear([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "linear").Append("; "))
+
+    /// Equivalent to steps(1, end)
+    [<CustomOperation("transitionTimingFunctionStepEnd")>]
+    member inline _.transitionTimingFunctionStepEnd([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "step-end").Append("; "))
+
+    /// Equivalent to steps(1, start)
+    [<CustomOperation("transitionTimingFunctionStepStart")>]
+    member inline _.transitionTimingFunctionStepStart([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append(defaultArg value "step-start").Append("; "))
+
+    /// Specifies a stepping function, with two parameters. The first parameter specifies the number of intervals in the function. It must be a positive integer (greater than 0). The second parameter, which is optional, is either the value "start" or "end", and specifies the point at which the change of values occur within the interval. If the second parameter is omitted, it is given the value "end"
+    [<CustomOperation("transitionTimingFunctionSteps")>]
+    member inline _.transitionTimingFunctionSteps([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition-timing-function: ").Append($"steps({value})").Append("; "))
+
+    /// The transition property is a shorthand property for:
+    [<CustomOperation("transitionTransitionDelay")>]
+    member inline _.transitionTransitionDelay([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition: ").Append(defaultArg value "transition-delay").Append("; "))
+
+    /// The transition property is a shorthand property for:
+    [<CustomOperation("transitionTransitionDuration")>]
+    member inline _.transitionTransitionDuration([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition: ").Append(defaultArg value "transition-duration").Append("; "))
+
+    /// The transition property is a shorthand property for:
+    [<CustomOperation("transitionTransitionProperty")>]
+    member inline _.transitionTransitionProperty([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition: ").Append(defaultArg value "transition-property").Append("; "))
+
+    /// The transition property is a shorthand property for:
+    [<CustomOperation("transitionTransitionTimingFunction")>]
+    member inline _.transitionTransitionTimingFunction([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("transition: ").Append(defaultArg value "transition-timing-function").Append("; "))
 
     ///  The translate property allows you to change the position of elements. 
     [<CustomOperation("translate")>]
@@ -7480,11 +8660,11 @@ type CssBuilder() =
 
     /// The translate property allows you to change the position of elements.
     [<CustomOperation("translateInherit")>]
-    member inline _.translateInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("translate: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.translateInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("translate: ").Append("inherit").Append("; "))
 
     /// The translate property allows you to change the position of elements.
     [<CustomOperation("translateInitial")>]
-    member inline _.translateInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("translate: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.translateInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("translate: ").Append("initial").Append("; "))
 
     /// The translate property allows you to change the position of elements.
     [<CustomOperation("translateXAxis")>]
@@ -7512,11 +8692,11 @@ type CssBuilder() =
 
     /// The unicode-bidi property is used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document.
     [<CustomOperation("unicodeBidiInherit")>]
-    member inline _.unicodeBidiInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("unicode-bidi: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.unicodeBidiInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("unicode-bidi: ").Append("inherit").Append("; "))
 
     /// The unicode-bidi property is used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document.
     [<CustomOperation("unicodeBidiInitial")>]
-    member inline _.unicodeBidiInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("unicode-bidi: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.unicodeBidiInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("unicode-bidi: ").Append("initial").Append("; "))
 
     /// The unicode-bidi property is used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document.
     [<CustomOperation("unicodeBidiIsolate")>]
@@ -7544,7 +8724,7 @@ type CssBuilder() =
 
     /// The user-select property specifies whether the text of an element can be selected.
     [<CustomOperation("userSelectAuto")>]
-    member inline _.userSelectAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("user-select: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.userSelectAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("user-select: ").Append("auto").Append("; "))
 
     /// The user-select property specifies whether the text of an element can be selected.
     [<CustomOperation("userSelectNone")>]
@@ -7559,8 +8739,8 @@ type CssBuilder() =
     member inline _.verticalAlign([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(value).Append("; "))
 
     /// The vertical-align property sets the vertical alignment of an element.
-    [<CustomOperation("verticalAlignPercentage")>]
-    member inline _.verticalAlignPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("verticalAlign")>]
+    member inline _.verticalAlign([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(string value + "%").Append("; "))
 
     /// The vertical-align property sets the vertical alignment of an element.
     [<CustomOperation("verticalAlignBaseline")>]
@@ -7572,15 +8752,15 @@ type CssBuilder() =
 
     /// The vertical-align property sets the vertical alignment of an element.
     [<CustomOperation("verticalAlignInherit")>]
-    member inline _.verticalAlignInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.verticalAlignInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append("inherit").Append("; "))
 
     /// The vertical-align property sets the vertical alignment of an element.
     [<CustomOperation("verticalAlignInitial")>]
-    member inline _.verticalAlignInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.verticalAlignInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append("initial").Append("; "))
 
     /// The vertical-align property sets the vertical alignment of an element.
-    [<CustomOperation("verticalAlign")>]
-    member inline _.verticalAlign([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("verticalAlignLength")>]
+    member inline _.verticalAlignLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("vertical-align: ").Append(string value + "px").Append("; "))
 
     /// The vertical-align property sets the vertical alignment of an element.
     [<CustomOperation("verticalAlignMiddle")>]
@@ -7623,6 +8803,14 @@ type CssBuilder() =
     member inline _.visibilityHidden([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("visibility: ").Append(defaultArg value "hidden").Append("; "))
 
     /// The visibility property specifies whether or not an element is visible.
+    [<CustomOperation("visibilityInherit")>]
+    member inline _.visibilityInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("visibility: ").Append("inherit").Append("; "))
+
+    /// The visibility property specifies whether or not an element is visible.
+    [<CustomOperation("visibilityInitial")>]
+    member inline _.visibilityInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("visibility: ").Append("initial").Append("; "))
+
+    /// The visibility property specifies whether or not an element is visible.
     [<CustomOperation("visibilityVisible")>]
     member inline _.visibilityVisible([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("visibility: ").Append(defaultArg value "visible").Append("; "))
 
@@ -7632,11 +8820,11 @@ type CssBuilder() =
 
     /// The white-space property specifies how white-space inside an element is handled.
     [<CustomOperation("whiteSpaceInherit")>]
-    member inline _.whiteSpaceInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("white-space: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.whiteSpaceInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("white-space: ").Append("inherit").Append("; "))
 
     /// The white-space property specifies how white-space inside an element is handled.
     [<CustomOperation("whiteSpaceInitial")>]
-    member inline _.whiteSpaceInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("white-space: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.whiteSpaceInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("white-space: ").Append("initial").Append("; "))
 
     /// The white-space property specifies how white-space inside an element is handled.
     [<CustomOperation("whiteSpaceNormal")>]
@@ -7662,29 +8850,41 @@ type CssBuilder() =
     [<CustomOperation("widows")>]
     member inline _.widows([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("widows: ").Append(value).Append("; "))
 
+    /// The widows property specifies the minimum number of lines that must be left at the top of a page or column.
+    [<CustomOperation("widowsInherit")>]
+    member inline _.widowsInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("widows: ").Append("inherit").Append("; "))
+
+    /// The widows property specifies the minimum number of lines that must be left at the top of a page or column.
+    [<CustomOperation("widowsInitial")>]
+    member inline _.widowsInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("widows: ").Append("initial").Append("; "))
+
+    /// The widows property specifies the minimum number of lines that must be left at the top of a page or column.
+    [<CustomOperation("widowsInteger")>]
+    member inline _.widowsInteger([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("widows: ").Append(defaultArg value "integer").Append("; "))
+
     ///  The width property sets the width of an element. 
     [<CustomOperation("width")>]
     member inline _.width([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(value).Append("; "))
 
     /// The width property sets the width of an element.
-    [<CustomOperation("widthPercentage")>]
-    member inline _.widthPercentage([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(string value + "%").Append("; "))
+    [<CustomOperation("width")>]
+    member inline _.width([<InlineIfLambda>] comb: CombineKeyValue, value: float) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(string value + "%").Append("; "))
 
     /// The width property sets the width of an element.
     [<CustomOperation("widthAuto")>]
-    member inline _.widthAuto([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(defaultArg value "auto").Append("; "))
+    member inline _.widthAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append("auto").Append("; "))
 
     /// The width property sets the width of an element.
     [<CustomOperation("widthInherit")>]
-    member inline _.widthInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.widthInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append("inherit").Append("; "))
 
     /// The width property sets the width of an element.
     [<CustomOperation("widthInitial")>]
-    member inline _.widthInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.widthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append("initial").Append("; "))
 
     /// The width property sets the width of an element.
-    [<CustomOperation("width")>]
-    member inline _.width([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("widthLength")>]
+    member inline _.widthLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("width: ").Append(string value + "px").Append("; "))
 
     ///  The word-break property specifies how words should break when reaching the end of a line. 
     [<CustomOperation("wordBreak")>]
@@ -7700,15 +8900,15 @@ type CssBuilder() =
 
     /// The word-break property specifies how words should break when reaching the end of a line.
     [<CustomOperation("wordBreakInherit")>]
-    member inline _.wordBreakInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.wordBreakInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append("inherit").Append("; "))
 
     /// The word-break property specifies how words should break when reaching the end of a line.
     [<CustomOperation("wordBreakInitial")>]
-    member inline _.wordBreakInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.wordBreakInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append("initial").Append("; "))
 
     /// The word-break property specifies how words should break when reaching the end of a line.
     [<CustomOperation("wordBreakKeepAll")>]
-    member inline _.wordBreakKeepAll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append(defaultArg value "keep-all").Append("; "))
+    member inline _.wordBreakKeepAll([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-break: ").Append(defaultArg value "keep-all ").Append("; "))
 
     /// The word-break property specifies how words should break when reaching the end of a line.
     [<CustomOperation("wordBreakNormal")>]
@@ -7720,15 +8920,15 @@ type CssBuilder() =
 
     /// The word-spacing property increases or decreases the white space between words.
     [<CustomOperation("wordSpacingInherit")>]
-    member inline _.wordSpacingInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.wordSpacingInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append("inherit").Append("; "))
 
     /// The word-spacing property increases or decreases the white space between words.
     [<CustomOperation("wordSpacingInitial")>]
-    member inline _.wordSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.wordSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append("initial").Append("; "))
 
     /// The word-spacing property increases or decreases the white space between words.
-    [<CustomOperation("wordSpacing")>]
-    member inline _.wordSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append(string value + "px").Append("; "))
+    [<CustomOperation("wordSpacingLength")>]
+    member inline _.wordSpacingLength([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-spacing: ").Append(string value + "px").Append("; "))
 
     /// The word-spacing property increases or decreases the white space between words.
     [<CustomOperation("wordSpacingNormal")>]
@@ -7744,11 +8944,11 @@ type CssBuilder() =
 
     /// The word-wrap property allows long words to be able to be broken and wrap onto the next line.
     [<CustomOperation("wordWrapInherit")>]
-    member inline _.wordWrapInherit([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-wrap: ").Append(defaultArg value "inherit").Append("; "))
+    member inline _.wordWrapInherit([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-wrap: ").Append("inherit").Append("; "))
 
     /// The word-wrap property allows long words to be able to be broken and wrap onto the next line.
     [<CustomOperation("wordWrapInitial")>]
-    member inline _.wordWrapInitial([<InlineIfLambda>] comb: CombineKeyValue, ?value: string) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-wrap: ").Append(defaultArg value "initial").Append("; "))
+    member inline _.wordWrapInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &&& CombineKeyValue(fun sb -> sb.Append("word-wrap: ").Append("initial").Append("; "))
 
     /// The word-wrap property allows long words to be able to be broken and wrap onto the next line.
     [<CustomOperation("wordWrapNormal")>]
