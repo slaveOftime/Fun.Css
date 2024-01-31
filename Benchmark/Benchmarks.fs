@@ -1,21 +1,29 @@
 ﻿namespace Benchmark.StyleBuilding
 
 open System.Text
+open Microsoft.Extensions.ObjectPool
 open BenchmarkDotNet.Attributes
 open Fss
 
 
+module Pool =
+    let objectPoolProvider = DefaultObjectPoolProvider()
+    let stringBuilderPool = objectPoolProvider.CreateStringBuilderPool()
+
 type RulesetBuilder(ruleName: string) =
     inherit Fun.Css.CssBuilder()
 
-    member _.Run(combine: Fun.Css.Internal.CombineKeyValue) =
-        let sb = StringBuilder()
-        sb.Append(ruleName).AppendLine(" {") |> ignore
+    member _.RuleName = ruleName
+
+    member inline this.Run([<InlineIfLambda>] combine: Fun.Css.Internal.CombineKeyValue) =
+        let sb = Pool.stringBuilderPool.Get()
+        sb.Append(this.RuleName).AppendLine(" {") |> ignore
         sb.Append("    ") |> ignore
         combine.Invoke(sb) |> ignore
         sb.AppendLine().AppendLine("}") |> ignore
-        sb.ToString()
-
+        let str = sb.ToString()
+        Pool.stringBuilderPool.Return sb
+        str
 
 [<AutoOpen>]
 module Feliz =
