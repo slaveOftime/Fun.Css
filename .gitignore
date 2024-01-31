@@ -368,3 +368,5 @@ deploy/
 /Fun.Blazor.Docs.Wasm/wwwroot/code-docs
 
 global.json
+
+Cache/

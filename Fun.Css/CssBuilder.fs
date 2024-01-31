@@ -2228,10 +2228,29 @@ type CssBuilder() =
     /// space in the flex container should be assigned to the item (the flex grow factor).
     [<CustomOperation("flexGrow")>]
     member inline _.flexGrow([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkWithKV ("flex-grow", value)
+    
     /// Shorthand of flex-grow, flex-shrink and flex-basis
     [<CustomOperation("flex")>]
-    member inline _.flex([<InlineIfLambda>] comb: CombineKeyValue, grow: int, ?shrink: int, ?basis: string) =
-        comb &>> ("flex", string grow + ", " + string shrink + ", " + string basis)
+    member inline _.flex([<InlineIfLambda>] comb: CombineKeyValue, grow: int, shrink: int, ?basis: string) =
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("flex: ")
+            sb.Append(grow) |> ignore
+            sb.Append(' ').Append(shrink) |> ignore
+            basis |> Option.iter (fun x -> sb.Append(' ').Append(x) |> ignore)
+            sb
+        )
+
+    /// Shorthand of flex-grow and flex-basis
+    [<CustomOperation("flex")>]
+    member inline _.flex([<InlineIfLambda>] comb: CombineKeyValue, grow: int, ?basis: string) =
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("flex: ")
+            sb.Append(grow) |> ignore
+            basis |> Option.iter (fun x -> sb.Append(' ').Append(x) |> ignore)
+            sb
+        )
+
+
     /// Shorthand of flex-grow, flex-shrink and flex-basis
     [<CustomOperation("flex")>]
     member inline _.flex([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("flex", value)

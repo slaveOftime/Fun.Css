@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Improve flex
+
 ## 0.3.2 - 2022-11-12
 
 ### Changed
