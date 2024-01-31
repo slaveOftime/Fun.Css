@@ -7,6 +7,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Fun.Css", "Fun.Css\Fun.Css.
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Benchmark", "Benchmark\Benchmark.fsproj", "{93A4FE36-2373-4B00-BA5C-ECB1F44CA469}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fun.Css.Tests", "Fun.Css.Tests\Fun.Css.Tests.fsproj", "{5EA3C477-326C-42E6-B56B-21BBBBFA6929}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{93A4FE36-2373-4B00-BA5C-ECB1F44CA469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93A4FE36-2373-4B00-BA5C-ECB1F44CA469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93A4FE36-2373-4B00-BA5C-ECB1F44CA469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA3C477-326C-42E6-B56B-21BBBBFA6929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA3C477-326C-42E6-B56B-21BBBBFA6929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA3C477-326C-42E6-B56B-21BBBBFA6929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA3C477-326C-42E6-B56B-21BBBBFA6929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+		<PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
 		<PackageReference Include="Fss-lib.Core" Version="2.1.0" />
 		<PackageReference Include="Feliz.Engine" Version="1.0.0-beta-004" />
 		<PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.*" />

@@ -2237,7 +2237,7 @@ type CssBuilder() =
             sb.Append(grow) |> ignore
             sb.Append(' ').Append(shrink) |> ignore
             basis |> Option.iter (fun x -> sb.Append(' ').Append(x) |> ignore)
-            sb
+            sb.Append("; ")
         )
 
     /// Shorthand of flex-grow and flex-basis
@@ -2247,7 +2247,7 @@ type CssBuilder() =
             let sb = comb.Invoke(sb).Append("flex: ")
             sb.Append(grow) |> ignore
             basis |> Option.iter (fun x -> sb.Append(' ').Append(x) |> ignore)
-            sb
+            sb.Append("; ")
         )
 
 
