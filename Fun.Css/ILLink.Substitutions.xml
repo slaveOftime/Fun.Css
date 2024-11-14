@@ -1,0 +1,8 @@
+﻿<linker>
+	<assembly fullname="Fun.Css">
+		<resource name="FSharpSignatureCompressedData.Fun.Css" action="remove" />
+		<resource name="FSharpSignatureCompressedDataB.Fun.Css" action="remove" />
+		<resource name="FSharpOptimizationCompressedData.Fun.Css" action="remove" />
+		<resource name="FSharpOptimizationCompressedDataB.Fun.Css" action="remove" />
+	</assembly>
+</linker>
