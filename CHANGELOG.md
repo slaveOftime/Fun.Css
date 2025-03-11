@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## 1.0.2 - 2025-03-11
+
+- Support flex-self
+- Support flex-items
+- Support flex-content
+
 ## 1.0.1 - 2024-11-14
 
 - Add ILLink.Substitutions.xml for better trimming

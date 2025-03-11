@@ -569,27 +569,147 @@ type CssBuilder() =
     [<CustomOperation("alignContentInheritFromParent")>]
     member inline _.alignContentInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("align-content", "inherit")
 
-    /// Default value. Items are positioned at the beginning of the container.
+    /// The CSS justify-content property defines how the browser distributes space between and around content items along the main axis of a flex container and the inline axis of grid and multicol containers
+    [<CustomOperation("justifyContent")>]
+    member inline _.justifyContent([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("justify-content", x)
+    /// The items are packed flush to each other toward the start edge of the alignment container in the main axis.
+    [<CustomOperation("justifyContentStart")>]
+    member inline _.justifyContentStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "start")
+    /// The items are packed flush to each other toward the end edge of the alignment container in the main axis.
+    [<CustomOperation("justifyContentEnd")>]
+    member inline _.justifyContentEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "end")
+    /// The items are packed flush to each other toward the start edge of the alignment container on the flex container's main-start side. This only applies to flex layout items. For items that are not children of a flex container, this value is treated like start.
     [<CustomOperation("justifyContentFlexStart")>]
     member inline _.justifyContentFlexStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "flex-start")
-    /// Items are positioned at the end of the container.
+    /// The items are packed flush to each other at the end edge of the alignment container on the flex container's main-end side. This only applies to flex layout items. For items that are not children of a flex container, this value is treated like end.
     [<CustomOperation("justifyContentFlexEnd")>]
     member inline _.justifyContentFlexEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "flex-end")
-    /// Items are positioned at the center of the container
+    /// The items are packed flush to each other toward the center of the alignment container along the main axis.
     [<CustomOperation("justifyContentCenter")>]
     member inline _.justifyContentCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "center")
-    /// Items are positioned with space between the lines
+    /// The items are packed flush to each other toward the left edge of the alignment container. When the property's horizontal axis is not parallel with the inline axis, such as when flex-direction: column; is set, this value behaves like start.
+    [<CustomOperation("justifyContentLeft")>]
+    member inline _.justifyContentLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "left")
+    /// The items are packed flush to each other toward the right edge of the alignment container in the appropriate axis. If the property's axis is not parallel with the inline axis (in a grid container) or the main-axis (in a flexbox container), this value behaves like start.
+    [<CustomOperation("justifyContentRight")>]
+    member inline _.justifyContentRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "right")
+    /// Behaves as stretch, except in the case of multi-column containers with a non-auto column-width, in which case the columns take their specified column-width rather than stretching to fill the container. As stretch behaves as start in flex containers, normal also behaves as start.
+    [<CustomOperation("justifyContentNormal")>]
+    member inline _.justifyContentNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "normal")
+    /// The items are evenly distributed within the alignment container along the main axis. The spacing between each pair of adjacent items is the same. The first item is flush with the main-start edge, and the last item is flush with the main-end edge.
     [<CustomOperation("justifyContentSpaceBetween")>]
     member inline _.justifyContentSpaceBetween([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "space-between")
-    /// Items are positioned with space before, between, and after the lines.
+    /// The items are evenly distributed within the alignment container along the main axis. The spacing between each pair of adjacent items is the same. The empty space before the first and after the last item equals half of the space between each pair of adjacent items. If there is only one item, it will be centered.
     [<CustomOperation("justifyContentSpaceAround")>]
     member inline _.justifyContentSpaceAround([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "space-around")
+    /// The items are evenly distributed within the alignment container along the main axis. The spacing between each pair of adjacent items, the main-start edge and the first item, and the main-end edge and the last item, are all exactly the same.
+    [<CustomOperation("justifyContentSpaceEvenly")>]
+    member inline _.justifyContentSpaceEvenly([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "space-evenly")
+    /// If the combined size of the items along the main axis is less than the size of the alignment container, any auto-sized items have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container along the main axis.
+    [<CustomOperation("justifyContentStretch")>]
+    member inline _.justifyContentStretch([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "stretch")
     /// Sets this property to its default value.
     [<CustomOperation("justifyContentInitial")>]
     member inline _.justifyContentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "initial")
     /// Inherits this property from its parent element.
     [<CustomOperation("justifyContentInheritFromParent")>]
     member inline _.justifyContentInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-content", "inherit")
+
+    /// The CSS justify-items property defines the default justify-self for all items of the box, giving them all a default way of justifying each box along the appropriate axis.
+    [<CustomOperation("justifyItems")>]
+    member inline _.justifyItems([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("justify-items", x)
+    /// The effect of this keyword is dependent of the layout mode we are in:
+    /// In block-level layouts, the keyword is a synonym of start.
+    /// In absolutely-positioned layouts, the keyword behaved like start on replaced absolutely-positioned boxes, and as stretch on all other absolutely-positioned boxes.
+    /// In table cell layouts, this keyword has no meaning as this property is ignored.
+    /// In flexbox layouts, this keyword has no meaning as this property is ignored.
+    /// In grid layouts, this keyword leads to a behavior similar to the one of stretch, except for boxes with an aspect ratio or an intrinsic size where it behaves like start.
+    [<CustomOperation("justifyItemsNormal")>]
+    member inline _.justifyItemsNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "normal")
+    /// The item is packed flush to each other toward the start edge of the alignment container in the appropriate axis
+    [<CustomOperation("justifyItemsStart")>]
+    member inline _.justifyItemsStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "start")
+    /// The item is packed flush to each other toward the end edge of the alignment container in the appropriate axis.
+    [<CustomOperation("justifyItemsEnd")>]
+    member inline _.justifyItemsEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "end")
+    /// For items that are not children of a flex container, this value is treated like start.
+    [<CustomOperation("justifyItemsFlexStart")>]
+    member inline _.justifyItemsFlexStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "flex-start")
+    /// For items that are not children of a flex container, this value is treated like end.
+    [<CustomOperation("justifyItemsFlexEnd")>]
+    member inline _.justifyItemsFlexEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "flex-end")
+    /// The item is packed flush to the edge of the alignment container of the start side of the item, in the appropriate axis.
+    [<CustomOperation("justifyItemsSelfStart")>]
+    member inline _.justifyItemsSelfStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "self-start")
+    /// The item is packed flush to the edge of the alignment container of the end side of the item, in the appropriate axis.
+    [<CustomOperation("justifyItemsSelfEnd")>]
+    member inline _.justifyItemsSelfEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "self-end")
+    /// The items are packed flush to each other toward the center of the alignment container.
+    [<CustomOperation("justifyItemsCenter")>]
+    member inline _.justifyItemsCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "center")
+    /// The items are packed flush to each other toward the left edge of the alignment container. If the property's axis is not parallel with the inline axis, this value behaves like start.
+    [<CustomOperation("justifyItemsLeft")>]
+    member inline _.justifyItemsLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "left")
+    /// The items are packed flush to each other toward the right edge of the alignment container in the appropriate axis. If the property's axis is not parallel with the inline axis, this value behaves like start.
+    [<CustomOperation("justifyItemsRight")>]
+    member inline _.justifyItemsRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "right")
+    /// Specifies participation in first- or last-baseline alignment: aligns the alignment baseline of the box's first or last baseline set with the corresponding baseline in the shared first or last baseline set of all the boxes in its baseline-sharing group. The fallback alignment for first baseline is start, the one for last baseline is end.
+    [<CustomOperation("justifyItemsBaseline")>]
+    member inline _.justifyItemsBaseline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "baseline")
+    ///If the combined size of the items is less than the size of the alignment container, any auto-sized items have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container.
+    [<CustomOperation("justifyItemsStrench")>]
+    member inline _.justifyItemsStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "strench")
+    /// In the case of anchor-positioned elements, aligns the items to the center of the associated anchor element in the inline direction. See Centering on the anchor using anchor-center.
+    [<CustomOperation("justifyItemsAnchorCenter")>]
+    member inline _.justifyItemsAnchorCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "anchor-center")
+
+    /// The CSS justify-self property sets the way a box is justified inside its alignment container along the appropriate axis.
+    [<CustomOperation("justifySelf")>]
+    member inline _.justifySelf([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("justify-self", x)
+    /// The effect of this keyword is dependent of the layout mode we are in:
+    /// In block-level layouts, the keyword is a synonym of start.
+    /// In absolutely-positioned layouts, the keyword behaves like start on replaced absolutely-positioned boxes, and as stretch on all other absolutely-positioned boxes.
+    /// In table cell layouts, this keyword has no meaning as this property is ignored.
+    /// In flexbox layouts, this keyword has no meaning as this property is ignored.
+    /// In grid layouts, this keyword leads to a behavior similar to the one of stretch, except for boxes with an aspect ratio or an intrinsic size where it behaves like start.
+    [<CustomOperation("justifySelfNormal")>]
+    member inline _.justifySelfNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "normal")
+    /// The item is packed flush to each other toward the start edge of the alignment container in the appropriate axis.
+    [<CustomOperation("justifySelfStart")>]
+    member inline _.justifySelfStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "start")
+    /// The item is packed flush to each other toward the end edge of the alignment container in the appropriate axis.
+    [<CustomOperation("justifySelfEnd")>]
+    member inline _.justifySelfEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "end")
+    /// For items that are not children of a flex container, this value is treated like start.
+    [<CustomOperation("justifySelfFlexStart")>]
+    member inline _.justifySelfFlexStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "flex-start")
+    /// For items that are not children of a flex container, this value is treated like end.
+    [<CustomOperation("justifySelfFlexEnd")>]
+    member inline _.justifySelfFlexEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "flex-end")
+    /// The item is packed flush to the edge of the alignment container of the start side of the item, in the appropriate axis.
+    [<CustomOperation("justifySelfSelfStart")>]
+    member inline _.justifySelfSelfStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "self-start")
+    /// The item is packed flush to the edge of the alignment container of the end side of the item, in the appropriate axis.
+    [<CustomOperation("justifySelfSelfEnd")>]
+    member inline _.justifySelfSelfEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "self-end")
+    /// The items are packed flush to each other toward the center of the alignment container.
+    [<CustomOperation("justifySelfCenter")>]
+    member inline _.justifySelfCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "center")
+    /// The items are packed flush to each other toward the left edge of the alignment container. If the property's axis is not parallel with the inline axis, this value behaves like start.
+    [<CustomOperation("justifySelfLeft")>]
+    member inline _.justifySelfLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "left")
+    /// The items are packed flush to each other toward the right edge of the alignment container in the appropriate axis. If the property's axis is not parallel with the inline axis, this value behaves like start.
+    [<CustomOperation("justifySelfRight")>]
+    member inline _.justifySelfRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "right")
+    /// Specifies participation in first- or last-baseline alignment: aligns the alignment baseline of the box's first or last baseline set with the corresponding baseline in the shared first or last baseline set of all the boxes in its baseline-sharing group. The fallback alignment for first baseline is start, the one for last baseline is end.
+    [<CustomOperation("justifySelfBaseline")>]
+    member inline _.justifySelfBaseline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "baseline")
+    /// If the combined size of the items is less than the size of the alignment container, any auto-sized items have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container.
+    [<CustomOperation("justifySelfStrench")>]
+    member inline _.justifySelfStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "strench")
+    /// In the case of anchor-positioned elements, aligns the item to the center of the associated anchor element in the inline direction. See Centering on the anchor using anchor-center.
+    [<CustomOperation("justifySelfAnchorCenter")>]
+    member inline _.justifySelfAnchorCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "anchor-center")
 
     [<CustomOperation("outlineWidth")>]
     member inline _.outlineWidth([<InlineIfLambda>] comb: CombineKeyValue, width: int) = comb &&& mkPxWithKV ("outline-width", width)
