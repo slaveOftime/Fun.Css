@@ -45,3 +45,14 @@ let ``Flex should work`` () =
         flexGrow 1
     }
     Assert.Equal("display: flex; flex: 1; flex: 1 1; flex: 1 10%; flex: 1 1 10%; flex-grow: 1; ", actual)
+
+[<Fact>]
+let ``letter-spacing should work`` () =
+    let actual = style {
+        letterSpacing 2
+        letterSpacing "0.08em"
+        letterSpacingNormal
+        letterSpacingInitial
+        letterSpacingInheritFromParent
+    }
+    Assert.Equal("letter-spacing: 2px; letter-spacing: 0.08em; letter-spacing: normal; letter-spacing: initial; letter-spacing: inherit; ", actual)
