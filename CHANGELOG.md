@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Add missing `///` doc comments so all `CustomOperation` overloads surface in `Fun.Css.xml` and IDE IntelliSense
+
 ## 1.0.2 - 2025-03-11
 
 - Support flex-self

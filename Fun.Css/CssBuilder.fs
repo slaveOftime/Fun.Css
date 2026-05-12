@@ -59,6 +59,7 @@ type CssBuilder() =
     member inline _.custom([<InlineIfLambda>] comb: CombineKeyValue, key: string, value: string) = comb &>> (key, value)
 
 
+    /// Specifies the magnification scale of the element. The CSS zoom property scales the targeted element, which can affect the page layout.
     [<CustomOperation("zoom")>]
     member inline _.zoom([<InlineIfLambda>] comb: CombineKeyValue, x: float) = comb &&& mkWithKV ("zoom", x)
 
@@ -83,9 +84,11 @@ type CssBuilder() =
     [<CustomOperation("allRevert")>]
     member inline _.allRevert([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("all", "revert")
 
+    /// Attaches one or more shadows to an element. Accepts a CSS box-shadow string (e.g. "2px 4px 8px rgba(0,0,0,0.2)"; multiple shadows can be separated by commas).
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("box-shadow", value)
 
+    /// Attaches a shadow with the given horizontal and vertical offsets (in pixels) and color.
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, color: string) =
         CombineKeyValue(fun sb ->
@@ -100,6 +103,7 @@ type CssBuilder() =
                 .Append("; ")
         )
 
+    /// Attaches a shadow with the given horizontal offset, vertical offset, and blur radius (all in pixels), plus a color.
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow([<InlineIfLambda>] comb: CombineKeyValue, horizontalOffset: int, verticalOffset: int, blur: int, color: string) =
         CombineKeyValue(fun sb ->
@@ -116,6 +120,7 @@ type CssBuilder() =
                 .Append("; ")
         )
 
+    /// Attaches a shadow with the given horizontal offset, vertical offset, blur radius, and spread radius (all in pixels), plus a color.
     [<CustomOperation("boxShadow")>]
     member inline _.boxShadow
         (
@@ -143,14 +148,17 @@ type CssBuilder() =
                 .Append("; ")
         )
 
+    /// Removes the box shadow from an element.
     [<CustomOperation("boxShadowNone")>]
     member inline _.boxShadowNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("box-shadow", "none")
     /// Inherits this property from its parent element.
     [<CustomOperation("boxShadowInheritFromParent")>]
     member inline _.boxShadowInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("box-shadow", "inherit")
 
+    /// Sets the height of an element.
     [<CustomOperation("height")>]
     member inline _.height([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkPxWithKV ("height", value)
+    /// Sets the height of an element.
     [<CustomOperation("height")>]
     member inline _.height([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("height", value)
     /// Inherits this property from its parent element.
@@ -166,8 +174,10 @@ type CssBuilder() =
     [<CustomOperation("heightMinContent")>]
     member inline _.heightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "min-content")
 
+    /// Sets the maximum height of an element.
     [<CustomOperation("maxHeight")>]
     member inline _.maxHeight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkPxWithKV ("max-height", value)
+    /// Sets the maximum height of an element.
     [<CustomOperation("maxHeight")>]
     member inline _.maxHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("max-height", value)
     /// Inherits this property from its parent element.
@@ -183,8 +193,10 @@ type CssBuilder() =
     [<CustomOperation("maxHeightMinContent")>]
     member inline _.maxHeightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "min-content")
 
+    /// Sets the minimum height of an element.
     [<CustomOperation("minHeight")>]
     member inline _.minHeight([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkPxWithKV ("min-height", value)
+    /// Sets the minimum height of an element.
     [<CustomOperation("minHeight")>]
     member inline _.minHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("min-height", value)
     /// Inherits this property from its parent element.
@@ -212,6 +224,7 @@ type CssBuilder() =
     /// Disables justification methods
     [<CustomOperation("textJustifyNone")>]
     member inline _.textJustifyNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-justify", "none")
+    /// Sets this property to its default value.
     [<CustomOperation("textJustifyInitial")>]
     member inline _.textJustifyInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-justify", "initial")
     /// Inherits this property from its parent element.
@@ -564,8 +577,10 @@ type CssBuilder() =
     /// Lines are evenly distributed in the flex container, with half-size spaces on either end.
     [<CustomOperation("alignContentSpaceAround")>]
     member inline _.alignContentSpaceAround([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("align-content", "space-around")
+    /// Sets this property to its default value.
     [<CustomOperation("alignContentInitial")>]
     member inline _.alignContentInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("align-content", "initial")
+    /// Inherits this property from its parent element.
     [<CustomOperation("alignContentInheritFromParent")>]
     member inline _.alignContentInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("align-content", "inherit")
 
@@ -711,8 +726,10 @@ type CssBuilder() =
     [<CustomOperation("justifySelfAnchorCenter")>]
     member inline _.justifySelfAnchorCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "anchor-center")
 
+    /// Sets the width of the outline.
     [<CustomOperation("outlineWidth")>]
     member inline _.outlineWidth([<InlineIfLambda>] comb: CombineKeyValue, width: int) = comb &&& mkPxWithKV ("outline-width", width)
+    /// Sets the width of the outline.
     [<CustomOperation("outlineWidth")>]
     member inline _.outlineWidth([<InlineIfLambda>] comb: CombineKeyValue, width: string) = comb &>> ("outline-width", width)
     /// Specifies a medium outline. This is default.
@@ -808,6 +825,7 @@ type CssBuilder() =
     [<CustomOperation("listStyleTypeInheritFromParent")>]
     member inline _.listStyleTypeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("list-style-type", "inherit")
 
+    /// Removes the list-style-image marker.
     [<CustomOperation("propertyNone")>]
     member inline _.propertyNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("list-style-image", "none")
     /// The path to the image to be used as a list-item marker
@@ -842,33 +860,45 @@ type CssBuilder() =
     [<CustomOperation("listStylePositionInheritFromParent")>]
     member inline _.listStylePositionInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("list-style-position", "inherit")
 
+    /// Sets the kind of decoration that is used on text in an element. Accepts a CSS text-decoration-line value (e.g. "underline overline").
     [<CustomOperation("textDecorationLine")>]
     member inline _.textDecorationLine([<InlineIfLambda>] comb: CombineKeyValue, line: string) = comb &>> ("text-decoration-line", line)
+    /// Specifies no text decoration line.
     [<CustomOperation("textDecorationLineNone")>]
     member inline _.textDecorationLineNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "none")
+    /// Draws a line beneath the text.
     [<CustomOperation("textDecorationLineUnderline")>]
     member inline _.textDecorationLineUnderline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "underline")
+    /// Draws a line above the text.
     [<CustomOperation("textDecorationLineOverline")>]
     member inline _.textDecorationLineOverline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "overline")
+    /// Draws a line through the text (strikethrough).
     [<CustomOperation("textDecorationLineLineThrough")>]
     member inline _.textDecorationLineLineThrough([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "line-through")
+    /// Sets this property to its default value.
     [<CustomOperation("textDecorationLineInitial")>]
     member inline _.textDecorationLineInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "initial")
     /// Inherits this property from its parent element.
     [<CustomOperation("textDecorationLineInheritFromParent")>]
     member inline _.textDecorationLineInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration-line", "inherit")
 
+    /// Specifies the decoration added to text. Accepts a CSS text-decoration value (e.g. "underline", "none", or a shorthand combining line, style, and color).
     [<CustomOperation("textDecoration")>]
     member inline _.textDecoration([<InlineIfLambda>] comb: CombineKeyValue, line: string) = comb &>> ("text-decoration", line)
 
+    /// Specifies no text decoration.
     [<CustomOperation("textDecorationNone")>]
     member inline _.textDecorationNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration", "none")
+    /// Underlines the text.
     [<CustomOperation("textDecorationUnderline")>]
     member inline _.textDecorationUnderline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration", "underline")
+    /// Adds a line above the text.
     [<CustomOperation("textDecorationOverline")>]
     member inline _.textDecorationOverline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration", "overline")
+    /// Adds a line through the text (strikethrough).
     [<CustomOperation("textDecorationLineThrough")>]
     member inline _.textDecorationLineThrough([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration", "line-through")
+    /// Sets this property to its default value.
     [<CustomOperation("textDecorationInitial")>]
     member inline _.textDecorationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-decoration", "initial")
     /// Inherits this property from its parent element.
@@ -881,6 +911,7 @@ type CssBuilder() =
     /// Specifies that child elements will preserve its 3D position
     [<CustomOperation("transformStylePreserve3D")>]
     member inline _.transformStylePreserve3D([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("transform-style", "preserve-3d")
+    /// Sets this property to its default value.
     [<CustomOperation("transformStyleInitial")>]
     member inline _.transformStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("transform-style", "initial")
     /// Inherits this property from its parent element.
@@ -899,6 +930,7 @@ type CssBuilder() =
     /// Transforms all characters to lowercase.
     [<CustomOperation("textTransformLowercase")>]
     member inline _.textTransformLowercase([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-transform", "lowercase")
+    /// Sets this property to its default value.
     [<CustomOperation("textTransformInitial")>]
     member inline _.textTransformInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("text-transform", "initial")
     /// Inherits this property from its parent element.
@@ -1226,8 +1258,10 @@ type CssBuilder() =
     /// The element does not float, (will be displayed just where it occurs in the text). This is default
     [<CustomOperation("floatStyleNone")>]
     member inline _.floatStyleNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("float", "none")
+    /// The element floats to the left of its container.
     [<CustomOperation("floatStyleLeft")>]
     member inline _.floatStyleLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("float", "left")
+    /// The element floats to the right of its container.
     [<CustomOperation("floatStyleRight")>]
     member inline _.floatStyleRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("float", "right")
     /// Sets this property to its default value.
@@ -1284,6 +1318,7 @@ type CssBuilder() =
     [<CustomOperation("writingModeInheritFromParent")>]
     member inline _.writingModeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("writing-mode", "inherit")
 
+    /// Specifies a shorthand for all the animation properties. Accepts a CSS animation string (e.g. "slidein 3s ease-in 1s infinite reverse both paused").
     [<CustomOperation("animation")>]
     member inline _.animation([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("animation", x)
 
@@ -1480,6 +1515,7 @@ type CssBuilder() =
     [<CustomOperation("tableLayoutInheritFromParent")>]
     member inline _.tableLayoutInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("table-layout", "inherit")
 
+    /// Specifies the mouse cursor to display when pointing over an element. Accepts a CSS cursor value (a keyword or a url()).
     [<CustomOperation("cursor")>]
     member inline _.cursor([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("cursor", value)
     /// The User Agent will determine the cursor to display based on the current context. E.g., equivalent to text when hovering text.
@@ -1696,6 +1732,7 @@ type CssBuilder() =
     [<CustomOperation("backgroundClipInheritFromParent")>]
     member inline _.backgroundClipInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("background-clip", "inherit")
 
+    /// Applies a 2D or 3D transformation to an element. Accepts a CSS transform value (e.g. "rotate(45deg)", "translate(10px, 20px)", "scale(1.5)").
     [<CustomOperation("transform")>]
     member inline _.transform([<InlineIfLambda>] comb: CombineKeyValue, transformation: string) = comb &>> ("transform", transformation)
 
@@ -1703,9 +1740,11 @@ type CssBuilder() =
     [<CustomOperation("transformNone")>]
     member inline _.transformNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("transform", "none")
 
+    /// Allows you to change the position of transformed elements.
     [<CustomOperation("transformOrigin")>]
     member inline _.transformOrigin([<InlineIfLambda>] comb: CombineKeyValue, x: string) = comb &>> ("transform-origin", x)
 
+    /// Allows you to change the position of transformed elements, using separate x and y values.
     [<CustomOperation("transformOrigin")>]
     member inline _.transformOrigin([<InlineIfLambda>] comb: CombineKeyValue, x: string, y: string) = comb &>> ("transform-origin", x + " " + y)
 
@@ -2009,6 +2048,7 @@ type CssBuilder() =
     /// Note: Not supported in IE/Edge 15 or earlier. Supported in Safari from version 6.1 with a -webkit- prefix.
     [<CustomOperation("positionSticky")>]
     member inline _.positionSticky([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("position", "sticky")
+    /// Sets this property to its default value.
     [<CustomOperation("positionInitial")>]
     member inline _.positionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("position", "initial")
     /// Inherits this property from its parent element.
@@ -2578,8 +2618,10 @@ type CssBuilder() =
     /// ```
     [<CustomOperation("gap")>]
     member inline _.gap([<InlineIfLambda>] comb: CombineKeyValue, rowGap: string, columnGap: string) = comb &>> ("gap", rowGap + " " + columnGap)
+    /// Sets the gap (both row and column) to the same CSS length value.
     [<CustomOperation("gap")>]
     member inline _.gap([<InlineIfLambda>] comb: CombineKeyValue, gap: string) = comb &>> ("gap", gap)
+    /// Sets the gap (both row and column) in pixels.
     [<CustomOperation("gap")>]
     member inline _.gap([<InlineIfLambda>] comb: CombineKeyValue, gap: int) = comb &>> ("gap", string gap + "px")
     /// Sets where an item in the grid starts
@@ -2922,6 +2964,7 @@ type CssBuilder() =
     /// ```
     [<CustomOperation("gridTemplate")>]
     member inline _.gridTemplate([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("grid-template", value)
+    /// Specifies a shorthand for all the transition properties. Accepts a CSS transition value (e.g. "all 0.3s ease-in-out").
     [<CustomOperation("transition")>]
     member inline _.transition([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("transition", value)
     /// Sets the length of time a transition animation should take to complete. By default, the
@@ -3062,7 +3105,6 @@ type CssBuilder() =
     ///
     /// The `outline-color` property specifies the color of an outline.
     /// **Note**: Always declare the outline-style property before the outline-color property. An element must have an outline before you change the color of it.
-
     [<CustomOperation("outlineColor")>]
     member inline _.outlineColor([<InlineIfLambda>] comb: CombineKeyValue, color: string) = comb &>> ("outline-color", color)
 
@@ -3070,15 +3112,19 @@ type CssBuilder() =
     [<CustomOperation("border")>]
     member inline _.border([<InlineIfLambda>] comb: CombineKeyValue, style: string) = comb &>> ("border", style)
 
+    /// Sets the line style of an element's left border.
     [<CustomOperation("borderLeft")>]
     member inline _.borderLeft([<InlineIfLambda>] comb: CombineKeyValue, style: string) = comb &>> ("border-left", style)
 
+    /// Sets the line style of an element's top border.
     [<CustomOperation("borderTop")>]
     member inline _.borderTop([<InlineIfLambda>] comb: CombineKeyValue, style: string) = comb &>> ("border-top", style)
 
+    /// Sets the line style of an element's right border.
     [<CustomOperation("borderRight")>]
     member inline _.borderRight([<InlineIfLambda>] comb: CombineKeyValue, style: string) = comb &>> ("border-right", style)
 
+    /// Sets the line style of an element's bottom border.
     [<CustomOperation("borderBottom")>]
     member inline _.borderBottom([<InlineIfLambda>] comb: CombineKeyValue, style: string) = comb &>> ("border-bottom", style)
 
