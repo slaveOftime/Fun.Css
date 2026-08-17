@@ -188,10 +188,10 @@ type CssBuilder() =
     member inline _.maxHeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("max-height", "initial")
     /// The intrinsic preferred height.
     [<CustomOperation("maxHeightMaxContent")>]
-    member inline _.maxHeightMaxContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "max-content")
+    member inline _.maxHeightMaxContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("max-height", "max-content")
     /// The intrinsic minimum height.
     [<CustomOperation("maxHeightMinContent")>]
-    member inline _.maxHeightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "min-content")
+    member inline _.maxHeightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("max-height", "min-content")
 
     /// Sets the minimum height of an element.
     [<CustomOperation("minHeight")>]
@@ -207,10 +207,10 @@ type CssBuilder() =
     member inline _.minHeightInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("min-height", "initial")
     /// The intrinsic preferred height.
     [<CustomOperation("minHeightMaxContent")>]
-    member inline _.minHeightMaxContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "max-content")
+    member inline _.minHeightMaxContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("min-height", "max-content")
     /// The intrinsic minimum height.
     [<CustomOperation("minHeightMinContent")>]
-    member inline _.minHeightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("height", "min-content")
+    member inline _.minHeightMinContent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("min-height", "min-content")
 
     /// The browser determines the justification algorithm
     [<CustomOperation("textJustifyAuto")>]
@@ -388,10 +388,10 @@ type CssBuilder() =
     member inline _.flexDirectionColumnReverse([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("flex-direction", "column-reverse")
     /// Sets this property to its default value.
     [<CustomOperation("flexDirectionInitial")>]
-    member inline _.flexDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("flex-basis", "initial")
+    member inline _.flexDirectionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("flex-direction", "initial")
     /// Inherits this property from its parent element.
     [<CustomOperation("flexDirectionInheritFromParent")>]
-    member inline _.flexDirectionInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("flex-basis", "inherit")
+    member inline _.flexDirectionInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("flex-direction", "inherit")
 
     /// Default value. Specifies that the flexible items will not wrap.
     [<CustomOperation("flexWrapNowrap")>]
@@ -451,6 +451,9 @@ type CssBuilder() =
     /// Possible values are [100, 200, 300, 400, 500, 600, 700, 800, 900]
     [<CustomOperation("fontWeight")>]
     member inline _.fontWeight([<InlineIfLambda>] comb: CombineKeyValue, weight: int) = comb &&& mkWithKV ("font-weight", weight)
+    /// Defines font weight using a CSS string value (e.g. "bold", "var(--font-weight-strong)").
+    [<CustomOperation("fontWeight")>]
+    member inline _.fontWeight([<InlineIfLambda>] comb: CombineKeyValue, weight: string) = comb &>> ("font-weight", weight)
     /// Defines normal characters. This is default.
     [<CustomOperation("fontWeightNormal")>]
     member inline _.fontWeightNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-weight", "normal")
@@ -469,6 +472,22 @@ type CssBuilder() =
     /// Inherits this property from its parent element.
     [<CustomOperation("fontWeightInheritFromParent")>]
     member inline _.fontWeightInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-weight", "inherit")
+
+    /// Sets the spacing between text characters.
+    [<CustomOperation("letterSpacing")>]
+    member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkPxWithKV ("letter-spacing", value)
+    /// Sets the spacing between text characters.
+    [<CustomOperation("letterSpacing")>]
+    member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("letter-spacing", value)
+    /// Specifies the default letter spacing for the current font.
+    [<CustomOperation("letterSpacingNormal")>]
+    member inline _.letterSpacingNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "normal")
+    /// Sets this property to its default value.
+    [<CustomOperation("letterSpacingInitial")>]
+    member inline _.letterSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "initial")
+    /// Inherits this property from its parent element.
+    [<CustomOperation("letterSpacingInheritFromParent")>]
+    member inline _.letterSpacingInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "inherit")
 
     /// The browser displays a normal font style. This is defaut.
     [<CustomOperation("fontStyleNormal")>]
@@ -673,7 +692,7 @@ type CssBuilder() =
     member inline _.justifyItemsBaseline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "baseline")
     ///If the combined size of the items is less than the size of the alignment container, any auto-sized items have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container.
     [<CustomOperation("justifyItemsStrench")>]
-    member inline _.justifyItemsStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "strench")
+    member inline _.justifyItemsStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "stretch")
     /// In the case of anchor-positioned elements, aligns the items to the center of the associated anchor element in the inline direction. See Centering on the anchor using anchor-center.
     [<CustomOperation("justifyItemsAnchorCenter")>]
     member inline _.justifyItemsAnchorCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-items", "anchor-center")
@@ -721,7 +740,7 @@ type CssBuilder() =
     member inline _.justifySelfBaseline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "baseline")
     /// If the combined size of the items is less than the size of the alignment container, any auto-sized items have their size increased equally (not proportionally), while still respecting the constraints imposed by max-height/max-width (or equivalent functionality), so that the combined size exactly fills the alignment container.
     [<CustomOperation("justifySelfStrench")>]
-    member inline _.justifySelfStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "strench")
+    member inline _.justifySelfStrench([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "stretch")
     /// In the case of anchor-positioned elements, aligns the item to the center of the associated anchor element in the inline direction. See Centering on the anchor using anchor-center.
     [<CustomOperation("justifySelfAnchorCenter")>]
     member inline _.justifySelfAnchorCenter([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("justify-self", "anchor-center")
@@ -3086,7 +3105,7 @@ type CssBuilder() =
     ///  - An outline may be non-rectangular
     ///
     [<CustomOperation("outlineOffset")>]
-    member inline _.outlineOffset([<InlineIfLambda>] comb: CombineKeyValue, offset: int) = comb &&& mkPxWithKV ("outline-width", offset)
+    member inline _.outlineOffset([<InlineIfLambda>] comb: CombineKeyValue, offset: int) = comb &&& mkPxWithKV ("outline-offset", offset)
 
     /// The outline-offset property adds space between an outline and the edge or border of an element.
     ///
@@ -3099,7 +3118,7 @@ type CssBuilder() =
     ///  - An outline may be non-rectangular
     ///
     [<CustomOperation("outlineOffset")>]
-    member inline _.outlineOffset([<InlineIfLambda>] comb: CombineKeyValue, offset: string) = comb &>> ("outline-width", offset)
+    member inline _.outlineOffset([<InlineIfLambda>] comb: CombineKeyValue, offset: string) = comb &>> ("outline-offset", offset)
 
     /// An outline is a line that is drawn around elements (outside the borders) to make the element "stand out".
     ///
