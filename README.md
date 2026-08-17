@@ -98,28 +98,3 @@ let styleStr = StyleStrBuilder()
     For Fable + React, it does not support, because as what I know React is using an js object for the inline style. So the key value is not the pure css standard instead it use camelCase. 
     But you can use it in Fable to build pure css inline style string if you want.
 
-
-## TODO
-
-[x] Add css selector, pseudo etc. (help wanted 😊)
-
-But we may not need to build that, because it looks pretty complex and very flexible. Maybe we can just do this:
-
-```fsharp
-styleElement {
-    ruleset ".selected span:hover" {
-        color "red"
-    }
-}
-```
-And it it generate things like
-
-```html
-<style>
-    .selected span:hover {
-        color: red;
-    }
-</style>
-```
-
-Even there is no type safety for the selector and pseudo class or element, but it is very straightforward to do.
