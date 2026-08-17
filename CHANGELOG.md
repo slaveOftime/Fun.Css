@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## 1.0.3 - 2026-08-17
+
 - Add missing `///` doc comments so all `CustomOperation` overloads surface in `Fun.Css.xml` and IDE IntelliSense
 - Fix several CSS property emission bugs: `maxHeightMaxContent`/`maxHeightMinContent` now emit `max-height`, `minHeightMaxContent`/`minHeightMinContent` now emit `min-height`, `flexDirectionInitial`/`flexDirectionInheritFromParent` now emit `flex-direction`, `outlineOffset` now emits `outline-offset`, and `justifyItemsStrench`/`justifySelfStrench` now emit the valid CSS value `stretch`
 - Add `fontWeight(string)` overload for CSS-variable / keyword string values
