@@ -53,3 +53,14 @@ let ``font-weight string should work`` () =
         fontWeight "var(--typography-strong-font-weight)"
     }
     Assert.Equal("font-weight: bold; font-weight: var(--typography-strong-font-weight); ", actual)
+    
+[<Fact>]
+let ``letter-spacing should work`` () =
+    let actual = style {
+        letterSpacing 2
+        letterSpacing "0.08em"
+        letterSpacingNormal
+        letterSpacingInitial
+        letterSpacingInheritFromParent
+    }
+    Assert.Equal("letter-spacing: 2px; letter-spacing: 0.08em; letter-spacing: normal; letter-spacing: initial; letter-spacing: inherit; ", actual)
