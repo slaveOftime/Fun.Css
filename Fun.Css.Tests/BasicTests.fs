@@ -47,6 +47,14 @@ let ``Flex should work`` () =
     Assert.Equal("display: flex; flex: 1; flex: 1 1; flex: 1 10%; flex: 1 1 10%; flex-grow: 1; ", actual)
 
 [<Fact>]
+let ``font-weight string should work`` () =
+    let actual = style {
+        fontWeight "bold"
+        fontWeight "var(--typography-strong-font-weight)"
+    }
+    Assert.Equal("font-weight: bold; font-weight: var(--typography-strong-font-weight); ", actual)
+    
+[<Fact>]
 let ``letter-spacing should work`` () =
     let actual = style {
         letterSpacing 2

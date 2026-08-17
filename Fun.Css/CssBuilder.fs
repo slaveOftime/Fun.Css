@@ -438,6 +438,9 @@ type CssBuilder() =
     /// Possible values are [100, 200, 300, 400, 500, 600, 700, 800, 900]
     [<CustomOperation("fontWeight")>]
     member inline _.fontWeight([<InlineIfLambda>] comb: CombineKeyValue, weight: int) = comb &&& mkWithKV ("font-weight", weight)
+    /// Defines font weight using a CSS string value (e.g. "bold", "var(--font-weight-strong)").
+    [<CustomOperation("fontWeight")>]
+    member inline _.fontWeight([<InlineIfLambda>] comb: CombineKeyValue, weight: string) = comb &>> ("font-weight", weight)
     /// Defines normal characters. This is default.
     [<CustomOperation("fontWeightNormal")>]
     member inline _.fontWeightNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-weight", "normal")
