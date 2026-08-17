@@ -457,6 +457,22 @@ type CssBuilder() =
     [<CustomOperation("fontWeightInheritFromParent")>]
     member inline _.fontWeightInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-weight", "inherit")
 
+    /// Sets the spacing between text characters.
+    [<CustomOperation("letterSpacing")>]
+    member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: int) = comb &&& mkPxWithKV ("letter-spacing", value)
+    /// Sets the spacing between text characters.
+    [<CustomOperation("letterSpacing")>]
+    member inline _.letterSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("letter-spacing", value)
+    /// Specifies the default letter spacing for the current font.
+    [<CustomOperation("letterSpacingNormal")>]
+    member inline _.letterSpacingNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "normal")
+    /// Sets this property to its default value.
+    [<CustomOperation("letterSpacingInitial")>]
+    member inline _.letterSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "initial")
+    /// Inherits this property from its parent element.
+    [<CustomOperation("letterSpacingInheritFromParent")>]
+    member inline _.letterSpacingInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("letter-spacing", "inherit")
+
     /// The browser displays a normal font style. This is defaut.
     [<CustomOperation("fontStyleNormal")>]
     member inline _.fontStyleNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-style", "normal")

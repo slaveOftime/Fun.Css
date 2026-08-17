@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Support letter-spacing
+
 ## 1.0.2 - 2025-03-11
 
 - Support flex-self
