@@ -47,6 +47,40 @@ let ``Flex should work`` () =
     Assert.Equal("display: flex; flex: 1; flex: 1 1; flex: 1 10%; flex: 1 1 10%; flex-grow: 1; ", actual)
 
 [<Fact>]
+let ``max-height and min-height with intrinsic sizing should emit the right property`` () =
+    let actual = style {
+        maxHeightMaxContent
+        maxHeightMinContent
+        minHeightMaxContent
+        minHeightMinContent
+    }
+    Assert.Equal("max-height: max-content; max-height: min-content; min-height: max-content; min-height: min-content; ", actual)
+
+[<Fact>]
+let ``flex-direction initial and inherit should emit flex-direction`` () =
+    let actual = style {
+        flexDirectionInitial
+        flexDirectionInheritFromParent
+    }
+    Assert.Equal("flex-direction: initial; flex-direction: inherit; ", actual)
+
+[<Fact>]
+let ``outline-offset should emit outline-offset`` () =
+    let actual = style {
+        outlineOffset 4
+        outlineOffset "1rem"
+    }
+    Assert.Equal("outline-offset: 4px; outline-offset: 1rem; ", actual)
+
+[<Fact>]
+let ``justify-items and justify-self Strench should emit the valid stretch value`` () =
+    let actual = style {
+        justifyItemsStrench
+        justifySelfStrench
+    }
+    Assert.Equal("justify-items: stretch; justify-self: stretch; ", actual)
+    
+[<Fact>]
 let ``font-weight string should work`` () =
     let actual = style {
         fontWeight "bold"
