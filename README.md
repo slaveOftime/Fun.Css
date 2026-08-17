@@ -1,8 +1,7 @@
+# Fun.Css [![NuGet](https://img.shields.io/nuget/vpre/Fun.Css)](https://www.nuget.org/packages/Fun.Css)
 
-# Fun.Css [![Nuget](https://img.shields.io/nuget/vpre/Fun.Css)](https://www.nuget.org/packages/Fun.Css)
+Fun.Css is an F# library for building type-safe inline CSS with computation expressions.
 
-
-First, let`s check how it can look like:
 ```fsharp
 style {
     backgroundColor "#44c767"
@@ -16,20 +15,13 @@ style {
 }
 ```
 
-Benchmarks (I know it is not fair comparison for Fss because Fss is more type safety and will automatically generate classname for you. But I did not find similar libraries to compare, just take as a reference), You can check the code in Benchmark/Benchmarks.fs:
+## Background
 
-|                     Method |       Mean |    Error |   StdDev |  Gen 0 | Allocated |
-|--------------------------- |-----------:|---------:|---------:|-------:|----------:|
-|       BuildStyleWithFunCss |   181.2 ns |  2.33 ns |  2.18 ns | 0.0343 |     432 B |
-| BuildStyleWithFunCssCustom |   170.9 ns |  2.31 ns |  2.05 ns | 0.0343 |     432 B |
-|        BuildStyleWithFeliz |   519.2 ns |  8.90 ns |  7.89 ns | 0.1593 |   2,000 B |
-|          BuildStyleWithFss | 6,042.3 ns | 65.63 ns | 61.39 ns | 0.8545 |  10,736 B |
+Fun.Css was originally created for [Fun.Blazor](https://github.com/slaveOftime/Fun.Blazor) to provide a type-safe and efficient way to build inline styles.
 
-This project is built in Fun.Blazor at first to help build inline style with type safety way.
+The project was inspired by Feliz.Engine. While migrating Fun.Blazor to use `InlineIfLambda` for better performance, I found that the same approach could improve CSS generation. Fun.Css therefore uses computation expressions and `InlineIfLambda` to efficiently combine CSS properties.
 
-Before I was using Feliz.Engine, when I was migrating Fun.Blazor to use InlineIfLambda for better performance, I found I can also make style building faster with the same way. So copied the Feliz.Engine basic methods for css and rebuild with computation plus InlineIfLambda.
-
-The basic stuff is like this:
+A custom operation is defined like this:
 
 ```fsharp
 [<CustomOperation("color")>]
@@ -37,18 +29,21 @@ member inline _.color([<InlineIfLambda>] comb: CombineKeyValue, color: string) =
     comb &>> ("color", color)
 ```
 
-**CombineKeyValue** is defined as:
+`CombineKeyValue` is a delegate that appends CSS fragments to a `StringBuilder`:
 
 ```fsharp
 type CombineKeyValue = delegate of StringBuilder -> StringBuilder
 ```
 
-So after you build with release mode, everything should combined in a local functions with a StringBuilder provide to append all the string pieces together.
+In release builds, the operations are combined into local functions that append each CSS fragment to a shared `StringBuilder`.
 
+## Usage
 
-## How to use it in your project
+The final output type depends on your application. The following examples show how to create builders for Fun.Blazor attributes and plain strings.
 
-It depends, take [Fun.Blazor](https://github.com/slaveOftime/Fun.Blazor) as an example, I will just inherit **Fun.Css.CssBuilder** and add a new **Run** member to generate the final result. In my case it is a **AttrRenderFragment**
+### Fun.Blazor
+
+Inherit from `Fun.Css.CssBuilder` and add a `Run` member that returns an `AttrRenderFragment`:
 
 ```fsharp
 type StyleBuilder() =
@@ -62,15 +57,14 @@ type StyleBuilder() =
             index + 1
         )
 
-// With a helper function
 let style = StyleBuilder()
 ```
 
-Then I can use it in Fun.Blazor like this:
+You can then use the builder directly in Fun.Blazor:
 
 ```fsharp
 div {
-    style { 
+    style {
         color "red"
         height 100
         width 100
@@ -78,7 +72,9 @@ div {
 }
 ```
 
-Another example is just to generate a string for the style, then you can similar do things like:
+### Plain CSS Strings
+
+To generate a CSS string, create a builder whose `Run` member returns the combined result:
 
 ```fsharp
 type StyleStrBuilder() =
@@ -86,15 +82,34 @@ type StyleStrBuilder() =
 
     member inline _.Run([<InlineIfLambda>] combine: Fun.Css.Internal.CombineKeyValue) =
         let sb = stringBuilderPool.Get()
-        let str = combine.Invoke(sb).ToString()
+        let result = combine.Invoke(sb).ToString()
         stringBuilderPool.Return sb
-        str
+        result
 
-// With a helper function
 let styleStr = StyleStrBuilder()
 ```
 
+## Fable and React
 
-    For Fable + React, it does not support, because as what I know React is using an js object for the inline style. So the key value is not the pure css standard instead it use camelCase. 
-    But you can use it in Fable to build pure css inline style string if you want.
+Fun.Css does not directly support React inline-style objects. React expects JavaScript objects with camel-cased property names rather than standard CSS strings.
 
+You can still use Fun.Css with Fable when you need to generate a standard inline CSS string.
+
+## Benchmarks
+
+The following results are provided as a general reference. The comparison with Fss is not equivalent because Fss provides additional type-safety features and automatically generates class names.
+
+See `Benchmark/Benchmarks.fs` for the benchmark source.
+
+BenchmarkDotNet v0.15.8, Linux Debian GNU/Linux 13 (trixie)
+Intel Core Ultra 7 265H 3.69GHz, 1 CPU, 16 logical and 16 physical cores
+.NET SDK 10.0.400
+  [Host]     : .NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3 DEBUG
+  DefaultJob : .NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3
+
+| Method                     | Mean      | Error     | StdDev    | Gen0   | Gen1   | Allocated |
+|--------------------------- |----------:|----------:|----------:|-------:|-------:|----------:|
+| BuildStyleWithFunCss       |  79.51 ns |  1.270 ns |  1.061 ns | 0.0318 |      - |     400 B |
+| BuildStyleWithFunCssCustom |  72.14 ns |  1.593 ns |  4.673 ns | 0.0318 |      - |     400 B |
+| BuildStyleWithFeliz        | 344.64 ns |  6.859 ns | 16.565 ns | 0.1535 | 0.0005 |    1928 B |
+| BuildStyleWithFss          | 996.88 ns | 19.811 ns | 51.138 ns | 0.4072 | 0.0010 |    5120 B |
