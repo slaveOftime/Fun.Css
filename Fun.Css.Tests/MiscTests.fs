@@ -1,3 +1,5 @@
+#nowarn "44" // obsolete-op usage is intentional: verifies legacy names keep working (backward compatibility)
+
 module Fun.Css.Tests.MiscTests
 
 open Microsoft.Extensions.ObjectPool
@@ -53,7 +55,7 @@ let ``borderWidth multi-value overloads`` () =
             borderWidth "1px" "2px" "3px" "4px"
         }
 
-    Assert.Equal("border-width: 1px, 2px; border-width: 1px; border-width: 1px, 2px, 3px, , 4px; ", actual)
+    Assert.Equal("border-width: 1px 2px; border-width: 1px; border-width: 1px 2px 3px 4px; ", actual)
 
 [<Fact>]
 let ``cursor variants`` () =
@@ -106,6 +108,18 @@ let ``float and clear`` () =
     Assert.Equal("float: left; float: right; float: none; ", actual)
 
 [<Fact>]
+let ``floatStyle keywords and string overload`` () =
+    let actual =
+        style {
+            floatStyleLeft
+            floatStyleRight
+            floatStyleNone
+            floatStyle "var(--float)"
+        }
+
+    Assert.Equal("float: left; float: right; float: none; float: var(--float); ", actual)
+
+[<Fact>]
 let ``colors and caret`` () =
     let actual =
         style {
@@ -138,7 +152,7 @@ let ``backgroundSize overloads`` () =
         }
 
     Assert.Equal(
-        "background-size: 100% 100%; background-size: 100px, auto; background-size: auto; background-size: cover; background-size: contain; ",
+        "background-size: 100% 100%; background-size: 100px auto; background-size: auto; background-size: cover; background-size: contain; ",
         actual
     )
 
@@ -270,6 +284,44 @@ let ``emptyCells and tableLayout`` () =
     Assert.Equal("empty-cells: show; empty-cells: hide; table-layout: auto; table-layout: fixed; ", actual)
 
 [<Fact>]
+let ``tableLayoutFixed (new name) and string overloads`` () =
+    let actual =
+        style {
+            tableLayoutFixed
+            tableLayout "var(--table-layout)"
+            emptyCells "var(--empty-cells)"
+        }
+
+    Assert.Equal("table-layout: fixed; table-layout: var(--table-layout); empty-cells: var(--empty-cells); ", actual)
+
+[<Fact>]
 let ``fill and stroke for SVG`` () =
     let actual = style { fill "currentColor" }
     Assert.Equal("fill: currentColor; ", actual)
+
+[<Fact>]
+let ``string overloads for keyword-only properties (design token support)`` () =
+    let actual =
+        style {
+            visibility "var(--visibility)"
+            overflow "var(--overflow)"
+            overflowX "var(--overflow-x)"
+            overflowY "var(--overflow-y)"
+            resize "var(--resize)"
+            userSelect "var(--user-select)"
+            scrollBehavior "var(--scroll-behavior)"
+            listStyleType "var(--list-style-type)"
+            listStylePosition "var(--list-style-position)"
+            borderCollapse "var(--border-collapse)"
+            direction "var(--direction)"
+            writingMode "var(--writing-mode)"
+            outlineStyle "var(--outline-style)"
+            backgroundClip "var(--background-clip)"
+            backgroundBlendMode "var(--background-blend-mode)"
+            filter "var(--filter)"
+        }
+
+    Assert.Equal(
+        "visibility: var(--visibility); overflow: var(--overflow); overflow-x: var(--overflow-x); overflow-y: var(--overflow-y); resize: var(--resize); user-select: var(--user-select); scroll-behavior: var(--scroll-behavior); list-style-type: var(--list-style-type); list-style-position: var(--list-style-position); border-collapse: var(--border-collapse); direction: var(--direction); writing-mode: var(--writing-mode); outline-style: var(--outline-style); background-clip: var(--background-clip); background-blend-mode: var(--background-blend-mode); filter: var(--filter); ",
+        actual
+    )

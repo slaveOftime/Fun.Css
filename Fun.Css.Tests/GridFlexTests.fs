@@ -28,7 +28,7 @@ let ``gridTemplateColumns overloads`` () =
         }
 
     Assert.Equal(
-        "grid-template-columns: 100px 200px 100px ; grid-template-columns: 1fr 1fr 2fr; grid-template-columns: repeat(3, 1fr); grid-template-columns: repeat(3, 1fr, [col-start]); ",
+        "grid-template-columns: 100px 200px 100px; grid-template-columns: 1fr 1fr 2fr; grid-template-columns: repeat(3, 1fr); grid-template-columns: repeat(3, 1fr, [col-start]); ",
         actual
     )
 
@@ -43,7 +43,7 @@ let ``gridTemplateRows overloads`` () =
         }
 
     Assert.Equal(
-        "grid-template-rows: 100px 200px ; grid-template-rows: 1fr 10% 250px auto; grid-template-rows: repeat(3, 10%); grid-template-rows: repeat(3, 10% [row-start]); ",
+        "grid-template-rows: 100px 200px; grid-template-rows: 1fr 10% 250px auto; grid-template-rows: repeat(3, 10%); grid-template-rows: repeat(3, 10% [row-start]); ",
         actual
     )
 
@@ -52,7 +52,7 @@ let ``gridTemplateAreas`` () =
     let actual =
         style { gridTemplateAreas [ "header header header"; "nav main sidebar"; "footer footer footer" ] }
 
-    Assert.Equal("grid-template-areas: 'header header header' 'nav main sidebar' 'footer footer footer' ; ", actual)
+    Assert.Equal("grid-template-areas: 'header header header' 'nav main sidebar' 'footer footer footer'; ", actual)
 
 [<Fact>]
 let ``gap overloads`` () =
@@ -161,5 +161,22 @@ let ``flexShrink and flexBasis`` () =
 
     Assert.Equal(
         "flex-shrink: 2; flex-basis: 100px; flex-basis: auto; flex-basis: auto; flex-basis: initial; flex-basis: inherit; ",
+        actual
+    )
+
+[<Fact>]
+let ``flex and align string overloads`` () =
+    let actual =
+        style {
+            flexDirection "var(--flex-direction)"
+            flexWrap "var(--flex-wrap)"
+            alignContent "var(--align-content)"
+            alignItems "var(--align-items)"
+            alignSelf "var(--align-self)"
+            transformStyle "var(--transform-style)"
+        }
+
+    Assert.Equal(
+        "flex-direction: var(--flex-direction); flex-wrap: var(--flex-wrap); align-content: var(--align-content); align-items: var(--align-items); align-self: var(--align-self); transform-style: var(--transform-style); ",
         actual
     )

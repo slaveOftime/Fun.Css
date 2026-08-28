@@ -46,7 +46,7 @@ let ``transformOrigin overloads`` () =
 let ``transformMatrix has correct value order`` () =
     // matrix(x1, y2, z1, x2, y2, z2) -- note: y1 is skipped (bug? see TODO.md)
     let actual = style { transformMatrix 1 2 3 4 5 6 }
-    Assert.Equal("transform: matrix(1,5,3,4,5,6); ", actual)
+    Assert.Equal("transform: matrix(1,2,3,4,5,6); ", actual)
 
 [<Fact>]
 let ``transformTranslate overloads`` () =
@@ -147,6 +147,6 @@ let ``boxShadow overloads`` () =
         }
 
     Assert.Equal(
-        "box-shadow: 2px 4px 8px rgba(0,0,0,0.2); box-shadow1px 2px red; box-shadow: 1px 2px 3px blue; box-shadow: 1px 2px 3px 4px green; box-shadow: none; box-shadow: inherit; ",
+        "box-shadow: 2px 4px 8px rgba(0,0,0,0.2); box-shadow: 1px 2px red; box-shadow: 1px 2px 3px blue; box-shadow: 1px 2px 3px 4px green; box-shadow: none; box-shadow: inherit; ",
         actual
     )

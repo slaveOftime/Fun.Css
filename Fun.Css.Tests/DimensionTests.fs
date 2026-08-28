@@ -1,3 +1,5 @@
+#nowarn "44" // obsolete-op usage is intentional: verifies legacy names keep working (backward compatibility)
+
 module Fun.Css.Tests.DimensionTests
 
 open Microsoft.Extensions.ObjectPool
@@ -180,6 +182,17 @@ let ``box sizing and display samples`` () =
     )
 
 [<Fact>]
+let ``display new name and string overload`` () =
+    let actual =
+        style {
+            displayInline
+            display "var(--display)"
+            boxSizing "var(--box-sizing)"
+        }
+
+    Assert.Equal("display: inline; display: var(--display); box-sizing: var(--box-sizing); ", actual)
+
+[<Fact>]
 let ``position keywords`` () =
     let actual =
         style {
@@ -194,6 +207,16 @@ let ``position keywords`` () =
         "position: static; position: relative; position: absolute; position: fixed; position: sticky; ",
         actual
     )
+
+[<Fact>]
+let ``position new name and string overload`` () =
+    let actual =
+        style {
+            positionStatic
+            position "var(--position)"
+        }
+
+    Assert.Equal("position: static; position: var(--position); ", actual)
 
 [<Fact>]
 let ``overflow variants`` () =

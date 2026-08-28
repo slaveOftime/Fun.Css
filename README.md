@@ -2,6 +2,8 @@
 
 Fun.Css is an F# library for building type-safe inline CSS with computation expressions.
 
+> 🤖 [SKILL.md](SKILL.md) is an [Agent Skills](https://agentskills.io)-format guide: point your AI coding assistant at it and it can author Fun.Css styles correctly from CSS knowledge alone. It documents the naming and consistency patterns every operation follows (camelCase property + PascalCase keyword, universal `(value: string)` overloads for CSS variables, composition, gotchas, and the deprecation policy) — useful for humans too.
+
 ```fsharp
 style {
     backgroundColor "#44c767"

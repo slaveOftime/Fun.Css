@@ -1,3 +1,5 @@
+#nowarn "44" // obsolete-op usage is intentional: verifies legacy names keep working (backward compatibility)
+
 module Fun.Css.Tests.TypographyTests
 
 open Microsoft.Extensions.ObjectPool
@@ -180,7 +182,7 @@ let ``textIndent overloads`` () =
             textIndent "2em"
         }
     // note: int overload does NOT emit px (uses mkWithKV instead of mkPxWithKV) - see TODO.md
-    Assert.Equal("text-indent: 10; text-indent: 2em; ", actual)
+    Assert.Equal("text-indent: 10px; text-indent: 2em; ", actual)
 
 [<Fact>]
 let ``verticalAlign keywords`` () =
@@ -200,7 +202,7 @@ let ``verticalAlign keywords`` () =
 
     Assert.Equal(
         // note: verticalAlignSub emits "sup" (bug - see TODO.md)
-        "vertical-align: baseline; vertical-align: sup; vertical-align: super; vertical-align: top; vertical-align: text-top; vertical-align: middle; vertical-align: bottom; vertical-align: text-bottom; vertical-align: initial; vertical-align: inherit; ",
+        "vertical-align: baseline; vertical-align: sub; vertical-align: super; vertical-align: top; vertical-align: text-top; vertical-align: middle; vertical-align: bottom; vertical-align: text-bottom; vertical-align: initial; vertical-align: inherit; ",
         actual
     )
 
@@ -223,7 +225,7 @@ let ``whiteSpace keywords`` () =
     )
 
 [<Fact>]
-let ``wordbreak keywords`` () =
+let ``wordbreak keywords (obsolete names)`` () =
     let actual =
         style {
             wordbreakNormal
@@ -236,6 +238,24 @@ let ``wordbreak keywords`` () =
 
     Assert.Equal(
         "word-break: normal; word-break: break-all; word-break: keep-all; word-break: break-word; word-break: initial; word-break: inherit; ",
+        actual
+    )
+
+[<Fact>]
+let ``wordBreak keywords (new names) and string overload`` () =
+    let actual =
+        style {
+            wordBreakNormal
+            wordBreakBreakAll
+            wordBreakKeepAll
+            wordBreakBreakWord
+            wordBreakInitial
+            wordBreakInheritFromParent
+            wordBreak "var(--word-break)"
+        }
+
+    Assert.Equal(
+        "word-break: normal; word-break: break-all; word-break: keep-all; word-break: break-word; word-break: initial; word-break: inherit; word-break: var(--word-break); ",
         actual
     )
 
@@ -253,5 +273,28 @@ let ``textJustify keywords`` () =
 
     Assert.Equal(
         "text-justify: auto; text-justify: inter-word; text-justify: inter-character; text-justify: none; text-justify: initial; text-justify: inherit; ",
+        actual
+    )
+
+[<Fact>]
+let ``typography string overloads`` () =
+    let actual =
+        style {
+            verticalAlign "var(--vertical-align)"
+            whiteSpace "var(--white-space)"
+            textAlign "var(--text-align)"
+            textTransform "var(--text-transform)"
+            textJustify "var(--text-justify)"
+            textOverflow "var(--text-overflow)"
+            wordWrap "var(--word-wrap)"
+            fontStyle "var(--font-style)"
+            fontVariant "var(--font-variant)"
+            fontKerning "var(--font-kerning)"
+            fontStretch "var(--font-stretch)"
+            textDecorationStyle "var(--text-decoration-style)"
+        }
+
+    Assert.Equal(
+        "vertical-align: var(--vertical-align); white-space: var(--white-space); text-align: var(--text-align); text-transform: var(--text-transform); text-justify: var(--text-justify); text-overflow: var(--text-overflow); word-wrap: var(--word-wrap); font-style: var(--font-style); font-variant: var(--font-variant); font-kerning: var(--font-kerning); font-stretch: var(--font-stretch); text-decoration-style: var(--text-decoration-style); ",
         actual
     )

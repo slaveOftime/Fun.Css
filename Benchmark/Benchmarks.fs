@@ -76,30 +76,27 @@ type Benchmarks() =
     member _.BuildStyleWithFeliz() =
         makeStyles
             ".my-feliz-style"
-            [
-                felizStyle.backgroundColor "#44c767"
-                felizStyle.borderRadius 30
-                felizStyle.borderWidth 1
-                felizStyle.borderStyleSolid
-                felizStyle.borderColor "#18ab29"
-                felizStyle.displayInlineBlock
-                felizStyle.cursorPointer
-                felizStyle.fontSize 17
-            ]
+            [ felizStyle.backgroundColor "#44c767"
+              felizStyle.borderRadius 30
+              felizStyle.borderWidth 1
+              felizStyle.borderStyleSolid
+              felizStyle.borderColor "#18ab29"
+              felizStyle.displayInlineBlock
+              felizStyle.cursorPointer
+              felizStyle.fontSize 17 ]
 
 
     [<Benchmark>]
     member _.BuildStyleWithFss() =
-        createFss [
-            BackgroundColor.hex "44c767"
-            BorderRadius.value (px 30)
-            BorderWidth.value (px 1)
-            BorderStyle.solid
-            BorderColor.hex "18ab29"
-            Display.inlineBlock
-            Cursor.pointer
-            FontSize.value (px 17)
-        ]
+        createFss
+            [ BackgroundColor.hex "44c767"
+              BorderRadius.value (px 30)
+              BorderWidth.value (px 1)
+              BorderStyle.solid
+              BorderColor.hex "18ab29"
+              Display.inlineBlock
+              Cursor.pointer
+              FontSize.value (px 17) ]
 
 
 // From Fun.Css

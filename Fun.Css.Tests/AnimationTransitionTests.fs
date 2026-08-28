@@ -1,3 +1,5 @@
+#nowarn "44" // obsolete-op usage is intentional: verifies legacy names keep working (backward compatibility)
+
 module Fun.Css.Tests.AnimationTransitionTests
 
 open System
@@ -118,9 +120,39 @@ let ``animation fill mode`` () =
     )
 
 [<Fact>]
-let ``animation duration count`` () =
+let ``animation duration count (obsolete) still emits animation-iteration-count`` () =
     let actual = style { animationDurationCount 3 }
-    Assert.Equal("animation-duration-count: 3; ", actual)
+    Assert.Equal("animation-iteration-count: 3; ", actual)
+
+[<Fact>]
+let ``animationIterationCount overloads`` () =
+    let actual =
+        style {
+            animationIterationCount 3
+            animationIterationCount "var(--animation-count)"
+        }
+
+    Assert.Equal("animation-iteration-count: 3; animation-iteration-count: var(--animation-count); ", actual)
+
+[<Fact>]
+let ``animation timing and direction string overloads`` () =
+    let actual =
+        style {
+            animationTimingFunction "cubic-bezier(0.1, 0.7, 1, 0.1)"
+            animationDirection "var(--animation-direction)"
+            animationPlayState "var(--animation-play-state)"
+            animationFillMode "var(--animation-fill-mode)"
+        }
+
+    Assert.Equal(
+        "animation-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1); animation-direction: var(--animation-direction); animation-play-state: var(--animation-play-state); animation-fill-mode: var(--animation-fill-mode); ",
+        actual
+    )
+
+[<Fact>]
+let ``transitionTimingFunction string overload`` () =
+    let actual = style { transitionTimingFunction "steps(4, end)" }
+    Assert.Equal("transition-timing-function: steps(4, end); ", actual)
 
 [<Fact>]
 let ``transition shorthand and property`` () =
