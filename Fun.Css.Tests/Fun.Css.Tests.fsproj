@@ -10,6 +10,15 @@
 
   <ItemGroup>
     <Compile Include="BasicTests.fs" />
+    <Compile Include="BuilderCoreTests.fs" />
+    <Compile Include="DimensionTests.fs" />
+    <Compile Include="TypographyTests.fs" />
+    <Compile Include="TransformTests.fs" />
+    <Compile Include="AnimationTransitionTests.fs" />
+    <Compile Include="GridFlexTests.fs" />
+    <Compile Include="MiscTests.fs" />
+    <Compile Include="UsagePatternTests.fs" />
+    <Compile Include="ColorFontTests.fs" />
   </ItemGroup>
 
   <ItemGroup>

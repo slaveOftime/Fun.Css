@@ -8,6 +8,7 @@ pipeline "benchmark" {
         workingDir "Benchmark"
         run "dotnet run -c Release"
     }
+
     runIfOnlySpecified
 }
 

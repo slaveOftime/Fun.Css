@@ -1,3 +1,5 @@
+#nowarn "44" // obsolete-op usage is intentional: verifies legacy names keep working (backward compatibility)
+
 module Fun.Css.Tests.BasicTests
 
 open Microsoft.Extensions.ObjectPool
@@ -73,13 +75,21 @@ let ``outline-offset should emit outline-offset`` () =
     Assert.Equal("outline-offset: 4px; outline-offset: 1rem; ", actual)
 
 [<Fact>]
-let ``justify-items and justify-self Strench should emit the valid stretch value`` () =
+let ``justify-items and justify-self Strench (obsolete) should emit the valid stretch value`` () =
     let actual = style {
         justifyItemsStrench
         justifySelfStrench
     }
     Assert.Equal("justify-items: stretch; justify-self: stretch; ", actual)
-    
+
+[<Fact>]
+let ``justifyItemsStretch and justifySelfStretch should emit the valid stretch value`` () =
+    let actual = style {
+        justifyItemsStretch
+        justifySelfStretch
+    }
+    Assert.Equal("justify-items: stretch; justify-self: stretch; ", actual)
+
 [<Fact>]
 let ``font-weight string should work`` () =
     let actual = style {

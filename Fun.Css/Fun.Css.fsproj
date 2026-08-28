@@ -13,6 +13,8 @@
 			<LogicalName>ILLink.Substitutions.xml</LogicalName>
 		</EmbeddedResource>
 		<Compile Include="CssBuilder.fs" />
+		<Compile Include="Color.fs" />
+		<Compile Include="Font.fs" />
 		<!-- Add source files to "fable" folder in Nuget package -->
 		<Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
 	</ItemGroup>
