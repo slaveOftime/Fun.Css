@@ -5,6 +5,7 @@ module Fun.Css.Tests.MiscTests
 open Microsoft.Extensions.ObjectPool
 open Xunit
 
+
 let objectPoolProvider = DefaultObjectPoolProvider()
 let stringBuilderPool = objectPoolProvider.CreateStringBuilderPool()
 
@@ -323,5 +324,57 @@ let ``string overloads for keyword-only properties (design token support)`` () =
 
     Assert.Equal(
         "visibility: var(--visibility); overflow: var(--overflow); overflow-x: var(--overflow-x); overflow-y: var(--overflow-y); resize: var(--resize); user-select: var(--user-select); scroll-behavior: var(--scroll-behavior); list-style-type: var(--list-style-type); list-style-position: var(--list-style-position); border-collapse: var(--border-collapse); direction: var(--direction); writing-mode: var(--writing-mode); outline-style: var(--outline-style); background-clip: var(--background-clip); background-blend-mode: var(--background-blend-mode); filter: var(--filter); ",
+        actual
+    )
+
+[<Fact>]
+let ``new standard property coverage ops`` () =
+    let actual =
+        style {
+            order 2
+            order "var(--order)"
+            flexFlow "row wrap"
+            outline "2px solid red"
+            outlineWidth 2.5
+            background "url(a.png) no-repeat center / cover"
+            backgroundAttachmentFixed
+            backgroundOrigin "padding-box"
+            backgroundPositionX "left"
+            backgroundPositionY "10px"
+            font "italic bold 12px/1.5 sans-serif"
+            textDecorationThickness "0.1em"
+            textDecorationSkipInkNone
+            textAlignLastCenter
+            tabSize 4
+            overflowWrap "anywhere"
+            textRenderingOptimizeLegibility
+            textSizeAdjust "100%"
+            textOrientationUpright
+            gridAutoRows "minmax(100px, auto)"
+            gridAutoColumns "auto"
+            gridAutoFlowRowDense
+            grid "auto-flow / 1fr 1fr"
+            listStyle "square inside"
+            transitionBehaviorAllowDiscrete
+            transformBoxFillBox
+            backfaceVisibilityHidden
+            inset 0
+            aspectRatio "16 / 9"
+            containPaint
+            marginBlockStart 10
+            marginInlineEnd "var(--margin-end)"
+            paddingBlockStart 10
+            paddingInlineEnd "1em"
+            scrollSnapAlignStart
+            scrollSnapTypeXMandatory
+            scrollSnapStopAlways
+            scrollMargin "10px"
+            scrollPadding "10px"
+            borderTopLeftRadius 8
+            borderBottomRightRadius "50%"
+        }
+
+    Assert.Equal(
+        "order: 2; order: var(--order); flex-flow: row wrap; outline: 2px solid red; outline-width: 2.5px; background: url(a.png) no-repeat center / cover; background-attachment: fixed; background-origin: padding-box; background-position-x: left; background-position-y: 10px; font: italic bold 12px/1.5 sans-serif; text-decoration-thickness: 0.1em; text-decoration-skip-ink: none; text-align-last: center; tab-size: 4; overflow-wrap: anywhere; text-rendering: optimizeLegibility; text-size-adjust: 100%; text-orientation: upright; grid-auto-rows: minmax(100px, auto); grid-auto-columns: auto; grid-auto-flow: row dense; grid: auto-flow / 1fr 1fr; list-style: square inside; transition-behavior: allow-discrete; transform-box: fill-box; backface-visibility: hidden; inset: 0px; aspect-ratio: 16 / 9; contain: paint; margin-block-start: 10px; margin-inline-end: var(--margin-end); padding-block-start: 10px; padding-inline-end: 1em; scroll-snap-align: start; scroll-snap-type: x mandatory; scroll-snap-stop: always; scroll-margin: 10px; scroll-padding: 10px; border-top-left-radius: 8px; border-bottom-right-radius: 50%; ",
         actual
     )

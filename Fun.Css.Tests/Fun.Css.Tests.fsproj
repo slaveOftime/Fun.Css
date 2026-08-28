@@ -17,6 +17,7 @@
     <Compile Include="AnimationTransitionTests.fs" />
     <Compile Include="GridFlexTests.fs" />
     <Compile Include="MiscTests.fs" />
+    <Compile Include="UsagePatternTests.fs" />
     <Compile Include="ColorFontTests.fs" />
   </ItemGroup>
 
