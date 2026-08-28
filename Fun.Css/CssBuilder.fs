@@ -758,6 +758,20 @@ type CssBuilder() =
     member inline _.backgroundSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
         comb &>> ("background-size", value)
 
+    /// Sets the size of the element's background image (in pixels).
+    ///
+    /// The image can be left to its natural size, stretched, or constrained to fit the available space.
+    [<CustomOperation("backgroundSize")>]
+    member inline _.backgroundSize([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
+        comb &&& mkPxWithKV ("background-size", value)
+
+    /// Sets the size of the element's background image (in pixels).
+    ///
+    /// The image can be left to its natural size, stretched, or constrained to fit the available space.
+    [<CustomOperation("backgroundSize")>]
+    member inline _.backgroundSize([<InlineIfLambda>] comb: CombineKeyValue, value: float) =
+        comb &&& mkPxWithKV ("background-size", value)
+
     /// Sets the size of the element's background image.
     ///
     /// The image can be left to its natural size, stretched, or constrained to fit the available space.
@@ -1040,6 +1054,98 @@ type CssBuilder() =
     [<CustomOperation("backgroundPositionY")>]
     member inline _.backgroundPositionY([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
         comb &>> ("background-position-y", value)
+
+
+    /// Shorthand for setting all mask-* properties.
+    [<CustomOperation("mask")>]
+    member inline _.mask([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("mask", value)
+
+    /// Sets the image used as the mask layer (e.g. url(...) or a gradient).
+    [<CustomOperation("maskImage")>]
+    member inline _.maskImage([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("mask-image", value)
+
+    /// Sets the size of the mask image.
+    [<CustomOperation("maskSize")>]
+    member inline _.maskSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("mask-size", value)
+
+    /// Default. The mask is repeated.
+    [<CustomOperation("maskRepeatRepeat")>]
+    member inline _.maskRepeatRepeat([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-repeat", "repeat")
+
+    /// The mask is not repeated.
+    [<CustomOperation("maskRepeatNoRepeat")>]
+    member inline _.maskRepeatNoRepeat([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-repeat", "no-repeat")
+
+    /// Repeated horizontally only.
+    [<CustomOperation("maskRepeatRepeatX")>]
+    member inline _.maskRepeatRepeatX([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-repeat", "repeat-x")
+
+    /// Repeated vertically only.
+    [<CustomOperation("maskRepeatRepeatY")>]
+    member inline _.maskRepeatRepeatY([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-repeat", "repeat-y")
+
+    /// Sets whether and how the mask image is repeated.
+    [<CustomOperation("maskRepeat")>]
+    member inline _.maskRepeat([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("mask-repeat", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("maskRepeatInitial")>]
+    member inline _.maskRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-repeat", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("maskRepeatInheritFromParent")>]
+    member inline _.maskRepeatInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-repeat", "inherit")
+
+    /// Sets the initial position of the mask image.
+    [<CustomOperation("maskPosition")>]
+    member inline _.maskPosition([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("mask-position", value)
+
+    /// Determines the area affected by the mask (e.g. "border-box", "padding-box", "content-box").
+    [<CustomOperation("maskClip")>]
+    member inline _.maskClip([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("mask-clip", value)
+
+    /// Sets the origin of the mask (e.g. "border-box", "padding-box", "content-box").
+    [<CustomOperation("maskOrigin")>]
+    member inline _.maskOrigin([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("mask-origin", value)
+
+    /// Default. Mask layers are added.
+    [<CustomOperation("maskCompositeAdd")>]
+    member inline _.maskCompositeAdd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mask-composite", "add")
+
+    /// Mask layers are subtracted.
+    [<CustomOperation("maskCompositeSubtract")>]
+    member inline _.maskCompositeSubtract([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-composite", "subtract")
+
+    /// Mask layers are intersected.
+    [<CustomOperation("maskCompositeIntersect")>]
+    member inline _.maskCompositeIntersect([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-composite", "intersect")
+
+    /// Mask layers are excluded (XOR).
+    [<CustomOperation("maskCompositeExclude")>]
+    member inline _.maskCompositeExclude([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-composite", "exclude")
+
+    /// Sets how multiple mask layers are composited together.
+    [<CustomOperation("maskComposite")>]
+    member inline _.maskComposite([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("mask-composite", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("maskCompositeInitial")>]
+    member inline _.maskCompositeInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-composite", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("maskCompositeInheritFromParent")>]
+    member inline _.maskCompositeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mask-composite", "inherit")
+
 
 
 
@@ -1513,6 +1619,198 @@ type CssBuilder() =
         comb &&& mkPxWithKV ("border-bottom-left-radius", value)
 
 
+    /// Shorthand for setting all border-image-* properties (source, slice, width, outset, repeat).
+    [<CustomOperation("borderImage")>]
+    member inline _.borderImage([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image", value)
+
+    /// Sets the source image used to create an element's border image (e.g. url(...) or a gradient).
+    [<CustomOperation("borderImageSource")>]
+    member inline _.borderImageSource([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image-source", value)
+
+    /// Divides the border image into regions (e.g. "30", "30% fill").
+    [<CustomOperation("borderImageSlice")>]
+    member inline _.borderImageSlice([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image-slice", value)
+
+    /// Sets the width of the border image (e.g. "1", "10px").
+    [<CustomOperation("borderImageWidth")>]
+    member inline _.borderImageWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image-width", value)
+
+    /// Sets the distance by which the border image is set out from the border box.
+    [<CustomOperation("borderImageOutset")>]
+    member inline _.borderImageOutset([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image-outset", value)
+
+    /// Default. The region is stretched to fill the gap.
+    [<CustomOperation("borderImageRepeatStretch")>]
+    member inline _.borderImageRepeatStretch([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "stretch")
+
+    /// The region is tiled to fill the gap.
+    [<CustomOperation("borderImageRepeatRepeat")>]
+    member inline _.borderImageRepeatRepeat([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "repeat")
+
+    /// The region is tiled and rescaled to fill the gap with a whole number of tiles.
+    [<CustomOperation("borderImageRepeatRound")>]
+    member inline _.borderImageRepeatRound([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "round")
+
+    /// The region is tiled with extra space distributed between tiles.
+    [<CustomOperation("borderImageRepeatSpace")>]
+    member inline _.borderImageRepeatSpace([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "space")
+
+    /// Defines how the edge regions of the border image are scaled and tiled.
+    [<CustomOperation("borderImageRepeat")>]
+    member inline _.borderImageRepeat([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-image-repeat", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("borderImageRepeatInitial")>]
+    member inline _.borderImageRepeatInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("borderImageRepeatInheritFromParent")>]
+    member inline _.borderImageRepeatInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-image-repeat", "inherit")
+
+    /// Shorthand for setting the block-start and block-end borders (width, style, color).
+    [<CustomOperation("borderBlock")>]
+    member inline _.borderBlock([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block", value)
+
+    /// Sets the color of the block-start and block-end borders.
+    [<CustomOperation("borderBlockColor")>]
+    member inline _.borderBlockColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block-color", value)
+
+    /// No border.
+    [<CustomOperation("borderBlockStyleNone")>]
+    member inline _.borderBlockStyleNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "none")
+
+    /// A solid line.
+    [<CustomOperation("borderBlockStyleSolid")>]
+    member inline _.borderBlockStyleSolid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "solid")
+
+    /// A dashed line.
+    [<CustomOperation("borderBlockStyleDashed")>]
+    member inline _.borderBlockStyleDashed([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "dashed")
+
+    /// A dotted line.
+    [<CustomOperation("borderBlockStyleDotted")>]
+    member inline _.borderBlockStyleDotted([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "dotted")
+
+    /// A double line.
+    [<CustomOperation("borderBlockStyleDouble")>]
+    member inline _.borderBlockStyleDouble([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "double")
+
+    /// Sets the style of the block-start and block-end borders.
+    [<CustomOperation("borderBlockStyle")>]
+    member inline _.borderBlockStyle([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block-style", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("borderBlockStyleInitial")>]
+    member inline _.borderBlockStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("borderBlockStyleInheritFromParent")>]
+    member inline _.borderBlockStyleInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-block-style", "inherit")
+
+    /// Sets the width of the block-start and block-end borders.
+    [<CustomOperation("borderBlockWidth")>]
+    member inline _.borderBlockWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block-width", value)
+
+    /// Shorthand for setting the inline-start and inline-end borders (width, style, color).
+    [<CustomOperation("borderInline")>]
+    member inline _.borderInline([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline", value)
+
+    /// Sets the color of the inline-start and inline-end borders.
+    [<CustomOperation("borderInlineColor")>]
+    member inline _.borderInlineColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline-color", value)
+
+    /// No border.
+    [<CustomOperation("borderInlineStyleNone")>]
+    member inline _.borderInlineStyleNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "none")
+
+    /// A solid line.
+    [<CustomOperation("borderInlineStyleSolid")>]
+    member inline _.borderInlineStyleSolid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "solid")
+
+    /// A dashed line.
+    [<CustomOperation("borderInlineStyleDashed")>]
+    member inline _.borderInlineStyleDashed([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "dashed")
+
+    /// A dotted line.
+    [<CustomOperation("borderInlineStyleDotted")>]
+    member inline _.borderInlineStyleDotted([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "dotted")
+
+    /// A double line.
+    [<CustomOperation("borderInlineStyleDouble")>]
+    member inline _.borderInlineStyleDouble([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "double")
+
+    /// Sets the style of the inline-start and inline-end borders.
+    [<CustomOperation("borderInlineStyle")>]
+    member inline _.borderInlineStyle([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline-style", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("borderInlineStyleInitial")>]
+    member inline _.borderInlineStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("borderInlineStyleInheritFromParent")>]
+    member inline _.borderInlineStyleInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("border-inline-style", "inherit")
+
+    /// Sets the width of the inline-start and inline-end borders.
+    [<CustomOperation("borderInlineWidth")>]
+    member inline _.borderInlineWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline-width", value)
+
+    /// Shorthand for setting the block-start border (width, style, color).
+    [<CustomOperation("borderBlockStart")>]
+    member inline _.borderBlockStart([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block-start", value)
+
+    /// Shorthand for setting the block-end border (width, style, color).
+    [<CustomOperation("borderBlockEnd")>]
+    member inline _.borderBlockEnd([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-block-end", value)
+
+    /// Shorthand for setting the inline-start border (width, style, color).
+    [<CustomOperation("borderInlineStart")>]
+    member inline _.borderInlineStart([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline-start", value)
+
+    /// Shorthand for setting the inline-end border (width, style, color).
+    [<CustomOperation("borderInlineEnd")>]
+    member inline _.borderInlineEnd([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("border-inline-end", value)
+
+
+
 
 
     // --------------------------------------------------------------------
@@ -1723,6 +2021,34 @@ type CssBuilder() =
     [<CustomOperation("paddingTop")>]
     member inline _.paddingTop([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
         comb &>> ("padding-top", value)
+
+
+    /// Default. Margins are not trimmed.
+    [<CustomOperation("marginTrimNone")>]
+    member inline _.marginTrimNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("margin-trim", "none")
+
+    /// Trim block-axis margins adjoining the box.
+    [<CustomOperation("marginTrimBlock")>]
+    member inline _.marginTrimBlock([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("margin-trim", "block")
+
+    /// Trim inline-axis margins adjoining the box.
+    [<CustomOperation("marginTrimInline")>]
+    member inline _.marginTrimInline([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("margin-trim", "inline")
+
+    /// Controls whether the margins of a box's children are trimmed when they adjoin the box's edges.
+    [<CustomOperation("marginTrim")>]
+    member inline _.marginTrim([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("margin-trim", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("marginTrimInitial")>]
+    member inline _.marginTrimInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("margin-trim", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("marginTrimInheritFromParent")>]
+    member inline _.marginTrimInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("margin-trim", "inherit")
+
 
 
 
@@ -2824,6 +3150,194 @@ type CssBuilder() =
     member inline _.grid([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("grid", value)
 
 
+    /// Shorthand for column-width and column-count (multi-column layout).
+    [<CustomOperation("columns")>]
+    member inline _.columns([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("columns", value)
+
+    /// Default. The width is determined by other properties (column-count).
+    [<CustomOperation("columnWidthAuto")>]
+    member inline _.columnWidthAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-width", "auto")
+
+    /// Sets the ideal column width in a multi-column layout. Also accepts a length via the string overload.
+    [<CustomOperation("columnWidth")>]
+    member inline _.columnWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-width", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("columnWidthInitial")>]
+    member inline _.columnWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-width", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("columnWidthInheritFromParent")>]
+    member inline _.columnWidthInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-width", "inherit")
+
+    /// Sets the number of columns in a multi-column layout.
+    [<CustomOperation("columnCount")>]
+    member inline _.columnCount([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
+        comb &&& mkWithKV ("column-count", value)
+
+    /// Sets the number of columns in a multi-column layout.
+    [<CustomOperation("columnCount")>]
+    member inline _.columnCount([<InlineIfLambda>] comb: CombineKeyValue, value: float) =
+        comb &&& mkWithKV ("column-count", value)
+
+    /// Sets the number of columns in a multi-column layout.
+    [<CustomOperation("columnCount")>]
+    member inline _.columnCount([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-count", value)
+
+    /// Default. Content is balanced between columns.
+    [<CustomOperation("columnFillBalance")>]
+    member inline _.columnFillBalance([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-fill", "balance")
+
+    /// Columns are filled sequentially.
+    [<CustomOperation("columnFillAuto")>]
+    member inline _.columnFillAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-fill", "auto")
+
+    /// Controls how content is partitioned into columns.
+    [<CustomOperation("columnFill")>]
+    member inline _.columnFill([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-fill", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("columnFillInitial")>]
+    member inline _.columnFillInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-fill", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("columnFillInheritFromParent")>]
+    member inline _.columnFillInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-fill", "inherit")
+
+    /// Default. The element does not span.
+    [<CustomOperation("columnSpanNone")>]
+    member inline _.columnSpanNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-span", "none")
+
+    /// The element spans across all columns.
+    [<CustomOperation("columnSpanAll")>]
+    member inline _.columnSpanAll([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-span", "all")
+
+    /// Makes an element span across all columns.
+    [<CustomOperation("columnSpan")>]
+    member inline _.columnSpan([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-span", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("columnSpanInitial")>]
+    member inline _.columnSpanInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("column-span", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("columnSpanInheritFromParent")>]
+    member inline _.columnSpanInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-span", "inherit")
+
+    /// Shorthand for column-rule-width, column-rule-style, and column-rule-color.
+    [<CustomOperation("columnRule")>]
+    member inline _.columnRule([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-rule", value)
+
+    /// A thin rule.
+    [<CustomOperation("columnRuleWidthThin")>]
+    member inline _.columnRuleWidthThin([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-width", "thin")
+
+    /// Default. A medium rule.
+    [<CustomOperation("columnRuleWidthMedium")>]
+    member inline _.columnRuleWidthMedium([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-width", "medium")
+
+    /// A thick rule.
+    [<CustomOperation("columnRuleWidthThick")>]
+    member inline _.columnRuleWidthThick([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-width", "thick")
+
+    /// Sets the width of the rule between columns. Also accepts a length via the string overload.
+    [<CustomOperation("columnRuleWidth")>]
+    member inline _.columnRuleWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-rule-width", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("columnRuleWidthInitial")>]
+    member inline _.columnRuleWidthInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-width", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("columnRuleWidthInheritFromParent")>]
+    member inline _.columnRuleWidthInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-width", "inherit")
+
+    /// Default. No rule.
+    [<CustomOperation("columnRuleStyleNone")>]
+    member inline _.columnRuleStyleNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "none")
+
+    /// A hidden rule.
+    [<CustomOperation("columnRuleStyleHidden")>]
+    member inline _.columnRuleStyleHidden([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "hidden")
+
+    /// A dotted rule.
+    [<CustomOperation("columnRuleStyleDotted")>]
+    member inline _.columnRuleStyleDotted([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "dotted")
+
+    /// A dashed rule.
+    [<CustomOperation("columnRuleStyleDashed")>]
+    member inline _.columnRuleStyleDashed([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "dashed")
+
+    /// A solid rule.
+    [<CustomOperation("columnRuleStyleSolid")>]
+    member inline _.columnRuleStyleSolid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "solid")
+
+    /// A double rule.
+    [<CustomOperation("columnRuleStyleDouble")>]
+    member inline _.columnRuleStyleDouble([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "double")
+
+    /// A grooved rule.
+    [<CustomOperation("columnRuleStyleGroove")>]
+    member inline _.columnRuleStyleGroove([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "groove")
+
+    /// A ridged rule.
+    [<CustomOperation("columnRuleStyleRidge")>]
+    member inline _.columnRuleStyleRidge([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "ridge")
+
+    /// An inset rule.
+    [<CustomOperation("columnRuleStyleInset")>]
+    member inline _.columnRuleStyleInset([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "inset")
+
+    /// An outset rule.
+    [<CustomOperation("columnRuleStyleOutset")>]
+    member inline _.columnRuleStyleOutset([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "outset")
+
+    /// Sets the style of the rule between columns.
+    [<CustomOperation("columnRuleStyle")>]
+    member inline _.columnRuleStyle([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-rule-style", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("columnRuleStyleInitial")>]
+    member inline _.columnRuleStyleInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("columnRuleStyleInheritFromParent")>]
+    member inline _.columnRuleStyleInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("column-rule-style", "inherit")
+
+    /// Sets the color of the rule between columns.
+    [<CustomOperation("columnRuleColor")>]
+    member inline _.columnRuleColor([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("column-rule-color", value)
+
+
+
 
 
     // --------------------------------------------------------------------
@@ -3782,6 +4296,813 @@ type CssBuilder() =
         comb &>> ("scroll-padding", value)
 
 
+    /// Default. The element is not moved below floating elements.
+    [<CustomOperation("clearNone")>]
+    member inline _.clearNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "none")
+
+    /// The element is moved below left-floating elements.
+    [<CustomOperation("clearLeft")>]
+    member inline _.clearLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "left")
+
+    /// The element is moved below right-floating elements.
+    [<CustomOperation("clearRight")>]
+    member inline _.clearRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "right")
+
+    /// The element is moved below both left and right-floating elements.
+    [<CustomOperation("clearBoth")>]
+    member inline _.clearBoth([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "both")
+
+    /// The element is moved below floats on the inline-start side.
+    [<CustomOperation("clearInlineStart")>]
+    member inline _.clearInlineStart([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "inline-start")
+
+    /// The element is moved below floats on the inline-end side.
+    [<CustomOperation("clearInlineEnd")>]
+    member inline _.clearInlineEnd([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "inline-end")
+
+    /// Sets whether an element must be moved below (cleared) floating elements that precede it.
+    [<CustomOperation("clear")>]
+    member inline _.clear([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("clear", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("clearInitial")>]
+    member inline _.clearInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("clearInheritFromParent")>]
+    member inline _.clearInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("clear", "inherit")
+
+    /// Default. The content is sized to fill the element's content box, stretching if necessary.
+    [<CustomOperation("objectFitFill")>]
+    member inline _.objectFitFill([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "fill")
+
+    /// The content is scaled to maintain its aspect ratio while fitting within the content box.
+    [<CustomOperation("objectFitContain")>]
+    member inline _.objectFitContain([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "contain")
+
+    /// The content is sized to maintain its aspect ratio while filling the entire content box, clipping to fit.
+    [<CustomOperation("objectFitCover")>]
+    member inline _.objectFitCover([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "cover")
+
+    /// The content is not resized.
+    [<CustomOperation("objectFitNone")>]
+    member inline _.objectFitNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "none")
+
+    /// The content is sized as if none or contain were specified, whichever results in a smaller concrete object size.
+    [<CustomOperation("objectFitScaleDown")>]
+    member inline _.objectFitScaleDown([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "scale-down")
+
+    /// Sets how the content of a replaced element (e.g. img or video) should be resized to fit its container.
+    [<CustomOperation("objectFit")>]
+    member inline _.objectFit([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("object-fit", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("objectFitInitial")>]
+    member inline _.objectFitInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("object-fit", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("objectFitInheritFromParent")>]
+    member inline _.objectFitInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("object-fit", "inherit")
+
+    /// Specifies the alignment of a replaced element's contents within the element's box (e.g. "50% 50%", "top right").
+    [<CustomOperation("objectPosition")>]
+    member inline _.objectPosition([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("object-position", value)
+
+    /// Default. The element behaves as it would if pointer-events were not specified.
+    [<CustomOperation("pointerEventsAuto")>]
+    member inline _.pointerEventsAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("pointer-events", "auto")
+
+    /// The element is never the target of pointer events.
+    [<CustomOperation("pointerEventsNone")>]
+    member inline _.pointerEventsNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("pointer-events", "none")
+
+    /// Sets under what circumstances an element can become the target of pointer events.
+    [<CustomOperation("pointerEvents")>]
+    member inline _.pointerEvents([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("pointer-events", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("pointerEventsInitial")>]
+    member inline _.pointerEventsInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("pointer-events", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("pointerEventsInheritFromParent")>]
+    member inline _.pointerEventsInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("pointer-events", "inherit")
+
+    /// Default. Enable all touch behaviors.
+    [<CustomOperation("touchActionAuto")>]
+    member inline _.touchActionAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("touch-action", "auto")
+
+    /// Disable all touch behaviors.
+    [<CustomOperation("touchActionNone")>]
+    member inline _.touchActionNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("touch-action", "none")
+
+    /// Enable horizontal single-finger panning.
+    [<CustomOperation("touchActionPanX")>]
+    member inline _.touchActionPanX([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("touch-action", "pan-x")
+
+    /// Enable vertical single-finger panning.
+    [<CustomOperation("touchActionPanY")>]
+    member inline _.touchActionPanY([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("touch-action", "pan-y")
+
+    /// Enable panning and pinch-zoom, but disable double-tap zooming.
+    [<CustomOperation("touchActionManipulation")>]
+    member inline _.touchActionManipulation([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("touch-action", "manipulation")
+
+    /// Sets how an element's region can be manipulated by a touchscreen user (e.g. panning, zooming).
+    [<CustomOperation("touchAction")>]
+    member inline _.touchAction([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("touch-action", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("touchActionInitial")>]
+    member inline _.touchActionInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("touch-action", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("touchActionInheritFromParent")>]
+    member inline _.touchActionInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("touch-action", "inherit")
+
+    /// Default. No particular optimization is expressed.
+    [<CustomOperation("willChangeAuto")>]
+    member inline _.willChangeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("will-change", "auto")
+
+    /// The element's scroll position is expected to change.
+    [<CustomOperation("willChangeScrollPosition")>]
+    member inline _.willChangeScrollPosition([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("will-change", "scroll-position")
+
+    /// The element's contents are expected to change.
+    [<CustomOperation("willChangeContents")>]
+    member inline _.willChangeContents([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("will-change", "contents")
+
+    /// The element's transform is expected to change.
+    [<CustomOperation("willChangeTransform")>]
+    member inline _.willChangeTransform([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("will-change", "transform")
+
+    /// The element's opacity is expected to change.
+    [<CustomOperation("willChangeOpacity")>]
+    member inline _.willChangeOpacity([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("will-change", "opacity")
+
+    /// Hints to the browser how an element is expected to change, so it can optimize ahead of time.
+    [<CustomOperation("willChange")>]
+    member inline _.willChange([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("will-change", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("willChangeInitial")>]
+    member inline _.willChangeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("will-change", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("willChangeInheritFromParent")>]
+    member inline _.willChangeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("will-change", "inherit")
+
+    /// Default. The default scroll overflow behavior occurs.
+    [<CustomOperation("overscrollBehaviorAuto")>]
+    member inline _.overscrollBehaviorAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior", "auto")
+
+    /// No scroll chaining to neighboring scrolling areas.
+    [<CustomOperation("overscrollBehaviorContain")>]
+    member inline _.overscrollBehaviorContain([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior", "contain")
+
+    /// No scroll chaining and no default affordances (e.g. pull-to-refresh).
+    [<CustomOperation("overscrollBehaviorNone")>]
+    member inline _.overscrollBehaviorNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior", "none")
+
+    /// Sets what a browser does when reaching the boundary of a scrolling area (shorthand for overscroll-behavior-x/y).
+    [<CustomOperation("overscrollBehavior")>]
+    member inline _.overscrollBehavior([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("overscroll-behavior", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("overscrollBehaviorInitial")>]
+    member inline _.overscrollBehaviorInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("overscrollBehaviorInheritFromParent")>]
+    member inline _.overscrollBehaviorInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior", "inherit")
+
+    /// Default.
+    [<CustomOperation("overscrollBehaviorXAuto")>]
+    member inline _.overscrollBehaviorXAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-x", "auto")
+
+    /// No scroll chaining horizontally.
+    [<CustomOperation("overscrollBehaviorXContain")>]
+    member inline _.overscrollBehaviorXContain([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-x", "contain")
+
+    /// No scroll chaining or affordances horizontally.
+    [<CustomOperation("overscrollBehaviorXNone")>]
+    member inline _.overscrollBehaviorXNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-x", "none")
+
+    /// Sets the browser's behavior when the horizontal boundary of a scrolling area is reached.
+    [<CustomOperation("overscrollBehaviorX")>]
+    member inline _.overscrollBehaviorX([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("overscroll-behavior-x", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("overscrollBehaviorXInitial")>]
+    member inline _.overscrollBehaviorXInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-x", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("overscrollBehaviorXInheritFromParent")>]
+    member inline _.overscrollBehaviorXInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-x", "inherit")
+
+    /// Default.
+    [<CustomOperation("overscrollBehaviorYAuto")>]
+    member inline _.overscrollBehaviorYAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-y", "auto")
+
+    /// No scroll chaining vertically.
+    [<CustomOperation("overscrollBehaviorYContain")>]
+    member inline _.overscrollBehaviorYContain([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-y", "contain")
+
+    /// No scroll chaining or affordances vertically.
+    [<CustomOperation("overscrollBehaviorYNone")>]
+    member inline _.overscrollBehaviorYNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-y", "none")
+
+    /// Sets the browser's behavior when the vertical boundary of a scrolling area is reached.
+    [<CustomOperation("overscrollBehaviorY")>]
+    member inline _.overscrollBehaviorY([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("overscroll-behavior-y", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("overscrollBehaviorYInitial")>]
+    member inline _.overscrollBehaviorYInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-y", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("overscrollBehaviorYInheritFromParent")>]
+    member inline _.overscrollBehaviorYInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overscroll-behavior-y", "inherit")
+
+    /// Default. A new stacking context is created only if needed.
+    [<CustomOperation("isolationAuto")>]
+    member inline _.isolationAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("isolation", "auto")
+
+    /// The element creates a new stacking context.
+    [<CustomOperation("isolationIsolate")>]
+    member inline _.isolationIsolate([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("isolation", "isolate")
+
+    /// Determines whether an element must create a new stacking context.
+    [<CustomOperation("isolation")>]
+    member inline _.isolation([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("isolation", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("isolationInitial")>]
+    member inline _.isolationInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("isolation", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("isolationInheritFromParent")>]
+    member inline _.isolationInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("isolation", "inherit")
+
+    /// Default. No blending.
+    [<CustomOperation("mixBlendModeNormal")>]
+    member inline _.mixBlendModeNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mix-blend-mode", "normal")
+
+    /// Multiply blend.
+    [<CustomOperation("mixBlendModeMultiply")>]
+    member inline _.mixBlendModeMultiply([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "multiply")
+
+    /// Screen blend.
+    [<CustomOperation("mixBlendModeScreen")>]
+    member inline _.mixBlendModeScreen([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mix-blend-mode", "screen")
+
+    /// Overlay blend.
+    [<CustomOperation("mixBlendModeOverlay")>]
+    member inline _.mixBlendModeOverlay([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "overlay")
+
+    /// Darken blend.
+    [<CustomOperation("mixBlendModeDarken")>]
+    member inline _.mixBlendModeDarken([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mix-blend-mode", "darken")
+
+    /// Lighten blend.
+    [<CustomOperation("mixBlendModeLighten")>]
+    member inline _.mixBlendModeLighten([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "lighten")
+
+    /// Color-dodge blend.
+    [<CustomOperation("mixBlendModeColorDodge")>]
+    member inline _.mixBlendModeColorDodge([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "color-dodge")
+
+    /// Color-burn blend.
+    [<CustomOperation("mixBlendModeColorBurn")>]
+    member inline _.mixBlendModeColorBurn([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "color-burn")
+
+    /// Hard-light blend.
+    [<CustomOperation("mixBlendModeHardLight")>]
+    member inline _.mixBlendModeHardLight([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "hard-light")
+
+    /// Soft-light blend.
+    [<CustomOperation("mixBlendModeSoftLight")>]
+    member inline _.mixBlendModeSoftLight([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "soft-light")
+
+    /// Difference blend.
+    [<CustomOperation("mixBlendModeDifference")>]
+    member inline _.mixBlendModeDifference([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "difference")
+
+    /// Exclusion blend.
+    [<CustomOperation("mixBlendModeExclusion")>]
+    member inline _.mixBlendModeExclusion([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "exclusion")
+
+    /// Hue blend.
+    [<CustomOperation("mixBlendModeHue")>]
+    member inline _.mixBlendModeHue([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mix-blend-mode", "hue")
+
+    /// Saturation blend.
+    [<CustomOperation("mixBlendModeSaturation")>]
+    member inline _.mixBlendModeSaturation([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "saturation")
+
+    /// Color blend.
+    [<CustomOperation("mixBlendModeColor")>]
+    member inline _.mixBlendModeColor([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("mix-blend-mode", "color")
+
+    /// Luminosity blend.
+    [<CustomOperation("mixBlendModeLuminosity")>]
+    member inline _.mixBlendModeLuminosity([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "luminosity")
+
+    /// Sets how an element's content should blend with the content of the element's parent and background.
+    [<CustomOperation("mixBlendMode")>]
+    member inline _.mixBlendMode([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("mix-blend-mode", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("mixBlendModeInitial")>]
+    member inline _.mixBlendModeInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("mixBlendModeInheritFromParent")>]
+    member inline _.mixBlendModeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("mix-blend-mode", "inherit")
+
+    /// Default. Content is not clipped.
+    [<CustomOperation("overflowBlockVisible")>]
+    member inline _.overflowBlockVisible([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-block", "visible")
+
+    /// Content is clipped.
+    [<CustomOperation("overflowBlockHidden")>]
+    member inline _.overflowBlockHidden([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-block", "hidden")
+
+    /// A scrollbar is always shown.
+    [<CustomOperation("overflowBlockScroll")>]
+    member inline _.overflowBlockScroll([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-block", "scroll")
+
+    /// A scrollbar is shown only when needed.
+    [<CustomOperation("overflowBlockAuto")>]
+    member inline _.overflowBlockAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("overflow-block", "auto")
+
+    /// Sets what shows when content overflows the block-start and block-end edges of a box.
+    [<CustomOperation("overflowBlock")>]
+    member inline _.overflowBlock([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("overflow-block", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("overflowBlockInitial")>]
+    member inline _.overflowBlockInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-block", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("overflowBlockInheritFromParent")>]
+    member inline _.overflowBlockInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-block", "inherit")
+
+    /// Default. Content is not clipped.
+    [<CustomOperation("overflowInlineVisible")>]
+    member inline _.overflowInlineVisible([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-inline", "visible")
+
+    /// Content is clipped.
+    [<CustomOperation("overflowInlineHidden")>]
+    member inline _.overflowInlineHidden([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-inline", "hidden")
+
+    /// A scrollbar is always shown.
+    [<CustomOperation("overflowInlineScroll")>]
+    member inline _.overflowInlineScroll([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-inline", "scroll")
+
+    /// A scrollbar is shown only when needed.
+    [<CustomOperation("overflowInlineAuto")>]
+    member inline _.overflowInlineAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("overflow-inline", "auto")
+
+    /// Sets what shows when content overflows the inline-start and inline-end edges of a box.
+    [<CustomOperation("overflowInline")>]
+    member inline _.overflowInline([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("overflow-inline", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("overflowInlineInitial")>]
+    member inline _.overflowInlineInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-inline", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("overflowInlineInheritFromParent")>]
+    member inline _.overflowInlineInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("overflow-inline", "inherit")
+
+    /// Generates content for a pseudo-element or replaces an element's content (e.g. "normal", "none", a quoted string, or a counter).
+    [<CustomOperation("content")>]
+    member inline _.content([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("content", value)
+
+    /// Default. No perspective transform is applied.
+    [<CustomOperation("perspectiveNone")>]
+    member inline _.perspectiveNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("perspective", "none")
+
+    /// Determines the distance between the z=0 plane and the user to give a 3D-positioned element some perspective. Also accepts a length (use the string overload, e.g. "500px").
+    [<CustomOperation("perspective")>]
+    member inline _.perspective([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("perspective", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("perspectiveInitial")>]
+    member inline _.perspectiveInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("perspective", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("perspectiveInheritFromParent")>]
+    member inline _.perspectiveInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("perspective", "inherit")
+
+    /// Determines the position at which the viewer is looking (the vanishing point for the perspective property, e.g. "50% 50%").
+    [<CustomOperation("perspectiveOrigin")>]
+    member inline _.perspectiveOrigin([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("perspective-origin", value)
+
+    /// Sets the intrinsic size used when an element is subject to size containment (shorthand).
+    [<CustomOperation("containIntrinsicSize")>]
+    member inline _.containIntrinsicSize([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("contain-intrinsic-size", value)
+
+    /// Sets the intrinsic width used when an element is subject to size containment.
+    [<CustomOperation("containIntrinsicWidth")>]
+    member inline _.containIntrinsicWidth([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("contain-intrinsic-width", value)
+
+    /// Sets the intrinsic height used when an element is subject to size containment.
+    [<CustomOperation("containIntrinsicHeight")>]
+    member inline _.containIntrinsicHeight([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("contain-intrinsic-height", value)
+
+    /// Default.
+    [<CustomOperation("breakBeforeAuto")>]
+    member inline _.breakBeforeAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "auto")
+
+    /// Avoid any break before.
+    [<CustomOperation("breakBeforeAvoid")>]
+    member inline _.breakBeforeAvoid([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "avoid")
+
+    /// Always break before.
+    [<CustomOperation("breakBeforeAlways")>]
+    member inline _.breakBeforeAlways([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "always")
+
+    /// Force breaks through all fragmentation contexts.
+    [<CustomOperation("breakBeforeAll")>]
+    member inline _.breakBeforeAll([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "all")
+
+    /// Avoid a page break before.
+    [<CustomOperation("breakBeforeAvoidPage")>]
+    member inline _.breakBeforeAvoidPage([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-before", "avoid-page")
+
+    /// Force a page break before.
+    [<CustomOperation("breakBeforePage")>]
+    member inline _.breakBeforePage([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "page")
+
+    /// Force one or two page breaks so the next page is a left page.
+    [<CustomOperation("breakBeforeLeft")>]
+    member inline _.breakBeforeLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "left")
+
+    /// Force one or two page breaks so the next page is a right page.
+    [<CustomOperation("breakBeforeRight")>]
+    member inline _.breakBeforeRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "right")
+
+    /// Force breaks so the next page is a recto page.
+    [<CustomOperation("breakBeforeRecto")>]
+    member inline _.breakBeforeRecto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "recto")
+
+    /// Force breaks so the next page is a verso page.
+    [<CustomOperation("breakBeforeVerso")>]
+    member inline _.breakBeforeVerso([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "verso")
+
+    /// Avoid a column break before.
+    [<CustomOperation("breakBeforeAvoidColumn")>]
+    member inline _.breakBeforeAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-before", "avoid-column")
+
+    /// Force a column break before.
+    [<CustomOperation("breakBeforeColumn")>]
+    member inline _.breakBeforeColumn([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "column")
+
+    /// Avoid a region break before.
+    [<CustomOperation("breakBeforeAvoidRegion")>]
+    member inline _.breakBeforeAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-before", "avoid-region")
+
+    /// Force a region break before.
+    [<CustomOperation("breakBeforeRegion")>]
+    member inline _.breakBeforeRegion([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "region")
+
+    /// Sets how page, column, or region breaks should occur before the generated box.
+    [<CustomOperation("breakBefore")>]
+    member inline _.breakBefore([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("break-before", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("breakBeforeInitial")>]
+    member inline _.breakBeforeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-before", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("breakBeforeInheritFromParent")>]
+    member inline _.breakBeforeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-before", "inherit")
+
+    /// Default.
+    [<CustomOperation("breakAfterAuto")>]
+    member inline _.breakAfterAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "auto")
+
+    /// Avoid any break after.
+    [<CustomOperation("breakAfterAvoid")>]
+    member inline _.breakAfterAvoid([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "avoid")
+
+    /// Always break after.
+    [<CustomOperation("breakAfterAlways")>]
+    member inline _.breakAfterAlways([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "always")
+
+    /// Force breaks through all fragmentation contexts.
+    [<CustomOperation("breakAfterAll")>]
+    member inline _.breakAfterAll([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "all")
+
+    /// Avoid a page break after.
+    [<CustomOperation("breakAfterAvoidPage")>]
+    member inline _.breakAfterAvoidPage([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-after", "avoid-page")
+
+    /// Force a page break after.
+    [<CustomOperation("breakAfterPage")>]
+    member inline _.breakAfterPage([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "page")
+
+    /// Force breaks so the next page is a left page.
+    [<CustomOperation("breakAfterLeft")>]
+    member inline _.breakAfterLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "left")
+
+    /// Force breaks so the next page is a right page.
+    [<CustomOperation("breakAfterRight")>]
+    member inline _.breakAfterRight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "right")
+
+    /// Force breaks so the next page is a recto page.
+    [<CustomOperation("breakAfterRecto")>]
+    member inline _.breakAfterRecto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "recto")
+
+    /// Force breaks so the next page is a verso page.
+    [<CustomOperation("breakAfterVerso")>]
+    member inline _.breakAfterVerso([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "verso")
+
+    /// Avoid a column break after.
+    [<CustomOperation("breakAfterAvoidColumn")>]
+    member inline _.breakAfterAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-after", "avoid-column")
+
+    /// Force a column break after.
+    [<CustomOperation("breakAfterColumn")>]
+    member inline _.breakAfterColumn([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "column")
+
+    /// Avoid a region break after.
+    [<CustomOperation("breakAfterAvoidRegion")>]
+    member inline _.breakAfterAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-after", "avoid-region")
+
+    /// Force a region break after.
+    [<CustomOperation("breakAfterRegion")>]
+    member inline _.breakAfterRegion([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "region")
+
+    /// Sets how page, column, or region breaks should occur after the generated box.
+    [<CustomOperation("breakAfter")>]
+    member inline _.breakAfter([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("break-after", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("breakAfterInitial")>]
+    member inline _.breakAfterInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-after", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("breakAfterInheritFromParent")>]
+    member inline _.breakAfterInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-after", "inherit")
+
+    /// Default.
+    [<CustomOperation("breakInsideAuto")>]
+    member inline _.breakInsideAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-inside", "auto")
+
+    /// Avoid any break inside.
+    [<CustomOperation("breakInsideAvoid")>]
+    member inline _.breakInsideAvoid([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-inside", "avoid")
+
+    /// Avoid a page break inside.
+    [<CustomOperation("breakInsideAvoidPage")>]
+    member inline _.breakInsideAvoidPage([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-inside", "avoid-page")
+
+    /// Avoid a column break inside.
+    [<CustomOperation("breakInsideAvoidColumn")>]
+    member inline _.breakInsideAvoidColumn([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-inside", "avoid-column")
+
+    /// Avoid a region break inside.
+    [<CustomOperation("breakInsideAvoidRegion")>]
+    member inline _.breakInsideAvoidRegion([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-inside", "avoid-region")
+
+    /// Sets how page, column, or region breaks should occur inside the generated box.
+    [<CustomOperation("breakInside")>]
+    member inline _.breakInside([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("break-inside", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("breakInsideInitial")>]
+    member inline _.breakInsideInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("break-inside", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("breakInsideInheritFromParent")>]
+    member inline _.breakInsideInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("break-inside", "inherit")
+
+    /// Default.
+    [<CustomOperation("pageBreakBeforeAuto")>]
+    member inline _.pageBreakBeforeAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "auto")
+
+    /// Always break before.
+    [<CustomOperation("pageBreakBeforeAlways")>]
+    member inline _.pageBreakBeforeAlways([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "always")
+
+    /// Avoid a page break before.
+    [<CustomOperation("pageBreakBeforeAvoid")>]
+    member inline _.pageBreakBeforeAvoid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "avoid")
+
+    /// Force breaks so the next page is a left page.
+    [<CustomOperation("pageBreakBeforeLeft")>]
+    member inline _.pageBreakBeforeLeft([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "left")
+
+    /// Force breaks so the next page is a right page.
+    [<CustomOperation("pageBreakBeforeRight")>]
+    member inline _.pageBreakBeforeRight([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "right")
+
+    /// Legacy alias of break-before. Sets how page breaks occur before the element.
+    [<CustomOperation("pageBreakBefore")>]
+    member inline _.pageBreakBefore([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("page-break-before", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("pageBreakBeforeInitial")>]
+    member inline _.pageBreakBeforeInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("pageBreakBeforeInheritFromParent")>]
+    member inline _.pageBreakBeforeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-before", "inherit")
+
+    /// Default.
+    [<CustomOperation("pageBreakAfterAuto")>]
+    member inline _.pageBreakAfterAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("page-break-after", "auto")
+
+    /// Always break after.
+    [<CustomOperation("pageBreakAfterAlways")>]
+    member inline _.pageBreakAfterAlways([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-after", "always")
+
+    /// Avoid a page break after.
+    [<CustomOperation("pageBreakAfterAvoid")>]
+    member inline _.pageBreakAfterAvoid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-after", "avoid")
+
+    /// Force breaks so the next page is a left page.
+    [<CustomOperation("pageBreakAfterLeft")>]
+    member inline _.pageBreakAfterLeft([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("page-break-after", "left")
+
+    /// Force breaks so the next page is a right page.
+    [<CustomOperation("pageBreakAfterRight")>]
+    member inline _.pageBreakAfterRight([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-after", "right")
+
+    /// Legacy alias of break-after. Sets how page breaks occur after the element.
+    [<CustomOperation("pageBreakAfter")>]
+    member inline _.pageBreakAfter([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("page-break-after", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("pageBreakAfterInitial")>]
+    member inline _.pageBreakAfterInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-after", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("pageBreakAfterInheritFromParent")>]
+    member inline _.pageBreakAfterInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-after", "inherit")
+
+    /// Default.
+    [<CustomOperation("pageBreakInsideAuto")>]
+    member inline _.pageBreakInsideAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-inside", "auto")
+
+    /// Avoid a page break inside.
+    [<CustomOperation("pageBreakInsideAvoid")>]
+    member inline _.pageBreakInsideAvoid([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-inside", "avoid")
+
+    /// Legacy alias of break-inside. Sets how page breaks occur inside the element.
+    [<CustomOperation("pageBreakInside")>]
+    member inline _.pageBreakInside([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("page-break-inside", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("pageBreakInsideInitial")>]
+    member inline _.pageBreakInsideInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-inside", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("pageBreakInsideInheritFromParent")>]
+    member inline _.pageBreakInsideInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("page-break-inside", "inherit")
+
+    /// Sets the top scroll snap margin.
+    [<CustomOperation("scrollMarginTop")>]
+    member inline _.scrollMarginTop([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-margin-top", value)
+
+    /// Sets the right scroll snap margin.
+    [<CustomOperation("scrollMarginRight")>]
+    member inline _.scrollMarginRight([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-margin-right", value)
+
+    /// Sets the bottom scroll snap margin.
+    [<CustomOperation("scrollMarginBottom")>]
+    member inline _.scrollMarginBottom([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-margin-bottom", value)
+
+    /// Sets the left scroll snap margin.
+    [<CustomOperation("scrollMarginLeft")>]
+    member inline _.scrollMarginLeft([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-margin-left", value)
+
+    /// Sets the top scroll snap padding.
+    [<CustomOperation("scrollPaddingTop")>]
+    member inline _.scrollPaddingTop([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-padding-top", value)
+
+    /// Sets the right scroll snap padding.
+    [<CustomOperation("scrollPaddingRight")>]
+    member inline _.scrollPaddingRight([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-padding-right", value)
+
+    /// Sets the bottom scroll snap padding.
+    [<CustomOperation("scrollPaddingBottom")>]
+    member inline _.scrollPaddingBottom([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-padding-bottom", value)
+
+    /// Sets the left scroll snap padding.
+    [<CustomOperation("scrollPaddingLeft")>]
+    member inline _.scrollPaddingLeft([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("scroll-padding-left", value)
+
+
+
 
 
     // --------------------------------------------------------------------
@@ -3974,6 +5295,23 @@ type CssBuilder() =
     member inline _.listStyle([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("list-style", value)
 
 
+    /// Resets a CSS counter to a given value (e.g. "section", "item 0").
+    [<CustomOperation("counterReset")>]
+    member inline _.counterReset([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("counter-reset", value)
+
+    /// Increases or decreases a CSS counter (e.g. "section", "item 2").
+    [<CustomOperation("counterIncrement")>]
+    member inline _.counterIncrement([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("counter-increment", value)
+
+    /// Sets a CSS counter to a given value (e.g. "section 5").
+    [<CustomOperation("counterSet")>]
+    member inline _.counterSet([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("counter-set", value)
+
+
+
 
 
     // --------------------------------------------------------------------
@@ -4033,6 +5371,50 @@ type CssBuilder() =
     [<CustomOperation("emptyCells")>]
     member inline _.emptyCells([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
         comb &>> ("empty-cells", value)
+
+
+    /// Default. The caption box is above the table.
+    [<CustomOperation("captionSideTop")>]
+    member inline _.captionSideTop([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("caption-side", "top")
+
+    /// The caption box is below the table.
+    [<CustomOperation("captionSideBottom")>]
+    member inline _.captionSideBottom([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("caption-side", "bottom")
+
+    /// The caption box is at the block-start edge.
+    [<CustomOperation("captionSideBlockStart")>]
+    member inline _.captionSideBlockStart([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("caption-side", "block-start")
+
+    /// The caption box is at the block-end edge.
+    [<CustomOperation("captionSideBlockEnd")>]
+    member inline _.captionSideBlockEnd([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("caption-side", "block-end")
+
+    /// The caption box is at the inline-start edge.
+    [<CustomOperation("captionSideInlineStart")>]
+    member inline _.captionSideInlineStart([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("caption-side", "inline-start")
+
+    /// The caption box is at the inline-end edge.
+    [<CustomOperation("captionSideInlineEnd")>]
+    member inline _.captionSideInlineEnd([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("caption-side", "inline-end")
+
+    /// Positions the table caption box on the specified side.
+    [<CustomOperation("captionSide")>]
+    member inline _.captionSide([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("caption-side", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("captionSideInitial")>]
+    member inline _.captionSideInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("caption-side", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("captionSideInheritFromParent")>]
+    member inline _.captionSideInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("caption-side", "inherit")
+
 
 
 
@@ -4494,6 +5876,21 @@ type CssBuilder() =
     [<CustomOperation("transitionProperty")>]
     member inline _.transitionProperty([<InlineIfLambda>] comb: CombineKeyValue, property: string) =
         comb &>> ("transition-property", property)
+
+    /// Sets the CSS properties to which a transition effect should be applied, joined with ", ".
+    [<CustomOperation("transitionProperty")>]
+    member inline _.transitionProperty([<InlineIfLambda>] comb: CombineKeyValue, properties: string seq) =
+        CombineKeyValue(fun sb ->
+            let sb = comb.Invoke(sb).Append("transition-property: ")
+            use e = properties.GetEnumerator()
+
+            if e.MoveNext() then
+                sb.Append(e.Current) |> ignore
+
+                while e.MoveNext() do
+                    sb.Append(", ").Append(e.Current) |> ignore
+
+            sb.Append("; "))
 
     /// Sets whether discrete-property transitions occur. Accepts normal | allow-discrete or a CSS variable.
     [<CustomOperation("transitionBehavior")>]
@@ -5442,3 +6839,558 @@ type CssBuilder() =
     [<CustomOperation("textOrientationInheritFromParent")>]
     member inline _.textOrientationInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
         comb &>> ("text-orientation", "inherit")
+
+
+    /// Default. No adjustment.
+    [<CustomOperation("fontSizeAdjustNone")>]
+    member inline _.fontSizeAdjustNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-size-adjust", "none")
+
+    /// Uses the first available font's metric.
+    [<CustomOperation("fontSizeAdjustFromFont")>]
+    member inline _.fontSizeAdjustFromFont([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-size-adjust", "from-font")
+
+    /// Sets the size of lowercase letters relative to the current font size. Also accepts a number via the string overload (e.g. "0.5").
+    [<CustomOperation("fontSizeAdjust")>]
+    member inline _.fontSizeAdjust([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-size-adjust", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontSizeAdjustInitial")>]
+    member inline _.fontSizeAdjustInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-size-adjust", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontSizeAdjustInheritFromParent")>]
+    member inline _.fontSizeAdjustInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-size-adjust", "inherit")
+
+    /// Do not synthesize bold or italic.
+    [<CustomOperation("fontSynthesisNone")>]
+    member inline _.fontSynthesisNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-synthesis", "none")
+
+    /// Synthesize bold if needed.
+    [<CustomOperation("fontSynthesisWeight")>]
+    member inline _.fontSynthesisWeight([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-synthesis", "weight")
+
+    /// Synthesize italic if needed.
+    [<CustomOperation("fontSynthesisStyle")>]
+    member inline _.fontSynthesisStyle([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("font-synthesis", "style")
+
+    /// Synthesize small-caps if needed.
+    [<CustomOperation("fontSynthesisSmallCaps")>]
+    member inline _.fontSynthesisSmallCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-synthesis", "small-caps")
+
+    /// Controls which missing typefaces (bold, italic) the browser may synthesize.
+    [<CustomOperation("fontSynthesis")>]
+    member inline _.fontSynthesis([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-synthesis", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontSynthesisInitial")>]
+    member inline _.fontSynthesisInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-synthesis", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontSynthesisInheritFromParent")>]
+    member inline _.fontSynthesisInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-synthesis", "inherit")
+
+    /// Controls advanced typographic OpenType features (e.g. "\"liga\" 1", "\"tnum\"").
+    [<CustomOperation("fontFeatureSettings")>]
+    member inline _.fontFeatureSettings([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-feature-settings", value)
+
+    /// Provides low-level control over variable font axes (e.g. "\"wght\" 700").
+    [<CustomOperation("fontVariationSettings")>]
+    member inline _.fontVariationSettings([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variation-settings", value)
+
+    /// Default.
+    [<CustomOperation("fontVariantCapsNormal")>]
+    member inline _.fontVariantCapsNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "normal")
+
+    /// Small capitals.
+    [<CustomOperation("fontVariantCapsSmallCaps")>]
+    member inline _.fontVariantCapsSmallCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "small-caps")
+
+    /// All small capitals.
+    [<CustomOperation("fontVariantCapsAllSmallCaps")>]
+    member inline _.fontVariantCapsAllSmallCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "all-small-caps")
+
+    /// Petite capitals.
+    [<CustomOperation("fontVariantCapsPetiteCaps")>]
+    member inline _.fontVariantCapsPetiteCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "petite-caps")
+
+    /// All petite capitals.
+    [<CustomOperation("fontVariantCapsAllPetiteCaps")>]
+    member inline _.fontVariantCapsAllPetiteCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "all-petite-caps")
+
+    /// Unicase.
+    [<CustomOperation("fontVariantCapsUnicase")>]
+    member inline _.fontVariantCapsUnicase([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "unicase")
+
+    /// Titling capitals.
+    [<CustomOperation("fontVariantCapsTitlingCaps")>]
+    member inline _.fontVariantCapsTitlingCaps([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "titling-caps")
+
+    /// Controls the usage of alternate glyphs for capital letters.
+    [<CustomOperation("fontVariantCaps")>]
+    member inline _.fontVariantCaps([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-caps", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantCapsInitial")>]
+    member inline _.fontVariantCapsInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantCapsInheritFromParent")>]
+    member inline _.fontVariantCapsInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-caps", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantLigaturesNormal")>]
+    member inline _.fontVariantLigaturesNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "normal")
+
+    /// No ligatures.
+    [<CustomOperation("fontVariantLigaturesNone")>]
+    member inline _.fontVariantLigaturesNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "none")
+
+    /// Common ligatures.
+    [<CustomOperation("fontVariantLigaturesCommonLigatures")>]
+    member inline _.fontVariantLigaturesCommonLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "common-ligatures")
+
+    /// Disable common ligatures.
+    [<CustomOperation("fontVariantLigaturesNoCommonLigatures")>]
+    member inline _.fontVariantLigaturesNoCommonLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "no-common-ligatures")
+
+    /// Discretionary ligatures.
+    [<CustomOperation("fontVariantLigaturesDiscretionaryLigatures")>]
+    member inline _.fontVariantLigaturesDiscretionaryLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "discretionary-ligatures")
+
+    /// Disable discretionary ligatures.
+    [<CustomOperation("fontVariantLigaturesNoDiscretionaryLigatures")>]
+    member inline _.fontVariantLigaturesNoDiscretionaryLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "no-discretionary-ligatures")
+
+    /// Historical ligatures.
+    [<CustomOperation("fontVariantLigaturesHistoricalLigatures")>]
+    member inline _.fontVariantLigaturesHistoricalLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "historical-ligatures")
+
+    /// Disable historical ligatures.
+    [<CustomOperation("fontVariantLigaturesNoHistoricalLigatures")>]
+    member inline _.fontVariantLigaturesNoHistoricalLigatures([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "no-historical-ligatures")
+
+    /// Contextual alternates.
+    [<CustomOperation("fontVariantLigaturesContextual")>]
+    member inline _.fontVariantLigaturesContextual([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "contextual")
+
+    /// Disable contextual alternates.
+    [<CustomOperation("fontVariantLigaturesNoContextual")>]
+    member inline _.fontVariantLigaturesNoContextual([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "no-contextual")
+
+    /// Controls which ligatures and contextual forms are used.
+    [<CustomOperation("fontVariantLigatures")>]
+    member inline _.fontVariantLigatures([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-ligatures", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantLigaturesInitial")>]
+    member inline _.fontVariantLigaturesInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantLigaturesInheritFromParent")>]
+    member inline _.fontVariantLigaturesInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-ligatures", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantNumericNormal")>]
+    member inline _.fontVariantNumericNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "normal")
+
+    /// Lining numerals.
+    [<CustomOperation("fontVariantNumericLiningNums")>]
+    member inline _.fontVariantNumericLiningNums([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "lining-nums")
+
+    /// Old-style numerals.
+    [<CustomOperation("fontVariantNumericOldstyleNums")>]
+    member inline _.fontVariantNumericOldstyleNums([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "oldstyle-nums")
+
+    /// Proportional numerals.
+    [<CustomOperation("fontVariantNumericProportionalNums")>]
+    member inline _.fontVariantNumericProportionalNums([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "proportional-nums")
+
+    /// Tabular numerals.
+    [<CustomOperation("fontVariantNumericTabularNums")>]
+    member inline _.fontVariantNumericTabularNums([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "tabular-nums")
+
+    /// Diagonal fractions.
+    [<CustomOperation("fontVariantNumericDiagonalFractions")>]
+    member inline _.fontVariantNumericDiagonalFractions([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "diagonal-fractions")
+
+    /// Stacked fractions.
+    [<CustomOperation("fontVariantNumericStackedFractions")>]
+    member inline _.fontVariantNumericStackedFractions([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "stacked-fractions")
+
+    /// Ordinal markers.
+    [<CustomOperation("fontVariantNumericOrdinal")>]
+    member inline _.fontVariantNumericOrdinal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "ordinal")
+
+    /// Slashed zero.
+    [<CustomOperation("fontVariantNumericSlashedZero")>]
+    member inline _.fontVariantNumericSlashedZero([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "slashed-zero")
+
+    /// Controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
+    [<CustomOperation("fontVariantNumeric")>]
+    member inline _.fontVariantNumeric([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-numeric", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantNumericInitial")>]
+    member inline _.fontVariantNumericInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantNumericInheritFromParent")>]
+    member inline _.fontVariantNumericInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-numeric", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantEastAsianNormal")>]
+    member inline _.fontVariantEastAsianNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "normal")
+
+    /// JIS78 glyph forms.
+    [<CustomOperation("fontVariantEastAsianJis78")>]
+    member inline _.fontVariantEastAsianJis78([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "jis78")
+
+    /// JIS83 glyph forms.
+    [<CustomOperation("fontVariantEastAsianJis83")>]
+    member inline _.fontVariantEastAsianJis83([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "jis83")
+
+    /// JIS90 glyph forms.
+    [<CustomOperation("fontVariantEastAsianJis90")>]
+    member inline _.fontVariantEastAsianJis90([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "jis90")
+
+    /// JIS04 glyph forms.
+    [<CustomOperation("fontVariantEastAsianJis04")>]
+    member inline _.fontVariantEastAsianJis04([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "jis04")
+
+    /// Simplified glyph forms.
+    [<CustomOperation("fontVariantEastAsianSimplified")>]
+    member inline _.fontVariantEastAsianSimplified([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "simplified")
+
+    /// Traditional glyph forms.
+    [<CustomOperation("fontVariantEastAsianTraditional")>]
+    member inline _.fontVariantEastAsianTraditional([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "traditional")
+
+    /// Full-width glyphs.
+    [<CustomOperation("fontVariantEastAsianFullWidth")>]
+    member inline _.fontVariantEastAsianFullWidth([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "full-width")
+
+    /// Proportional-width glyphs.
+    [<CustomOperation("fontVariantEastAsianProportionalWidth")>]
+    member inline _.fontVariantEastAsianProportionalWidth([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "proportional-width")
+
+    /// Ruby variant glyphs.
+    [<CustomOperation("fontVariantEastAsianRuby")>]
+    member inline _.fontVariantEastAsianRuby([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "ruby")
+
+    /// Controls the usage of alternate glyphs for East Asian scripts.
+    [<CustomOperation("fontVariantEastAsian")>]
+    member inline _.fontVariantEastAsian([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-east-asian", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantEastAsianInitial")>]
+    member inline _.fontVariantEastAsianInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantEastAsianInheritFromParent")>]
+    member inline _.fontVariantEastAsianInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-east-asian", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantAlternatesNormal")>]
+    member inline _.fontVariantAlternatesNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-alternates", "normal")
+
+    /// Historical forms.
+    [<CustomOperation("fontVariantAlternatesHistoricalForms")>]
+    member inline _.fontVariantAlternatesHistoricalForms([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-alternates", "historical-forms")
+
+    /// Controls the usage of alternate glyphs.
+    [<CustomOperation("fontVariantAlternates")>]
+    member inline _.fontVariantAlternates([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-alternates", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantAlternatesInitial")>]
+    member inline _.fontVariantAlternatesInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-alternates", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantAlternatesInheritFromParent")>]
+    member inline _.fontVariantAlternatesInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-alternates", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantPositionNormal")>]
+    member inline _.fontVariantPositionNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-position", "normal")
+
+    /// Subscript glyphs.
+    [<CustomOperation("fontVariantPositionSub")>]
+    member inline _.fontVariantPositionSub([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-position", "sub")
+
+    /// Superscript glyphs.
+    [<CustomOperation("fontVariantPositionSuper")>]
+    member inline _.fontVariantPositionSuper([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-position", "super")
+
+    /// Controls the usage of alternate glyphs for subscript and superscript.
+    [<CustomOperation("fontVariantPosition")>]
+    member inline _.fontVariantPosition([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-position", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantPositionInitial")>]
+    member inline _.fontVariantPositionInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-position", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantPositionInheritFromParent")>]
+    member inline _.fontVariantPositionInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-position", "inherit")
+
+    /// Default.
+    [<CustomOperation("fontVariantEmojiNormal")>]
+    member inline _.fontVariantEmojiNormal([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "normal")
+
+    /// Text presentation.
+    [<CustomOperation("fontVariantEmojiText")>]
+    member inline _.fontVariantEmojiText([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "text")
+
+    /// Emoji presentation.
+    [<CustomOperation("fontVariantEmojiEmoji")>]
+    member inline _.fontVariantEmojiEmoji([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "emoji")
+
+    /// Unicode-default presentation.
+    [<CustomOperation("fontVariantEmojiUnicode")>]
+    member inline _.fontVariantEmojiUnicode([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "unicode")
+
+    /// Controls the presentation of emoji code points.
+    [<CustomOperation("fontVariantEmoji")>]
+    member inline _.fontVariantEmoji([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("font-variant-emoji", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("fontVariantEmojiInitial")>]
+    member inline _.fontVariantEmojiInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("fontVariantEmojiInheritFromParent")>]
+    member inline _.fontVariantEmojiInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("font-variant-emoji", "inherit")
+
+    /// Words are not hyphenated.
+    [<CustomOperation("hyphensNone")>]
+    member inline _.hyphensNone([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("hyphens", "none")
+
+    /// Default. Hyphenation only at explicitly suggested breaks.
+    [<CustomOperation("hyphensManual")>]
+    member inline _.hyphensManual([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("hyphens", "manual")
+
+    /// The browser chooses hyphenation points automatically.
+    [<CustomOperation("hyphensAuto")>]
+    member inline _.hyphensAuto([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("hyphens", "auto")
+
+    /// Specifies how words should be hyphenated when text wraps across multiple lines.
+    [<CustomOperation("hyphens")>]
+    member inline _.hyphens([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("hyphens", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("hyphensInitial")>]
+    member inline _.hyphensInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("hyphens", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("hyphensInheritFromParent")>]
+    member inline _.hyphensInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("hyphens", "inherit")
+
+    /// Default. The normal inter-word space.
+    [<CustomOperation("wordSpacingNormal")>]
+    member inline _.wordSpacingNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("word-spacing", "normal")
+
+    /// Sets the length of space between words. Also accepts a length via the string overload (e.g. "0.2em").
+    [<CustomOperation("wordSpacing")>]
+    member inline _.wordSpacing([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("word-spacing", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("wordSpacingInitial")>]
+    member inline _.wordSpacingInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("word-spacing", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("wordSpacingInheritFromParent")>]
+    member inline _.wordSpacingInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("word-spacing", "inherit")
+
+    /// Limits the contents of a block container to the specified number of lines.
+    [<CustomOperation("lineClamp")>]
+    member inline _.lineClamp([<InlineIfLambda>] comb: CombineKeyValue, value: int) =
+        comb &&& mkWithKV ("line-clamp", value)
+
+    /// Limits the contents of a block container to the specified number of lines.
+    [<CustomOperation("lineClamp")>]
+    member inline _.lineClamp([<InlineIfLambda>] comb: CombineKeyValue, value: float) =
+        comb &&& mkWithKV ("line-clamp", value)
+
+    /// Limits the contents of a block container to the specified number of lines.
+    [<CustomOperation("lineClamp")>]
+    member inline _.lineClamp([<InlineIfLambda>] comb: CombineKeyValue, value: string) = comb &>> ("line-clamp", value)
+
+    /// Default.
+    [<CustomOperation("unicodeBidiNormal")>]
+    member inline _.unicodeBidiNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("unicode-bidi", "normal")
+
+    /// An additional level of embedding is opened.
+    [<CustomOperation("unicodeBidiEmbed")>]
+    member inline _.unicodeBidiEmbed([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("unicode-bidi", "embed")
+
+    /// Reordering is overridden per the direction property.
+    [<CustomOperation("unicodeBidiBidiOverride")>]
+    member inline _.unicodeBidiBidiOverride([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("unicode-bidi", "bidi-override")
+
+    /// The element is isolated from its surroundings for bidi resolution.
+    [<CustomOperation("unicodeBidiIsolate")>]
+    member inline _.unicodeBidiIsolate([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("unicode-bidi", "isolate")
+
+    /// Isolate plus override.
+    [<CustomOperation("unicodeBidiIsolateOverride")>]
+    member inline _.unicodeBidiIsolateOverride([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("unicode-bidi", "isolate-override")
+
+    /// Bidi per the Unicode plaintext algorithm.
+    [<CustomOperation("unicodeBidiPlaintext")>]
+    member inline _.unicodeBidiPlaintext([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("unicode-bidi", "plaintext")
+
+    /// Together with direction, determines how bidirectional text is handled.
+    [<CustomOperation("unicodeBidi")>]
+    member inline _.unicodeBidi([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("unicode-bidi", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("unicodeBidiInitial")>]
+    member inline _.unicodeBidiInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("unicode-bidi", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("unicodeBidiInheritFromParent")>]
+    member inline _.unicodeBidiInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("unicode-bidi", "inherit")
+
+    /// Default.
+    [<CustomOperation("colorSchemeNormal")>]
+    member inline _.colorSchemeNormal([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("color-scheme", "normal")
+
+    /// Light color scheme.
+    [<CustomOperation("colorSchemeLight")>]
+    member inline _.colorSchemeLight([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("color-scheme", "light")
+
+    /// Dark color scheme.
+    [<CustomOperation("colorSchemeDark")>]
+    member inline _.colorSchemeDark([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("color-scheme", "dark")
+
+    /// Forbids the user agent from overriding the scheme.
+    [<CustomOperation("colorSchemeOnly")>]
+    member inline _.colorSchemeOnly([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("color-scheme", "only")
+
+    /// Indicates which color schemes an element can be rendered in (e.g. light/dark).
+    [<CustomOperation("colorScheme")>]
+    member inline _.colorScheme([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("color-scheme", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("colorSchemeInitial")>]
+    member inline _.colorSchemeInitial([<InlineIfLambda>] comb: CombineKeyValue) = comb &>> ("color-scheme", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("colorSchemeInheritFromParent")>]
+    member inline _.colorSchemeInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("color-scheme", "inherit")
+
+    /// Default. Colors are forced per the system.
+    [<CustomOperation("forcedColorAdjustAuto")>]
+    member inline _.forcedColorAdjustAuto([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("forced-color-adjust", "auto")
+
+    /// The element's colors are not automatically adjusted.
+    [<CustomOperation("forcedColorAdjustNone")>]
+    member inline _.forcedColorAdjustNone([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("forced-color-adjust", "none")
+
+    /// Preserve the parent's forced color.
+    [<CustomOperation("forcedColorAdjustPreserveParentColor")>]
+    member inline _.forcedColorAdjustPreserveParentColor([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("forced-color-adjust", "preserve-parent-color")
+
+    /// Allows certain elements to opt out of forced colors mode.
+    [<CustomOperation("forcedColorAdjust")>]
+    member inline _.forcedColorAdjust([<InlineIfLambda>] comb: CombineKeyValue, value: string) =
+        comb &>> ("forced-color-adjust", value)
+
+    /// Sets this property to its default value.
+    [<CustomOperation("forcedColorAdjustInitial")>]
+    member inline _.forcedColorAdjustInitial([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("forced-color-adjust", "initial")
+
+    /// Inherits this property from its parent element.
+    [<CustomOperation("forcedColorAdjustInheritFromParent")>]
+    member inline _.forcedColorAdjustInheritFromParent([<InlineIfLambda>] comb: CombineKeyValue) =
+        comb &>> ("forced-color-adjust", "inherit")

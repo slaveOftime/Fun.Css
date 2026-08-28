@@ -378,3 +378,157 @@ let ``new standard property coverage ops`` () =
         "order: 2; order: var(--order); flex-flow: row wrap; outline: 2px solid red; outline-width: 2.5px; background: url(a.png) no-repeat center / cover; background-attachment: fixed; background-origin: padding-box; background-position-x: left; background-position-y: 10px; font: italic bold 12px/1.5 sans-serif; text-decoration-thickness: 0.1em; text-decoration-skip-ink: none; text-align-last: center; tab-size: 4; overflow-wrap: anywhere; text-rendering: optimizeLegibility; text-size-adjust: 100%; text-orientation: upright; grid-auto-rows: minmax(100px, auto); grid-auto-columns: auto; grid-auto-flow: row dense; grid: auto-flow / 1fr 1fr; list-style: square inside; transition-behavior: allow-discrete; transform-box: fill-box; backface-visibility: hidden; inset: 0px; aspect-ratio: 16 / 9; contain: paint; margin-block-start: 10px; margin-inline-end: var(--margin-end); padding-block-start: 10px; padding-inline-end: 1em; scroll-snap-align: start; scroll-snap-type: x mandatory; scroll-snap-stop: always; scroll-margin: 10px; scroll-padding: 10px; border-top-left-radius: 8px; border-bottom-right-radius: 50%; ",
         actual
     )
+
+[<Fact>]
+let ``layout coverage ops`` () =
+    let actual =
+        style {
+            clearBoth
+            clear "var(--clear)"
+            objectFitCover
+            objectFit "contain"
+            objectPosition "top right"
+            pointerEventsNone
+            pointerEvents "var(--pe)"
+            touchActionManipulation
+            willChangeTransform
+            overscrollBehaviorContain
+            overscrollBehaviorXNone
+            overscrollBehaviorYAuto
+            isolationIsolate
+            mixBlendModeMultiply
+            mixBlendMode "var(--blend)"
+            overflowBlockHidden
+            overflowInlineAuto
+            content "\"hello\""
+            perspective "500px"
+            perspectiveNone
+            perspectiveOrigin "50% 50%"
+        }
+
+    Assert.Equal(
+        "clear: both; clear: var(--clear); object-fit: cover; object-fit: contain; object-position: top right; pointer-events: none; pointer-events: var(--pe); touch-action: manipulation; will-change: transform; overscroll-behavior: contain; overscroll-behavior-x: none; overscroll-behavior-y: auto; isolation: isolate; mix-blend-mode: multiply; mix-blend-mode: var(--blend); overflow-block: hidden; overflow-inline: auto; content: \"hello\"; perspective: 500px; perspective: none; perspective-origin: 50% 50%; ",
+        actual
+    )
+
+[<Fact>]
+let ``border and mask coverage ops`` () =
+    let actual =
+        style {
+            borderImage "url(b.png) 30 round"
+            borderImageSource "url(b.png)"
+            borderImageSlice "30"
+            borderImageWidth "10px"
+            borderImageOutset "5px"
+            borderImageRepeatRound
+            borderBlock "1px solid red"
+            borderBlockColor "red"
+            borderBlockStyleDashed
+            borderBlockWidth "2px"
+            borderInline "1px solid blue"
+            borderInlineColor "blue"
+            borderInlineStyleDotted
+            borderInlineWidth "3px"
+            borderBlockStart "1px solid red"
+            borderBlockEnd "1px solid red"
+            borderInlineStart "2px solid blue"
+            borderInlineEnd "2px solid blue"
+            marginTrimBlock
+            mask "url(m.png)"
+            maskImage "url(m.png)"
+            maskSize "cover"
+            maskRepeatNoRepeat
+            maskPosition "center"
+            maskClip "padding-box"
+            maskOrigin "content-box"
+            maskCompositeIntersect
+        }
+
+    Assert.Equal(
+        "border-image: url(b.png) 30 round; border-image-source: url(b.png); border-image-slice: 30; border-image-width: 10px; border-image-outset: 5px; border-image-repeat: round; border-block: 1px solid red; border-block-color: red; border-block-style: dashed; border-block-width: 2px; border-inline: 1px solid blue; border-inline-color: blue; border-inline-style: dotted; border-inline-width: 3px; border-block-start: 1px solid red; border-block-end: 1px solid red; border-inline-start: 2px solid blue; border-inline-end: 2px solid blue; margin-trim: block; mask: url(m.png); mask-image: url(m.png); mask-size: cover; mask-repeat: no-repeat; mask-position: center; mask-clip: padding-box; mask-origin: content-box; mask-composite: intersect; ",
+        actual
+    )
+
+[<Fact>]
+let ``typography coverage ops`` () =
+    let actual =
+        style {
+            fontSizeAdjust "0.5"
+            fontSizeAdjustFromFont
+            fontSynthesisWeight
+            fontFeatureSettings "\"liga\" 1"
+            fontVariationSettings "\"wght\" 700"
+            fontVariantCapsSmallCaps
+            fontVariantLigaturesCommonLigatures
+            fontVariantNumericTabularNums
+            fontVariantEastAsianSimplified
+            fontVariantAlternatesHistoricalForms
+            fontVariantPositionSub
+            fontVariantEmojiEmoji
+            hyphensAuto
+            wordSpacingNormal
+            lineClamp 3
+            unicodeBidiIsolate
+            colorSchemeDark
+            forcedColorAdjustNone
+        }
+
+    Assert.Equal(
+        "font-size-adjust: 0.5; font-size-adjust: from-font; font-synthesis: weight; font-feature-settings: \"liga\" 1; font-variation-settings: \"wght\" 700; font-variant-caps: small-caps; font-variant-ligatures: common-ligatures; font-variant-numeric: tabular-nums; font-variant-east-asian: simplified; font-variant-alternates: historical-forms; font-variant-position: sub; font-variant-emoji: emoji; hyphens: auto; word-spacing: normal; line-clamp: 3; unicode-bidi: isolate; color-scheme: dark; forced-color-adjust: none; ",
+        actual
+    )
+
+[<Fact>]
+let ``table list grid and break coverage ops`` () =
+    let actual =
+        style {
+            captionSideBottom
+            counterReset "section"
+            counterIncrement "item 2"
+            counterSet "section 5"
+            columns "auto 3"
+            columnWidthAuto
+            columnCount 3
+            columnFillBalance
+            columnSpanAll
+            columnRule "1px solid gray"
+            columnRuleWidthThin
+            columnRuleStyleSolid
+            columnRuleColor "gray"
+            containIntrinsicSize "300px 200px"
+            containIntrinsicWidth "300px"
+            containIntrinsicHeight "200px"
+            breakBeforePage
+            breakAfterAlways
+            breakInsideAvoid
+            pageBreakBeforeAlways
+            pageBreakAfterAvoid
+            pageBreakInsideAuto
+        }
+
+    Assert.Equal(
+        "caption-side: bottom; counter-reset: section; counter-increment: item 2; counter-set: section 5; columns: auto 3; column-width: auto; column-count: 3; column-fill: balance; column-span: all; column-rule: 1px solid gray; column-rule-width: thin; column-rule-style: solid; column-rule-color: gray; contain-intrinsic-size: 300px 200px; contain-intrinsic-width: 300px; contain-intrinsic-height: 200px; break-before: page; break-after: always; break-inside: avoid; page-break-before: always; page-break-after: avoid; page-break-inside: auto; ",
+        actual
+    )
+
+[<Fact>]
+let ``scroll longhand and new overload coverage ops`` () =
+    let actual =
+        style {
+            scrollMarginTop "10px"
+            scrollMarginRight "10px"
+            scrollMarginBottom "10px"
+            scrollMarginLeft "10px"
+            scrollPaddingTop "1em"
+            scrollPaddingRight "1em"
+            scrollPaddingBottom "1em"
+            scrollPaddingLeft "1em"
+            backgroundSize 100
+            backgroundSize 50.5
+            transitionProperty [ "opacity"; "transform" ]
+        }
+
+    Assert.Equal(
+        "scroll-margin-top: 10px; scroll-margin-right: 10px; scroll-margin-bottom: 10px; scroll-margin-left: 10px; scroll-padding-top: 1em; scroll-padding-right: 1em; scroll-padding-bottom: 1em; scroll-padding-left: 1em; background-size: 100px; background-size: 50.5px; transition-property: opacity, transform; ",
+        actual
+    )
