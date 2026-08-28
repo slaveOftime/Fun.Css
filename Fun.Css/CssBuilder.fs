@@ -15,6 +15,29 @@ module Internal =
     let inline (&>>) ([<InlineIfLambda>] comb: CombineKeyValue) (x: string, value: string) =
         CombineKeyValue(fun sb -> comb.Invoke(sb).Append(x).Append(": ").Append(value).Append("; "))
 
+    /// Rewrites every "key: value; " declaration produced by comb into
+    /// "key: value !important; ". Declarations are always terminated by "; ",
+    /// so a textual rewrite that inserts " !important" before each ";" is safe:
+    /// the only ";" the operations emit are declaration terminators.
+    let applyImportant (comb: CombineKeyValue) =
+        CombineKeyValue(fun sb ->
+            let inner = StringBuilder()
+            comb.Invoke(inner) |> ignore
+            let s = inner.ToString()
+
+            let mutable i = 0
+            let len = s.Length
+
+            while i < len do
+                if s.[i] = ';' then
+                    sb.Append(" !important;") |> ignore
+                else
+                    sb.Append(s.[i]) |> ignore
+
+                i <- i + 1
+
+            sb)
+
 
     type Makers =
         static member inline mkPxWithKV(k: string, v: int) =
@@ -34,7 +57,11 @@ open Internal
 open type Makers
 
 
-type CssBuilder() =
+type CssBuilder(?important: bool) =
+
+    /// When true, every property emitted by the block is suffixed with " !important".
+    /// Defaults to false.
+    member val Important = defaultArg important false
 
     member inline _.Yield(_: unit) = CombineKeyValue(fun sb -> sb)
     member inline _.Yield([<InlineIfLambda>] x: CombineKeyValue) = x
@@ -54,7 +81,17 @@ type CssBuilder() =
     member inline _.Yield((key, value): string * bool) =
         CombineKeyValue(fun s -> s.Append(key).Append(": ").Append(value).Append("; "))
 
-    member inline _.Run([<InlineIfLambda>] combine: CombineKeyValue) = combine
+    /// Applies the " !important" suffix to every declaration when Important is
+    /// true; otherwise returns the combine unchanged. Subclasses that override
+    /// Run should route the final combine through this so the important flag is
+    /// honored regardless of the output type.
+    member this.ApplyImportant(combine: CombineKeyValue) : CombineKeyValue =
+        if this.Important then
+            applyImportant combine
+        else
+            combine
+
+    member inline this.Run([<InlineIfLambda>] combine: CombineKeyValue) = this.ApplyImportant(combine)
 
     member inline _.For([<InlineIfLambda>] comb: CombineKeyValue, [<InlineIfLambda>] fn: unit -> CombineKeyValue) =
         comb &&& (fn ())

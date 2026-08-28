@@ -155,6 +155,19 @@ let styleStr = StyleStrBuilder()
 
 For Fun.Blazor, override `Run` to return an `AttrRenderFragment` (see README.md).
 
+**`!important`.** Pass `important = true` to the constructor to suffix every property with `!important`:
+
+```fsharp
+type StyleStrBuilder() =
+    inherit Fun.Css.CssBuilder(important = true)
+
+    member inline this.Run([<InlineIfLambda>] combine: Fun.Css.Internal.CombineKeyValue) =
+        let combine = this.ApplyImportant(combine)   // route the final combine through this
+        // ... render combine to a string as above
+```
+
+When overriding `Run`, route the final combine through `this.ApplyImportant(...)` so the flag is honored. `width 100` then emits `width: 100px !important;`. The default is `false` (no `!important`).
+
 ## Gotchas
 
 - **Tuples don't compile.** CE custom operations are curried: `margin 10 20`, not `margin (10, 20)` (FS3099/FS0041).
