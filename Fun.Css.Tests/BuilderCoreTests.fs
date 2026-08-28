@@ -158,10 +158,11 @@ type private ImportantStrBuilder(?important: bool) =
 let ``important false by default leaves output unchanged`` () =
     let s = ImportantStrBuilder()
 
-    let actual = s {
-        color "red"
-        width 100
-    }
+    let actual =
+        s {
+            color "red"
+            width 100
+        }
 
     Assert.Equal("color: red; width: 100px; ", actual)
 
@@ -169,14 +170,15 @@ let ``important false by default leaves output unchanged`` () =
 let ``important true appends important to every property`` () =
     let s = ImportantStrBuilder(true)
 
-    let actual = s {
-        color "red"
-        width 100
-        displayFlex
-        margin 10 20
-        opacity 0.5
-        zIndex 5
-    }
+    let actual =
+        s {
+            color "red"
+            width 100
+            displayFlex
+            margin 10 20
+            opacity 0.5
+            zIndex 5
+        }
 
     Assert.Equal(
         "color: red !important; width: 100px !important; display: flex !important; margin: 10px 20px !important; opacity: 0.5 !important; z-index: 5 !important; ",
@@ -187,10 +189,11 @@ let ``important true appends important to every property`` () =
 let ``important true applies to custom and yielded tuples`` () =
     let s = ImportantStrBuilder(true)
 
-    let actual = s {
-        custom "--my-var" "10px"
-        yield ("flag", true)
-    }
+    let actual =
+        s {
+            custom "--my-var" "10px"
+            yield ("flag", true)
+        }
 
     Assert.Equal("--my-var: 10px !important; flag: True !important; ", actual)
 
@@ -198,9 +201,10 @@ let ``important true applies to custom and yielded tuples`` () =
 let ``base CssBuilder default Run applies important to fragment`` () =
     let builder = Fun.Css.CssBuilder(important = true)
 
-    let frag = builder {
-        color "blue"
-        fontSize 16
-    }
+    let frag =
+        builder {
+            color "blue"
+            fontSize 16
+        }
 
     Assert.Equal("color: blue !important; font-size: 16px !important; ", render frag)

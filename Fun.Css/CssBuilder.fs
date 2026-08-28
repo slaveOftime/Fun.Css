@@ -86,10 +86,7 @@ type CssBuilder(?important: bool) =
     /// Run should route the final combine through this so the important flag is
     /// honored regardless of the output type.
     member this.ApplyImportant(combine: CombineKeyValue) : CombineKeyValue =
-        if this.Important then
-            applyImportant combine
-        else
-            combine
+        if this.Important then applyImportant combine else combine
 
     member inline this.Run([<InlineIfLambda>] combine: CombineKeyValue) = this.ApplyImportant(combine)
 
